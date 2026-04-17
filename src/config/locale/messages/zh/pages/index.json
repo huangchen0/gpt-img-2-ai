@@ -43,22 +43,33 @@
         "show_avatars": true,
         "avatars_tip": "999+ 用户在使用 ChatGPT Image 2 Generator 上站",
         "show_award": false,
-        "image": {
-          "src": "/imgs/features/admin.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "image_invert": {
-          "src": "/imgs/features/admin-dark.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "background_image": {
-          "src": "/imgs/bg/tree.jpg",
-          "alt": "hero"
-        }
+        "show_bg": false,
+        "gallery_images": [
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-1.webp",
+            "alt": "PhotoGPT 首页演示图 1"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-2.webp",
+            "alt": "PhotoGPT 首页演示图 2"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-3.webp",
+            "alt": "PhotoGPT 首页演示图 3"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-4.webp",
+            "alt": "PhotoGPT 首页演示图 4"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-5.webp",
+            "alt": "PhotoGPT 首页演示图 5"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-6.webp",
+            "alt": "PhotoGPT 首页演示图 6"
+          }
+        ]
       },
       "logos": {
         "title": "ChatGPT Image 2 Generator 使用以下技术栈构建",

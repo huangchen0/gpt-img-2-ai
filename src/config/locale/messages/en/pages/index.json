@@ -43,22 +43,33 @@
         "show_avatars": true,
         "avatars_tip": "999+ users are using ChatGPT Image 2 Generator",
         "show_award": false,
-        "image": {
-          "src": "/imgs/features/admin.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "image_invert": {
-          "src": "/imgs/features/admin-dark.png",
-          "alt": "hero",
-          "width": 1200,
-          "height": 800
-        },
-        "background_image": {
-          "src": "/imgs/bg/tree.jpg",
-          "alt": "hero"
-        }
+        "show_bg": false,
+        "gallery_images": [
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-1.webp",
+            "alt": "PhotoGPT hero demo 1"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-2.webp",
+            "alt": "PhotoGPT hero demo 2"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-3.webp",
+            "alt": "PhotoGPT hero demo 3"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-4.webp",
+            "alt": "PhotoGPT hero demo 4"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-5.webp",
+            "alt": "PhotoGPT hero demo 5"
+          },
+          {
+            "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/photogpt-hero/demo-6.webp",
+            "alt": "PhotoGPT hero demo 6"
+          }
+        ]
       },
       "logos": {
         "id": "logos",

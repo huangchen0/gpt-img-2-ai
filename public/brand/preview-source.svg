@@ -1,160 +1,124 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="44" y1="20" x2="1172" y2="664" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#071525"/>
-      <stop offset="0.5" stop-color="#081A31"/>
-      <stop offset="1" stop-color="#030C16"/>
+    <linearGradient id="bg" x1="64" y1="28" x2="1184" y2="662" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06121E"/>
+      <stop offset="0.54" stop-color="#0A1A2E"/>
+      <stop offset="1" stop-color="#040A14"/>
     </linearGradient>
-    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(880 126) rotate(126.027) scale(431.322 430.666)">
-      <stop offset="0" stop-color="#58EFFF" stop-opacity="0.36"/>
-      <stop offset="1" stop-color="#58EFFF" stop-opacity="0"/>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(928 118) rotate(129) scale(420 400)">
+      <stop offset="0" stop-color="#62F1FF" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#62F1FF" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1048 536) rotate(-170.496) scale(315.86 212.81)">
-      <stop offset="0" stop-color="#FF9669" stop-opacity="0.3"/>
-      <stop offset="1" stop-color="#FF9669" stop-opacity="0"/>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1060 526) rotate(-173) scale(334 220)">
+      <stop offset="0" stop-color="#FF9A71" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FF9A71" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glowC" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(246 540) rotate(-23.2559) scale(307.063 186.847)">
-      <stop offset="0" stop-color="#3E7CFF" stop-opacity="0.24"/>
-      <stop offset="1" stop-color="#3E7CFF" stop-opacity="0"/>
+    <radialGradient id="glowC" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(276 554) rotate(-18) scale(360 204)">
+      <stop offset="0" stop-color="#497AFF" stop-opacity="0.2"/>
+      <stop offset="1" stop-color="#497AFF" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="pill" x1="72" y1="72" x2="426" y2="72" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#73F5FF"/>
-      <stop offset="1" stop-color="#FF9A71"/>
+    <linearGradient id="pillStroke" x1="74" y1="72" x2="494" y2="72" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#74F4FF"/>
+      <stop offset="1" stop-color="#FF9E73"/>
     </linearGradient>
-    <linearGradient id="accentText" x1="70" y1="284" x2="494" y2="284" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7AF7FF"/>
-      <stop offset="0.55" stop-color="#7DABFF"/>
-      <stop offset="1" stop-color="#FF9D72"/>
+    <linearGradient id="cardStroke" x1="844" y1="164" x2="980" y2="342" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7AF6FF"/>
+      <stop offset="0.54" stop-color="#6188FF"/>
+      <stop offset="1" stop-color="#FF9E72"/>
     </linearGradient>
-    <linearGradient id="tileFill" x1="760" y1="88" x2="1072" y2="444" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#081B2C"/>
-      <stop offset="0.52" stop-color="#0B2340"/>
-      <stop offset="1" stop-color="#05111E"/>
+    <linearGradient id="progress" x1="882" y1="328" x2="956" y2="328" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#70F3FF"/>
+      <stop offset="0.52" stop-color="#6188FF"/>
+      <stop offset="1" stop-color="#FF9E72"/>
     </linearGradient>
-    <linearGradient id="tileBorder" x1="748" y1="90" x2="1070" y2="438" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7BF4FF"/>
-      <stop offset="0.48" stop-color="#4F83FF"/>
-      <stop offset="1" stop-color="#FF9A63"/>
-    </linearGradient>
-    <linearGradient id="bladeA" x1="906" y1="192" x2="906" y2="318" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#84F8FF"/>
-      <stop offset="1" stop-color="#4E86FF"/>
-    </linearGradient>
-    <linearGradient id="bladeB" x1="1018" y1="260" x2="922" y2="320" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7AB5FF"/>
-      <stop offset="1" stop-color="#6777FF"/>
-    </linearGradient>
-    <linearGradient id="bladeC" x1="1018" y1="378" x2="918" y2="332" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FF9A70"/>
-      <stop offset="1" stop-color="#7B73FF"/>
-    </linearGradient>
-    <linearGradient id="bladeD" x1="906" y1="446" x2="906" y2="326" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFB27D"/>
-      <stop offset="1" stop-color="#FF8E6D"/>
-    </linearGradient>
-    <linearGradient id="bladeE" x1="794" y1="378" x2="890" y2="322" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFD27A"/>
-      <stop offset="1" stop-color="#73A8FF"/>
-    </linearGradient>
-    <linearGradient id="bladeF" x1="794" y1="260" x2="890" y2="318" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#73F8FF"/>
-      <stop offset="1" stop-color="#438DFF"/>
-    </linearGradient>
-    <radialGradient id="sparkGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(906 320) rotate(90) scale(74)">
-      <stop offset="0" stop-color="#F8FDFF" stop-opacity="0.98"/>
-      <stop offset="0.68" stop-color="#BEEBFF" stop-opacity="0.42"/>
-      <stop offset="1" stop-color="#BEEBFF" stop-opacity="0"/>
+    <radialGradient id="sparkGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(906 270) rotate(90) scale(54)">
+      <stop offset="0" stop-color="#FCFEFF" stop-opacity="0.92"/>
+      <stop offset="0.64" stop-color="#BFE8FF" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#BFE8FF" stop-opacity="0"/>
     </radialGradient>
-    <filter id="tileShadow" x="702" y="54" width="410" height="434" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="24"/>
-      <feGaussianBlur stdDeviation="24"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.0117647 0 0 0 0 0.0470588 0 0 0 0 0.0980392 0 0 0 0.48 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
-    </filter>
   </defs>
 
-  <rect width="1200" height="630" rx="32" fill="url(#bg)"/>
-  <rect width="1200" height="630" rx="32" fill="url(#glowA)"/>
-  <rect width="1200" height="630" rx="32" fill="url(#glowB)"/>
-  <rect width="1200" height="630" rx="32" fill="url(#glowC)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glowA)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glowB)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glowC)"/>
 
-  <g opacity="0.14">
-    <path d="M740 72L1122 72" stroke="#8EF8FF" stroke-width="2"/>
-    <path d="M740 124L1122 124" stroke="#8EF8FF" stroke-width="2"/>
-    <path d="M740 176L1122 176" stroke="#8EF8FF" stroke-width="2"/>
-    <path d="M740 228L1122 228" stroke="#8EF8FF" stroke-width="2"/>
-    <path d="M740 280L1122 280" stroke="#8EF8FF" stroke-width="2"/>
-    <path d="M740 332L1122 332" stroke="#8EF8FF" stroke-width="2"/>
-    <path d="M740 384L1122 384" stroke="#8EF8FF" stroke-width="2"/>
-    <path d="M778 32L1038 564" stroke="#4F83FF" stroke-width="2"/>
-    <path d="M848 10L1098 530" stroke="#FF9A63" stroke-width="2"/>
+  <g opacity="0.12">
+    <path d="M732 72H1122" stroke="#8DF5FF" stroke-width="2"/>
+    <path d="M732 126H1122" stroke="#8DF5FF" stroke-width="2"/>
+    <path d="M732 180H1122" stroke="#8DF5FF" stroke-width="2"/>
+    <path d="M732 234H1122" stroke="#8DF5FF" stroke-width="2"/>
+    <path d="M732 288H1122" stroke="#8DF5FF" stroke-width="2"/>
+    <path d="M732 342H1122" stroke="#8DF5FF" stroke-width="2"/>
+    <path d="M732 396H1122" stroke="#8DF5FF" stroke-width="2"/>
+    <path d="M782 30L1036 560" stroke="#5682FF" stroke-width="2"/>
+    <path d="M848 4L1096 532" stroke="#FF9E72" stroke-width="2"/>
   </g>
 
-  <rect x="70" y="62" width="356" height="36" rx="18" fill="#0C1D32" fill-opacity="0.86" stroke="url(#pill)" stroke-width="1.5"/>
-  <text x="92" y="85" fill="#DBFCFF" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="1.6">CHATGPT • IMAGE • GENERATION</text>
+  <rect x="72" y="60" width="420" height="38" rx="19" fill="#0C1D30" fill-opacity="0.88" stroke="url(#pillStroke)" stroke-width="1.5"/>
+  <text x="96" y="84" fill="#E3FCFF" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="1.4">PROFESSIONAL AI IMAGE STUDIO</text>
 
-  <text x="70" y="204" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="80" font-weight="700">ChatGPT</text>
-  <text x="70" y="288" fill="url(#accentText)" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700">Image 2</text>
-  <text x="72" y="356" fill="#D3E0EE" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="400">Create photoreal images, smart edits and stylized art</text>
-  <text x="72" y="392" fill="#D3E0EE" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="400">from one prompt with a polished generation workflow.</text>
+  <text x="72" y="206" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="80" font-weight="700">ChatGPT</text>
+  <text x="72" y="292" fill="#8FD7FF" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700">Image 2</text>
+  <text x="72" y="358" fill="#D5E3F0" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="400">Generate, edit and remix images with cleaner outputs,</text>
+  <text x="72" y="396" fill="#D5E3F0" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="400">tighter prompt control and a more production-ready workflow.</text>
 
-  <g opacity="0.95">
-    <rect x="70" y="462" width="158" height="48" rx="24" fill="#0C1D32" fill-opacity="0.86" stroke="#1C5E86" stroke-width="1.5"/>
-    <text x="102" y="493" fill="#E2FBFF" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Text to Image</text>
-    <rect x="244" y="462" width="128" height="48" rx="24" fill="#0C1D32" fill-opacity="0.86" stroke="#2E6CFF" stroke-width="1.5"/>
-    <text x="279" y="493" fill="#E2FBFF" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Image Edit</text>
-    <rect x="388" y="462" width="152" height="48" rx="24" fill="#0C1D32" fill-opacity="0.86" stroke="#FF8A5B" stroke-width="1.5"/>
-    <text x="417" y="493" fill="#FFF1EA" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700">Style Transfer</text>
+  <g opacity="0.96">
+    <rect x="72" y="468" width="170" height="48" rx="24" fill="#0C1D32" fill-opacity="0.9" stroke="#2B6E94" stroke-width="1.5"/>
+    <text x="88" y="497" fill="#E6FCFF" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Text to Image</text>
+    <rect x="254" y="468" width="146" height="48" rx="24" fill="#0C1D32" fill-opacity="0.9" stroke="#3D6FFF" stroke-width="1.5"/>
+    <text x="270" y="497" fill="#EAF2FF" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Precise Edit</text>
+    <rect x="412" y="468" width="186" height="48" rx="24" fill="#0C1D32" fill-opacity="0.9" stroke="#FF9567" stroke-width="1.5"/>
+    <text x="428" y="497" fill="#FFF2EC" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">Reference Remix</text>
   </g>
 
-  <text x="72" y="565" fill="#8AA8C7" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="2.8">GPTIMG2.ART</text>
+  <text x="72" y="570" fill="#8AA7C3" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" letter-spacing="2.6">GPTIMG2.ART</text>
 
-  <g filter="url(#tileShadow)">
-    <rect x="748" y="88" width="316" height="316" rx="96" fill="url(#tileFill)"/>
-    <rect x="748" y="88" width="316" height="316" rx="96" fill="url(#glowA)" opacity="0.34"/>
-    <rect x="748" y="88" width="316" height="316" rx="96" fill="url(#glowB)" opacity="0.18"/>
-    <rect x="748" y="88" width="316" height="316" rx="96" stroke="url(#tileBorder)" stroke-width="4"/>
+  <g>
+    <rect x="748" y="86" width="316" height="316" rx="90" fill="#0A1826"/>
+    <rect x="748" y="86" width="316" height="316" rx="90" fill="url(#glowA)" opacity="0.3"/>
+    <rect x="748" y="86" width="316" height="316" rx="90" fill="url(#glowB)" opacity="0.18"/>
+    <rect x="748" y="86" width="316" height="316" rx="90" stroke="url(#pillStroke)" stroke-width="4"/>
   </g>
 
-  <g opacity="0.22">
-    <path d="M804 144L1008 144" stroke="#8EF8FF" stroke-width="4" stroke-linecap="round"/>
-    <path d="M804 348L1008 348" stroke="#FFAA82" stroke-width="4" stroke-linecap="round"/>
-    <path d="M826 112L980 364" stroke="#5B83FF" stroke-width="3" stroke-linecap="round"/>
-    <path d="M998 138L844 372" stroke="#7DF4FF" stroke-width="3" stroke-linecap="round"/>
+  <g opacity="0.16">
+    <path d="M804 158H1008" stroke="#87F7FF" stroke-width="4" stroke-linecap="round"/>
+    <path d="M804 326H1008" stroke="#FFB08A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M826 116L980 356" stroke="#5C86FF" stroke-width="3" stroke-linecap="round"/>
+    <path d="M1000 136L844 354" stroke="#7DF6FF" stroke-width="3" stroke-linecap="round"/>
   </g>
 
-  <rect x="820" y="232" width="172" height="176" rx="44" fill="#09172A" fill-opacity="0.34" stroke="#D0ECFF" stroke-opacity="0.16" stroke-width="3"/>
-  <path d="M842 270C842 255.641 853.641 244 868 244H894" stroke="#C7E7FF" stroke-opacity="0.78" stroke-width="8" stroke-linecap="round"/>
-  <path d="M970 290V368C970 382.359 958.359 394 944 394H916" stroke="#FFD1B7" stroke-opacity="0.72" stroke-width="8" stroke-linecap="round"/>
+  <rect x="834" y="168" width="136" height="178" rx="24" transform="rotate(-16 834 168)" fill="#4D87FF" fill-opacity="0.18" stroke="#79DFFF" stroke-opacity="0.24" stroke-width="2"/>
+  <rect x="874" y="150" width="136" height="178" rx="24" transform="rotate(12 874 150)" fill="#FF9E72" fill-opacity="0.18" stroke="#FFE0C6" stroke-opacity="0.16" stroke-width="2"/>
 
-  <circle cx="906" cy="320" r="84" fill="#071321" stroke="#9BC9FF" stroke-opacity="0.18" stroke-width="2"/>
-  <rect x="882" y="192" width="48" height="126" rx="24" fill="url(#bladeA)"/>
-  <rect x="952" y="244" width="48" height="126" rx="24" transform="rotate(60 952 244)" fill="url(#bladeB)"/>
-  <rect x="950" y="322" width="48" height="126" rx="24" transform="rotate(120 950 322)" fill="url(#bladeC)"/>
-  <rect x="882" y="318" width="48" height="126" rx="24" fill="url(#bladeD)"/>
-  <rect x="812" y="322" width="48" height="126" rx="24" transform="rotate(-120 812 322)" fill="url(#bladeE)"/>
-  <rect x="810" y="244" width="48" height="126" rx="24" transform="rotate(-60 810 244)" fill="url(#bladeF)"/>
+  <rect x="858" y="160" width="104" height="138" rx="22" fill="url(#cardStroke)"/>
+  <rect x="862" y="164" width="96" height="130" rx="18" fill="#081423"/>
+  <rect x="870" y="172" width="80" height="114" rx="14" fill="#0B1C2B" fill-opacity="0.88"/>
 
-  <circle cx="906" cy="320" r="40" fill="#071321"/>
-  <circle cx="906" cy="320" r="40" fill="url(#sparkGlow)"/>
-  <circle cx="906" cy="320" r="28" fill="#0A1B2D" stroke="#BEE6FF" stroke-opacity="0.24" stroke-width="2"/>
-  <path d="M906 278L916 308L946 320L916 332L906 362L896 332L866 320L896 308L906 278Z" fill="#F7FCFF"/>
-  <path d="M906 294L913 314L933 320L913 326L906 346L899 326L879 320L899 314L906 294Z" fill="#7EF7FF"/>
+  <path d="M882 206V194H894" stroke="#72F5FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M918 194H930V206" stroke="#95B3FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M882 258V270H894" stroke="#72E0FF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M918 270H930V258" stroke="#FFB47D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 
-  <circle cx="1012" cy="210" r="9" fill="#7AF7FF" fill-opacity="0.9"/>
-  <path d="M1012 186L1016 199L1029 203L1016 207L1012 220L1008 207L995 203L1008 199L1012 186Z" fill="#F8FDFF"/>
+  <rect x="882" y="316" width="74" height="14" rx="7" fill="url(#progress)"/>
+  <rect x="960" y="308" width="10" height="10" rx="3" fill="#71F3FF"/>
+  <rect x="972" y="322" width="6" height="6" rx="2" fill="#FFB27D"/>
 
-  <g opacity="0.9">
-    <rect x="786" y="430" width="270" height="110" rx="28" fill="#0C1D32" fill-opacity="0.84" stroke="#214A6A" stroke-width="1.5"/>
-    <rect x="816" y="456" width="102" height="10" rx="5" fill="#76F3FF"/>
-    <rect x="816" y="481" width="176" height="10" rx="5" fill="#D4E4F4" fill-opacity="0.74"/>
-    <rect x="816" y="506" width="150" height="10" rx="5" fill="#D4E4F4" fill-opacity="0.42"/>
-    <rect x="988" y="450" width="42" height="42" rx="14" fill="#10243B" stroke="#2F5F86" stroke-width="1.2"/>
-    <path d="M1002 462L1002 480" stroke="#7AF7FF" stroke-width="4.5" stroke-linecap="round"/>
-    <path d="M1014 458L1014 484" stroke="#7DABFF" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="906" cy="270" r="54" fill="url(#sparkGlow)"/>
+  <path d="M906 224L918 256L950 270L918 284L906 316L894 284L862 270L894 256L906 224Z" fill="#F7FCFF"/>
+  <path d="M906 238L914 260L938 270L914 280L906 302L898 280L874 270L898 260L906 238Z" fill="#7EF5FF"/>
+  <circle cx="906" cy="270" r="8" fill="#081624"/>
+
+  <circle cx="984" cy="176" r="8" fill="#FFFFFF"/>
+  <path d="M984 152L988 167L1003 172L988 177L984 192L980 177L965 172L980 167L984 152Z" fill="#FFFFFF"/>
+
+  <g opacity="0.96">
+    <rect x="780" y="432" width="286" height="108" rx="28" fill="#0C1D32" fill-opacity="0.88" stroke="#214966" stroke-width="1.5"/>
+    <rect x="810" y="456" width="104" height="10" rx="5" fill="#7AF4FF"/>
+    <rect x="810" y="480" width="182" height="10" rx="5" fill="#D9E6F2" fill-opacity="0.78"/>
+    <rect x="810" y="504" width="154" height="10" rx="5" fill="#D9E6F2" fill-opacity="0.42"/>
+    <rect x="996" y="448" width="40" height="40" rx="14" fill="#10243A" stroke="#2F5E84" stroke-width="1.2"/>
+    <path d="M1008 460V478" stroke="#7AF4FF" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M1020 456V482" stroke="#7AA8FF" stroke-width="4.5" stroke-linecap="round"/>
   </g>
 </svg>
