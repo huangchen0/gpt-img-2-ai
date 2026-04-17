@@ -2,7 +2,7 @@
   "metadata": {
     "title": "GPT Image 2 AI | GPT Image 2 AI 图像生成、改图与 Mockup 工具",
     "description": "GPT Image 2 AI 是一款面向真实业务场景的 AI 图像生成与编辑工具，适合写实图片、带字海报、UI 截图、产品效果图和参考图改图。用 GPT Image 2 AI 可以更快产出可直接使用的视觉素材。",
-    "keywords": "GPT Image 2 AI, gpt image 2 ai, GPT Image 2 AI 图像生成, GPT Image 2 AI 改图, GPT Image 2 AI mockup, GPT Image 2, gpt image 2, gpt-image-2, gpt image v2, gpt image 2.0, chatgpt image 2, chatgpt image gen 2, chatgpt image generator 2, chatgpt 4.0图片, chatgpt 图像生成, openai gpt image 2, open ai image 2, openai image gen 2, gpt image 2 api, gpt image 2 如何使用, gpt image generator"
+    "keywords": "GPT Image 2 AI, 图像生成, 图片编辑, mockup, ChatGPT image 2"
   },
   "header": {
     "id": "header",
@@ -102,7 +102,7 @@
     "avatars_tip": "适合探索 GPT Image 2 AI 工作流的创作者",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/hero/photogpt-case-e-commerce-hero-1920-q72.webp",
       "alt": "GPT Image 2 AI ChatGPT AI 图像生成器"
     }
   },

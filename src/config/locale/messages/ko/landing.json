@@ -2,7 +2,7 @@
   "metadata": {
     "title": "GPT Image 2 AI | GPT Image 2 AI 이미지 생성, 편집, UI 목업 도구",
     "description": "GPT Image 2 AI는 실사 이미지, 텍스트가 들어간 비주얼, UI 화면, 제품 목업, 레퍼런스 기반 편집에 강한 이미지 생성·편집 도구입니다. GPT Image 2 AI로 바로 활용 가능한 시각 자산을 더 빠르게 만들 수 있습니다.",
-    "keywords": "GPT Image 2 AI, gpt image 2 ai, GPT Image 2 AI 이미지 생성, GPT Image 2 AI 편집, GPT Image 2 AI 목업, GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, openai gpt image 2, openai image gen 2, gpt image 2 api, gpt image generator"
+    "keywords": "GPT Image 2 AI, 이미지 생성, 이미지 편집, 목업, ChatGPT image 2"
   },
   "header": {
     "id": "header",
@@ -102,7 +102,7 @@
     "avatars_tip": "실무에 바로 쓸 수 있는 GPT Image 2 결과물을 찾는 분께 적합합니다",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/hero/photogpt-case-e-commerce-hero-1920-q72.webp",
       "alt": "GPT Image 2 AI ChatGPT AI 이미지 생성기"
     }
   },

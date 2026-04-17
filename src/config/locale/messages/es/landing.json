@@ -2,7 +2,7 @@
   "metadata": {
     "title": "GPT Image 2 AI | Generador, editor y creador de mockups con GPT Image 2 AI",
     "description": "GPT Image 2 AI es una herramienta de generación y edición visual pensada para imágenes fotorrealistas, diseños con texto, pantallas UI, mockups de producto y retoque a partir de referencias. Con GPT Image 2 AI puedes producir piezas listas para usar mucho más rápido.",
-    "keywords": "GPT Image 2 AI, gpt image 2 ai, GPT Image 2 AI generador, GPT Image 2 AI editor, GPT Image 2 AI mockups, GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, openai gpt image 2, openai image gen 2, gpt image 2 api, gpt image generator"
+    "keywords": "GPT Image 2 AI, generador IA, editor de imagenes, mockups, ChatGPT image 2"
   },
   "header": {
     "id": "header",
@@ -102,7 +102,7 @@
     "avatars_tip": "Ideal para quienes buscan resultados de GPT Image 2 que se puedan usar de verdad",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/hero/photogpt-case-e-commerce-hero-1920-q72.webp",
       "alt": "GPT Image 2 AI Generador de Imágenes con IA de ChatGPT"
     }
   },

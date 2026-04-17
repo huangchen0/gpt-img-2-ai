@@ -2,7 +2,7 @@
   "metadata": {
     "title": "GPT Image 2 AI | GPT Image 2 AI для генерації, редагування та UI-мокапів",
     "description": "GPT Image 2 AI — це інструмент для генерації та редагування візуалів, який підходить для фотореалістичних сцен, графіки з текстом, UI-екранів, продуктових мокапів і правок за референсами. З GPT Image 2 AI легше швидко готувати корисні візуальні матеріали.",
-    "keywords": "GPT Image 2 AI, gpt image 2 ai, GPT Image 2 AI генератор, GPT Image 2 AI редагування, GPT Image 2 AI мокапи, GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, openai gpt image 2, openai image gen 2, gpt image 2 api, gpt image generator"
+    "keywords": "GPT Image 2 AI, генерація зображень, редагування, мокапи, ChatGPT image 2"
   },
   "header": {
     "id": "header",
@@ -102,7 +102,7 @@
     "avatars_tip": "Підійде тим, хто шукає практичні приклади використання GPT Image 2",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/hero/photogpt-case-e-commerce-hero-1920-q72.webp",
       "alt": "GPT Image 2 AI генератор зображень ChatGPT AI"
     }
   },
