@@ -25,7 +25,7 @@ We don't run an open directory. Listings are selective, editorially reviewed, an
 <a href="https://gptimg2.art" title="ChatGPT Image 2 Generator">ChatGPT Image 2 Generator</a>
 \`\`\`
 
-2. Email [support@gptimg2.art](mailto:support@gptimg2.art) with all required information for review.
+2. Email [support@gpt-image-2-ai.org](mailto:support@gpt-image-2-ai.org) with all required information for review.
 
 3. Every submission is manually reviewed. We only approve sites that meet all of the requirements below.
 
@@ -49,7 +49,7 @@ Approved outbound partner links are published in the dedicated list at the botto
 
 ## Contact
 
-If you'd like us to review your site for a possible partnership, email [support@gptimg2.art](mailto:support@gptimg2.art) with:
+If you'd like us to review your site for a possible partnership, email [support@gpt-image-2-ai.org](mailto:support@gpt-image-2-ai.org) with:
 
 - Your site URL
 - A short description of your audience or product
