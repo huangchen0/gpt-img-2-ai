@@ -102,7 +102,7 @@
     "avatars_tip": "Ideal para quienes buscan resultados de GPT Image 2 que se puedan usar de verdad",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
       "alt": "GPT Image 2 AI Generador de Imágenes con IA de ChatGPT"
     }
   },
@@ -366,61 +366,67 @@
   },
   "testimonials": {
     "id": "testimonials",
-    "title": "Opiniones de usuarios",
-    "description": "Así lo están usando otros equipos y creadores en proyectos reales.",
+    "title": "Creadores, marketers y equipos de producto ya lo usan",
+    "description": "Descubre cómo usan GPT Image 2 AI para headshots profesionales, visuales de producto, contenido lifestyle, creatividades para redes y materiales de marketing más pulidos.",
     "items": [
       {
-        "name": "Sarah Chen",
-        "role": "Diseñadora de redes sociales",
-        "quote": "GPT Image 2 facilita muchísimo crear piezas de campaña con texto usable. Paso de la idea al gráfico final en minutos.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
-          "alt": "Sarah Chen"
+        "name": "J.K.",
+        "role": "Creadora de contenido",
+        "rating": 5,
+        "quote": "Uso GPT Image 2 AI para crear headshots más pulidos y visuales lifestyle para mi blog y mis redes. Las imágenes se ven realistas, la luz es natural y el ajuste final me lleva mucho menos tiempo que hacerlo todo a mano.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-1.webp",
+          "alt": "Fondo de testimonio para creadora de contenido"
         }
       },
       {
-        "name": "Michael Rodriguez",
-        "role": "Responsable de growth",
-        "quote": "Lo usamos para mockups de landing pages, conceptos de anuncios y assets de marketing. La calidad de screenshots destaca mucho.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
-          "alt": "Michael Rodriguez"
+        "name": "M.L.",
+        "role": "Responsable de e-commerce",
+        "rating": 5,
+        "quote": "GPT Image 2 AI hace mucho más fácil producir visuales de producto. Sin montar un estudio completo, puedo sacar imágenes limpias y realistas para fichas, campañas y nuevas creatividades comerciales.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-2.webp",
+          "alt": "Fondo de testimonio para responsable de e-commerce"
         }
       },
       {
-        "name": "David Kim",
-        "role": "Diseñador de producto",
-        "quote": "Las generaciones de UI son lo bastante buenas como para discutir flujos antes de abrir Figma.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
-          "alt": "David Kim"
+        "name": "A.R.",
+        "role": "Fotógrafo freelance",
+        "rating": 5,
+        "quote": "Como fotógrafo freelance, valoro mucho la velocidad, pero no quiero resultados que se vean artificiales. GPT Image 2 AI me ayuda a desarrollar retratos y headshots tipo estudio con una apariencia creíble y una terminación muy cuidada.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-3.webp",
+          "alt": "Fondo de testimonio para fotógrafo freelance"
         }
       },
       {
-        "name": "Emma Thompson",
-        "role": "Director creativo",
-        "quote": "La calidad fotorrealista se nota más pulida en iluminación, materiales y composición. Es excelente para dirección visual temprana.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
-          "alt": "Emma Thompson"
+        "name": "S.T.",
+        "role": "Blogger de moda",
+        "rating": 5,
+        "quote": "Uso GPT Image 2 AI para probar looks, cambios de outfit y direcciones visuales antes de una sesión. Me permite validar ideas rápido y mantener un acabado elegante y profesional en las imágenes finales.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-4.webp",
+          "alt": "Fondo de testimonio para blogger de moda"
         }
       },
       {
-        "name": "James Wilson",
-        "role": "Fundador de ecommerce",
-        "quote": "Los mockups de producto y packaging salen mucho más rápido. Nos ayuda a validar ideas antes de producirlas.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
-          "alt": "James Wilson"
+        "name": "R.K.",
+        "role": "Especialista en marketing digital",
+        "rating": 5,
+        "quote": "GPT Image 2 AI funciona muy bien para creatividades sociales, visuales de campaña y ediciones realistas que deben publicarse rápido. Cuando necesito varias versiones en poco tiempo, acelera mucho el proceso.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-5.webp",
+          "alt": "Fondo de testimonio para especialista en marketing digital"
         }
       },
       {
-        "name": "Lisa Anderson",
-        "role": "Diseñadora de marca",
-        "quote": "La edición en lenguaje natural ahorra muchísimo tiempo. Ya no tengo que rehacer toda la imagen por pequeños cambios de texto o estilo.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
-          "alt": "Lisa Anderson"
+        "name": "L.N.",
+        "role": "Diseñadora de producto",
+        "rating": 5,
+        "quote": "Cuando necesito imágenes conceptuales realistas para presentaciones y propuestas, GPT Image 2 AI me ayuda a avanzar más rápido. El nivel de detalle es suficiente para revisiones internas, decks y storytelling de producto en fases tempranas.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-6.webp",
+          "alt": "Fondo de testimonio para diseñadora de producto"
         }
       }
     ]

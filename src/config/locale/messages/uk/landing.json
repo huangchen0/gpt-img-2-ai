@@ -102,7 +102,7 @@
     "avatars_tip": "Підійде тим, хто шукає практичні приклади використання GPT Image 2",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
       "alt": "GPT Image 2 AI генератор зображень ChatGPT AI"
     }
   },
@@ -366,61 +366,67 @@
   },
   "testimonials": {
     "id": "testimonials",
-    "title": "Відгуки користувачів",
-    "description": "Подивіться, як GPT Image 2 використовують у реальних робочих сценаріях.",
+    "title": "Креатори, маркетингові та продуктові команди вже використовують це",
+    "description": "Подивіться, як GPT Image 2 AI застосовують для професійних headshot-зображень, продуктових візуалів, lifestyle-контенту, матеріалів для соцмереж і більш відполірованих маркетингових креативів.",
     "items": [
       {
-        "name": "Сара Чен",
-        "role": "Дизайнерка соцмереж",
-        "quote": "GPT Image 2 значно спростив створення кампаній із текстом у візуалах. Від ідеї до фінального графічного матеріалу тепер проходить кілька хвилин.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
-          "alt": "Sarah Chen"
+        "name": "J.K.",
+        "role": "Контент-креаторка",
+        "rating": 5,
+        "quote": "Я використовую GPT Image 2 AI для більш акуратних професійних headshot-зображень і lifestyle-візуалів для блогу та соцмереж. Картинки виглядають реалістично, світло природне, а фінальна доробка займає значно менше часу, ніж ручна обробка.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-1.webp",
+          "alt": "Фонове зображення відгуку для контент-креаторки"
         }
       },
       {
-        "name": "Майкл Родрігес",
-        "role": "Growth-маркетолог",
-        "quote": "Ми використовуємо його для мокапів лендингів, рекламних концептів і продуктових візуалів. Якість скриншотів особливо корисна.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
-          "alt": "Michael Rodriguez"
+        "name": "M.L.",
+        "role": "Менеджерка e-commerce",
+        "rating": 5,
+        "quote": "GPT Image 2 AI значно спростив підготовку продуктових візуалів. Без складної студійної зйомки я можу швидко отримати чисті й реалістичні зображення для карток товарів і маркетингових кампаній.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-2.webp",
+          "alt": "Фонове зображення відгуку для менеджерки e-commerce"
         }
       },
       {
-        "name": "Девід Кім",
-        "role": "Продуктовий дизайнер",
-        "quote": "UI-генерація вже достатньо сильна, щоб обговорювати сценарії з командою ще до Figma.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
-          "alt": "David Kim"
+        "name": "A.R.",
+        "role": "Фриланс-фотограф",
+        "rating": 5,
+        "quote": "Як фриланс-фотограф, я ціную швидкість, але не хочу, щоб результат виглядав штучно. GPT Image 2 AI допомагає створювати переконливі портретні концепти та headshot-зображення у студійному стилі з якісною деталізацією.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-3.webp",
+          "alt": "Фонове зображення відгуку для фриланс-фотографа"
         }
       },
       {
-        "name": "Емма Томпсон",
-        "role": "Креативна директорка",
-        "quote": "Фотореалістичні результати стали відчутно кращими за світлом, матеріалами й композицією. Чудово підходить для раннього візуального напрямку.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
-          "alt": "Emma Thompson"
+        "name": "S.T.",
+        "role": "Фешн-блогерка",
+        "rating": 5,
+        "quote": "Я використовую GPT Image 2 AI, щоб тестувати стилі, образи й візуальні напрямки ще до зйомки. Це допомагає швидко перевіряти ідеї та зберігати відчуття акуратного професійного результату.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-4.webp",
+          "alt": "Фонове зображення відгуку для фешн-блогерки"
         }
       },
       {
-        "name": "Джеймс Вілсон",
-        "role": "Засновник e-commerce бренду",
-        "quote": "Продуктові мокапи та пакування тепер перевіряти набагато швидше. Ми можемо тестувати ідеї до виробництва.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
-          "alt": "James Wilson"
+        "name": "R.K.",
+        "role": "Digital-маркетолог",
+        "rating": 5,
+        "quote": "GPT Image 2 AI добре підходить для соцмережевих креативів, рекламних візуалів і реалістичного редагування, коли потрібно випустити матеріали швидко. Особливо корисно, коли за короткий час потрібно зробити кілька варіантів.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-5.webp",
+          "alt": "Фонове зображення відгуку для digital-маркетолога"
         }
       },
       {
-        "name": "Ліза Андерсон",
-        "role": "Бренд-дизайнерка",
-        "quote": "Редагування природною мовою сильно економить час. Дрібні зміни тексту чи стилю більше не вимагають починати все заново.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
-          "alt": "Lisa Anderson"
+        "name": "L.N.",
+        "role": "Продуктова дизайнерка",
+        "rating": 5,
+        "quote": "Коли мені потрібні реалістичні концепт-візуали для презентацій і пропозицій, GPT Image 2 AI помітно пришвидшує роботу. Деталізація достатньо чітка для внутрішніх рев’ю, презентаційних deck-ів і раннього продуктового сторітелінгу.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-6.webp",
+          "alt": "Фонове зображення відгуку для продуктової дизайнерки"
         }
       }
     ]

@@ -18,7 +18,7 @@ async function verifyShowcaseURLs() {
     let localCount = 0;
 
     showcases.forEach((s: typeof showcase.$inferSelect) => {
-      const isR2 = s.image.includes('cdn.gptimg2.art') || s.image.includes('.r2.cloudflarestorage.com');
+      const isR2 = s.image.includes('cdn.gpt-image-2-ai.org') || s.image.includes('.r2.cloudflarestorage.com');
       if (isR2) {
         r2Count++;
         console.log(`✓ [R2] ${s.title}`);
@@ -38,7 +38,7 @@ async function verifyShowcaseURLs() {
 
     if (r2Count > 0) {
       console.log('✓ Videos are successfully hosted on R2 CDN!');
-      console.log(`  CDN URL: https://cdn.gptimg2.art`);
+      console.log(`  CDN URL: https://cdn.gpt-image-2-ai.org`);
     }
 
     process.exit(0);

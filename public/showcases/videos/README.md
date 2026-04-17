@@ -8,7 +8,7 @@ All showcase videos have been migrated to **Cloudflare R2 CDN** for better perfo
 
 ## CDN Information
 
-- **CDN URL**: `https://cdn.gptimg2.art`
+- **CDN URL**: `https://cdn.gpt-image-2-ai.org`
 - **Storage Path**: `uploads/showcases/`
 - **Total Videos**: 12 showcase videos
 
@@ -33,7 +33,7 @@ To manage showcase videos:
 
 All video URLs are stored in the `showcase` table with R2 CDN URLs:
 ```
-https://cdn.gptimg2.art/uploads/showcases/[timestamp]-[filename].mp4
+https://cdn.gpt-image-2-ai.org/uploads/showcases/[timestamp]-[filename].mp4
 ```
 
 ## Local Development

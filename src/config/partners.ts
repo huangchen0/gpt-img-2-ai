@@ -62,7 +62,7 @@ export const partnerListings: PartnerListing[] = [
   },
   {
     name: 'Startup Fame',
-    url: 'https://startupfa.me/s/gptimg2.art-208?utm_source=gptimg2.art',
+    url: 'https://startupfa.me/s/gpt-image-2-ai.org-208?utm_source=gpt-image-2-ai.org',
     description:
       'Startup Fame is a startup showcase and discovery platform that features emerging products and founder projects.',
     category: 'Startup Directory',
@@ -92,14 +92,14 @@ export const partnerListings: PartnerListing[] = [
     category: 'SEO Tool',
     relationship: 'nofollow',
     badgeImageUrl:
-      'https://domainrank.app/api/badge/gptimg2.art?theme=dark',
-    badgeAlt: 'gptimg2.art Domain Rating',
+      'https://domainrank.app/api/badge/gpt-image-2-ai.org?theme=dark',
+    badgeAlt: 'gpt-image-2-ai.org Domain Rating',
     badgeWidth: 360,
     badgeHeight: 80,
   },
   {
     name: 'AI Just Better',
-    url: 'https://aijustbetter.com/item/gptimg2.art-zh-partners',
+    url: 'https://aijustbetter.com/item/gpt-image-2-ai.org-zh-partners',
     description:
       'AI Just Better publishes AI product reviews, comparisons, and analysis to help users evaluate tools more clearly.',
     category: 'AI Review Site',

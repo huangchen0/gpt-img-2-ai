@@ -400,7 +400,7 @@
         "buttons": [
           {
             "title": "获取 ChatGPT Image 2 Generator",
-            "url": "https://gptimg2.art",
+            "url": "https://gpt-image-2-ai.org",
             "target": "_blank",
             "icon": "Zap"
           },

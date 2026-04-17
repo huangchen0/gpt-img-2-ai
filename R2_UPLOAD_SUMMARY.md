@@ -8,7 +8,7 @@
 
 - **总视频数**: 12个
 - **上传到R2**: 12个 (100%)
-- **CDN域名**: `https://cdn.gptimg2.art`
+- **CDN域名**: `https://cdn.gpt-image-2-ai.org`
 - **存储路径**: `uploads/showcases/`
 
 ## 🎬 已上传的视频列表
@@ -16,53 +16,53 @@
 ### 第一批（早期高热度演示）
 
 1. **1分钟战争场景连拍** (`1min-war-scene.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718766568-1min-war-scene.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718766568-1min-war-scene.mp4`
    - 标签: war, cinematic, action, demo
 
 2. **钢铁侠重现** (`man-of-steel.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718776982-man-of-steel.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718776982-man-of-steel.mp4`
    - 标签: superman, cinematic, recreation, movie
 
 3. **钢琴女孩演奏** (`piano-girl.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718779298-piano-girl.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718779298-piano-girl.mp4`
    - 标签: piano, music, realistic, performance
 
 4. **45秒长镜头演示** (`45s-long-shot.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718769372-45s-long-shot.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718769372-45s-long-shot.mp4`
    - 标签: long-shot, cinematic, demo, technical
 
 5. **2分钟打斗场景** (`2min-fight.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718767964-2min-fight.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718767964-2min-fight.mp4`
    - 标签: fight, action, long-form, choreography
 
 6. **17秒电影镜头** (`17s-cinematic.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718763883-17s-cinematic.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718763883-17s-cinematic.mp4`
    - 标签: cinematic, quick, demo, lighting
 
 ### 第二批（最新演示）
 
 7. **Nike风格广告** (`nike-ad.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718778178-nike-ad.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718778178-nike-ad.mp4`
    - 标签: nike, commercial, advertisement, audio
 
 8. **角色一致性演示** (`character-consistency.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718770891-character-consistency.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718770891-character-consistency.mp4`
    - 标签: consistency, demo, quality, bytedance
 
 9. **F1赛车比喻** (`f1-prediction.mp4`)
-   - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718774705-f1-prediction.mp4`
+   - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718774705-f1-prediction.mp4`
    - 标签: f1, racing, metaphor, visualization
 
 10. **自然语言生成** (`chat-prompt.mp4`)
-    - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718772947-chat-prompt.mp4`
+    - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718772947-chat-prompt.mp4`
     - 标签: natural-language, daily, demo, nlp
 
 11. **搞笑示例场景** (`funny-scene.mp4`)
-    - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718775785-funny-scene.mp4`
+    - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718775785-funny-scene.mp4`
     - 标签: funny, creative, short, entertainment
 
 12. **Sora对比演示** (`sora-comparison.mp4`)
-    - R2 URL: `https://cdn.gptimg2.art/uploads/showcases/1770718780384-sora-comparison.mp4`
+    - R2 URL: `https://cdn.gpt-image-2-ai.org/uploads/showcases/1770718780384-sora-comparison.mp4`
     - 标签: comparison, sora, benchmark, openai
 
 ## 🛠️ 创建的脚本
@@ -105,7 +105,7 @@ npx tsx scripts/upload-single-video.ts
 - R2 Access Key
 - R2 Secret Key
 - R2 Bucket Name: `Happy Horse`
-- R2 Public Domain: `https://cdn.gptimg2.art`
+- R2 Public Domain: `https://cdn.gpt-image-2-ai.org`
 - Upload Path: `uploads`
 
 ## 💡 视频展示特性

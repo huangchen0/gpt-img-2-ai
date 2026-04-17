@@ -826,7 +826,7 @@ pnpm cf:deploy    # 部署
 **访问地址**:
 ```
 本地: http://localhost:3001/blog
-生产: https://gptimg2.art/blog
+生产: https://gpt-image-2-ai.org/blog
 ```
 
 ---

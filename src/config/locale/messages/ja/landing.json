@@ -102,7 +102,7 @@
     "avatars_tip": "GPT Image 2 の実用的な作例を探している方におすすめ",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
       "alt": "GPT Image 2 AI ChatGPT AI画像ジェネレーター"
     }
   },
@@ -366,61 +366,67 @@
   },
   "testimonials": {
     "id": "testimonials",
-    "title": "利用者の声",
-    "description": "GPT Image 2 を活用しているユーザーのリアルな感想を紹介します。",
+    "title": "クリエイター、マーケター、プロダクトチームに選ばれています",
+    "description": "GPT Image 2 AI を使って、プロフィール写真、商品ビジュアル、ライフスタイル素材、SNS クリエイティブ、洗練されたマーケティング画像を制作している事例をご紹介します。",
     "items": [
       {
-        "name": "サラ・チェン",
-        "role": "SNSデザイナー",
-        "quote": "GPT Image 2 なら文字入りのキャンペーン画像が作りやすく、数分で公開レベルの素材まで持っていけます。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
-          "alt": "サラ・チェン"
+        "name": "J.K.",
+        "role": "コンテンツクリエイター",
+        "rating": 5,
+        "quote": "GPT Image 2 AI を使うと、ブログやSNS向けの洗練されたヘッドショットやライフスタイル画像をすばやく作れます。仕上がりは自然で、光の見え方もきれいなので、手作業で整える時間をかなり減らせました。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-1.webp",
+          "alt": "コンテンツクリエイター向けのレビュー背景画像"
         }
       },
       {
-        "name": "マイケル・ロドリゲス",
-        "role": "グロースマーケター",
-        "quote": "ランディングページ案、広告クリエイティブ、商品訴求画像まで、スクリーンショット品質がとても役立っています。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
-          "alt": "マイケル・ロドリゲス"
+        "name": "M.L.",
+        "role": "ECマネージャー",
+        "rating": 5,
+        "quote": "GPT Image 2 AI があると、商品ビジュアルの制作がかなり楽になります。大がかりな撮影環境を用意しなくても、商品ページやキャンペーン向けの自然でクリーンな画像を短時間で用意できます。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-2.webp",
+          "alt": "ECマネージャー向けのレビュー背景画像"
         }
       },
       {
-        "name": "デビッド・キム",
+        "name": "A.R.",
+        "role": "フリーランスフォトグラファー",
+        "rating": 5,
+        "quote": "フリーランスの写真家として、速さは大切ですが、不自然な仕上がりにはしたくありません。GPT Image 2 AI は、信頼感のあるポートレートやスタジオ風ヘッドショットの企画づくりにとても役立っています。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-3.webp",
+          "alt": "フリーランスフォトグラファー向けのレビュー背景画像"
+        }
+      },
+      {
+        "name": "S.T.",
+        "role": "ファッションブロガー",
+        "rating": 5,
+        "quote": "GPT Image 2 AI で、撮影前にコーディネートやビジュアルの方向性を試しています。服装の切り替えやイメージ検証をすばやく行えて、最終的なビジュアルもきれいにまとまります。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-4.webp",
+          "alt": "ファッションブロガー向けのレビュー背景画像"
+        }
+      },
+      {
+        "name": "R.K.",
+        "role": "デジタルマーケター",
+        "rating": 5,
+        "quote": "GPT Image 2 AI は、SNS素材やキャンペーンビジュアル、リアルな編集画像を短時間で用意したいときにぴったりです。バリエーションを何枚も出したい場面で特に助かっています。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-5.webp",
+          "alt": "デジタルマーケター向けのレビュー背景画像"
+        }
+      },
+      {
+        "name": "L.N.",
         "role": "プロダクトデザイナー",
-        "quote": "UI 生成の完成度が高く、Figma を開く前にチームでフローを検討できます。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
-          "alt": "デビッド・キム"
-        }
-      },
-      {
-        "name": "エマ・トンプソン",
-        "role": "クリエイティブディレクター",
-        "quote": "光や素材感、構図のまとまりが良く、初期のビジュアル方向性を探るのに最適です。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
-          "alt": "エマ・トンプソン"
-        }
-      },
-      {
-        "name": "ジェームズ・ウィルソン",
-        "role": "ECブランド創業者",
-        "quote": "商品モックアップやパッケージ案の検証が速くなり、本制作前の判断がしやすくなりました。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
-          "alt": "ジェームズ・ウィルソン"
-        }
-      },
-      {
-        "name": "リサ・アンダーソン",
-        "role": "ブランドデザイナー",
-        "quote": "自然言語での修正が本当に便利で、細かなコピー変更やスタイル調整に時間がかかりません。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
-          "alt": "リサ・アンダーソン"
+        "rating": 5,
+        "quote": "提案資料やプレゼン用にリアルなコンセプトビジュアルが必要なとき、GPT Image 2 AI が制作スピードを上げてくれます。細部まで確認しやすく、社内レビューや初期のプロダクト説明にも使いやすいです。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-6.webp",
+          "alt": "プロダクトデザイナー向けのレビュー背景画像"
         }
       }
     ]

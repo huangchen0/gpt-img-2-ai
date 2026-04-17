@@ -7,7 +7,7 @@ const showcaseVideo = {
   userId: 'dd2fdc4f-8c3d-4ae1-a020-84c789989b4a',
   title: 'happy horse video 8',
   prompt: 'Dynamic video generation with realistic movements and professional cinematography using happy horse AI model.',
-  image: 'https://cdn.gptimg2.art/uploads/showcases/1770729180070-2.webm',
+  image: 'https://cdn.gpt-image-2-ai.org/uploads/showcases/1770729180070-2.webm',
   tags: 'seedance,ai-video,demo,webm',
   description: 'Advanced AI video synthesis with realistic motion',
 };
