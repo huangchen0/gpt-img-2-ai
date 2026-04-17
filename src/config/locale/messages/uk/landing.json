@@ -1,0 +1,573 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 AI генератор зображень ChatGPT безкоштовно",
+    "description": "GPT Image 2 — AI генератор для реалістичних зображень, чіткого тексту, UI-скриншотів, мокапів і швидкого редагування.",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+  },
+  "header": {
+    "id": "header",
+    "brand": {
+      "title": "GPT Image 2",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "GPT Image 2"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "AI Зображення",
+          "url": "/ai-image",
+          "icon": "Image"
+        },
+        {
+          "title": "AI Відео",
+          "url": "/ai-video",
+          "icon": "Video"
+        },
+        {
+          "title": "Pricing",
+          "url": "/pricing",
+          "icon": "DollarSign"
+        },
+        {
+          "title": "Showcases",
+          "url": "/showcases",
+          "icon": "Box"
+        },
+        {
+          "title": "Blog",
+          "url": "/blog",
+          "icon": "BookOpen"
+        }
+      ]
+    },
+    "buttons": [],
+    "user_nav": {
+      "show_name": true,
+      "show_credits": true,
+      "show_sign_out": true,
+      "items": [
+        {
+          "title": "Billing",
+          "url": "/settings/billing",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "Activity",
+          "url": "/activity",
+          "icon": "Activity"
+        }
+      ]
+    },
+    "show_sign": true,
+    "show_theme": true,
+    "show_locale": true,
+    "topbanner": {
+      "id": "limited-time-offer-2026-04-15",
+      "image": {
+        "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
+        "alt": "Обмежена пропозиція"
+      },
+      "text": "Лише зараз <strong>50%</strong> OFF!",
+      "closeLabel": "Закрити банер",
+      "buttonText": "Переглянути ціни",
+      "href": "/pricing",
+      "target": "_self",
+      "dismissedExpiryDays": 7
+    }
+  },
+  "hero": {
+    "id": "hero",
+    "title": "GPT Image 2 - AI генератор зображень для ChatGPT",
+    "description": "За допомогою GPT Image 2 можна швидко створювати реалістичні зображення, UI-екрани, продуктові мокапи та маркетингові візуали. Сервіс працює на основі ChatGPT Image і краще справляється з інструкціями, текстом усередині зображень та подальшим редагуванням.",
+    "buttons": [
+      {
+        "title": "Спробувати AI Зображення",
+        "icon": "Image",
+        "url": "/ai-image",
+        "target": "_self",
+        "variant": "default"
+      },
+      {
+        "title": "Спробувати AI Відео",
+        "icon": "Video",
+        "url": "/ai-video",
+        "target": "_self",
+        "variant": "outline"
+      }
+    ],
+    "show_avatars": false,
+    "avatars_tip": "Підійде тим, хто шукає практичні приклади використання GPT Image 2",
+    "show_award": false,
+    "background_image": {
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "alt": "GPT Image 2 AI генератор зображень ChatGPT"
+    }
+  },
+  "showcases-flow": {
+    "id": "showcases",
+    "title": "Приклади GPT Image 2",
+    "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+    "items": [
+      {
+        "title": "GPT Image 2 Приклад 1",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/3d-case-presentation.webp",
+          "alt": "GPT Image 2 Приклад 1"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 2",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/pro-ai-img.webp",
+          "alt": "GPT Image 2 Приклад 2"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 3",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/fighting-actions.webp",
+          "alt": "GPT Image 2 Приклад 3"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 4",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/sticker-maker.webp",
+          "alt": "GPT Image 2 Приклад 4"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 5",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/math-solution.webp",
+          "alt": "GPT Image 2 Приклад 5"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 6",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.webp",
+          "alt": "GPT Image 2 Приклад 6"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 7",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/clothing-removal-tryon.webp",
+          "alt": "GPT Image 2 Приклад 7"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 8",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/anime-figure-1.webp",
+          "alt": "GPT Image 2 Приклад 8"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 9",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/graffiti-action.webp",
+          "alt": "GPT Image 2 Приклад 9"
+        }
+      },
+      {
+        "title": "GPT Image 2 Приклад 10",
+        "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/face-swap.webp",
+          "alt": "GPT Image 2 Приклад 10"
+        }
+      }
+    ]
+  },
+  "logos": {
+    "hidden": true
+  },
+  "introduce": {
+    "id": "introduce",
+    "title": "Що таке GPT Image 2",
+    "description": "GPT Image 2 — це генератор зображень на базі ChatGPT Image, орієнтований на реальні робочі задачі. Він добре підходить для фотореалістичних сцен, читабельного тексту в кадрі, UI-візуалів, редагування зображень і роботи з референсами.",
+    "items": [
+      {
+        "title": "Краще працює з текстом у зображеннях",
+        "description": "Підходить для банерів, меню, етикеток, рекламних креативів і соцмережевої графіки, де важливо, щоб текст у кадрі був зрозумілим.",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "Зручно робити UI та екрани",
+        "description": "Можна швидко створювати екрани застосунків, дашборди, мокапи лендингів і продуктові візуали для дизайну, документації чи презентацій.",
+        "icon": "RiImageLine"
+      },
+      {
+        "title": "Більш природний фотореалізм",
+        "description": "Портрети, продуктова зйомка, lifestyle-візуали та бренд-матеріали виглядають переконливіше завдяки світлу, фактурам і ціліснішій картинці.",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "Редагування через звичайні інструкції",
+        "description": "Можна змінювати текст, композицію, стиль чи окремі елементи, просто описуючи потрібний результат природною мовою.",
+        "icon": "RiSparklingLine"
+      }
+    ]
+  },
+  "benefits": {
+    "id": "benefits",
+    "title": "Чому варто обрати GPT Image 2",
+    "description": "GPT Image 2 не просто генерує красиві картинки, а допомагає швидше довести їх до стану, придатного для реальної роботи.",
+    "items": [
+      {
+        "title": "Швидше проходить цикл ітерацій",
+        "description": "Ви швидко отримуєте першу робочу версію, а потім допрацьовуєте її без потреби починати все з нуля.",
+        "icon": "RiRocketLine"
+      },
+      {
+        "title": "Підходить для реальних задач",
+        "description": "Сервіс добре працює для рекламних матеріалів, продуктових візуалів, UI-пропозицій, комерційних презентацій і бренд-контенту.",
+        "icon": "RiUserSmileLine"
+      },
+      {
+        "title": "Краще розуміє складні інструкції",
+        "description": "Якщо у промпті є вимоги до композиції, копірайту, кольору чи деталей об’єкта, результат легше наблизити до бажаного.",
+        "icon": "RiTimeLine"
+      },
+      {
+        "title": "Створення й редагування в одному потоці",
+        "description": "Можна як генерувати з нуля, так і брати наявне зображення та поетапно доводити його до потрібного вигляду.",
+        "icon": "RiMoneyDollarCircleLine"
+      }
+    ]
+  },
+  "usage": {
+    "hidden": true
+  },
+  "how-to-techniques": {
+    "id": "how-to-techniques",
+    "block": "how-to-techniques",
+    "tip": "How to efficiently use GPT Image 2 in real creative workflows",
+    "title": "How to Use GPT Image 2 Techniques",
+    "description": "See how GPT Image 2 can handle practical image generation and editing tasks for commerce, design, and content work without switching between multiple tools.",
+    "items": [
+      {
+        "title": "GPT Image 2 E-commerce Photo Editor",
+        "description": "Use GPT Image 2 to polish product visuals, clean up backgrounds, improve lighting, and turn rough source images into sharper commerce-ready assets for listings, ads, and storefronts.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/ip-creation.webp",
+          "alt": "GPT Image 2 e-commerce photo editing example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Multi-Image Scene Remix",
+        "description": "Combine references, preserve subject identity, and reshape composition with GPT Image 2 to build cleaner marketing scenes, concept visuals, and story-driven image variations from multiple inputs.",
+        "image_position": "left",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/novel-view-synthesis.webp",
+          "alt": "GPT Image 2 multi-image remix example"
+        },
+        "button": {
+          "title": "Create With References",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Text and Poster Editing",
+        "description": "Revise layouts, swap headlines, refine on-image copy, and update design details with GPT Image 2 for posters, social creatives, launch graphics, and product marketing visuals.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/poster-editing.webp",
+          "alt": "GPT Image 2 poster editing example"
+        },
+        "button": {
+          "title": "Edit an Image",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      }
+    ]
+  },
+  "features": {
+    "id": "features",
+    "title": "Основні можливості",
+    "description": "GPT Image 2 поєднує генерацію, доопрацювання та візуальний пошук рішень в одному робочому процесі.",
+    "items": [
+      {
+        "title": "Генерація зі звичайного тексту",
+        "description": "Достатньо описати сцену своїми словами, щоб отримати зображення з кращою композицією, стилем і цілісністю.",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "Дизайни з текстом усередині",
+        "description": "Інструмент добре підходить для банерів, меню, пакування, інтерфейсів і промоматеріалів, де текст є частиною дизайну.",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "Створення UI та мокапів",
+        "description": "Підходить для вебекранів, мобільних інтерфейсів, SaaS-дашбордів і продуктових презентаційних матеріалів.",
+        "icon": "RiLayoutLine"
+      },
+      {
+        "title": "Комбінація кількох референсів",
+        "description": "Можна змішувати кілька зображень, щоб зберігати стиль, поєднувати ідеї та швидше перевіряти нові композиції.",
+        "icon": "Layers"
+      },
+      {
+        "title": "Гнучкий контроль формату",
+        "description": "Зручно працювати з форматами 1:1, 16:9 або 4:5 для соцмереж, лендингів, реклами та продуктових сторінок.",
+        "icon": "RiAspectRatioLine"
+      },
+      {
+        "title": "Підходить і для майбутніх API-сценаріїв",
+        "description": "Добре лягає в сторінки чи продукти, які хочуть будувати позиціонування навколо GPT Image 2 API у міру розвитку моделі.",
+        "icon": "RiFlashlightLine"
+      }
+    ]
+  },
+  "stats": {
+    "id": "stats",
+    "title": "Зручно для роботи із зображеннями",
+    "description": "Практичний процес для команд, яким потрібно швидше створювати та допрацьовувати візуали.",
+    "items": [
+      {
+        "title": "Текст у зображення",
+        "description": "Перетворюйте ідеї на корисні візуали"
+      },
+      {
+        "title": "Редагування інструкціями",
+        "description": "Вносьте правки звичайною мовою"
+      },
+      {
+        "title": "UI-мокапи",
+        "description": "Показуйте екрани та продуктові концепти"
+      },
+      {
+        "title": "Швидший процес",
+        "description": "Скорочуйте шлях від ідеї до готового матеріалу"
+      }
+    ]
+  },
+  "testimonials": {
+    "id": "testimonials",
+    "title": "Відгуки користувачів",
+    "description": "Подивіться, як GPT Image 2 використовують у реальних робочих сценаріях.",
+    "items": [
+      {
+        "name": "Сара Чен",
+        "role": "Дизайнерка соцмереж",
+        "quote": "GPT Image 2 значно спростив створення кампаній із текстом у візуалах. Від ідеї до фінального графічного матеріалу тепер проходить кілька хвилин.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
+          "alt": "Sarah Chen"
+        }
+      },
+      {
+        "name": "Майкл Родрігес",
+        "role": "Growth-маркетолог",
+        "quote": "Ми використовуємо його для мокапів лендингів, рекламних концептів і продуктових візуалів. Якість скриншотів особливо корисна.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
+          "alt": "Michael Rodriguez"
+        }
+      },
+      {
+        "name": "Девід Кім",
+        "role": "Продуктовий дизайнер",
+        "quote": "UI-генерація вже достатньо сильна, щоб обговорювати сценарії з командою ще до Figma.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
+          "alt": "David Kim"
+        }
+      },
+      {
+        "name": "Емма Томпсон",
+        "role": "Креативна директорка",
+        "quote": "Фотореалістичні результати стали відчутно кращими за світлом, матеріалами й композицією. Чудово підходить для раннього візуального напрямку.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
+          "alt": "Emma Thompson"
+        }
+      },
+      {
+        "name": "Джеймс Вілсон",
+        "role": "Засновник e-commerce бренду",
+        "quote": "Продуктові мокапи та пакування тепер перевіряти набагато швидше. Ми можемо тестувати ідеї до виробництва.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
+          "alt": "James Wilson"
+        }
+      },
+      {
+        "name": "Ліза Андерсон",
+        "role": "Бренд-дизайнерка",
+        "quote": "Редагування природною мовою сильно економить час. Дрібні зміни тексту чи стилю більше не вимагають починати все заново.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
+          "alt": "Lisa Anderson"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "id": "faq",
+    "title": "Поширені запитання",
+    "items": [
+      {
+        "question": "Що таке GPT Image 2",
+        "answer": "GPT Image 2 — це інструмент генерації зображень на базі ChatGPT Image. Він добре підходить для реалістичних візуалів, картинок із текстом, UI-екранів і редагування природною мовою."
+      },
+      {
+        "question": "Чи можна спробувати безкоштовно",
+        "answer": "Ви можете почати з доступу або кредитів, які доступні на цьому сайті. Якщо є обмеження чи платні плани, вони вказані на сторінці цін."
+      },
+      {
+        "question": "Які зображення можна створювати",
+        "answer": "Можна створювати продуктові мокапи, графіку для соцмереж, UI-екрани, банери, постери, візуали для кампаній та інші корисні матеріали."
+      },
+      {
+        "question": "Чим він кращий за старіші моделі",
+        "answer": "Сильні сторони GPT Image 2 — більш читабельний текст, правдоподібніші інтерфейси, краще слідування промпту та більш цілісна картинка."
+      },
+      {
+        "question": "Чи є GPT Image 2 API",
+        "answer": "Доступність GPT Image 2 API може змінюватися. Водночас цей сайт уже дозволяє підготувати сторінки та позиціонування під такий сценарій."
+      },
+      {
+        "question": "Які входи підтримуються",
+        "answer": "Можна починати з тексту, використовувати референсні зображення, а потім продовжувати через варіації та редагування в одному потоці."
+      },
+      {
+        "question": "Чи можна використовувати для комерційних задач",
+        "answer": "Таке використання можливе, але варто перевіряти права на завантажені матеріали та умови вашого плану."
+      }
+    ]
+  },
+  "cta": {
+    "id": "cta",
+    "title": "Почніть створювати з AI Зображенням та AI Відео",
+    "description": "Розділіть генерацію зображень і відео на два окремі сценарії, які буде легко розширювати новими моделями.",
+    "buttons": [
+      {
+        "title": "Використати AI Зображення",
+        "url": "/ai-image",
+        "target": "_self",
+        "icon": "Image"
+      },
+      {
+        "title": "Використати AI Відео",
+        "url": "/ai-video",
+        "target": "_self",
+        "icon": "Video"
+      }
+    ],
+    "className": "bg-muted"
+  },
+  "subscribe": {
+    "hidden": true
+  },
+  "footer": {
+    "id": "footer",
+    "brand": {
+      "title": "GPT Image 2",
+      "description": "GPT Image 2 — це інструмент на базі ChatGPT Image для генерації, редагування та доопрацювання зображень в одному робочому процесі.",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "GPT Image 2 AI генератор зображень ChatGPT"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "About",
+          "children": [
+            {
+              "title": "About Us",
+              "url": "/about",
+              "target": "_self"
+            },
+            {
+              "title": "AI Зображення",
+              "url": "/ai-image",
+              "target": "_self"
+            },
+            {
+              "title": "AI Відео",
+              "url": "/ai-video",
+              "target": "_self"
+            },
+            {
+              "title": "Features",
+              "url": "/#features",
+              "target": "_self"
+            },
+            {
+              "title": "Showcases",
+              "url": "/#showcases",
+              "target": "_self"
+            },
+            {
+              "title": "FAQ",
+              "url": "/#faq",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    "social": {
+      "items": [
+        {
+          "title": "Email",
+          "icon": "Mail",
+          "url": "mailto:support@gptimg2.art",
+          "target": "_self"
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "Privacy Policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "title": "Terms of Service",
+          "url": "/terms-of-service"
+        }
+      ]
+    },
+    "show_theme": true,
+    "show_locale": true
+  },
+  "generator_switcher": {
+    "title": "Створюйте з GPT Image 2",
+    "subtitle": "Генеруйте реалістичні зображення прямо з головної сторінки та швидко доводьте їх до потрібного вигляду.",
+    "video": "Генерація зображень",
+    "image": "Редагування зображень",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "Краще підходить для мультимодальних референсів, керування камерою та кінематографічного результату.",
+    "kling_description": "Краще підходить для мультишот-оповіді, цілісності елементів і нативного аудіо.",
+    "sr_only_video": "GPT Image 2 AI генератор зображень ChatGPT",
+    "sr_only_image": "Редагування зображень GPT Image 2",
+    "sr_only_kling": "Відеогенератор Kling 3"
+  }
+}

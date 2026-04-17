@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "title": "Penjana Imej AI",
+    "description": "Jana imej dengan model AI, menyokong teks ke imej dan imej ke imej."
+  },
+  "page": {
+    "title": "Penjana Imej AI",
+    "description": "Jana imej dengan model AI, menyokong teks ke imej dan imej ke imej."
+  },
+  "generator": {
+    "title": "Penjana Imej",
+    "description": "Jana imej dengan model AI, menyokong teks ke imej dan imej ke imej.",
+    "tabs": {
+      "text-to-image": "Teks ke Imej",
+      "image-to-image": "Imej ke Imej"
+    },
+    "form": {
+      "provider": "Penyedia",
+      "model": "Model",
+      "select_provider": "Pilih penyedia",
+      "select_model": "Pilih model",
+      "model_hint": "GPT Image 2: lebih pantas, lebih bernilai dan menyokong Google Search. GPT Image 2 Pro: kualiti dan perincian lebih tinggi untuk produksi.",
+      "resolution": "Resolusi",
+      "select_resolution": "Pilih resolusi",
+      "aspect_ratio": "Nisbah aspek",
+      "select_aspect_ratio": "Pilih nisbah aspek",
+      "output_format": "Format output",
+      "select_output_format": "Pilih format output",
+      "google_search": "Google Search",
+      "google_search_hint": "Hanya untuk GPT Image 2 (+2 kredit)",
+      "prompt": "Prompt",
+      "prompt_placeholder": "Terangkan butiran imej seperti warna, bentuk, tekstur dan sebagainya.",
+      "reference_image": "Imej rujukan",
+      "reference_image_placeholder": "Muat naik imej rujukan, menyokong berbilang imej",
+      "some_images_failed_to_upload": "Beberapa imej gagal dimuat naik, padamkannya dan muat naik semula",
+      "prompt_too_long": "Prompt terlalu panjang, sila kurangkan kandungan"
+    },
+    "generate": "Jana Imej",
+    "checking_account": "Menyemak akaun...",
+    "loading": "Memuatkan...",
+    "generating": "Menjana...",
+    "sign_in_to_generate": "Log masuk untuk jana imej",
+    "credits_cost": "Kos {credits} kredit",
+    "credits_remaining": "Baki {credits} kredit",
+    "buy_credits": "Beli kredit",
+    "progress": "Kemajuan",
+    "generated_images": "Pratonton imej",
+    "ready_to_generate": "Sedia untuk jana",
+    "ready_for_generating": "Sedia untuk jana",
+    "no_images_generated": "Tiada imej dijana"
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "title": "ChatGPT Image 2 Prompts & Showcases",
+    "description": "Awesome projects built with ChatGPT Image 2 Generator"
+  },
+  "ui": {
+    "create_similar": "Create Similar",
+    "loading": "Loading...",
+    "no_showcases": "No showcases yet",
+    "load_more": "Load More"
+  },
+  "showcases-flow": {
+    "id": "showcases",
+    "sr_only_title": "Showcases",
+    "title": "ChatGPT Image 2 Prompts",
+    "description": "Representative editing and generation cases powered by ChatGPT Image 2 Generator",
+    "items": [
+      {
+        "title": "Vertical fisheye selfie",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/1.jpeg",
+          "alt": "AI SaaS Showcase 1"
+        },
+        "prompt": "vertical-fisheye-selfie"
+      },
+      {
+        "title": "AI SaaS Showcase 2",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/2.jpeg",
+          "alt": "AI SaaS Showcase 2"
+        },
+        "prompt": "3d-digital-human-comics"
+      },
+      {
+        "title": "AI SaaS Showcase 3",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/3.jpeg",
+          "alt": "AI SaaS Showcase 3"
+        }
+      },
+      {
+        "title": "AI SaaS Showcase 4",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/4.jpeg",
+          "alt": "AI SaaS Showcase 4"
+        }
+      },
+      {
+        "title": "AI SaaS Showcase 5",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/5.jpeg",
+          "alt": "AI SaaS Showcase 5"
+        }
+      },
+      {
+        "title": "AI SaaS Showcase 6",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/6.jpeg",
+          "alt": "AI SaaS Showcase 6"
+        }
+      },
+      {
+        "title": "AI SaaS Showcase 7",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/7.jpeg",
+          "alt": "AI SaaS Showcase 7"
+        }
+      },
+      {
+        "title": "AI SaaS Showcase 8",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/8.jpeg",
+          "alt": "AI SaaS Showcase 8"
+        }
+      },
+      {
+        "title": "AI SaaS Showcase 9",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/9.jpeg",
+          "alt": "AI SaaS Showcase 9"
+        }
+      },
+      {
+        "title": "AI SaaS Showcase 10",
+        "description": "AI SaaS Showcase",
+        "image": {
+          "src": "/imgs/showcases/10.jpeg",
+          "alt": "AI SaaS Showcase 10"
+        }
+      }
+    ]
+  },
+  "page": {
+    "title": "Showcases",
+    "sections": {
+      "showcases": {
+        "id": "showcases",
+        "title": "AI SaaS Startups built with ChatGPT Image 2 Generator",
+        "description": "Easy to use and fast to ship.",
+        "groups": [
+          {
+            "name": "all",
+            "title": "All"
+          },
+          {
+            "name": "ai-chatbot",
+            "title": "AI Chatbot"
+          },
+          {
+            "name": "ai-image",
+            "title": "AI Image"
+          },
+          {
+            "name": "ai-video",
+            "title": "AI Video"
+          },
+          {
+            "name": "ai-audio",
+            "title": "AI Audio"
+          },
+          {
+            "name": "ai-music",
+            "title": "AI Music"
+          },
+          {
+            "name": "ai-coding",
+            "title": "AI Coding"
+          },
+          {
+            "name": "other",
+            "title": "Other"
+          }
+        ],
+        "items": [
+          {
+            "title": "ThinkAny",
+            "description": "AI Search Engine",
+            "url": "https://thinkany.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/7.png",
+              "alt": "showcases"
+            },
+            "group": "ai-chatbot"
+          },
+          {
+            "title": "HeyBeauty",
+            "description": "AI Virtual Try On",
+            "url": "https://heybeauty.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/5.png",
+              "alt": "showcases"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "AI Wallpaper",
+            "description": "AI Wallpaper Generator",
+            "url": "https://aiwallpaper.shop",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/1.png",
+              "alt": "showcases"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "AI Cover",
+            "description": "AI Cover Generator",
+            "url": "https://aicover.design",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/2.png",
+              "alt": "showcases"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "GPTs Works",
+            "description": "GPTs Directory",
+            "url": "https://gpts.works",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/3.png",
+              "alt": "showcases"
+            },
+            "group": "other"
+          },
+          {
+            "title": "Melodisco",
+            "description": "AI Music Player",
+            "url": "https://melodis.co",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/4.png",
+              "alt": "showcases"
+            },
+            "group": "ai-music"
+          },
+          {
+            "title": "Pagen",
+            "description": "AI Landing Page Generator",
+            "url": "https://pagen.so",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/6.png",
+              "alt": "showcases"
+            },
+            "group": "ai-coding"
+          },
+          {
+            "title": "SoraFM",
+            "description": "AI Video Generator",
+            "url": "https://sorafm.trys.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/8.png",
+              "alt": "showcases"
+            },
+            "group": "ai-video"
+          },
+          {
+            "title": "PodLM",
+            "description": "AI Podcast Generator",
+            "url": "https://podlm.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/9.png",
+              "alt": "showcases"
+            },
+            "group": "ai-audio"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,573 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 Penjana Imej AI ChatGPT Percuma Online",
+    "description": "GPT Image 2 ialah penjana imej AI untuk imej realistik, teks yang jelas, skrin UI, mockup dan suntingan imej pantas.",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+  },
+  "header": {
+    "id": "header",
+    "brand": {
+      "title": "GPT Image 2",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "GPT Image 2"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "Imej AI",
+          "url": "/ai-image",
+          "icon": "Image"
+        },
+        {
+          "title": "Video AI",
+          "url": "/ai-video",
+          "icon": "Video"
+        },
+        {
+          "title": "Harga",
+          "url": "/pricing",
+          "icon": "DollarSign"
+        },
+        {
+          "title": "Paparan",
+          "url": "/showcases",
+          "icon": "Box"
+        },
+        {
+          "title": "Blog",
+          "url": "/blog",
+          "icon": "BookOpen"
+        }
+      ]
+    },
+    "buttons": [],
+    "user_nav": {
+      "show_name": true,
+      "show_credits": true,
+      "show_sign_out": true,
+      "items": [
+        {
+          "title": "Pembayaran",
+          "url": "/settings/billing",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "Aktiviti",
+          "url": "/activity",
+          "icon": "Activity"
+        }
+      ]
+    },
+    "show_sign": true,
+    "show_theme": true,
+    "show_locale": true,
+    "topbanner": {
+      "id": "limited-time-offer-2026-04-15",
+      "image": {
+        "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
+        "alt": "Promosi masa terhad"
+      },
+      "text": "Promosi terhad: <strong>50%</strong> OFF!",
+      "closeLabel": "Tutup banner",
+      "buttonText": "Lihat harga",
+      "href": "/pricing",
+      "target": "_self",
+      "dismissedExpiryDays": 7
+    }
+  },
+  "hero": {
+    "id": "hero",
+    "title": "GPT Image 2 - Penjana imej AI untuk ChatGPT",
+    "description": "Dengan GPT Image 2, anda boleh menghasilkan imej realistik, skrin antaramuka, mockup produk dan bahan visual pemasaran dengan lebih pantas. Ia dibina di atas ChatGPT Image dan lebih baik dalam memahami arahan, memaparkan teks dalam imej, serta memudahkan proses suntingan selepas penjanaan.",
+    "buttons": [
+      {
+        "title": "Cuba Imej AI",
+        "icon": "Image",
+        "url": "/ai-image",
+        "target": "_self",
+        "variant": "default"
+      },
+      {
+        "title": "Cuba Video AI",
+        "icon": "Video",
+        "url": "/ai-video",
+        "target": "_self",
+        "variant": "outline"
+      }
+    ],
+    "show_avatars": false,
+    "avatars_tip": "Sesuai untuk pengguna yang mahukan hasil GPT Image 2 yang benar-benar boleh digunakan",
+    "show_award": false,
+    "background_image": {
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "alt": "Penjana Imej AI ChatGPT GPT Image 2"
+    }
+  },
+  "showcases-flow": {
+    "id": "showcases",
+    "title": "Contoh GPT Image 2",
+    "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+    "items": [
+      {
+        "title": "GPT Image 2 Contoh 1",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/3d-case-presentation.webp",
+          "alt": "GPT Image 2 Contoh 1"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 2",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/pro-ai-img.webp",
+          "alt": "GPT Image 2 Contoh 2"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 3",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/fighting-actions.webp",
+          "alt": "GPT Image 2 Contoh 3"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 4",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/sticker-maker.webp",
+          "alt": "GPT Image 2 Contoh 4"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 5",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/math-solution.webp",
+          "alt": "GPT Image 2 Contoh 5"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 6",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.webp",
+          "alt": "GPT Image 2 Contoh 6"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 7",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/clothing-removal-tryon.webp",
+          "alt": "GPT Image 2 Contoh 7"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 8",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/anime-figure-1.webp",
+          "alt": "GPT Image 2 Contoh 8"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 9",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/graffiti-action.webp",
+          "alt": "GPT Image 2 Contoh 9"
+        }
+      },
+      {
+        "title": "GPT Image 2 Contoh 10",
+        "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/face-swap.webp",
+          "alt": "GPT Image 2 Contoh 10"
+        }
+      }
+    ]
+  },
+  "logos": {
+    "hidden": true
+  },
+  "introduce": {
+    "id": "introduce",
+    "title": "Apa itu GPT Image 2",
+    "description": "GPT Image 2 ialah penjana imej berasaskan ChatGPT Image yang lebih sesuai untuk kerja sebenar. Ia membantu menghasilkan visual fotorealistik, imej dengan teks yang lebih kemas, paparan UI, idea berpandukan rujukan dan suntingan imej melalui arahan biasa.",
+    "items": [
+      {
+        "title": "Lebih sesuai untuk imej yang mengandungi teks",
+        "description": "Ia berguna untuk banner, menu, label, iklan dan grafik media sosial yang memerlukan teks dalam imej kelihatan lebih jelas.",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "Bagus untuk UI dan paparan skrin",
+        "description": "Anda boleh menghasilkan skrin aplikasi, papan pemuka, mockup landing page dan visual produk untuk reka bentuk, dokumentasi atau pembentangan.",
+        "icon": "RiImageLine"
+      },
+      {
+        "title": "Imej realistik yang lebih meyakinkan",
+        "description": "Sesuai untuk potret, visual produk, gaya hidup dan bahan jenama dengan pencahayaan serta material yang nampak lebih semula jadi.",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "Sunting imej dengan arahan biasa",
+        "description": "Anda boleh ubah teks, susun atur, gaya atau elemen tertentu hanya dengan menerangkan perubahan yang dikehendaki.",
+        "icon": "RiSparklingLine"
+      }
+    ]
+  },
+  "benefits": {
+    "id": "benefits",
+    "title": "Mengapa pilih GPT Image 2",
+    "description": "GPT Image 2 bukan sekadar menghasilkan imej yang cantik, tetapi juga membantu anda sampai kepada hasil yang benar-benar boleh digunakan dengan lebih cepat.",
+    "items": [
+      {
+        "title": "Ulang kaji lebih cepat",
+        "description": "Anda boleh bergerak dari idea ke draf pertama dengan pantas, kemudian terus perhalusi tanpa perlu bermula semula.",
+        "icon": "RiRocketLine"
+      },
+      {
+        "title": "Sesuai untuk aset sebenar",
+        "description": "Ia berguna untuk visual pemasaran, imej produk, cadangan UI, bahan jualan dan kandungan jenama.",
+        "icon": "RiUserSmileLine"
+      },
+      {
+        "title": "Arahan lebih mudah diikuti",
+        "description": "Prompt yang mengandungi komposisi, warna, salinan dan butiran subjek lebih mudah diterjemahkan kepada hasil yang hampir dengan keperluan anda.",
+        "icon": "RiTimeLine"
+      },
+      {
+        "title": "Jana dan sunting dalam aliran yang sama",
+        "description": "Anda boleh mula dari kosong atau dari imej sedia ada, kemudian terus baiki hasil itu dalam aliran kerja yang sama.",
+        "icon": "RiMoneyDollarCircleLine"
+      }
+    ]
+  },
+  "usage": {
+    "hidden": true
+  },
+  "how-to-techniques": {
+    "id": "how-to-techniques",
+    "block": "how-to-techniques",
+    "tip": "How to efficiently use GPT Image 2 in real creative workflows",
+    "title": "How to Use GPT Image 2 Techniques",
+    "description": "See how GPT Image 2 can handle practical image generation and editing tasks for commerce, design, and content work without switching between multiple tools.",
+    "items": [
+      {
+        "title": "GPT Image 2 E-commerce Photo Editor",
+        "description": "Use GPT Image 2 to polish product visuals, clean up backgrounds, improve lighting, and turn rough source images into sharper commerce-ready assets for listings, ads, and storefronts.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/ip-creation.webp",
+          "alt": "GPT Image 2 e-commerce photo editing example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Multi-Image Scene Remix",
+        "description": "Combine references, preserve subject identity, and reshape composition with GPT Image 2 to build cleaner marketing scenes, concept visuals, and story-driven image variations from multiple inputs.",
+        "image_position": "left",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/novel-view-synthesis.webp",
+          "alt": "GPT Image 2 multi-image remix example"
+        },
+        "button": {
+          "title": "Create With References",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Text and Poster Editing",
+        "description": "Revise layouts, swap headlines, refine on-image copy, and update design details with GPT Image 2 for posters, social creatives, launch graphics, and product marketing visuals.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/poster-editing.webp",
+          "alt": "GPT Image 2 poster editing example"
+        },
+        "button": {
+          "title": "Edit an Image",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      }
+    ]
+  },
+  "features": {
+    "id": "features",
+    "title": "Ciri utama",
+    "description": "GPT Image 2 menggabungkan penjanaan, penerokaan visual dan proses penambahbaikan dalam satu aliran kerja.",
+    "items": [
+      {
+        "title": "Jana imej daripada arahan biasa",
+        "description": "Huraikan adegan yang anda mahu dalam bahasa harian dan sistem akan menghasilkan imej dengan komposisi serta gaya yang lebih kemas.",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "Reka bentuk dengan teks dalam imej",
+        "description": "Sesuai untuk banner, menu, pembungkusan, antaramuka dan bahan promosi yang memerlukan teks sebagai sebahagian daripada reka bentuk.",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "Hasilkan UI dan mockup",
+        "description": "Boleh digunakan untuk paparan web, UI mudah alih, papan pemuka SaaS dan visual pembentangan produk.",
+        "icon": "RiLayoutLine"
+      },
+      {
+        "title": "Gabung beberapa rujukan sekali gus",
+        "description": "Campurkan beberapa imej rujukan untuk mengekalkan gaya, menggabungkan idea dan menguji komposisi baru dengan lebih cepat.",
+        "icon": "Layers"
+      },
+      {
+        "title": "Kawal nisbah dan susun atur",
+        "description": "Mudah disesuaikan kepada format seperti 1:1, 16:9 atau 4:5 untuk sosial, landing page, iklan dan halaman produk.",
+        "icon": "RiAspectRatioLine"
+      },
+      {
+        "title": "Sesuai untuk aliran kerja API pada masa depan",
+        "description": "Ia juga sesuai untuk halaman atau produk yang ingin dibina seiring dengan perkembangan GPT Image 2 API.",
+        "icon": "RiFlashlightLine"
+      }
+    ]
+  },
+  "stats": {
+    "id": "stats",
+    "title": "Direka untuk kerja imej",
+    "description": "Aliran kerja praktikal untuk pasukan yang mahu menghasilkan dan menambah baik imej dengan lebih pantas.",
+    "items": [
+      {
+        "title": "Teks ke imej",
+        "description": "Tukar idea menjadi visual berguna"
+      },
+      {
+        "title": "Suntingan berpandukan arahan",
+        "description": "Baiki imej dengan bahasa biasa"
+      },
+      {
+        "title": "Mockup antaramuka",
+        "description": "Paparkan skrin dan konsep produk"
+      },
+      {
+        "title": "Kerja lebih pantas",
+        "description": "Kurangkan masa dari idea ke hasil akhir"
+      }
+    ]
+  },
+  "testimonials": {
+    "id": "testimonials",
+    "title": "Maklum balas pengguna",
+    "description": "Lihat bagaimana pengguna lain memanfaatkan GPT Image 2 dalam kerja sebenar.",
+    "items": [
+      {
+        "name": "Sarah Chen",
+        "role": "Pereka Media Sosial",
+        "quote": "GPT Image 2 memudahkan penghasilan visual kempen dengan teks yang boleh digunakan. Saya boleh bergerak dari idea ke grafik akhir dalam beberapa minit.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
+          "alt": "Sarah Chen"
+        }
+      },
+      {
+        "name": "Michael Rodriguez",
+        "role": "Pemasar Growth",
+        "quote": "Kami menggunakannya untuk mockup landing page, konsep iklan dan aset pemasaran produk. Kualiti tangkapan skrinnya sangat membantu.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
+          "alt": "Michael Rodriguez"
+        }
+      },
+      {
+        "name": "David Kim",
+        "role": "Pereka Produk",
+        "quote": "Hasil UI cukup baik untuk membincangkan aliran sebelum kami membuka Figma. Ia mempercepat eksplorasi idea produk.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
+          "alt": "David Kim"
+        }
+      },
+      {
+        "name": "Emma Thompson",
+        "role": "Pengarah Kreatif",
+        "quote": "Output fotorealistik terasa lebih kemas dari segi pencahayaan, bahan dan komposisi. Sangat sesuai untuk arah visual awal.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
+          "alt": "Emma Thompson"
+        }
+      },
+      {
+        "name": "James Wilson",
+        "role": "Pengasas E-dagang",
+        "quote": "Mockup produk dan idea pembungkusan kini jauh lebih cepat. Ia membantu kami menguji sudut kreatif sebelum produksi sebenar.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
+          "alt": "James Wilson"
+        }
+      },
+      {
+        "name": "Lisa Anderson",
+        "role": "Pereka Jenama",
+        "quote": "Suntingan bahasa semula jadi menjimatkan banyak masa. Perubahan kecil pada salinan atau gaya tidak lagi memerlukan imej dibuat semula.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
+          "alt": "Lisa Anderson"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "id": "faq",
+    "title": "Soalan lazim",
+    "items": [
+      {
+        "question": "Apa itu GPT Image 2",
+        "answer": "GPT Image 2 ialah alat penjanaan imej berasaskan ChatGPT Image. Ia sesuai untuk imej realistik, visual dengan teks, UI, mockup dan suntingan berpandukan bahasa semula jadi."
+      },
+      {
+        "question": "Bolehkah saya mencubanya secara percuma",
+        "answer": "Anda boleh bermula dengan akses atau kredit yang tersedia di laman ini. Jika terdapat had atau pelan berbayar, anda boleh semaknya pada halaman harga."
+      },
+      {
+        "question": "Apakah jenis imej yang boleh saya hasilkan",
+        "answer": "Anda boleh menghasilkan mockup produk, grafik sosial, skrin UI, banner, poster, visual kempen dan banyak lagi."
+      },
+      {
+        "question": "Apa bezanya dengan model imej yang lebih lama",
+        "answer": "Kelebihan utamanya ialah teks yang lebih mudah dibaca, UI yang lebih meyakinkan, prompt yang lebih tepat dan hasil visual yang lebih konsisten."
+      },
+      {
+        "question": "Adakah GPT Image 2 API tersedia",
+        "answer": "Ketersediaan GPT Image 2 API boleh berubah. Namun laman ini memudahkan anda membina halaman dan mesej produk yang selari dengan arah tersebut."
+      },
+      {
+        "question": "Apakah input yang disokong",
+        "answer": "Anda boleh bermula daripada teks, menggunakan imej rujukan, kemudian teruskan dengan variasi dan suntingan dalam aliran yang sama."
+      },
+      {
+        "question": "Bolehkah ia digunakan untuk kerja komersial",
+        "answer": "Ia boleh digunakan untuk kerja komersial tertentu, tetapi pastikan anda menyemak hak aset yang dimuat naik dan syarat pelan anda."
+      }
+    ]
+  },
+  "cta": {
+    "id": "cta",
+    "title": "Mula berkarya dengan Imej AI dan Video AI",
+    "description": "Gunakan penjanaan imej dan video sebagai dua aliran kerja khusus yang sedia berkembang dengan lebih banyak model.",
+    "buttons": [
+      {
+        "title": "Guna Imej AI",
+        "url": "/ai-image",
+        "target": "_self",
+        "icon": "Image"
+      },
+      {
+        "title": "Guna Video AI",
+        "url": "/ai-video",
+        "target": "_self",
+        "icon": "Video"
+      }
+    ],
+    "className": "bg-muted"
+  },
+  "subscribe": {
+    "hidden": true
+  },
+  "footer": {
+    "id": "footer",
+    "brand": {
+      "title": "GPT Image 2",
+      "description": "GPT Image 2 ialah alat berasaskan ChatGPT Image untuk menjana, menyunting dan memperhalusi imej dalam satu aliran kerja yang lancar.",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "Penjana Imej AI ChatGPT GPT Image 2"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "Tentang",
+          "children": [
+            {
+              "title": "Tentang Kami",
+              "url": "/about",
+              "target": "_self"
+            },
+            {
+              "title": "Imej AI",
+              "url": "/ai-image",
+              "target": "_self"
+            },
+            {
+              "title": "Video AI",
+              "url": "/ai-video",
+              "target": "_self"
+            },
+            {
+              "title": "Ciri-ciri",
+              "url": "/#features",
+              "target": "_self"
+            },
+            {
+              "title": "Paparan",
+              "url": "/#showcases",
+              "target": "_self"
+            },
+            {
+              "title": "FAQ",
+              "url": "/#faq",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    "social": {
+      "items": [
+        {
+          "title": "Email",
+          "icon": "Mail",
+          "url": "mailto:support@gptimg2.art",
+          "target": "_self"
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "Dasar Privasi",
+          "url": "/privacy-policy"
+        },
+        {
+          "title": "Terma Perkhidmatan",
+          "url": "/terms-of-service"
+        }
+      ]
+    },
+    "show_theme": true,
+    "show_locale": true
+  },
+  "generator_switcher": {
+    "title": "Cipta dengan GPT Image 2",
+    "subtitle": "Jana imej realistik terus dari halaman utama dan laraskan hasilnya dengan cepat.",
+    "video": "Penjanaan imej",
+    "image": "Suntingan imej",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "Terbaik untuk rujukan multimodal, kawalan kamera, dan hasil lebih sinematik.",
+    "kling_description": "Terbaik untuk naratif multi-shot, kesinambungan elemen, dan audio natif.",
+    "sr_only_video": "Penjana Imej AI ChatGPT GPT Image 2",
+    "sr_only_image": "Suntingan imej GPT Image 2",
+    "sr_only_kling": "Penjana Video Kling 3"
+  }
+}

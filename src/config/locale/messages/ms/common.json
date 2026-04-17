@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 Penjana Imej AI ChatGPT Percuma Online",
+    "description": "GPT Image 2 ialah penjana imej AI untuk imej realistik, teks yang jelas, skrin UI, mockup dan suntingan imej pantas.",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+  },
+  "actions": {
+    "continue": "Teruskan"
+  },
+  "sign": {
+    "sign_in_title": "Log Masuk",
+    "sign_in_description": "Log masuk ke akaun anda",
+    "sign_in_reward_hint": "Log masuk untuk tuntut kredit percuma",
+    "entry_cta_title": "Mula Secara Percuma",
+    "entry_modal_title": "Mulakan",
+    "entry_modal_description": "Log masuk atau cipta akaun untuk mula secara percuma.",
+    "sign_up_title": "Daftar",
+    "sign_up_description": "Cipta akaun",
+    "email_title": "Email",
+    "email_placeholder": "Masukkan email anda di sini",
+    "password_title": "Kata Laluan",
+    "password_placeholder": "Masukkan kata laluan anda di sini",
+    "forgot_password": "Lupa kata laluan?",
+    "or": "Atau",
+    "continue": "Teruskan",
+    "no_account": "Tidak mempunyai akaun?",
+    "already_have_account": "Sudah mempunyai akaun?",
+    "email_sign_in": "Log masuk dengan Email",
+    "google_sign_in_title": "Log masuk dengan Google",
+    "github_sign_in_title": "Log masuk dengan GitHub",
+    "close_title": "Tutup",
+    "cancel_title": "Batal",
+    "sign_out_title": "Log Keluar",
+    "billing_title": "Pembayaran",
+    "name_title": "Nama",
+    "name_placeholder": "Masukkan nama anda di sini",
+    "email_verification_hint": "Gunakan alamat email yang boleh anda akses. Anda mesti mengesahkan email anda selepas mendaftar.",
+    "admin_title": "Sistem Admin",
+    "credits_title": "Kredit: {credits}",
+    "verify_email_sent": "Email pengesahan dihantar. Sila semak inbox anda.",
+    "verify_email_required": "Sila sahkan alamat email anda sebelum log masuk.",
+    "resend_verification": "Hantar semula email pengesahan",
+    "resend_verification_sent": "Email pengesahan dihantar semula. Sila semak inbox anda.",
+    "verify_email_page_title": "Semak email anda",
+    "verify_email_page_description": "Untuk meneruskan, klik pautan yang dihantar ke",
+    "verify_email_continue": "Teruskan",
+    "verify_email_tip": "Selepas mengesahkan, klik \"Teruskan\".",
+    "verify_email_not_verified_yet": "Belum disahkan lagi. Sila klik pautan dalam email anda terlebih dahulu.",
+    "verify_email_account_mismatch": "Log masuk sebagai {current}. Halaman ini menunggu {expected}.",
+    "resend_verification_countdown": "Hantar semula email pengesahan ({seconds}s)",
+    "resend_verification_wait": "Sila tunggu {seconds}s sebelum menghantar semula.",
+    "back_to_sign_in": "Kembali ke Log Masuk"
+  },
+  "payment": {
+    "choose_payment_method": "Pilih Kaedah Pembayaran",
+    "choose_payment_method_description": "",
+    "cancel_title": "Batal"
+  },
+  "locale_detector": {
+    "title": "Kami mengesan bahasa penyemak imbas anda ialah {locale}. Tukar kepadanya?",
+    "switch_to": "Tukar ke {locale}"
+  }
+}

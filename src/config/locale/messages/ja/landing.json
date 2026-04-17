@@ -1,0 +1,573 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 ChatGPT AI画像生成ツール 無料オンライン",
+    "description": "GPT Image 2 は ChatGPT Image モデルを活用した AI画像生成ツールです。写真風の画像、文字入りバナー、UIイメージ、商品モック、画像の修正まで幅広く対応します。",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+  },
+  "header": {
+    "id": "header",
+    "brand": {
+      "title": "GPT Image 2",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "GPT Image 2"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "AI画像",
+          "url": "/ai-image",
+          "icon": "Image"
+        },
+        {
+          "title": "AI動画",
+          "url": "/ai-video",
+          "icon": "Video"
+        },
+        {
+          "title": "料金プラン",
+          "url": "/pricing",
+          "icon": "DollarSign"
+        },
+        {
+          "title": "ギャラリー",
+          "url": "/showcases",
+          "icon": "Box"
+        },
+        {
+          "title": "ブログ",
+          "url": "/blog",
+          "icon": "BookOpen"
+        }
+      ]
+    },
+    "buttons": [],
+    "user_nav": {
+      "show_name": true,
+      "show_credits": true,
+      "show_sign_out": true,
+      "items": [
+        {
+          "title": "お支払い",
+          "url": "/settings/billing",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "アクティビティ",
+          "url": "/activity",
+          "icon": "Activity"
+        }
+      ]
+    },
+    "show_sign": true,
+    "show_theme": true,
+    "show_locale": true,
+    "topbanner": {
+      "id": "limited-time-offer-2026-04-15",
+      "image": {
+        "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
+        "alt": "期間限定セール"
+      },
+      "text": "期間限定 <strong>50%</strong> OFF!",
+      "closeLabel": "バナーを閉じる",
+      "buttonText": "料金を見る",
+      "href": "/pricing",
+      "target": "_self",
+      "dismissedExpiryDays": 7
+    }
+  },
+  "hero": {
+    "id": "hero",
+    "title": "GPT Image 2 - ChatGPT対応のAI画像生成ツール",
+    "description": "GPT Image 2 なら、写真風のビジュアル、UIイメージ、商品モックアップ、販促用の画像をすばやく作成できます。ChatGPT Image モデルを活用し、指示の反映しやすさ、文字表現の安定感、調整のしやすさに優れています。",
+    "buttons": [
+      {
+        "title": "AI画像を試す",
+        "icon": "Image",
+        "url": "/ai-image",
+        "target": "_self",
+        "variant": "default"
+      },
+      {
+        "title": "AI動画を試す",
+        "icon": "Video",
+        "url": "/ai-video",
+        "target": "_self",
+        "variant": "outline"
+      }
+    ],
+    "show_avatars": false,
+    "avatars_tip": "GPT Image 2 の実用的な作例を探している方におすすめ",
+    "show_award": false,
+    "background_image": {
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "alt": "GPT Image 2 ChatGPT AI画像ジェネレーター"
+    }
+  },
+  "showcases-flow": {
+    "id": "showcases",
+    "title": "GPT Image 2 の作例",
+    "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+    "items": [
+      {
+        "title": "GPT Image 2 作例 1",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/3d-case-presentation.webp",
+          "alt": "GPT Image 2 作例 1"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 2",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/pro-ai-img.webp",
+          "alt": "GPT Image 2 作例 2"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 3",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/fighting-actions.webp",
+          "alt": "GPT Image 2 作例 3"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 4",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/sticker-maker.webp",
+          "alt": "GPT Image 2 作例 4"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 5",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/math-solution.webp",
+          "alt": "GPT Image 2 作例 5"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 6",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.webp",
+          "alt": "GPT Image 2 作例 6"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 7",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/clothing-removal-tryon.webp",
+          "alt": "GPT Image 2 作例 7"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 8",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/anime-figure-1.webp",
+          "alt": "GPT Image 2 作例 8"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 9",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/graffiti-action.webp",
+          "alt": "GPT Image 2 作例 9"
+        }
+      },
+      {
+        "title": "GPT Image 2 作例 10",
+        "description": "写真風のビジュアル、文字入りデザイン、商品モック、UIイメージなど、GPT Image 2 で作れる表現をまとめて紹介します。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/face-swap.webp",
+          "alt": "GPT Image 2 作例 10"
+        }
+      }
+    ]
+  },
+  "logos": {
+    "hidden": true
+  },
+  "introduce": {
+    "id": "introduce",
+    "title": "GPT Image 2 とは",
+    "description": "GPT Image 2 は、ChatGPT Image モデルをベースにした画像生成サービスです。リアルな写真表現、読みやすい文字入り画像、UIイメージ、画像編集、参考画像を使った発想出しまで、実務に使いやすいのが特長です。",
+    "items": [
+      {
+        "title": "文字入り画像を作りやすい",
+        "description": "バナー、メニュー、ラベル、広告素材、SNS投稿画像などで、従来よりも読みやすい文字入りビジュアルを作成しやすくなっています。",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "UIや画面イメージの生成に向く",
+        "description": "アプリ画面、ダッシュボード、LPのワイヤー、サービス紹介画像などを作りやすく、デザイン検討や資料作成にも活用できます。",
+        "icon": "RiImageLine"
+      },
+      {
+        "title": "写真風の表現が自然",
+        "description": "人物、商品、ライフスタイル写真、ブランドビジュアルなどを、光や質感まで含めて自然な印象で生成しやすいのが魅力です。",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "会話しながら画像を調整できる",
+        "description": "文言の差し替え、レイアウト変更、雰囲気の調整、不要物の削除などを、自然な指示文で進められます。",
+        "icon": "RiSparklingLine"
+      }
+    ]
+  },
+  "benefits": {
+    "id": "benefits",
+    "title": "GPT Image 2 が選ばれる理由",
+    "description": "GPT Image 2 は、ただ画像を出すだけでなく、そのまま仕事に使いやすい形まで持っていきやすいのが強みです。",
+    "items": [
+      {
+        "title": "試行錯誤がしやすい",
+        "description": "思いついたアイデアをすぐ形にして、そのまま構図や文言、雰囲気を詰めていけます。",
+        "icon": "RiRocketLine"
+      },
+      {
+        "title": "実務向けの画像に強い",
+        "description": "広告クリエイティブ、商品画像、UI案、営業資料用ビジュアルなど、実際の用途を意識した制作に向いています。",
+        "icon": "RiUserSmileLine"
+      },
+      {
+        "title": "指示の反映がわかりやすい",
+        "description": "構図、色味、コピー、被写体など複数条件がある指示でも、比較的狙いに寄せやすいのが特長です。",
+        "icon": "RiTimeLine"
+      },
+      {
+        "title": "生成から修正まで一気に進められる",
+        "description": "ゼロから作るだけでなく、途中の画像を見ながら手直しして完成度を上げていけます。",
+        "icon": "RiMoneyDollarCircleLine"
+      }
+    ]
+  },
+  "usage": {
+    "hidden": true
+  },
+  "how-to-techniques": {
+    "id": "how-to-techniques",
+    "block": "how-to-techniques",
+    "tip": "How to efficiently use GPT Image 2 in real creative workflows",
+    "title": "How to Use GPT Image 2 Techniques",
+    "description": "See how GPT Image 2 can handle practical image generation and editing tasks for commerce, design, and content work without switching between multiple tools.",
+    "items": [
+      {
+        "title": "GPT Image 2 E-commerce Photo Editor",
+        "description": "Use GPT Image 2 to polish product visuals, clean up backgrounds, improve lighting, and turn rough source images into sharper commerce-ready assets for listings, ads, and storefronts.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/ip-creation.webp",
+          "alt": "GPT Image 2 e-commerce photo editing example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Multi-Image Scene Remix",
+        "description": "Combine references, preserve subject identity, and reshape composition with GPT Image 2 to build cleaner marketing scenes, concept visuals, and story-driven image variations from multiple inputs.",
+        "image_position": "left",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/novel-view-synthesis.webp",
+          "alt": "GPT Image 2 multi-image remix example"
+        },
+        "button": {
+          "title": "Create With References",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Text and Poster Editing",
+        "description": "Revise layouts, swap headlines, refine on-image copy, and update design details with GPT Image 2 for posters, social creatives, launch graphics, and product marketing visuals.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/generator-demos/poster-editing.webp",
+          "alt": "GPT Image 2 poster editing example"
+        },
+        "button": {
+          "title": "Edit an Image",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      }
+    ]
+  },
+  "features": {
+    "id": "features",
+    "title": "主な機能",
+    "description": "GPT Image 2 では、画像生成だけでなく、実際の制作フローで役立つ編集や調整もまとめて行えます。",
+    "items": [
+      {
+        "title": "自然文から画像を生成",
+        "description": "作りたい内容を文章で伝えるだけで、構図や雰囲気を踏まえた画像を生成できます。",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "文字入りデザインに対応",
+        "description": "バナー、メニュー、パッケージ、UIパーツなど、文字を含むデザインにも活用しやすいのが特長です。",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "UIイメージやモック作成",
+        "description": "ブラウザ画面、スマホUI、SaaSダッシュボード、プロダクト紹介用のビジュアル制作に向いています。",
+        "icon": "RiLayoutLine"
+      },
+      {
+        "title": "複数画像をもとにアレンジ",
+        "description": "参考画像を組み合わせながら、テイストを寄せたり構成を変えたりして、新しい案を作れます。",
+        "icon": "Layers"
+      },
+      {
+        "title": "比率や構図も調整しやすい",
+        "description": "1:1、16:9、4:5 など用途に合わせて整えやすく、SNSやLP、広告素材にも使いやすいです。",
+        "icon": "RiAspectRatioLine"
+      },
+      {
+        "title": "今後の API 展開も見据えやすい",
+        "description": "将来的な GPT Image 2 API の拡張を見越した導線づくりや訴求設計にもなじみます。",
+        "icon": "RiFlashlightLine"
+      }
+    ]
+  },
+  "stats": {
+    "id": "stats",
+    "title": "画像制作に使いやすい構成",
+    "description": "企画から仕上げまでを早く回したいチーム向けの画像生成ワークフローです。",
+    "items": [
+      {
+        "title": "テキストから画像生成",
+        "description": "文章からビジュアルを作成"
+      },
+      {
+        "title": "画像をあとから調整",
+        "description": "既存画像を自然な指示で修正"
+      },
+      {
+        "title": "UIモック作成",
+        "description": "サービス画面や構成案を可視化"
+      },
+      {
+        "title": "作業スピードを向上",
+        "description": "初稿から完成までを短縮"
+      }
+    ]
+  },
+  "testimonials": {
+    "id": "testimonials",
+    "title": "利用者の声",
+    "description": "GPT Image 2 を活用しているユーザーのリアルな感想を紹介します。",
+    "items": [
+      {
+        "name": "サラ・チェン",
+        "role": "SNSデザイナー",
+        "quote": "GPT Image 2 なら文字入りのキャンペーン画像が作りやすく、数分で公開レベルの素材まで持っていけます。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
+          "alt": "サラ・チェン"
+        }
+      },
+      {
+        "name": "マイケル・ロドリゲス",
+        "role": "グロースマーケター",
+        "quote": "ランディングページ案、広告クリエイティブ、商品訴求画像まで、スクリーンショット品質がとても役立っています。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
+          "alt": "マイケル・ロドリゲス"
+        }
+      },
+      {
+        "name": "デビッド・キム",
+        "role": "プロダクトデザイナー",
+        "quote": "UI 生成の完成度が高く、Figma を開く前にチームでフローを検討できます。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
+          "alt": "デビッド・キム"
+        }
+      },
+      {
+        "name": "エマ・トンプソン",
+        "role": "クリエイティブディレクター",
+        "quote": "光や素材感、構図のまとまりが良く、初期のビジュアル方向性を探るのに最適です。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
+          "alt": "エマ・トンプソン"
+        }
+      },
+      {
+        "name": "ジェームズ・ウィルソン",
+        "role": "ECブランド創業者",
+        "quote": "商品モックアップやパッケージ案の検証が速くなり、本制作前の判断がしやすくなりました。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
+          "alt": "ジェームズ・ウィルソン"
+        }
+      },
+      {
+        "name": "リサ・アンダーソン",
+        "role": "ブランドデザイナー",
+        "quote": "自然言語での修正が本当に便利で、細かなコピー変更やスタイル調整に時間がかかりません。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
+          "alt": "リサ・アンダーソン"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "id": "faq",
+    "title": "よくある質問",
+    "items": [
+      {
+        "question": "GPT Image 2 とは何ですか？",
+        "answer": "GPT Image 2 は ChatGPT Image モデルを活用した AI画像生成サービスです。写真風の画像、文字入りデザイン、UIイメージ、画像編集などに幅広く活用できます。"
+      },
+      {
+        "question": "無料で試せますか？",
+        "answer": "このサイトで利用できるプランや付与クレジットの範囲でお試しいただけます。料金や上限は価格ページでご確認ください。"
+      },
+      {
+        "question": "どんな画像を作れますか？",
+        "answer": "商品画像、広告バナー、SNS投稿画像、UIモック、ポスター、コンセプトビジュアルなど、幅広い用途に対応できます。"
+      },
+      {
+        "question": "従来の画像生成モデルとの違いは？",
+        "answer": "文字表現、UIらしい画面描写、指示の反映しやすさ、写真風のまとまりなど、実用面で扱いやすい点が魅力です。"
+      },
+      {
+        "question": "GPT Image 2 API は使えますか？",
+        "answer": "API 提供状況は今後変わる可能性があります。このサイトでは、GPT Image 2 を前提にした導線や活用イメージを先に整えられます。"
+      },
+      {
+        "question": "どんな入力に対応していますか？",
+        "answer": "テキストからの生成に加えて、参考画像をもとにした調整や、生成後の編集にも対応しやすい構成です。"
+      },
+      {
+        "question": "商用利用はできますか？",
+        "answer": "用途によっては商用利用も可能ですが、アップロード素材の権利関係や、ご利用プランの条件をご確認ください。"
+      }
+    ]
+  },
+  "cta": {
+    "id": "cta",
+    "title": "AI画像とAI動画の作成を始める",
+    "description": "画像生成と動画生成をそれぞれ独立したワークフローとして提供し、今後のモデル拡張にも対応しやすくします。",
+    "buttons": [
+      {
+        "title": "AI画像を使う",
+        "url": "/ai-image",
+        "target": "_self",
+        "icon": "Image"
+      },
+      {
+        "title": "AI動画を使う",
+        "url": "/ai-video",
+        "target": "_self",
+        "icon": "Video"
+      }
+    ],
+    "className": "bg-muted"
+  },
+  "subscribe": {
+    "hidden": true
+  },
+  "footer": {
+    "id": "footer",
+    "brand": {
+      "title": "GPT Image 2",
+      "description": "GPT Image 2 は、画像生成から編集までをまとめて進められる ChatGPT Image ベースの AI画像制作ツールです。",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "GPT Image 2 ChatGPT AI画像ジェネレーター"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "について",
+          "children": [
+            {
+              "title": "私たちについて",
+              "url": "/about",
+              "target": "_self"
+            },
+            {
+              "title": "AI画像",
+              "url": "/ai-image",
+              "target": "_self"
+            },
+            {
+              "title": "AI動画",
+              "url": "/ai-video",
+              "target": "_self"
+            },
+            {
+              "title": "機能",
+              "url": "/#features",
+              "target": "_self"
+            },
+            {
+              "title": "ギャラリー",
+              "url": "/#showcases",
+              "target": "_self"
+            },
+            {
+              "title": "よくある質問",
+              "url": "/#faq",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    "social": {
+      "items": [
+        {
+          "title": "メール",
+          "icon": "Mail",
+          "url": "mailto:support@gptimg2.art",
+          "target": "_self"
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "プライバシーポリシー",
+          "url": "/privacy-policy"
+        },
+        {
+          "title": "利用規約",
+          "url": "/terms-of-service"
+        }
+      ]
+    },
+    "show_theme": true,
+    "show_locale": true
+  },
+  "generator_switcher": {
+    "title": "GPT Image 2 で作成する",
+    "subtitle": "トップページからそのまま、リアルな AI画像をすぐに生成できます。",
+    "video": "AI画像生成",
+    "image": "画像編集",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "マルチモーダル参照、カメラ制御、映画的な出力に向いています。",
+    "kling_description": "マルチショット構成、要素の一貫性、ネイティブ音声に向いています。",
+    "sr_only_video": "GPT Image 2 ChatGPT AI画像ジェネレーター",
+    "sr_only_image": "GPT Image 2 画像編集",
+    "sr_only_kling": "Kling 3 動画ジェネレーター"
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "title": "案例展示",
+    "description": "用 ChatGPT Image 2 Generator 打造的精彩项目"
+  },
+  "ui": {
+    "create_similar": "创建相似",
+    "loading": "加载中...",
+    "no_showcases": "暂无案例",
+    "load_more": "加载更多"
+  },
+  "showcases-flow": {
+    "id": "showcases",
+    "sr_only_title": "案例展示",
+    "title": "ChatGPT Image 2 Generator 提示词",
+    "description": "由 ChatGPT Image 2 Generator 提供支持的代表性编辑和生成案例",
+    "items": [
+      {
+        "title": "垂直鱼眼自拍",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/1.jpeg",
+          "alt": "AI SaaS 案例展示 1"
+        },
+        "prompt": "vertical-fisheye-selfie"
+      },
+      {
+        "title": "AI SaaS 案例展示 2",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/2.jpeg",
+          "alt": "AI SaaS 案例展示 2"
+        },
+        "prompt": "3d-digital-human-comics"
+      },
+      {
+        "title": "AI SaaS 案例展示 3",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/3.jpeg",
+          "alt": "AI SaaS 案例展示 3"
+        }
+      },
+      {
+        "title": "AI SaaS 案例展示 4",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/4.jpeg",
+          "alt": "AI SaaS 案例展示 4"
+        }
+      },
+      {
+        "title": "AI SaaS 案例展示 5",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/5.jpeg",
+          "alt": "AI SaaS 案例展示 5"
+        }
+      },
+      {
+        "title": "AI SaaS 案例展示 6",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/6.jpeg",
+          "alt": "AI SaaS 案例展示 6"
+        }
+      },
+      {
+        "title": "AI SaaS 案例展示 7",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/7.jpeg",
+          "alt": "AI SaaS 案例展示 7"
+        }
+      },
+      {
+        "title": "AI SaaS 案例展示 8",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/8.jpeg",
+          "alt": "AI SaaS 案例展示 8"
+        }
+      },
+      {
+        "title": "AI SaaS 案例展示 9",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/9.jpeg",
+          "alt": "AI SaaS 案例展示 9"
+        }
+      },
+      {
+        "title": "AI SaaS 案例展示 10",
+        "description": "AI SaaS 案例展示",
+        "image": {
+          "src": "/imgs/showcases/10.jpeg",
+          "alt": "AI SaaS 案例展示 10"
+        }
+      }
+    ]
+  },
+  "page": {
+    "title": "案例展示",
+    "sections": {
+      "showcases": {
+        "id": "showcases",
+        "title": "用 ChatGPT Image 2 Generator 构建的 AI SaaS 创业项目",
+        "description": "简单、快速、高效。",
+        "groups": [
+          {
+            "name": "all",
+            "title": "所有项目"
+          },
+          {
+            "name": "ai-chatbot",
+            "title": "AI 聊天机器人"
+          },
+          {
+            "name": "ai-image",
+            "title": "AI 图片"
+          },
+          {
+            "name": "ai-video",
+            "title": "AI 视频"
+          },
+          {
+            "name": "ai-audio",
+            "title": "AI 音频"
+          },
+          {
+            "name": "ai-music",
+            "title": "AI 音乐"
+          },
+          {
+            "name": "ai-coding",
+            "title": "AI 编程"
+          },
+          {
+            "name": "other",
+            "title": "其他"
+          }
+        ],
+        "items": [
+          {
+            "title": "ThinkAny",
+            "description": "AI 搜索引擎",
+            "url": "https://thinkany.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/7.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-chatbot"
+          },
+          {
+            "title": "HeyBeauty",
+            "description": "AI 虚拟试妆",
+            "url": "https://heybeauty.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/5.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "AI Wallpaper",
+            "description": "AI 壁纸生成器",
+            "url": "https://aiwallpaper.shop",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/1.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "AI Cover",
+            "description": "AI 封面生成器",
+            "url": "https://aicover.design",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/2.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "GPTs Works",
+            "description": "GPTs 导航",
+            "url": "https://gpts.works",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/3.png",
+              "alt": "案例展示"
+            },
+            "group": "other"
+          },
+          {
+            "title": "Melodisco",
+            "description": "AI 音乐播放器",
+            "url": "https://melodis.co",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/4.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-music"
+          },
+          {
+            "title": "Pagen",
+            "description": "AI 落地页生成器",
+            "url": "https://pagen.so",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/6.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-coding"
+          },
+          {
+            "title": "SoraFM",
+            "description": "AI 视频生成器",
+            "url": "https://sorafm.trys.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/8.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-video"
+          },
+          {
+            "title": "PodLM",
+            "description": "AI 播客生成器",
+            "url": "https://podlm.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/9.png",
+              "alt": "案例展示"
+            },
+            "group": "ai-audio"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "Cipta Video dan Imej AI | ChatGPT Image 2 Generator",
+    "description": "Cipta video dan imej AI dalam satu ruang kerja ChatGPT Image 2 Generator. Tukar antara mod video dan imej tanpa meninggalkan halaman cipta."
+  },
+  "page": {
+    "title": "Cipta video atau imej AI",
+    "description": "Tukar antara penciptaan video dan imej AI dalam satu ruang kerja ChatGPT Image 2 Generator."
+  },
+  "generator": {
+    "title": "Penjana Imej AI",
+    "description": "Jana atau sunting imej daripada arahan teks dan imej rujukan.",
+    "tabs": {
+      "text-to-image": "Teks ke Imej",
+      "image-to-image": "Imej ke Imej"
+    },
+    "form": {
+      "provider": "Pembekal",
+      "model": "Model",
+      "select_provider": "Pilih Pembekal",
+      "select_model": "Pilih Model",
+      "prompt": "Arahan",
+      "prompt_placeholder": "Terangkan butiran imej, seperti warna, bentuk, tekstur, dll.",
+      "reference_image": "Imej Rujukan",
+      "reference_image_placeholder": "Muat naik imej rujukan, menyokong berbilang imej",
+      "some_images_failed_to_upload": "Beberapa imej gagal dimuat naik, sila padam dan muat naik semula",
+      "prompt_too_long": "Arahan terlalu panjang, sila padam beberapa kandungan"
+    },
+    "generate": "Jana Imej",
+    "checking_account": "Memeriksa Akaun...",
+    "loading": "Memuatkan...",
+    "generating": "Menjana...",
+    "sign_in_to_generate": "Log Masuk untuk Jana Imej",
+    "credits_cost": "Kos {credits} kredit",
+    "credits_remaining": "Baki {credits} kredit",
+    "buy_credits": "Beli Kredit",
+    "progress": "Kemajuan",
+    "generated_images": "Imej Dijana",
+    "ready_to_generate": "Sedia untuk Jana",
+    "ready_for_generating": "Sedia untuk Penjanaan",
+    "no_images_generated": "Tiada Imej Dijana"
+  },
+  "generator_switcher": {
+    "video": "Video AI",
+    "image": "Imej AI",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "Terbaik untuk rujukan multimodal, kawalan kamera, dan hasil lebih sinematik.",
+    "kling_description": "Terbaik untuk naratif multi-shot, kesinambungan elemen, dan audio natif.",
+    "sr_only_video": "Penjana Video AI",
+    "sr_only_image": "Penjana Imej AI",
+    "sr_only_kling": "Penjana Video Kling 3"
+  }
+}

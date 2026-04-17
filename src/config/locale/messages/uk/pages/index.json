@@ -1,0 +1,424 @@
+{
+  "page": {
+    "show_sections": [
+      "hero",
+      "logos",
+      "introduce",
+      "benefits",
+      "usage",
+      "features",
+      "stats",
+      "testimonials",
+      "faq",
+      "cta"
+    ],
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Створюйте AI стартапи за години, а не дні",
+        "highlight_text": "за години",
+        "description": "ChatGPT Image 2 Generator - це NextJS шаблон для створення AI SaaS стартапів.<br/>Запускайте швидко з різноманітними шаблонами та компонентами.",
+        "announcement": {
+          "badge": "Новинка",
+          "title": "🎉 ChatGPT Image 2 Generator",
+          "url": "/pricing"
+        },
+        "tip": "🎁 Спеціальна пропозиція для перших 1000 користувачів",
+        "buttons": [
+          {
+            "title": "Розпочати",
+            "icon": "Zap",
+            "url": "/pricing",
+            "target": "_self",
+            "variant": "default"
+          },
+          {
+            "title": "Читати документацію",
+            "icon": "BookOpenText",
+            "url": "/docs",
+            "target": "_blank",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": true,
+        "avatars_tip": "999+ користувачів використовують ChatGPT Image 2 Generator",
+        "show_award": false,
+        "image": {
+          "src": "/imgs/features/admin.png",
+          "alt": "hero",
+          "width": 1200,
+          "height": 800
+        },
+        "image_invert": {
+          "src": "/imgs/features/admin-dark.png",
+          "alt": "hero",
+          "width": 1200,
+          "height": 800
+        },
+        "background_image": {
+          "src": "/imgs/bg/tree.jpg",
+          "alt": "hero"
+        }
+      },
+      "logos": {
+        "id": "logos",
+        "title": "ChatGPT Image 2 Generator побудований на плечах гігантів",
+        "items": [
+          {
+            "title": "Next.js",
+            "image": {
+              "src": "/imgs/logos/nextjs.svg",
+              "alt": "Next.js"
+            }
+          },
+          {
+            "title": "React",
+            "image": {
+              "src": "/imgs/logos/react.svg",
+              "alt": "React"
+            }
+          },
+          {
+            "title": "TailwindCSS",
+            "image": {
+              "src": "/imgs/logos/tailwindcss.svg",
+              "alt": "TailwindCSS"
+            }
+          },
+          {
+            "title": "Shadcn/UI",
+            "image": {
+              "src": "/imgs/logos/shadcn.svg",
+              "alt": "Shadcn/UI"
+            }
+          },
+          {
+            "title": "Vercel",
+            "image": {
+              "src": "/imgs/logos/vercel.svg",
+              "alt": "Vercel"
+            }
+          }
+        ]
+      },
+      "introduce": {
+        "block": "features-list",
+        "id": "introduce",
+        "title": "Що таке ChatGPT Image 2 Generator",
+        "label": "Знайомство",
+        "description": "ChatGPT Image 2 Generator - це NextJS шаблон для створення AI SaaS стартапів, що включає шаблони, компоненти та документацію.",
+        "image": {
+          "src": "/imgs/features/landing-page.png",
+          "alt": "introduce"
+        },
+        "items": [
+          {
+            "title": "Готові шаблони",
+            "description": "Обирайте з десятків готових AI SaaS шаблонів для швидкого старту вашого проєкту.",
+            "icon": "RiNextjsFill",
+            "image": {
+              "src": "/imgs/features/1.png",
+              "alt": "introduce"
+            }
+          },
+          {
+            "title": "Налаштування інфраструктури",
+            "description": "Отримайте миттєвий доступ до масштабованої інфраструктури з вбудованими кращими практиками.",
+            "icon": "RiDatabase2Line",
+            "image": {
+              "src": "/imgs/features/2.png",
+              "alt": "introduce"
+            }
+          },
+          {
+            "title": "Швидке розгортання",
+            "description": "Розгорніть ваш AI SaaS додаток в продакшн за години, а не дні.",
+            "icon": "RiCloudyFill",
+            "image": {
+              "src": "/imgs/features/3.png",
+              "alt": "introduce"
+            }
+          },
+          {
+            "title": "Інтеграція AI",
+            "description": "Інтегруйте AI у ваш проєкт легко, використовуючи наш вбудований AI SDK.",
+            "icon": "RiRobot2Line",
+            "image": {
+              "src": "/imgs/features/4.png",
+              "alt": "introduce"
+            }
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "benefits": {
+        "block": "features-accordion",
+        "id": "benefits",
+        "title": "Чому варто обрати ChatGPT Image 2 Generator",
+        "label": "Переваги",
+        "description": "Отримайте все необхідне для запуску вашого AI стартапу - від готових шаблонів до технічної підтримки.",
+        "items": [
+          {
+            "title": "Повний фреймворк",
+            "description": "Побудований на Next.js з аутентифікацією, платежами та інтеграцією AI - все працює одразу.",
+            "icon": "RiNextjsFill",
+            "image": {
+              "src": "/imgs/features/user-billing.png",
+              "alt": "benefits"
+            }
+          },
+          {
+            "title": "Багата бібліотека шаблонів",
+            "description": "Обирайте з різноманітних AI SaaS шаблонів для швидкого старту проєкту - чатботи, генерація зображень та більше.",
+            "icon": "RiClapperboardAiLine",
+            "image": {
+              "src": "/imgs/features/admin-settings.png",
+              "alt": "benefits"
+            }
+          },
+          {
+            "title": "Технічна підтримка",
+            "description": "Отримайте спеціалізовану підтримку та приєднуйтесь до нашої спільноти розробників для забезпечення успішного запуску.",
+            "icon": "RiCodeFill",
+            "image": {
+              "src": "/imgs/features/landing-page.png",
+              "alt": "benefits"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "title": "Як запустити з ChatGPT Image 2 Generator",
+        "description": "Запустіть ваш AI SaaS стартап у три прості кроки:",
+        "image": {
+          "src": "/imgs/features/1.png",
+          "alt": "usage"
+        },
+        "image_position": "left",
+        "text_align": "center",
+        "items": [
+          {
+            "title": "Придбайте ChatGPT Image 2 Generator",
+            "description": "Купіть ChatGPT Image 2 Generator одноразовим платежем. Перевірте вашу електронну пошту для отримання коду та документації.",
+            "image": {
+              "src": "/imgs/features/5.png",
+              "alt": "usage"
+            }
+          },
+          {
+            "title": "Розпочніть ваш проєкт",
+            "description": "Прочитайте документацію та клонуйте код ChatGPT Image 2 Generator. Почніть будувати ваш AI SaaS стартап.",
+            "image": {
+              "src": "/imgs/features/6.png",
+              "alt": "usage"
+            }
+          },
+          {
+            "title": "Налаштуйте ваш проєкт",
+            "description": "Модифікуйте шаблон з вашими даними та контентом. Специфічні потреби AI функціональності.",
+            "image": {
+              "src": "/imgs/features/7.png",
+              "alt": "usage"
+            }
+          },
+          {
+            "title": "Розгорніть в продакшн",
+            "description": "Розгорніть ваш проєкт в продакшн за кілька кроків і почніть обслуговувати клієнтів негайно.",
+            "image": {
+              "src": "/imgs/features/8.png",
+              "alt": "usage"
+            }
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "features": {
+        "id": "features",
+        "title": "Ключові можливості ChatGPT Image 2 Generator",
+        "description": "Все, що вам потрібно для швидкого та ефективного запуску вашого AI SaaS стартапу.",
+        "items": [
+          {
+            "title": "Next.js шаблон",
+            "description": "Готові до продакшну Next.js шаблони з SEO-дружньою структурою та підтримкою i18n.",
+            "icon": "RiNextjsFill"
+          },
+          {
+            "title": "Аутентифікація та платежі",
+            "description": "Інтегровані Google OAuth, вхід в один клік та обробка платежів Stripe.",
+            "icon": "RiKey2Fill"
+          },
+          {
+            "title": "Інфраструктура даних",
+            "description": "Вбудована інтеграція Supabase для надійного та масштабованого зберігання даних.",
+            "icon": "RiDatabase2Line"
+          },
+          {
+            "title": "Розгортання в один клік",
+            "description": "Безшовне розгортання на Vercel або Cloudflare з автоматичним налаштуванням.",
+            "icon": "RiCloudy2Fill"
+          },
+          {
+            "title": "Бізнес-аналітика",
+            "description": "Інтегровані Google Analytics та Search Console для відстеження зростання.",
+            "icon": "RiBarChart2Line"
+          },
+          {
+            "title": "AI-готова інфраструктура",
+            "description": "Попередньо налаштована інтеграція AI з вбудованою системою кредитів та продажем API.",
+            "icon": "RiRobot2Line"
+          }
+        ]
+      },
+      "stats": {
+        "id": "stats",
+        "title": "Люди люблять ChatGPT Image 2 Generator",
+        "description": "за простоту використання та швидкість запуску.",
+        "items": [
+          {
+            "title": "999+",
+            "description": "Клієнтів"
+          },
+          {
+            "title": "200+",
+            "description": "Блоків"
+          },
+          {
+            "title": "50+",
+            "description": "Шаблонів"
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "testimonials": {
+        "id": "testimonials",
+        "title": "Що користувачі говорять про ChatGPT Image 2 Generator",
+        "description": "Почуйте від розробників та засновників, які запустили свої AI стартапи з ChatGPT Image 2 Generator.",
+        "items": [
+          {
+            "name": "Девід Чен",
+            "role": "Засновник AIWallpaper.shop",
+            "quote": "ChatGPT Image 2 Generator заощадив нам місяці розробки. Ми запустили наш бізнес AI шпалер всього за 2 дні та отримали нашого першого платного клієнта протягом тижня!",
+            "image": {
+              "src": "/imgs/avatars/1.png",
+              "alt": "david"
+            }
+          },
+          {
+            "name": "Рейчел Кім",
+            "role": "CTO в HeyBeauty.ai",
+            "quote": "Попередньо побудована AI інфраструктура - це зміна правил гри. Нам не потрібно було турбуватися про архітектуру - просто зосередилися на нашій AI технології краси та швидко вийшли в світ.",
+            "image": {
+              "src": "/imgs/avatars/2.png",
+              "alt": "rachel"
+            }
+          },
+          {
+            "name": "Маркус Томпсон",
+            "role": "Соло-розробник",
+            "quote": "Як соло-розробник, ChatGPT Image 2 Generator дав мені все, що потрібно - аутентифікацію, платежі, інтеграцію AI та красивий UI. Запустив мій SaaS за вихідні!",
+            "image": {
+              "src": "/imgs/avatars/3.png",
+              "alt": "marcus"
+            }
+          },
+          {
+            "name": "Софія Гарсія",
+            "role": "CEO Melodisco",
+            "quote": "Шаблони готові до продакшну та дуже налаштовувані. Ми побудували нашу AI музичну платформу за години замість місяців. Неймовірний час виходу на ринок!",
+            "image": {
+              "src": "/imgs/avatars/4.png",
+              "alt": "sofia"
+            }
+          },
+          {
+            "name": "Джеймс Вілсон",
+            "role": "Tech Lead в GPTs.works",
+            "quote": "Інфраструктура ChatGPT Image 2 Generator надійна як скеля. Ми масштабувалися від 0 до 10k користувачів без торкання бекенду. Найкраща інвестиція для нашого AI стартапу.",
+            "image": {
+              "src": "/imgs/avatars/5.png",
+              "alt": "james"
+            }
+          },
+          {
+            "name": "Анна Чжан",
+            "role": "Засновник стартапу",
+            "quote": "Від ідеї до запуску за 3 дні! Шаблони та інструменти розгортання ChatGPT Image 2 Generator зробили можливим неймовірно швидке тестування нашої AI бізнес-концепції.",
+            "image": {
+              "src": "/imgs/avatars/6.png",
+              "alt": "anna"
+            }
+          }
+        ]
+      },
+      "faq": {
+        "id": "faq",
+        "title": "Часті запитання про ChatGPT Image 2 Generator",
+        "description": "Є інше запитання? Зв'яжіться з нами в Discord або електронною поштою.",
+        "items": [
+          {
+            "question": "Що саме таке ChatGPT Image 2 Generator і як це працює?",
+            "answer": "ChatGPT Image 2 Generator - це комплексний NextJS шаблон, розроблений спеціально для створення AI SaaS стартапів. Він надає готові шаблони, налаштування інфраструктури та інструменти розгортання, які допомагають запустити ваш AI бізнес за години замість днів."
+          },
+          {
+            "question": "Чи потрібні мені просунуті технічні навички для використання ChatGPT Image 2 Generator?",
+            "answer": "Хоча базові знання програмування корисні, ChatGPT Image 2 Generator розроблений як дружній для розробників. Наші шаблони та документація роблять початок роботи легким, навіть якщо ви не експерт в AI або хмарній інфраструктурі."
+          },
+          {
+            "question": "Які типи AI SaaS я можу побудувати з ChatGPT Image 2 Generator?",
+            "answer": "ChatGPT Image 2 Generator підтримує широкий спектр AI додатків, від генерації контенту до інструментів аналізу даних. Наші шаблони охоплюють популярні випадки використання, такі як AI чатботи, генератори контенту, додатки обробки зображень та більше."
+          },
+          {
+            "question": "Скільки часу зазвичай займає запуск з ChatGPT Image 2 Generator?",
+            "answer": "З ChatGPT Image 2 Generator ви можете мати робочий прототип за години та готовий до продакшну додаток за години. Наше розгортання в один клік та попередньо налаштована інфраструктура значно скорочують традиційний цикл розробки тривалістю в місяці."
+          },
+          {
+            "question": "Що включено в інфраструктуру ChatGPT Image 2 Generator?",
+            "answer": "ChatGPT Image 2 Generator надає повний стек інфраструктури, включаючи аутентифікацію, налаштування бази даних, інтеграцію API, обробку платежів та масштабоване хмарне розгортання. Все попередньо налаштовано відповідно до кращих галузевих практик."
+          },
+          {
+            "question": "Чи можу я налаштувати шаблони відповідно до мого бренду?",
+            "answer": "Абсолютно! Усі шаблони ChatGPT Image 2 Generator повністю налаштовувані. Ви можете змінити дизайн, функції та функціональність відповідно до вашої ідентичності бренду та конкретних бізнес-вимог, зберігаючи надійну базову інфраструктуру."
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Запустіть ваш перший AI SaaS стартап",
+        "description": "Почніть звідси, запускайте з ChatGPT Image 2 Generator.",
+        "buttons": [
+          {
+            "title": "Отримати ChatGPT Image 2 Generator",
+            "url": "https://gptimg2.art",
+            "target": "_blank",
+            "icon": "Zap"
+          },
+          {
+            "title": "Читати документацію",
+            "url": "/docs",
+            "target": "_blank",
+            "variant": "outline",
+            "icon": "BookOpenText"
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "subscribe": {
+        "id": "subscribe",
+        "title": "Підпишіться на нашу розсилку",
+        "description": "Отримуйте останні новини та оновлення від ChatGPT Image 2 Generator.",
+        "submit": {
+          "input": {
+            "placeholder": "Введіть вашу електронну пошту"
+          },
+          "button": {
+            "title": "Підписатися"
+          },
+          "action": "/api/subscribe"
+        },
+        "className": "bg-muted"
+      }
+    }
+  }
+}

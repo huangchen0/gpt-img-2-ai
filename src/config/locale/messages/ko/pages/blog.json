@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "title": "해피홀스 블로그",
+    "description": "해피홀스의 제품 소식, AI 영상 제작 팁, 활용 사례와 업데이트를 확인해보세요."
+  },
+  "blog": {
+    "id": "blog",
+    "sr_only_title": "해피홀스 블로그",
+    "title": "블로그",
+    "description": "제품 소식, 제작 팁, 활용 사례와 업데이트를 모았습니다."
+  },
+  "page": {
+    "title": "해피홀스 블로그",
+    "sections": {
+      "blog": {
+        "id": "blog",
+        "title": "블로그",
+        "description": "해피홀스로 더 좋은 영상을 만들기 위한 아이디어와 제품 소식을 확인해보세요."
+      }
+    }
+  },
+  "messages": {
+    "all": "전체",
+    "no_content": "아직 게시물이 없습니다",
+    "crumb": "블로그",
+    "toc": "목차"
+  }
+}

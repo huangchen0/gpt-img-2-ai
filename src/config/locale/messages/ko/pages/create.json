@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "AI 비디오와 이미지를 만들기 | 해피홀스",
+    "description": "해피홀스 작업 공간에서 AI 비디오와 AI 이미지를 만들 수 있습니다. 생성 페이지를 벗어나지 않고 비디오와 이미지 모드를 전환할 수 있습니다."
+  },
+  "page": {
+    "title": "AI 비디오 또는 이미지 만들기",
+    "description": "해피홀스 작업 공간에서 AI 비디오와 AI 이미지를 만들 수 있습니다."
+  },
+  "generator_switcher": {
+    "video": "AI 비디오",
+    "image": "AI 이미지",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "멀티모달 레퍼런스, 카메라 제어, 영화적인 결과물에 더 적합합니다.",
+    "kling_description": "멀티샷 서사, 요소 일관성, 네이티브 오디오에 더 적합합니다.",
+    "sr_only_video": "AI 비디오 생성기",
+    "sr_only_image": "AI 이미지 생성기",
+    "sr_only_kling": "Kling 3 비디오 생성기"
+  },
+  "generator": {
+    "title": "AI 이미지 생성기",
+    "description": "텍스트 프롬프트와 참조 이미지를 바탕으로 이미지를 생성하거나 편집합니다.",
+    "tabs": {
+      "text-to-image": "텍스트에서 이미지",
+      "image-to-image": "이미지에서 이미지"
+    },
+    "form": {
+      "provider": "제공업체",
+      "model": "모델",
+      "select_provider": "제공업체 선택",
+      "select_model": "모델 선택",
+      "prompt": "프롬프트",
+      "prompt_placeholder": "색상, 형태, 질감 등 이미지의 세부 사항을 설명하세요",
+      "reference_image": "참조 이미지",
+      "reference_image_placeholder": "참조 이미지를 업로드하세요. 여러 이미지를 지원합니다",
+      "some_images_failed_to_upload": "일부 이미지 업로드에 실패했습니다. 삭제 후 다시 업로드하세요",
+      "prompt_too_long": "프롬프트가 너무 깁니다. 일부 내용을 삭제하세요"
+    },
+    "generate": "이미지 생성",
+    "checking_account": "계정 확인 중...",
+    "loading": "로딩 중...",
+    "generating": "생성 중...",
+    "sign_in_to_generate": "이미지 생성을 위해 로그인",
+    "credits_cost": "{credits} 크레딧 소비",
+    "credits_remaining": "{credits} 크레딧 남음",
+    "buy_credits": "크레딧 구매",
+    "progress": "진행률",
+    "generated_images": "생성된 이미지",
+    "ready_to_generate": "생성 준비 완료",
+    "ready_for_generating": "생성 준비 중",
+    "no_images_generated": "생성된 이미지 없음"
+  }
+}

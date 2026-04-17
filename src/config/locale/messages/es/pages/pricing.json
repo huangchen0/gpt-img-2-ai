@@ -1,0 +1,473 @@
+{
+  "metadata": {
+    "title": "Precios de ChatGPT Image 2 Generator",
+    "description": "Elige un plan de ChatGPT Image 2 Generator para generación y edición de imágenes con un sistema flexible basado en créditos."
+  },
+  "pricing": {
+    "id": "pricing",
+    "sr_only_title": "Precios de ChatGPT Image 2 Generator",
+    "title": "Precio minimalista, crea al instante.",
+    "description": "Únete a más de 5,000 creadores en todo el mundo. Paga una vez y ten tus créditos listos cuando llegue la idea.",
+    "trust_badges": [
+      {
+        "icon": "RiCheckDoubleLine",
+        "title": "Cancela cuando quieras",
+        "description": "Planes flexibles, cambia cuando quieras."
+      },
+      {
+        "icon": "RiShieldCheckLine",
+        "title": "Seguridad bancaria",
+        "description": "Pago cifrado de principio a fin."
+      },
+      {
+        "icon": "RiRefreshLine",
+        "title": "Créditos de larga duración",
+        "description": "Los créditos únicos son válidos durante 12 meses."
+      }
+    ],
+    "groups": [
+      {
+        "name": "monthly",
+        "title": "Mensual"
+      },
+      {
+        "name": "yearly",
+        "title": "Anual",
+        "label": "Mejor valor",
+        "is_featured": true
+      },
+      {
+        "name": "packs",
+        "title": "Paquetes de créditos"
+      }
+    ],
+    "items": [
+      {
+        "title": "Starter Mensual",
+        "description": "Por menos que un café al día, tu creatividad siempre está disponible.",
+        "features_title": "Incluye",
+        "features": [
+          {
+            "text": "100 créditos de render al mes",
+            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. El consumo real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          {
+            "text": "Render más rápido, sin hacer fila",
+            "note": "Obtienes mayor prioridad en la cola durante horas pico. El tiempo real de espera sigue dependiendo de la carga del sistema."
+          },
+          "Flujo limpio, sin anuncios",
+          {
+            "text": "Exportaciones sin marca de agua, listas para entregar",
+            "note": "Las exportaciones se generan sin marca de agua de la plataforma. Si usas recursos de terceros, sigues siendo responsable de sus derechos y licencias."
+          },
+          "Biblioteca en la nube (30 días)",
+          {
+            "text": "Uso comercial incluido",
+            "note": "Disponible para uso comercial dentro de las Condiciones vigentes. Si tu obra incluye recursos de terceros, debes confirmar sus derechos por tu cuenta."
+          },
+          "Suscripción flexible, cancela cuando quieras"
+        ],
+        "interval": "month",
+        "amount": 2490,
+        "currency": "USD",
+        "price": "$24.9",
+        "original_price": "$29.9",
+        "unit": "/ mes",
+        "tip": "Ideal para tu primera suscripción • Cuesta menos que un café al día",
+        "button": {
+          "title": "Empieza tu camino Pro",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "starter-monthly",
+        "legacy_product_ids": [
+          "starter-monthly",
+          "lite-monthly-v2"
+        ],
+        "product_name": "Membresía Starter Mensual",
+        "credits": 4000,
+        "valid_days": 30,
+        "group": "monthly",
+        "plan_name": "Starter Mensual",
+        "label": "Inicio fácil"
+      },
+      {
+        "title": "Creator Mensual",
+        "description": "Pensado para creadores que publican con frecuencia y quieren un flujo más fluido.",
+        "label": "Más popular",
+        "features_title": "Todo en Starter, más",
+        "features": [
+          {
+            "text": "160 créditos de render al mes",
+            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. El consumo real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          "62% más créditos que Starter",
+          {
+            "text": "Render más rápido, sin hacer fila",
+            "note": "Obtienes mayor prioridad en la cola durante horas pico. El tiempo real de espera sigue dependiendo de la carga del sistema."
+          },
+          "Flujo limpio, sin anuncios",
+          {
+            "text": "Exportaciones sin marca de agua, listas para entregar",
+            "note": "Las exportaciones se generan sin marca de agua de la plataforma. Si usas recursos de terceros, sigues siendo responsable de sus derechos y licencias."
+          },
+          "Biblioteca en la nube (90 días)",
+          {
+            "text": "Uso comercial incluido",
+            "note": "Disponible para uso comercial dentro de las Condiciones vigentes. Si tu obra incluye recursos de terceros, debes confirmar sus derechos por tu cuenta."
+          }
+        ],
+        "interval": "month",
+        "amount": 3990,
+        "currency": "USD",
+        "price": "$39.9",
+        "original_price": "$49.9",
+        "unit": "/ mes",
+        "is_featured": true,
+        "tip": "Elegido por creadores frecuentes • Más ritmo, menos fricción",
+        "button": {
+          "title": "Subir de nivel ahora",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "creator-monthly-v2",
+        "product_name": "Membresía Creator Mensual",
+        "credits": 6500,
+        "valid_days": 30,
+        "group": "monthly",
+        "plan_name": "Creator Mensual"
+      },
+      {
+        "title": "Plan Pro Anual",
+        "description": "Asegura un 50% de ahorro en creación y mantén una producción constante.",
+        "label": "Más vendido del año",
+        "features_title": "Beneficios Pro anuales",
+        "features": [
+          {
+            "text": "1,200+ créditos de render al año",
+            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. El consumo real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          {
+            "text": "Render más rápido, sin hacer fila",
+            "note": "Obtienes mayor prioridad en la cola durante horas pico. El tiempo real de espera sigue dependiendo de la carga del sistema."
+          },
+          {
+            "text": "Privacidad de nivel comercial, visible solo para ti",
+            "note": "La creación se gestiona como privada por defecto y no se muestra públicamente. La visibilidad final depende de tu configuración actual de privacidad y publicación."
+          },
+          "Flujo limpio, sin anuncios",
+          {
+            "text": "Exportaciones sin marca de agua, listas para entregar",
+            "note": "Las exportaciones se generan sin marca de agua de la plataforma. Si usas recursos de terceros, sigues siendo responsable de sus derechos y licencias."
+          },
+          {
+            "text": "Mejora Pro de detalle y pulido visual",
+            "note": "Pensado para mejorar luces, texturas y detalles de escena. El resultado final puede variar según el material y el modelo."
+          },
+          {
+            "text": "Acceso anticipado a nuevas funciones",
+            "note": "Permite probar ciertas funciones nuevas antes de su lanzamiento público. La disponibilidad puede cambiar según el calendario de despliegue."
+          },
+          "Biblioteca en la nube (6 meses)",
+          "Soporte premium prioritario"
+        ],
+        "interval": "year",
+        "amount": 15480,
+        "currency": "USD",
+        "price": "$12.9",
+        "original_price": "$29.9",
+        "unit": "/ mes",
+        "is_featured": true,
+        "tip": "Ahorra más de $200 al año • Favorito de los creadores",
+        "button": {
+          "title": "Iniciar plan Pro",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "premium-yearly",
+        "legacy_product_ids": [
+          "premium-yearly"
+        ],
+        "product_name": "Membresía Pro Anual",
+        "credits": 48000,
+        "valid_days": 365,
+        "group": "yearly",
+        "plan_name": "Pro Anual"
+      },
+      {
+        "title": "Plan Studio Insignia",
+        "description": "Un plan insignia creado para equipos creativos de alta frecuencia.",
+        "label": "Mejor costo unitario",
+        "features_title": "Beneficios Studio",
+        "features": [
+          {
+            "text": "2,400+ créditos de render al año",
+            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. El consumo real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          {
+            "text": "Render más rápido, sin hacer fila",
+            "note": "Obtienes mayor prioridad en la cola durante horas pico. El tiempo real de espera sigue dependiendo de la carga del sistema."
+          },
+          {
+            "text": "Privacidad de nivel comercial, visible solo para ti",
+            "note": "La creación se gestiona como privada por defecto y no se muestra públicamente. La visibilidad final depende de tu configuración actual de privacidad y publicación."
+          },
+          "Flujo limpio, sin anuncios",
+          {
+            "text": "Exportaciones sin marca de agua, listas para entregar",
+            "note": "Las exportaciones se generan sin marca de agua de la plataforma. Si usas recursos de terceros, sigues siendo responsable de sus derechos y licencias."
+          },
+          {
+            "text": "Mejora Pro de detalle y pulido visual",
+            "note": "Pensado para mejorar luces, texturas y detalles de escena. El resultado final puede variar según el material y el modelo."
+          },
+          {
+            "text": "Acceso anticipado a nuevas funciones",
+            "note": "Permite probar ciertas funciones nuevas antes de su lanzamiento público. La disponibilidad puede cambiar según el calendario de despliegue."
+          },
+          "Historial ilimitado de trabajos finalizados",
+          "Soporte premium prioritario",
+          "Límites de subida más altos para proyectos grandes"
+        ],
+        "interval": "year",
+        "amount": 23880,
+        "currency": "USD",
+        "price": "$19.9",
+        "original_price": "$49.9",
+        "unit": "/ mes",
+        "tip": "Ahorra más de $400 al año • Máximo ahorro por pieza",
+        "button": {
+          "title": "Iniciar plan insignia",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "studio-yearly-v2",
+        "product_name": "Membresía Studio Anual",
+        "credits": 96000,
+        "valid_days": 365,
+        "group": "yearly",
+        "plan_name": "Studio Anual"
+      },
+      {
+        "title": "Paquete Starter",
+        "description": "Úsalo al instante y empieza a crear de inmediato. Recarga solo cuando lo necesites.",
+        "label": "Recomendado para empezar",
+        "features_title": "Perfecto Para Probar",
+        "features": [
+          {
+            "text": "Crea ~100 imágenes estándar 1K",
+            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. La cantidad real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          "Prueba prompts y calidad sin riesgo",
+          "Texto a imagen e imagen a imagen",
+          "Válido por 1 año completo",
+          {
+            "text": "Uso comercial de imágenes incluido",
+            "note": "Disponible para uso comercial dentro de las Condiciones vigentes. Si tu obra incluye recursos de terceros, debes confirmar sus derechos por tu cuenta."
+          }
+        ],
+        "interval": "one-time",
+        "amount": 2990,
+        "currency": "USD",
+        "price": "$29.9",
+        "original_price": "$39.9",
+        "unit": "único",
+        "tip": "Sin suscripción • Usa en cualquier momento en 12 meses • 25% off hoy",
+        "button": {
+          "title": "Obtén capacidad para ~100 imágenes",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "credits-package",
+        "legacy_product_ids": [
+          "credits-package"
+        ],
+        "product_name": "Paquete Starter de Créditos",
+        "credits": 4000,
+        "valid_days": 365,
+        "group": "packs"
+      },
+      {
+        "title": "Paquete Creator",
+        "description": "Una recarga flexible para creadores que producen con mayor frecuencia.",
+        "label": "Alta frecuencia",
+        "features_title": "Más Créditos, Mejor Precio",
+        "features": [
+          {
+            "text": "Crea ~225 imágenes estándar 1K",
+            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. La cantidad real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          "33% mejor valor por crédito",
+          "Genial para creación semanal",
+          "Válido por 1 año completo",
+          {
+            "text": "Uso comercial de imágenes incluido",
+            "note": "Disponible para uso comercial dentro de las Condiciones vigentes. Si tu obra incluye recursos de terceros, debes confirmar sus derechos por tu cuenta."
+          }
+        ],
+        "interval": "one-time",
+        "amount": 5990,
+        "currency": "USD",
+        "price": "$59.9",
+        "original_price": "$79.9",
+        "unit": "único",
+        "tip": "Recarga más popular • 25% off hoy • Sin presión de vencimiento",
+        "button": {
+          "title": "Obtén capacidad para ~225 imágenes",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "creator-pack-v2",
+        "product_name": "Paquete Creator de Créditos",
+        "credits": 9000,
+        "valid_days": 365,
+        "group": "packs"
+      },
+      {
+        "title": "Paquete Pro",
+        "description": "Un paquete insignia para creadores intensivos y trabajo por lotes.",
+        "features_title": "Valor Máximo",
+        "features": [
+          {
+            "text": "Crea ~400 imágenes estándar 1K",
+            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. La cantidad real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          "Mejor precio por crédito",
+          "Perfecto para creación por lotes",
+          "Válido por 1 año completo",
+          {
+            "text": "Uso comercial de imágenes incluido",
+            "note": "Disponible para uso comercial dentro de las Condiciones vigentes. Si tu obra incluye recursos de terceros, debes confirmar sus derechos por tu cuenta."
+          }
+        ],
+        "interval": "one-time",
+        "amount": 9990,
+        "currency": "USD",
+        "price": "$99.9",
+        "original_price": "$129.9",
+        "unit": "único",
+        "tip": "Menor costo por crédito • 23% off hoy • Abastécete y ahorra",
+        "button": {
+          "title": "Obtén capacidad para ~400 imágenes",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "pro-pack-v2",
+        "product_name": "Paquete Pro de Créditos",
+        "credits": 16000,
+        "valid_days": 365,
+        "group": "packs",
+        "label": "Menor costo unitario"
+      }
+    ],
+    "sections": [
+      {
+        "id": "membership",
+        "title": "Planes Pro",
+        "description": "Produce más con un menor costo de render a largo plazo.",
+        "group_names": [
+          "monthly",
+          "yearly"
+        ],
+        "default_group": "yearly"
+      },
+      {
+        "id": "credits",
+        "title": "Compra cuando quieras, crea con flexibilidad",
+        "description": "Úsalos al instante, recarga cuando quieras y sin suscripción.",
+        "group_names": [
+          "packs"
+        ],
+        "default_group": "packs"
+      }
+    ],
+    "usage_examples_title": "Cómo funcionan los créditos",
+    "usage_examples_description": "El consumo de créditos depende del modelo, la resolución, el modo de generación y las funciones de búsqueda.",
+    "usage_examples": [
+      {
+        "title": "1K / texto a imagen / estándar",
+        "description": "40 créditos"
+      },
+      {
+        "title": "1K / imagen a imagen / estándar",
+        "description": "60 créditos"
+      },
+      {
+        "title": "4K / texto a imagen / pro",
+        "description": "120 créditos"
+      }
+    ],
+    "messages": {
+      "feature_note_label": "Ver detalles"
+    }
+  },
+  "faq": {
+    "id": "faq",
+    "title": "Preguntas clave antes de comprar",
+    "description": "Precio, créditos, cancelación, reembolsos y uso comercial explicados con claridad antes del pago.",
+    "items": [
+      {
+        "question": "¿Cuál es la diferencia entre los paquetes de créditos y la membresía?",
+        "answer": "Los paquetes de créditos son compras únicas sin renovación automática, por lo que sirven bien para probar, recargar saldo o trabajar por proyecto. La membresía se renueva automáticamente cada mes o cada año, pero normalmente ofrece un menor costo por creación y es más adecuada para un uso continuo."
+      },
+      {
+        "question": "¿Los créditos vencen?",
+        "answer": "Los paquetes de créditos de pago único son válidos durante 12 meses desde la fecha de compra. Los créditos de membresía se asignan para el ciclo de facturación actual y vencen o se renuevan al final de ese ciclo. Puedes revisar tu saldo restante y la fecha de vencimiento en las páginas de facturación y créditos."
+      },
+      {
+        "question": "¿La cancelación de la suscripción entra en vigor de inmediato?",
+        "answer": "No. Puedes cancelar en cualquier momento y la cancelación entrará en vigor al final del período de facturación actual. Hasta entonces, podrás seguir usando los beneficios incluidos en tu plan actual."
+      },
+      {
+        "question": "¿Cuántos créditos cuesta generar una imagen?",
+        "answer": "La generación estándar 1K de texto a imagen comienza en 40 créditos, y la generación estándar 1K de imagen a imagen comienza en 60 créditos. Las resoluciones más altas y los modos pro consumen más. Los ejemplos de la página de precios sirven como referencia útil, pero el valor mostrado dentro del creador es el que debe tomarse como definitivo."
+      },
+      {
+        "question": "¿Los planes actuales se pueden usar comercialmente?",
+        "answer": "Sí. Todos los planes mostrados actualmente en la página de precios incluyen derechos de uso comercial. Aun así, debes asegurarte de tener los derechos legales para usar los materiales que subas, likenesses, elementos de marca, música y voz, y de cumplir con los términos de la plataforma."
+      },
+      {
+        "question": "¿Ofrecen reembolsos?",
+        "answer": "Según los términos actuales del servicio, los pagos normalmente no son reembolsables salvo que la ley lo exija o la plataforma lo apruebe. Si ves un cobro duplicado o un error del sistema, contacta con support@gptimg2.art lo antes posible."
+      },
+      {
+        "question": "¿Los precios subirán en el futuro? ¿El plan anual fija la tarifa?",
+        "answer": "Podemos ajustar los precios con el tiempo a medida que cambien las capacidades del modelo, los costos de infraestructura y las funciones disponibles. Los planes anuales son una mejor opción si quieres fijar por adelantado tu costo de creación anual. Las suscripciones activas seguirán respetándose durante el ciclo de facturación actual."
+      },
+      {
+        "question": "¿Qué pasa si necesito más capacidad o una compra para equipo?",
+        "answer": "Si necesitas límites más altos, compras centralizadas para equipos, soporte para creación por lotes o un plan de proyecto a más largo plazo, escríbenos a support@gptimg2.art y cuéntanos lo que necesitas."
+      }
+    ]
+  },
+  "page": {
+    "title": "Precios de ChatGPT Image 2 Generator",
+    "sections": {
+      "pricing": {
+        "id": "pricing",
+        "title": "Planes de ChatGPT Image 2 Generator",
+        "description": "Comienza a generar y editar imágenes con ChatGPT Image 2 Generator. La generación estándar 1K de texto a imagen comienza en 40 créditos, y la generación estándar 1K de imagen a imagen comienza en 60 créditos."
+      }
+    }
+  },
+  "messages": {
+    "current_plan": "Plan Actual",
+    "processing": "Procesando",
+    "original_price_label": "Precio original",
+    "billed_annually_total": "Facturado anualmente a {amount}",
+    "vs_monthly_price": "vs mensual {price}",
+    "credits_count": "{credits} créditos",
+    "included_credits": "Incluye {credits} créditos",
+    "per_100_credits": "~{amount} por 100 créditos",
+    "flash_sale_title": "⚡ Venta Flash Activa",
+    "flash_sale_title_with_savings": "⚡ Venta Flash: Ahorra Hasta {percent}% Ahora Mismo",
+    "flash_sale_description": "Este precio desaparece cuando el temporizador llegue a cero. Asegúralo ahora o paga precio completo mañana.",
+    "flash_sale_countdown": "Termina en {time}",
+    "flash_sale_ends_at": "Venta termina: {date}",
+    "flash_sale_price_note": "Los precios mostrados ya están con descuento. Lo que ves es lo que pagas al finalizar compra.",
+    "flash_sale_save_percent": "Ahorra {percent}%",
+    "flash_sale_cta": "Reclama {percent}% Off Ahora",
+    "flash_sale_cta_note": "El precio early-bird solo estará disponible este mes. Después volverá la tarifa estándar.",
+    "per_video_price": "Aprox. {amount} / 100 créditos"
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "page": {
+    "show_sections": [
+      "hero",
+      "logos",
+      "introduce",
+      "benefits",
+      "usage",
+      "features",
+      "stats",
+      "testimonials",
+      "faq",
+      "cta"
+    ],
+    "sections": {
+      "hero": {
+        "id": "hero",
+        "title": "Lanza tu Startup de IA en horas, no en días",
+        "highlight_text": "en horas",
+        "description": "ChatGPT Image 2 Generator es un boilerplate de NextJS para crear startups de IA SaaS.<br/>Despliega rápidamente con una variedad de plantillas y componentes.",
+        "announcement": {
+          "badge": "Nuevo",
+          "title": "🎉 ChatGPT Image 2 Generator",
+          "url": "/pricing"
+        },
+        "tip": "🎁 Oferta especial para los primeros 1000 usuarios",
+        "buttons": [
+          {
+            "title": "Comenzar",
+            "icon": "Zap",
+            "url": "/pricing",
+            "target": "_self",
+            "variant": "default"
+          },
+          {
+            "title": "Ver Documentación",
+            "icon": "BookOpenText",
+            "url": "/docs",
+            "target": "_blank",
+            "variant": "outline"
+          }
+        ],
+        "show_avatars": true,
+        "avatars_tip": "Más de 999 usuarios ya usan ChatGPT Image 2 Generator",
+        "show_award": false,
+        "image": {
+          "src": "/imgs/features/admin.png",
+          "alt": "hero",
+          "width": 1200,
+          "height": 800
+        },
+        "image_invert": {
+          "src": "/imgs/features/admin-dark.png",
+          "alt": "hero",
+          "width": 1200,
+          "height": 800
+        },
+        "background_image": {
+          "src": "/imgs/bg/tree.jpg",
+          "alt": "hero"
+        }
+      },
+      "logos": {
+        "id": "logos",
+        "title": "ChatGPT Image 2 Generator está construido sobre tecnologías líderes",
+        "items": [
+          {
+            "title": "Next.js",
+            "image": {
+              "src": "/imgs/logos/nextjs.svg",
+              "alt": "Next.js"
+            }
+          },
+          {
+            "title": "React",
+            "image": {
+              "src": "/imgs/logos/react.svg",
+              "alt": "React"
+            }
+          },
+          {
+            "title": "TailwindCSS",
+            "image": {
+              "src": "/imgs/logos/tailwindcss.svg",
+              "alt": "TailwindCSS"
+            }
+          },
+          {
+            "title": "Shadcn/UI",
+            "image": {
+              "src": "/imgs/logos/shadcn.svg",
+              "alt": "Shadcn/UI"
+            }
+          },
+          {
+            "title": "Vercel",
+            "image": {
+              "src": "/imgs/logos/vercel.svg",
+              "alt": "Vercel"
+            }
+          }
+        ]
+      },
+      "introduce": {
+        "block": "features-list",
+        "id": "introduce",
+        "title": "¿Qué es ChatGPT Image 2 Generator?",
+        "label": "Introducción",
+        "description": "ChatGPT Image 2 Generator es un boilerplate de NextJS para crear startups de IA SaaS, que incluye plantillas, componentes y documentación completa.",
+        "image": {
+          "src": "/imgs/features/landing-page.png",
+          "alt": "introduce"
+        },
+        "items": [
+          {
+            "title": "Plantillas Listas para Usar",
+            "description": "Elige entre docenas de plantillas de IA SaaS listas para producción y arranca tu proyecto rápidamente.",
+            "icon": "RiNextjsFill",
+            "image": {
+              "src": "/imgs/features/1.png",
+              "alt": "introduce"
+            }
+          },
+          {
+            "title": "Infraestructura Configurada",
+            "description": "Accede instantáneamente a una infraestructura escalable con las mejores prácticas integradas.",
+            "icon": "RiDatabase2Line",
+            "image": {
+              "src": "/imgs/features/2.png",
+              "alt": "introduce"
+            }
+          },
+          {
+            "title": "Despliegue Rápido",
+            "description": "Despliega tu aplicación de IA SaaS a producción en horas, no en días.",
+            "icon": "RiCloudyFill",
+            "image": {
+              "src": "/imgs/features/3.png",
+              "alt": "introduce"
+            }
+          },
+          {
+            "title": "Integración de IA",
+            "description": "Integra IA en tu proyecto fácilmente usando nuestro SDK de IA incorporado.",
+            "icon": "RiRobot2Line",
+            "image": {
+              "src": "/imgs/features/4.png",
+              "alt": "introduce"
+            }
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "benefits": {
+        "block": "features-accordion",
+        "id": "benefits",
+        "title": "¿Por qué elegir ChatGPT Image 2 Generator?",
+        "label": "Beneficios",
+        "description": "Obtén todo lo que necesitas para lanzar tu startup de IA: desde plantillas listas hasta soporte técnico.",
+        "items": [
+          {
+            "title": "Framework Completo",
+            "description": "Construido sobre Next.js con autenticación, pagos e integración de IA: todo funciona desde el primer momento.",
+            "icon": "RiNextjsFill",
+            "image": {
+              "src": "/imgs/features/user-billing.png",
+              "alt": "benefits"
+            }
+          },
+          {
+            "title": "Biblioteca Amplia de Plantillas",
+            "description": "Elige entre varias plantillas de IA SaaS para impulsar tu proyecto: chatbots, generación de imágenes y más.",
+            "icon": "RiClapperboardAiLine",
+            "image": {
+              "src": "/imgs/features/admin-settings.png",
+              "alt": "benefits"
+            }
+          },
+          {
+            "title": "Orientación Técnica",
+            "description": "Recibe soporte dedicado y únete a nuestra comunidad de desarrolladores para asegurar tu lanzamiento exitoso.",
+            "icon": "RiCodeFill",
+            "image": {
+              "src": "/imgs/features/landing-page.png",
+              "alt": "benefits"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "block": "features-step",
+        "id": "usage",
+        "title": "Cómo lanzar con ChatGPT Image 2 Generator",
+        "description": "Pon en marcha tu startup de IA SaaS en tres simples pasos:",
+        "image": {
+          "src": "/imgs/features/1.png",
+          "alt": "usage"
+        },
+        "image_position": "left",
+        "text_align": "center",
+        "items": [
+          {
+            "title": "Obtén ChatGPT Image 2 Generator",
+            "description": "Compra ChatGPT Image 2 Generator con un pago único. Recibe el código y la documentación en tu correo.",
+            "image": {
+              "src": "/imgs/features/5.png",
+              "alt": "usage"
+            }
+          },
+          {
+            "title": "Inicia tu Proyecto",
+            "description": "Lee la documentación y clona el código de ChatGPT Image 2 Generator. Comienza a construir tu startup de IA SaaS.",
+            "image": {
+              "src": "/imgs/features/6.png",
+              "alt": "usage"
+            }
+          },
+          {
+            "title": "Personaliza tu Proyecto",
+            "description": "Modifica la plantilla con tus datos y contenidos. Adapta la funcionalidad de IA a tus necesidades específicas.",
+            "image": {
+              "src": "/imgs/features/7.png",
+              "alt": "usage"
+            }
+          },
+          {
+            "title": "Despliega a Producción",
+            "description": "Despliega tu proyecto a producción con unos pocos pasos y comienza a atender clientes de inmediato.",
+            "image": {
+              "src": "/imgs/features/8.png",
+              "alt": "usage"
+            }
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "features": {
+        "id": "features",
+        "title": "Características clave de ChatGPT Image 2 Generator",
+        "description": "Todo lo que necesitas para lanzar tu startup de IA SaaS de forma rápida y eficiente.",
+        "items": [
+          {
+            "title": "Boilerplate de Next.js",
+            "description": "Plantillas de Next.js listas para producción con estructura SEO-friendly y soporte i18n.",
+            "icon": "RiNextjsFill"
+          },
+          {
+            "title": "Autenticación y Pagos",
+            "description": "Google OAuth integrado, inicio de sesión con un toque y procesamiento de pagos con Stripe.",
+            "icon": "RiKey2Fill"
+          },
+          {
+            "title": "Infraestructura de Datos",
+            "description": "Integración de Supabase incorporada para almacenamiento de datos confiable y escalable.",
+            "icon": "RiDatabase2Line"
+          },
+          {
+            "title": "Despliegue con Un Clic",
+            "description": "Despliegue fluido a Vercel o Cloudflare con configuración automatizada.",
+            "icon": "RiCloudy2Fill"
+          },
+          {
+            "title": "Analítica de Negocio",
+            "description": "Google Analytics y Search Console integrados para rastrear tu crecimiento.",
+            "icon": "RiBarChart2Line"
+          },
+          {
+            "title": "Infraestructura Lista para IA",
+            "description": "Integración de IA preconfigurada con sistema de créditos integrado y venta de API.",
+            "icon": "RiRobot2Line"
+          }
+        ]
+      },
+      "stats": {
+        "id": "stats",
+        "title": "La gente ama ChatGPT Image 2 Generator",
+        "description": "por su facilidad de uso y rapidez de despliegue.",
+        "items": [
+          {
+            "title": "999+",
+            "description": "Clientes"
+          },
+          {
+            "title": "200+",
+            "description": "Bloques"
+          },
+          {
+            "title": "50+",
+            "description": "Plantillas"
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "testimonials": {
+        "id": "testimonials",
+        "title": "Lo que dicen los usuarios sobre ChatGPT Image 2 Generator",
+        "description": "Escucha a desarrolladores y fundadores que lanzaron sus startups de IA con ChatGPT Image 2 Generator.",
+        "items": [
+          {
+            "name": "David Chen",
+            "role": "Fundador de AIWallpaper.shop",
+            "quote": "ChatGPT Image 2 Generator nos ahorró meses de desarrollo. Lanzamos nuestro negocio de fondos de pantalla con IA en solo 2 días y conseguimos nuestro primer cliente de pago en una semana.",
+            "image": {
+              "src": "/imgs/avatars/1.png",
+              "alt": "david"
+            }
+          },
+          {
+            "name": "Rachel Kim",
+            "role": "CTO en HeyBeauty.ai",
+            "quote": "La infraestructura de IA preconstruida es revolucionaria. No tuvimos que preocuparnos por la arquitectura, solo nos enfocamos en nuestra tecnología de belleza IA y lanzamos rápido.",
+            "image": {
+              "src": "/imgs/avatars/2.png",
+              "alt": "rachel"
+            }
+          },
+          {
+            "name": "Marcus Thompson",
+            "role": "Desarrollador Independiente",
+            "quote": "Como desarrollador independiente, ChatGPT Image 2 Generator me dio todo lo que necesitaba: autenticación, pagos, integración de IA y una interfaz hermosa. ¡Lancé mi SaaS en un fin de semana!",
+            "image": {
+              "src": "/imgs/avatars/3.png",
+              "alt": "marcus"
+            }
+          },
+          {
+            "name": "Sofia Garcia",
+            "role": "CEO de Melodisco",
+            "quote": "Las plantillas están listas para producción y son altamente personalizables. Construimos nuestra plataforma de música IA en horas en lugar de meses. ¡Tiempo de comercialización increíble!",
+            "image": {
+              "src": "/imgs/avatars/4.png",
+              "alt": "sofia"
+            }
+          },
+          {
+            "name": "James Wilson",
+            "role": "Tech Lead en GPTs.works",
+            "quote": "La infraestructura de ChatGPT Image 2 Generator es super sólida. Escalamos de 0 a 10k usuarios sin tocar el backend. La mejor inversión para nuestra startup de IA.",
+            "image": {
+              "src": "/imgs/avatars/5.png",
+              "alt": "james"
+            }
+          },
+          {
+            "name": "Anna Zhang",
+            "role": "Fundadora de Startup",
+            "quote": "¡De la idea al lanzamiento en 3 días! Las plantillas y herramientas de despliegue de ChatGPT Image 2 Generator hicieron posible probar nuestro concepto de negocio de IA increíblemente rápido.",
+            "image": {
+              "src": "/imgs/avatars/6.png",
+              "alt": "anna"
+            }
+          }
+        ]
+      },
+      "faq": {
+        "id": "faq",
+        "title": "Preguntas frecuentes sobre ChatGPT Image 2 Generator",
+        "description": "¿Tienes otra pregunta? Contáctanos en Discord o por correo electrónico.",
+        "items": [
+          {
+            "question": "¿Qué es exactamente ChatGPT Image 2 Generator y cómo funciona?",
+            "answer": "ChatGPT Image 2 Generator es un boilerplate completo de NextJS diseñado específicamente para crear startups de IA SaaS. Proporciona plantillas listas para usar, configuración de infraestructura y herramientas de despliegue que te ayudan a lanzar tu negocio de IA en horas en lugar de días."
+          },
+          {
+            "question": "¿Necesito habilidades técnicas avanzadas para usar ChatGPT Image 2 Generator?",
+            "answer": "Aunque conocimientos básicos de programación son útiles, ChatGPT Image 2 Generator está diseñado para ser amigable con los desarrolladores. Nuestras plantillas y documentación facilitan el inicio, incluso si no eres un experto en IA o infraestructura en la nube."
+          },
+          {
+            "question": "¿Qué tipos de IA SaaS puedo construir con ChatGPT Image 2 Generator?",
+            "answer": "ChatGPT Image 2 Generator soporta una amplia gama de aplicaciones de IA, desde generación de contenido hasta herramientas de análisis de datos. Nuestras plantillas cubren casos de uso populares como chatbots de IA, generadores de contenido, aplicaciones de procesamiento de imágenes y más."
+          },
+          {
+            "question": "¿Cuánto tiempo toma normalmente lanzar con ChatGPT Image 2 Generator?",
+            "answer": "Con ChatGPT Image 2 Generator, puedes tener un prototipo funcional en horas y una aplicación lista para producción en horas. Nuestro despliegue con un clic y la infraestructura preconfigurada reducen significativamente el ciclo de desarrollo tradicional que toma meses."
+          },
+          {
+            "question": "¿Qué incluye la infraestructura de ChatGPT Image 2 Generator?",
+            "answer": "ChatGPT Image 2 Generator proporciona una pila de infraestructura completa que incluye autenticación, configuración de base de datos, integración de API, procesamiento de pagos y despliegue en la nube escalable. Todo está preconfigurado siguiendo las mejores prácticas de la industria."
+          },
+          {
+            "question": "¿Puedo personalizar las plantillas para que coincidan con mi marca?",
+            "answer": "¡Por supuesto! Todas las plantillas de ChatGPT Image 2 Generator son completamente personalizables. Puedes modificar el diseño, las características y la funcionalidad para que coincidan con tu identidad de marca y requisitos de negocio específicos, manteniendo la sólida infraestructura subyacente."
+          }
+        ]
+      },
+      "cta": {
+        "id": "cta",
+        "title": "Lanza tu primera Startup de IA SaaS",
+        "description": "Empieza aquí, despliega con ChatGPT Image 2 Generator.",
+        "buttons": [
+          {
+            "title": "Obtener ChatGPT Image 2 Generator",
+            "url": "https://gptimg2.art",
+            "target": "_blank",
+            "icon": "Zap"
+          },
+          {
+            "title": "Ver Documentación",
+            "url": "/docs",
+            "target": "_blank",
+            "variant": "outline",
+            "icon": "BookOpenText"
+          }
+        ],
+        "className": "bg-muted"
+      },
+      "subscribe": {
+        "id": "subscribe",
+        "title": "Suscríbete a nuestro boletín",
+        "description": "Recibe las últimas noticias y actualizaciones de ChatGPT Image 2 Generator.",
+        "submit": {
+          "input": {
+            "placeholder": "Ingresa tu correo electrónico"
+          },
+          "button": {
+            "title": "Suscribirse"
+          },
+          "action": "/api/subscribe"
+        },
+        "className": "bg-muted"
+      }
+    }
+  }
+}

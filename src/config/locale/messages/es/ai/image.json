@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "title": "Generador de Imágenes con IA",
+    "description": "Genera imágenes con modelos de IA, compatible con texto a imagen e imagen a imagen."
+  },
+  "page": {
+    "title": "Generador de Imágenes con IA",
+    "description": "Genera imágenes con modelos de IA, compatible con texto a imagen e imagen a imagen."
+  },
+  "generator": {
+    "title": "Generador de Imágenes",
+    "description": "Genera imágenes con modelos de IA, compatible con texto a imagen e imagen a imagen.",
+    "tabs": {
+      "text-to-image": "Texto a Imagen",
+      "image-to-image": "Imagen a Imagen"
+    },
+    "form": {
+      "provider": "Proveedor",
+      "model": "Modelo",
+      "select_provider": "Seleccionar proveedor",
+      "select_model": "Seleccionar modelo",
+      "model_hint": "GPT Image 2: más rápido, mejor valor y compatible con Google Search. GPT Image 2 Pro: mayor calidad y detalle para producción.",
+      "resolution": "Resolución",
+      "select_resolution": "Seleccionar resolución",
+      "aspect_ratio": "Relación de aspecto",
+      "select_aspect_ratio": "Seleccionar relación de aspecto",
+      "output_format": "Formato de salida",
+      "select_output_format": "Seleccionar formato de salida",
+      "google_search": "Google Search",
+      "google_search_hint": "Solo para GPT Image 2 (+2 créditos)",
+      "prompt": "Prompt",
+      "prompt_placeholder": "Describe los detalles de la imagen, como color, forma, textura, etc.",
+      "reference_image": "Imagen de referencia",
+      "reference_image_placeholder": "Sube imágenes de referencia, se admiten varias",
+      "some_images_failed_to_upload": "Algunas imágenes no se pudieron subir. Elimínalas y vuelve a subirlas.",
+      "prompt_too_long": "El prompt es demasiado largo, elimina parte del contenido"
+    },
+    "generate": "Generar Imágenes",
+    "checking_account": "Comprobando cuenta...",
+    "loading": "Cargando...",
+    "generating": "Generando...",
+    "sign_in_to_generate": "Inicia sesión para generar imágenes",
+    "credits_cost": "Costo: {credits} créditos",
+    "credits_remaining": "Créditos restantes: {credits}",
+    "buy_credits": "Comprar créditos",
+    "progress": "Progreso",
+    "generated_images": "Vista previa de la imagen",
+    "ready_to_generate": "Listo para generar",
+    "ready_for_generating": "Listo para generar",
+    "no_images_generated": "No se generaron imágenes"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 Generador de Imagenes IA de ChatGPT Gratis",
+    "description": "GPT Image 2 es un generador de imágenes con IA para imágenes realistas, texto nítido, capturas de UI, mockups y edición rápida.",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+  },
+  "actions": {
+    "continue": "Continuar"
+  },
+  "sign": {
+    "sign_in_title": "Iniciar Sesión",
+    "sign_in_description": "Inicia sesión en tu cuenta",
+    "sign_in_reward_hint": "Inicia sesión para reclamar créditos gratis",
+    "entry_cta_title": "Empieza Gratis",
+    "entry_modal_title": "Comenzar",
+    "entry_modal_description": "Inicia sesión o crea una cuenta para empezar gratis.",
+    "sign_up_title": "Registrarse",
+    "sign_up_description": "Crear una cuenta",
+    "email_title": "Correo Electrónico",
+    "email_placeholder": "Ingresa tu correo electrónico aquí",
+    "password_title": "Contraseña",
+    "password_placeholder": "Ingresa tu contraseña aquí",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "or": "O",
+    "continue": "Continuar",
+    "no_account": "¿No tienes una cuenta?",
+    "already_have_account": "¿Ya tienes una cuenta?",
+    "email_sign_in": "Iniciar sesión con correo electrónico",
+    "google_sign_in_title": "Iniciar sesión con Google",
+    "github_sign_in_title": "Iniciar sesión con GitHub",
+    "close_title": "Cerrar",
+    "cancel_title": "Cancelar",
+    "sign_out_title": "Cerrar Sesión",
+    "billing_title": "Facturación",
+    "name_title": "Nombre",
+    "name_placeholder": "Ingresa tu nombre aquí",
+    "email_verification_hint": "Usa una dirección de correo electrónico a la que puedas acceder. Debes verificar tu correo después de registrarte.",
+    "admin_title": "Sistema de Administración",
+    "credits_title": "Créditos: {credits}",
+    "verify_email_sent": "Correo de verificación enviado. Por favor revisa tu bandeja de entrada.",
+    "verify_email_required": "Por favor verifica tu dirección de correo electrónico antes de iniciar sesión.",
+    "resend_verification": "Reenviar correo de verificación",
+    "resend_verification_sent": "Correo de verificación reenviado. Por favor revisa tu bandeja de entrada.",
+    "verify_email_page_title": "Revisa tu correo",
+    "verify_email_page_description": "Para continuar, haz clic en el enlace enviado a",
+    "verify_email_continue": "Continuar",
+    "verify_email_tip": "Después de verificar, haz clic en \"Continuar\".",
+    "verify_email_not_verified_yet": "Aún no verificado. Por favor haz clic en el enlace en tu correo primero.",
+    "verify_email_account_mismatch": "Sesión iniciada como {current}. Esta página está esperando {expected}.",
+    "resend_verification_countdown": "Reenviar correo de verificación ({seconds}s)",
+    "resend_verification_wait": "Por favor espera {seconds}s antes de reenviar.",
+    "back_to_sign_in": "Volver a Iniciar Sesión"
+  },
+  "payment": {
+    "choose_payment_method": "Elige el Método de Pago",
+    "choose_payment_method_description": "",
+    "cancel_title": "Cancelar"
+  },
+  "locale_detector": {
+    "title": "Detectamos que el idioma de tu navegador es {locale}. ¿Cambiar a él?",
+    "switch_to": "Cambiar a {locale}"
+  }
+}

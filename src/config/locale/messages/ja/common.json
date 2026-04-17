@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 ChatGPT AI画像生成ツール 無料オンライン",
+    "description": "GPT Image 2 は ChatGPT Image モデルをベースにした AI画像ジェネレーターで、リアルな画像生成、正確な文字表現、UIスクリーンショット、柔軟なプロンプト制御に対応します。",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+  },
+  "actions": {
+    "continue": "続ける"
+  },
+  "sign": {
+    "sign_in_title": "ログイン",
+    "sign_in_description": "アカウントにログイン",
+    "sign_in_reward_hint": "ログインして無料クレジットを受け取る",
+    "entry_cta_title": "無料で始める",
+    "entry_modal_title": "使い始める",
+    "entry_modal_description": "ログインまたはアカウントを作成して、無料で始めましょう。",
+    "sign_up_title": "新規登録",
+    "sign_up_description": "アカウントを作成",
+    "email_title": "メールアドレス",
+    "email_placeholder": "メールアドレスを入力してください",
+    "password_title": "パスワード",
+    "password_placeholder": "パスワードを入力してください",
+    "forgot_password": "パスワードをお忘れですか？",
+    "or": "または",
+    "continue": "続ける",
+    "no_account": "アカウントをお持ちでないですか？",
+    "already_have_account": "既にアカウントをお持ちですか？",
+    "email_sign_in": "メールアドレスでログイン",
+    "google_sign_in_title": "Google でログイン",
+    "github_sign_in_title": "GitHub でログイン",
+    "close_title": "閉じる",
+    "cancel_title": "キャンセル",
+    "sign_out_title": "ログアウト",
+    "billing_title": "お支払い",
+    "name_title": "お名前",
+    "name_placeholder": "お名前を入力してください",
+    "email_verification_hint": "アクセス可能なメールアドレスをご利用ください。登録後、メールアドレスの確認が必要です。",
+    "admin_title": "管理システム",
+    "credits_title": "クレジット: {credits}",
+    "verify_email_sent": "確認メールを送信しました。受信トレイをご確認ください。",
+    "verify_email_required": "ログインする前にメールアドレスを確認してください。",
+    "resend_verification": "確認メールを再送信",
+    "resend_verification_sent": "確認メールを再送信しました。受信トレイをご確認ください。",
+    "verify_email_page_title": "メールを確認してください",
+    "verify_email_page_description": "続けるには、以下に送信されたリンクをクリックしてください",
+    "verify_email_continue": "続ける",
+    "verify_email_tip": "確認後、「続ける」をクリックしてください。",
+    "verify_email_not_verified_yet": "まだ確認されていません。最初にメール内のリンクをクリックしてください。",
+    "verify_email_account_mismatch": "{current} としてログイン中です。このページは {expected} を待っています。",
+    "resend_verification_countdown": "確認メールを再送信 ({seconds}秒)",
+    "resend_verification_wait": "再送信する前に{seconds}秒お待ちください。",
+    "back_to_sign_in": "ログインに戻る"
+  },
+  "payment": {
+    "choose_payment_method": "お支払い方法を選択",
+    "choose_payment_method_description": "",
+    "cancel_title": "キャンセル"
+  },
+  "locale_detector": {
+    "title": "ブラウザの言語が{locale}であることを検出しました。切り替えますか？",
+    "switch_to": "{locale}に切り替え"
+  }
+}

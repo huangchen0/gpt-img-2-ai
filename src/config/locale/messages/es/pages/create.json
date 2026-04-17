@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "Crea Videos e Imágenes con IA | ChatGPT Image 2 Generator",
+    "description": "Crea videos e imágenes con IA en un espacio de trabajo de ChatGPT Image 2 Generator. Cambia entre los modos de video e imagen sin salir de la página de creación."
+  },
+  "page": {
+    "title": "Crea videos o imágenes con IA",
+    "description": "Alterna entre la creación de video e imagen con IA desde un espacio de trabajo de ChatGPT Image 2 Generator."
+  },
+  "generator_switcher": {
+    "video": "Video AI",
+    "image": "Imagen IA",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "Mejor para referencias multimodales, control de cámara y resultados cinematográficos.",
+    "kling_description": "Mejor para narrativa multi-shot, consistencia de elementos y audio nativo.",
+    "sr_only_video": "Generador de Video AI",
+    "sr_only_image": "Generador de Imagen IA",
+    "sr_only_kling": "Generador de Video Kling 3"
+  },
+  "generator": {
+    "title": "Generador de Imágenes IA",
+    "description": "Genera o edita imágenes a partir de descripciones de texto e imágenes de referencia.",
+    "tabs": {
+      "text-to-image": "Texto a Imagen",
+      "image-to-image": "Imagen a Imagen"
+    },
+    "form": {
+      "provider": "Proveedor",
+      "model": "Modelo",
+      "select_provider": "Seleccionar Proveedor",
+      "select_model": "Seleccionar Modelo",
+      "prompt": "Descripción",
+      "prompt_placeholder": "Describe los detalles de la imagen, como color, forma, textura, etc.",
+      "reference_image": "Imagen de Referencia",
+      "reference_image_placeholder": "Sube imágenes de referencia, admite varias imágenes",
+      "some_images_failed_to_upload": "Algunas imágenes no se pudieron cargar. Elimínalas y vuelve a subirlas.",
+      "prompt_too_long": "La descripción es demasiado larga, elimina parte del contenido"
+    },
+    "generate": "Generar Imágenes",
+    "checking_account": "Verificando Cuenta...",
+    "loading": "Cargando...",
+    "generating": "Generando...",
+    "sign_in_to_generate": "Inicia sesión para generar imágenes",
+    "credits_cost": "Cuesta {credits} créditos",
+    "credits_remaining": "Quedan {credits} créditos",
+    "buy_credits": "Comprar Créditos",
+    "progress": "Progreso",
+    "generated_images": "Imágenes Generadas",
+    "ready_to_generate": "Listo para Generar",
+    "ready_for_generating": "Listo para Generar",
+    "no_images_generated": "No se han generado imágenes"
+  }
+}

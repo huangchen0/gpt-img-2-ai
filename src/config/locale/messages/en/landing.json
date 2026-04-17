@@ -1,0 +1,633 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 ChatGPT AI Image Generator Free Online",
+    "description": "GPT Image 2 is an AI image generator for photoreal images, text rendering, UI screenshots, mockups, and fast image editing.",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+  },
+  "header": {
+    "id": "header",
+    "brand": {
+      "title": "GPT Image 2",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "GPT Image 2"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "GPT Image 2",
+          "url": "/models/gpt-image-2",
+          "icon": "Image"
+        },
+        {
+          "title": "AI Video",
+          "url": "/ai-video",
+          "icon": "Video"
+        },
+        {
+          "title": "Pricing",
+          "url": "/pricing",
+          "icon": "DollarSign"
+        },
+        {
+          "title": "Showcases",
+          "url": "/showcases",
+          "icon": "Box"
+        },
+        {
+          "title": "Blog",
+          "url": "/blog",
+          "icon": "BookOpen"
+        }
+      ]
+    },
+    "buttons": [],
+    "user_nav": {
+      "show_name": true,
+      "show_credits": true,
+      "show_sign_out": true,
+      "items": [
+        {
+          "title": "Billing",
+          "url": "/settings/billing",
+          "icon": "CreditCard"
+        },
+        {
+          "title": "Activity",
+          "url": "/activity",
+          "icon": "Activity"
+        }
+      ]
+    },
+    "show_sign": true,
+    "show_theme": true,
+    "show_locale": true,
+    "topbanner": {
+      "id": "limited-time-offer-2026-04-15",
+      "image": {
+        "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
+        "alt": "Limited-time sale"
+      },
+      "text": "Enjoy Limited-Time <strong>50%</strong> OFF!",
+      "closeLabel": "Close banner",
+      "buttonText": "View Pricing",
+      "href": "/pricing",
+      "target": "_self",
+      "dismissedExpiryDays": 7
+    }
+  },
+  "hero": {
+    "id": "hero",
+    "title": "GPT Image 2 — ChatGPT AI Image Generator",
+    "description": "Create photoreal images, polished UI screenshots, product mockups, and editable visual concepts with GPT Image 2. Built on the ChatGPT Image model for strong prompt following, clear in-image text, and fast iteration.",
+    "buttons": [
+      {
+        "title": "Try GPT Image 2",
+        "icon": "Image",
+        "url": "/models/gpt-image-2",
+        "target": "_self",
+        "variant": "default"
+      },
+      {
+        "title": "Try AI Video",
+        "icon": "Video",
+        "url": "/ai-video",
+        "target": "_self",
+        "variant": "outline"
+      }
+    ],
+    "show_avatars": false,
+    "avatars_tip": "Built for creators exploring GPT Image 2 preview workflows",
+    "show_award": false,
+    "background_image": {
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "alt": "GPT Image 2 ChatGPT AI Image Generator"
+    }
+  },
+  "showcases-flow": {
+    "id": "showcases",
+    "title": "GPT Image 2 Showcases",
+    "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+    "items": [
+      {
+        "title": "GPT Image 2 Showcase 1",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/3d-case-presentation.webp",
+          "alt": "GPT Image 2 Showcase 1"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 2",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/pro-ai-img.webp",
+          "alt": "GPT Image 2 Showcase 2"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 3",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/fighting-actions.webp",
+          "alt": "GPT Image 2 Showcase 3"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 4",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/sticker-maker.webp",
+          "alt": "GPT Image 2 Showcase 4"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 5",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/math-solution.webp",
+          "alt": "GPT Image 2 Showcase 5"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 6",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.webp",
+          "alt": "GPT Image 2 Showcase 6"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 7",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/clothing-removal-tryon.webp",
+          "alt": "GPT Image 2 Showcase 7"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 8",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/anime-figure-1.webp",
+          "alt": "GPT Image 2 Showcase 8"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 9",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/graffiti-action.webp",
+          "alt": "GPT Image 2 Showcase 9"
+        }
+      },
+      {
+        "title": "GPT Image 2 Showcase 10",
+        "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/face-swap.webp",
+          "alt": "GPT Image 2 Showcase 10"
+        }
+      }
+    ]
+  },
+  "logos": {
+    "hidden": true
+  },
+  "introduce": {
+    "id": "introduce",
+    "title": "What Is GPT Image 2?",
+    "description": "GPT Image 2 is an AI image generator based on the ChatGPT Image model. It is designed for photoreal image creation, reliable text rendering, realistic screenshot generation, image editing, and reference-driven visual ideation.",
+    "items": [
+      {
+        "title": "Text Rendering That Actually Works",
+        "description": "Generate posters, menus, labels, ad creatives, and social graphics with clearer, more reliable in-image text than older image workflows.",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "Realistic UI & Screenshot Generation",
+        "description": "Create believable app screens, dashboards, landing page mockups, and product walkthrough visuals for design, docs, and marketing.",
+        "icon": "RiImageLine"
+      },
+      {
+        "title": "Photoreal Image Quality",
+        "description": "Produce portraits, lifestyle scenes, product shots, and branded visuals with stronger lighting, materials, and overall coherence.",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "Natural Language Image Editing",
+        "description": "Refine images with conversational instructions to change copy, layout, styling, objects, or composition without rebuilding from scratch.",
+        "icon": "RiSparklingLine"
+      }
+    ]
+  },
+  "benefits": {
+    "id": "benefits",
+    "title": "Why Create with GPT Image 2?",
+    "description": "GPT Image 2 helps teams go from prompt to usable visual assets faster with strong instruction following, practical text rendering, and flexible image generation workflows.",
+    "items": [
+      {
+        "title": "Faster Creative Iteration",
+        "description": "Move from idea to polished image quickly, then keep refining prompts, layout, and detail without slowing down.",
+        "icon": "RiRocketLine"
+      },
+      {
+        "title": "Built for Real-World Assets",
+        "description": "Generate marketing graphics, product visuals, UI previews, slides, and concept art that are useful beyond inspiration.",
+        "icon": "RiUserSmileLine"
+      },
+      {
+        "title": "Better Prompt Control",
+        "description": "Handle multi-part prompts more reliably for composition, copy, color, and subject details.",
+        "icon": "RiTimeLine"
+      },
+      {
+        "title": "One Workflow for Create and Edit",
+        "description": "Start from text or references, generate new images, then revise them with natural language instructions in the same flow.",
+        "icon": "RiMoneyDollarCircleLine"
+      }
+    ]
+  },
+  "usage": {
+    "hidden": true
+  },
+  "how-to-techniques": {
+    "id": "how-to-techniques",
+    "block": "how-to-techniques",
+    "tip": "How to efficiently use GPT Image 2 in real creative workflows",
+    "title": "How to Use GPT Image 2 Techniques",
+    "description": "See how GPT Image 2 can handle practical image generation and editing tasks for commerce, design, and content work without switching between multiple tools.",
+    "items": [
+      {
+        "title": "GPT Image 2 E-commerce Photo Editor",
+        "description": "Use GPT Image 2 to refine product photos with cleaner lighting, sharper materials, and studio-style polish so rough source shots become stronger assets for listings, ads, and storefronts.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.png",
+          "alt": "GPT Image 2 e-commerce photo editing example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Virtual Try-On Assistant",
+        "description": "Create virtual outfit previews with GPT Image 2 by blending garment references and subject photos into cleaner try-on visuals for fashion concepts, styling tests, and shopping flows.",
+        "image_position": "left",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/clothing-removal-tryon.jpg",
+          "alt": "GPT Image 2 virtual try-on example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Anime Avatar Generator",
+        "description": "Turn portraits and character ideas into stylized anime-inspired figures with GPT Image 2, making it easier to generate collectible concepts, profile art, and fandom-ready visuals.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/anime-figure-1.png",
+          "alt": "GPT Image 2 anime avatar example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Sketch-to-Edit Tool",
+        "description": "Use GPT Image 2 to redraw, replace, or enhance specific parts of an image with rough visual guidance, making scene edits feel faster when you want targeted changes instead of a full remake.",
+        "image_position": "left",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/graffiti-action.png",
+          "alt": "GPT Image 2 sketch-to-edit example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Background Remover & Replacer",
+        "description": "Cut out subjects and swap environments with GPT Image 2 to produce cleaner portraits, sports edits, creator assets, and marketing visuals without a manual masking workflow.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/element-replacement.png",
+          "alt": "GPT Image 2 background replacement example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Face Swap Studio",
+        "description": "Blend identity references and preserve natural expressions with GPT Image 2 for playful face swaps, character experiments, and stylized social content that still feels believable.",
+        "image_position": "left",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/face-swap.png",
+          "alt": "GPT Image 2 face swap example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 Meme & Sticker Maker",
+        "description": "Generate reaction stickers, meme panels, and character packs with GPT Image 2 by turning subject references into cleaner cutout-style graphics for chats, communities, and social posts.",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ai-meme-sticker-maker.jpeg",
+          "alt": "GPT Image 2 meme and sticker example"
+        },
+        "button": {
+          "title": "Try It Now",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      }
+    ]
+  },
+  "features": {
+    "id": "features",
+    "title": "GPT Image 2 Features",
+    "description": "Explore the core image generation tools behind GPT Image 2, from prompt-based creation and screenshot-style outputs to multi-image remixing and iterative editing.",
+    "items": [
+      {
+        "title": "ChatGPT Image Model Generation",
+        "description": "Describe what you want in natural language and GPT Image 2 generates detailed visuals with strong instruction following, layout awareness, and realistic styling.",
+        "icon": "RiMagicLine"
+      },
+      {
+        "title": "Reliable Text in Images",
+        "description": "Create banners, menus, interfaces, packaging, and promotional graphics with much more usable text rendering for practical design work.",
+        "icon": "RiFileTextLine"
+      },
+      {
+        "title": "Screenshot & Mockup Creation",
+        "description": "Generate browser windows, mobile screens, SaaS dashboards, and launch visuals that communicate product ideas clearly.",
+        "icon": "RiLayoutLine"
+      },
+      {
+        "title": "Multi-Image Remix",
+        "description": "Blend ideas from reference images to preserve style, combine objects, or explore new compositions without restarting your concept work.",
+        "icon": "Layers"
+      },
+      {
+        "title": "Aspect Ratio & Composition Control",
+        "description": "Choose formats like 1:1, 16:9, and 4:5 for social posts, hero sections, ads, and product pages while keeping compositions intentional.",
+        "icon": "RiAspectRatioLine"
+      },
+      {
+        "title": "GPT Image 2 API Readiness",
+        "description": "Build landing pages and creative workflows that are ready for GPT Image 2 API updates and broader rollout without rewriting your visual pipeline.",
+        "icon": "RiFlashlightLine"
+      }
+    ]
+  },
+  "stats": {
+    "id": "stats",
+    "title": "Made for Image Work",
+    "description": "A practical toolkit for fast, flexible AI image generation and editing.",
+    "items": [
+      {
+        "title": "Text to Image",
+        "description": "Turn prompts into high-quality visuals"
+      },
+      {
+        "title": "Image Editing",
+        "description": "Revise existing images with natural language"
+      },
+      {
+        "title": "UI Mockups",
+        "description": "Generate realistic product and interface concepts"
+      },
+      {
+        "title": "Fast Workflow",
+        "description": "Iterate quickly from concept to final asset"
+      }
+    ]
+  },
+  "testimonials": {
+    "id": "testimonials",
+    "title": "Real User Reviews",
+    "description": "See how creators use GPT Image 2 for visual design, marketing, product mockups, and branded content.",
+    "items": [
+      {
+        "name": "Sarah Chen",
+        "role": "Social Media Designer",
+        "quote": "GPT Image 2 makes it much easier to create campaign visuals with usable text. I can move from idea to final post graphics in minutes.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
+          "alt": "Sarah Chen"
+        }
+      },
+      {
+        "name": "Michael Rodriguez",
+        "role": "Growth Marketer",
+        "quote": "We use GPT Image 2 for landing page mockups, ad concepts, and product marketing assets. The screenshot quality is especially useful.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
+          "alt": "Michael Rodriguez"
+        }
+      },
+      {
+        "name": "David Kim",
+        "role": "Product Designer",
+        "quote": "The UI generations are strong enough to communicate flows before we open Figma. It is a fast way to explore product ideas with the team.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
+          "alt": "David Kim"
+        }
+      },
+      {
+        "name": "Emma Thompson",
+        "role": "Creative Director",
+        "quote": "Photoreal outputs feel noticeably more polished, especially for lighting, materials, and composition. It is great for early visual direction.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
+          "alt": "Emma Thompson"
+        }
+      },
+      {
+        "name": "James Wilson",
+        "role": "E-commerce Founder",
+        "quote": "Product mockups and packaging ideas come together much faster now. GPT Image 2 helps us test creative angles before production.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
+          "alt": "James Wilson"
+        }
+      },
+      {
+        "name": "Lisa Anderson",
+        "role": "Brand Designer",
+        "quote": "Natural language edits save a huge amount of time. Small copy or styling changes no longer require starting the image over.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
+          "alt": "Lisa Anderson"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "id": "faq",
+    "title": "Frequently Asked Questions About GPT Image 2",
+    "items": [
+      {
+        "question": "What is GPT Image 2?",
+        "answer": "GPT Image 2 is an AI image generator based on the ChatGPT Image model, focused on photoreal images, better text rendering, UI screenshots, and more reliable prompt following."
+      },
+      {
+        "question": "Can I use GPT Image 2 for free?",
+        "answer": "You can start with the access and credits offered on this site. If pricing or credit limits apply, check the pricing page for the current plan details."
+      },
+      {
+        "question": "What can I create with GPT Image 2?",
+        "answer": "You can create product mockups, social graphics, UI screenshots, posters, concept art, branded visuals, and edited versions of existing images from natural language prompts."
+      },
+      {
+        "question": "What makes GPT Image 2 different from older image models?",
+        "answer": "GPT Image 2 appears to improve text rendering, screenshot realism, prompt following, and photoreal output quality, making it more practical for real production assets."
+      },
+      {
+        "question": "Is there a GPT Image 2 API?",
+        "answer": "GPT Image 2 API availability and rollout can change over time. This site is designed to support GPT Image 2 style workflows while you track official API updates and access options."
+      },
+      {
+        "question": "What inputs does GPT Image 2 support?",
+        "answer": "GPT Image 2 workflows can start from text prompts and reference images, then continue through iterative image editing and variation generation."
+      },
+      {
+        "question": "Can I use GPT Image 2 for commercial work?",
+        "answer": "GPT Image 2 can support marketing, product, brand, and creative image work. Make sure you have rights to uploaded assets and review your plan terms for commercial usage details."
+      }
+    ]
+  },
+  "cta": {
+    "id": "cta",
+    "title": "Start Creating with AI Image and AI Video",
+    "description": "Explore image generation and video generation as two dedicated workflows, each ready to grow with more models over time.",
+    "buttons": [
+      {
+        "title": "Use AI Image",
+        "url": "/ai-image",
+        "target": "_self",
+        "icon": "Image"
+      },
+      {
+        "title": "Use AI Video",
+        "url": "/ai-video",
+        "target": "_self",
+        "icon": "Video"
+      }
+    ],
+    "className": "bg-muted"
+  },
+  "subscribe": {
+    "hidden": true
+  },
+  "footer": {
+    "id": "footer",
+    "brand": {
+      "title": "GPT Image 2",
+      "description": "GPT Image 2 is a ChatGPT Image model based AI image generator for text-to-image creation, editing, UI mockups, and product visuals.",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "GPT Image 2 ChatGPT AI Image Generator"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "About",
+          "children": [
+            {
+              "title": "About Us",
+              "url": "/about",
+              "target": "_self"
+            },
+            {
+              "title": "AI Image",
+              "url": "/ai-image",
+              "target": "_self"
+            },
+            {
+              "title": "AI Video",
+              "url": "/ai-video",
+              "target": "_self"
+            },
+            {
+              "title": "Features",
+              "url": "/#features",
+              "target": "_self"
+            },
+            {
+              "title": "Showcases",
+              "url": "/#showcases",
+              "target": "_self"
+            },
+            {
+              "title": "FAQ",
+              "url": "/#faq",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    "social": {
+      "items": [
+        {
+          "title": "Email",
+          "icon": "Mail",
+          "url": "mailto:support@gptimg2.art",
+          "target": "_self"
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "Privacy Policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "title": "Terms of Service",
+          "url": "/terms-of-service"
+        },
+        {
+          "title": "Partners",
+          "url": "/partners"
+        }
+      ]
+    },
+    "show_theme": true,
+    "show_locale": true
+  },
+  "generator_switcher": {
+    "title": "Create With GPT Image 2",
+    "subtitle": "Generate realistic AI images with GPT Image 2 right from the homepage.",
+    "video": "AI Video",
+    "image": "AI Image",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "Best for multimodal references, stronger camera direction, and cinematic output.",
+    "kling_description": "Best for multi-shot storytelling, element consistency, and native audio.",
+    "sr_only_video": "GPT Image 2 ChatGPT AI Image Generator",
+    "sr_only_image": "GPT Image 2 Image Editing",
+    "sr_only_kling": "Kling 3 Video Generator"
+  }
+}

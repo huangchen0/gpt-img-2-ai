@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "title": "AI 图片生成器",
+    "description": "使用 AI 模型生成图片，支持文本到图片和图片到图片。"
+  },
+  "page": {
+    "title": "AI 图片生成器",
+    "description": "使用 AI 模型生成图片，支持文本到图片和图片到图片。"
+  },
+  "generator": {
+    "title": "图片生成器",
+    "description": "使用 AI 模型生成图片，支持文本到图片和图片到图片。",
+    "tabs": {
+      "text-to-image": "文生图",
+      "image-to-image": "图生图"
+    },
+    "form": {
+      "provider": "服务商",
+      "model": "模型",
+      "select_provider": "选择服务商",
+      "select_model": "选择模型",
+      "model_hint": "GPT Image 2：更快、更划算，并支持 Google Search。GPT Image 2 Pro：更适合生产级画质和细节表现。",
+      "resolution": "分辨率",
+      "select_resolution": "选择分辨率",
+      "aspect_ratio": "画面比例",
+      "select_aspect_ratio": "选择画面比例",
+      "output_format": "输出格式",
+      "select_output_format": "选择输出格式",
+      "google_search": "Google 搜索增强",
+      "google_search_hint": "仅 GPT Image 2 支持（+2 积分）",
+      "prompt": "提示词",
+      "prompt_placeholder": "描述图片的细节，如颜色、形状、纹理等",
+      "reference_image": "参考图片",
+      "reference_image_placeholder": "上传参考图片，支持多张",
+      "some_images_failed_to_upload": "一些图片上传失败，请删除它们并重新上传",
+      "prompt_too_long": "提示词太长，请删除一些内容"
+    },
+    "generate": "生成图片",
+    "checking_account": "检查账户...",
+    "loading": "加载中...",
+    "generating": "生成中...",
+    "sign_in_to_generate": "登录生成图片",
+    "credits_cost": "消耗 {credits} 积分",
+    "credits_remaining": "剩余 {credits} 积分",
+    "buy_credits": "购买积分",
+    "queue": {
+      "title": "当前生成请求较多",
+      "description": "普通用户需要排队等待，会员可立即开始生成并优先渲染。",
+      "task_label": "图片生成",
+      "remaining_label": "预计等待",
+      "upgrade": "跳过队列，立即生成",
+      "cancel": "取消排队",
+      "retry": "立即重试",
+      "submitting": "正在为你启动真实生成...",
+      "submit_failed": "刚刚没能成功启动生成，你可以直接重试，不会丢掉排队资格。",
+      "button_waiting": "排队中，会员可立即生成",
+      "membership_checking": "正在检查会员状态，请稍后再试。"
+    },
+    "credit_fallback": {
+      "title": "当前模式积分不足",
+      "description": "当前生成需要 {requested} 积分，你的余额为 {remaining} 积分。你可以立即切换到低积分模式继续生成，或补充积分后继续使用当前模式。",
+      "current_mode": "当前模式",
+      "remaining_credits": "当前余额",
+      "switch": "切换并继续",
+      "buy_credits": "获取更多积分",
+      "close": "暂不切换",
+      "standard_badge": "Standard",
+      "image_standard_title": "GPT Image 2 · 1K",
+      "image_standard_description": "更轻量，适合快速出图。"
+    },
+    "progress": "进度",
+    "generated_images": "图片预览",
+    "ready_to_generate": "准备生成",
+    "no_images_generated": "没有生成图片",
+    "ready_for_generating": "准备生成"
+  }
+}

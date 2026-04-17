@@ -1,0 +1,247 @@
+{
+  "metadata": {
+    "title": "해피홀스 프롬프트와 쇼케이스",
+    "description": "해피홀스로 만든 대표 AI 영상 생성 사례와 프롬프트를 확인해보세요."
+  },
+  "ui": {
+    "create_similar": "비슷하게 만들기",
+    "loading": "불러오는 중...",
+    "no_showcases": "아직 쇼케이스가 없습니다",
+    "load_more": "더 보기"
+  },
+  "showcases-flow": {
+    "id": "showcases",
+    "sr_only_title": "쇼케이스",
+    "title": "해피홀스 프롬프트",
+    "description": "해피홀스로 만든 대표 편집 및 생성 사례입니다.",
+    "items": [
+      {
+        "title": "세로형 어안 셀피",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/1.jpeg",
+          "alt": "해피홀스 쇼케이스 1"
+        },
+        "prompt": "vertical-fisheye-selfie"
+      },
+      {
+        "title": "3D 디지털 휴먼 만화 스타일",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/2.jpeg",
+          "alt": "해피홀스 쇼케이스 2"
+        },
+        "prompt": "3d-digital-human-comics"
+      },
+      {
+        "title": "시네마틱 인물 장면",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/3.jpeg",
+          "alt": "해피홀스 쇼케이스 3"
+        }
+      },
+      {
+        "title": "제품 무드 영상",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/4.jpeg",
+          "alt": "해피홀스 쇼케이스 4"
+        }
+      },
+      {
+        "title": "SNS 캠페인 컷",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/5.jpeg",
+          "alt": "해피홀스 쇼케이스 5"
+        }
+      },
+      {
+        "title": "캐릭터 모션 테스트",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/6.jpeg",
+          "alt": "해피홀스 쇼케이스 6"
+        }
+      },
+      {
+        "title": "브랜드 비주얼 실험",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/7.jpeg",
+          "alt": "해피홀스 쇼케이스 7"
+        }
+      },
+      {
+        "title": "스타일 변환 예시",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/8.jpeg",
+          "alt": "해피홀스 쇼케이스 8"
+        }
+      },
+      {
+        "title": "비주얼 스토리보드",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/9.jpeg",
+          "alt": "해피홀스 쇼케이스 9"
+        }
+      },
+      {
+        "title": "크리에이티브 영상 샘플",
+        "description": "해피홀스 쇼케이스",
+        "image": {
+          "src": "/imgs/showcases/10.jpeg",
+          "alt": "해피홀스 쇼케이스 10"
+        }
+      }
+    ]
+  },
+  "page": {
+    "title": "쇼케이스",
+    "sections": {
+      "showcases": {
+        "id": "showcases",
+        "title": "해피홀스로 만든 AI 프로젝트",
+        "description": "빠르게 만들고 바로 테스트할 수 있는 제작 사례를 살펴보세요.",
+        "groups": [
+          {
+            "name": "all",
+            "title": "전체"
+          },
+          {
+            "name": "ai-chatbot",
+            "title": "AI 챗봇"
+          },
+          {
+            "name": "ai-image",
+            "title": "AI 이미지"
+          },
+          {
+            "name": "ai-video",
+            "title": "AI 비디오"
+          },
+          {
+            "name": "ai-audio",
+            "title": "AI 오디오"
+          },
+          {
+            "name": "ai-music",
+            "title": "AI 음악"
+          },
+          {
+            "name": "ai-coding",
+            "title": "AI 코딩"
+          },
+          {
+            "name": "other",
+            "title": "기타"
+          }
+        ],
+        "items": [
+          {
+            "title": "ThinkAny",
+            "description": "AI 검색 엔진",
+            "url": "https://thinkany.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/7.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-chatbot"
+          },
+          {
+            "title": "HeyBeauty",
+            "description": "AI 가상 피팅",
+            "url": "https://heybeauty.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/5.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "AI Wallpaper",
+            "description": "AI 배경화면 생성기",
+            "url": "https://aiwallpaper.shop",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/1.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "AI Cover",
+            "description": "AI 커버 이미지 생성기",
+            "url": "https://aicover.design",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/2.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-image"
+          },
+          {
+            "title": "GPTs Works",
+            "description": "GPT 디렉터리",
+            "url": "https://gpts.works",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/3.png",
+              "alt": "쇼케이스"
+            },
+            "group": "other"
+          },
+          {
+            "title": "Melodisco",
+            "description": "AI 음악 플레이어",
+            "url": "https://melodis.co",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/4.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-music"
+          },
+          {
+            "title": "Pagen",
+            "description": "AI 랜딩 페이지 생성기",
+            "url": "https://pagen.so",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/6.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-coding"
+          },
+          {
+            "title": "SoraFM",
+            "description": "AI 비디오 생성기",
+            "url": "https://sorafm.trys.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/8.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-video"
+          },
+          {
+            "title": "PodLM",
+            "description": "AI 팟캐스트 생성기",
+            "url": "https://podlm.ai",
+            "target": "_blank",
+            "image": {
+              "src": "/imgs/cases/9.png",
+              "alt": "쇼케이스"
+            },
+            "group": "ai-audio"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 图片生成器 | 职业头像、产品图、图生图",
+    "description": "用 GPT Image 2 生成职业头像、产品图、室内改造图和参考图改图。查看 GPT Image 2、GPT Image 2 Pro、积分消耗和提示词案例。",
+    "keywords": "GPT Image 2,gpt image 2 图片生成器,gpt image 2 提示词,gpt image 2 图生图,gpt image 2 积分,gpt image 2 价格,gpt image 2 职业头像,gpt image 2 产品图"
+  },
+  "page": {
+    "title": "GPT Image 2 图片生成器",
+    "description": "用 GPT Image 2 生成职业头像、产品图、室内改造图和风格化图片，支持直接输入提示词或上传参考图。",
+    "heroTitle": "GPT Image 2 图片生成器",
+    "heroDescription": "适合职业头像、电商产品图、室内改造预览和前后对比改图。你可以直接输入提示词，也可以上传参考图开始生成。",
+    "benefitsTitle": "GPT Image 2 常见用法",
+    "benefitsDescription": "如果你想要更干净的结果、更快的改图节奏，以及更容易直接拿来用的图片，可以先从这些方向开始。",
+    "benefitsItems": [
+      {
+        "title": "需要职业头像的创作者和团队",
+        "description": "适合 LinkedIn 头像、创作者头像、演讲者资料照和品牌型个人形象图，人物身份更容易保持稳定。",
+        "imageAlt": "GPT Image 2 职业头像案例"
+      },
+      {
+        "title": "需要产品素材的卖家和品牌",
+        "description": "适合白底电商图、产品精修图和海报感商品视觉，不需要每次都从零搭一整套素材。",
+        "imageAlt": "GPT Image 2 产品图案例"
+      },
+      {
+        "title": "依赖参考图反复修改的团队",
+        "description": "适合室内改造、贴纸风格化、概念改稿和参考图重绘，想让新图尽量贴近原图时会更好用。",
+        "imageAlt": "GPT Image 2 改图案例"
+      }
+    ],
+    "usageLabel": "常见任务",
+    "usageTitle": "你可以用 GPT Image 2 做什么",
+    "usageDescription": "很多用户会从这些任务开始，因为结果更容易继续修改，也更容易直接使用。",
+    "usageItems": [
+      {
+        "title": "批量职业头像",
+        "description": "适合商务头像、创作者头像和团队头像，连续生成时更容易保持统一观感。"
+      },
+      {
+        "title": "参考图产品图生成",
+        "description": "上传参考图后，可以更稳定地保留产品轮廓、陈列方式和视觉方向，再继续优化成片。"
+      },
+      {
+        "title": "室内改造和概念改稿",
+        "description": "适合快速测试空间改造、前后对比图和视觉方向，不需要每次都从零开始重做。"
+      },
+      {
+        "title": "营销素材快速出图",
+        "description": "适合活动图、社媒配图和落地页视觉，在需要快速出多个版本时更高效。"
+      }
+    ],
+    "featuresTitle": "为什么大家会继续用 GPT Image 2",
+    "featuresDescription": "下面这些能力，通常也是用户愿意继续生成、继续改图、继续测试不同版本的原因。",
+    "featuresItems": [
+      {
+        "title": "GPT Image 2 图生图",
+        "description": "如果你想让人物、产品或构图尽量贴近原图，图生图会更好用。"
+      },
+      {
+        "title": "GPT Image 2 提示词案例",
+        "description": "可以直接从可用案例开始改，不需要每次都从空白状态试错。"
+      },
+      {
+        "title": "GPT Image 2 职业头像",
+        "description": "适合 LinkedIn 头像、创作者资料照、团队页头像和商务场景个人品牌图。"
+      },
+      {
+        "title": "GPT Image 2 产品图提示词",
+        "description": "适合电商白底图、产品精修图和海报感商品视觉。"
+      },
+      {
+        "title": "GPT Image 2 + Google Search",
+        "description": "Google Search 仅 GPT Image 2 支持，每次额外增加 2 积分，适合想补充更多上下文时使用。"
+      },
+      {
+        "title": "GPT Image 2 积分与价格",
+        "description": "批量生成前先看积分和价格，更容易平衡质量、速度和成本。"
+      }
+    ],
+    "testimonialsTitle": "用户如何评价 GPT Image 2",
+    "testimonialsDescription": "来自设计师、创作者、营销团队和产品团队的真实反馈。",
+    "testimonials": [
+      {
+        "name": "Mia Carter",
+        "role": "创意策略负责人",
+        "quote": "GPT Image 2 最打动我的地方，是它能很快把模糊的人像想法变成能拿去讨论的职业头像方向。",
+        "avatar": {
+          "src": "/imgs/avatars/1.png",
+          "alt": "Mia Carter avatar"
+        }
+      },
+      {
+        "name": "Daniel Brooks",
+        "role": "增长设计师",
+        "quote": "我们会用它做产品图和室内改造效果图，因为出图速度快，而且结果已经足够拿给客户看。",
+        "avatar": {
+          "src": "/imgs/avatars/5.png",
+          "alt": "Daniel Brooks avatar"
+        }
+      },
+      {
+        "name": "Sophia Reed",
+        "role": "内容负责人",
+        "quote": "这里最有价值的是案例和提示词都能直接拿来改，团队不需要从零开始试错。",
+        "avatar": {
+          "src": "/imgs/avatars/7.png",
+          "alt": "Sophia Reed avatar"
+        }
+      }
+    ],
+    "faqTitle": "GPT Image 2 常见问题",
+    "faqDescription": "快速回答提示词、图生图、Google Search、积分和使用权限相关问题。",
+    "faqItems": [
+      {
+        "question": "GPT Image 2 最适合做什么？",
+        "answer": "GPT Image 2 很适合做人像、产品图、风格化改图和参考图重绘，尤其是在你希望结果更贴近要求的时候。"
+      },
+      {
+        "question": "GPT Image 2 的提示词应该怎么写？",
+        "answer": "先写清主体、场景、风格、光线和构图，再一次只改一个变量，这样最容易看清楚每次调整到底带来了什么变化。"
+      },
+      {
+        "question": "GPT Image 2 支持图生图吗？",
+        "answer": "支持。你可以上传参考图做职业头像、产品修图、室内改造或风格迁移，在需要连续性的时候会比纯文生图更稳定。"
+      },
+      {
+        "question": "GPT Image 2 适合做职业头像吗？",
+        "answer": "适合。只要你把人物身份、服装、背景和镜头风格写清楚，它很适合做商务头像、LinkedIn 头像和创作者头像。"
+      },
+      {
+        "question": "GPT Image 2 能做产品图吗？",
+        "answer": "可以。产品类提示词在白底电商图、材质强化、产品清理和海报级展示图场景里都比较实用。"
+      },
+      {
+        "question": "GPT Image 2 一次要消耗多少积分？",
+        "answer": "积分消耗和模型版本、分辨率以及生成方式有关。建议在批量生成前先看本页价格区。"
+      },
+      {
+        "question": "Google Search 会额外扣积分吗？",
+        "answer": "会。Google Search 目前适用于 GPT Image 2，每次调用额外增加 2 积分，适合想补充更多上下文时使用。"
+      },
+      {
+        "question": "该选 GPT Image 2 还是 GPT Image 2 Pro？",
+        "answer": "如果你更看重速度和成本，优先用 GPT Image 2；如果你更看重细节、质感和最终成片质量，可以用 GPT Image 2 Pro。"
+      },
+      {
+        "question": "怎样让 GPT Image 2 的结果更稳定？",
+        "answer": "尽量使用稳定的参考图，先锁定比例，再做小步迭代，不要在一条提示词里同时塞太多风格要求。"
+      },
+      {
+        "question": "GPT Image 2 生成的图片可以商用吗？",
+        "answer": "一般可以，但你要确保上传的参考素材、品牌元素、产品素材以及最终使用场景本身都具备合法授权。"
+      }
+    ],
+    "ctaTitle": "开始生成你的第一张图片",
+    "ctaDescription": "直接输入提示词，或者上传参考图来生成职业头像、产品图或室内改造图，再根据速度和细节选择 GPT Image 2 或 GPT Image 2 Pro。",
+    "primaryCta": "开始使用 GPT Image 2",
+    "secondaryCta": "查看价格"
+  },
+  "overview": {
+    "eyebrow": "概览",
+    "title": "大家会用 GPT Image 2 做什么",
+    "description": "如果你想要的不是随便试玩几张图，而是更干净、更省时间的结果，GPT Image 2 会更合适。",
+    "mainLabel": "职业头像",
+    "sideTopLabel": "产品图",
+    "sideBottomLabel": "室内改造",
+    "items": [
+      {
+        "title": "从一句提示词开始",
+        "description": "从一个简单想法出发，也能很快拿到能继续调整的图片方向。"
+      },
+      {
+        "title": "从参考图继续改",
+        "description": "如果你想让人物、构图或产品轮廓尽量保持不变，图生图会更顺手。"
+      },
+      {
+        "title": "一页里做多种图片",
+        "description": "职业头像、产品图、室内改造图和风格化素材都可以在这里完成。"
+      },
+      {
+        "title": "放大生成前先看积分",
+        "description": "先试几张，确认方向对了，再看积分和价格决定要不要继续批量生成。"
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "使用场景",
+    "title": "精选 GPT Image 2 前后对比案例",
+    "description": "这里整理了职业头像、产品图、老照片修复、室内改造、分镜和风格化贴纸等常见场景。每个案例都附带提示词和前后对比。",
+    "featuredLabel": "热门案例",
+    "archiveLabel": "导入案例库",
+    "archiveDescription": "这里收录了导入的 53 组 before / after 图片和提示词。你可以先看上面的热门案例，再打开完整案例库继续找灵感。",
+    "selectedLabel": "当前案例",
+    "before": "改造前",
+    "beforeCaption": "参考图",
+    "after": "改造后",
+    "afterCaption": "GPT Image 2 结果",
+    "promptLabel": "提示词",
+    "promptTipLabel": "提示建议",
+    "promptSummary": "可以直接复制这条提示词，再按你的图片和需求继续调整。",
+    "showFullPrompt": "展开完整提示词",
+    "showLessPrompt": "收起",
+    "copyPrompt": "复制提示词",
+    "copiedPrompt": "已复制",
+    "promptCopyFailed": "复制提示词失败",
+    "tryPrompt": "用这个提示词",
+    "openArchive": "查看全部 53 个案例",
+    "closeArchive": "收起导入案例库",
+    "searchLabel": "搜索导入案例",
+    "searchPlaceholder": "搜索标题、标签或提示词",
+    "searchResults": "条匹配结果",
+    "noResultsTitle": "没有找到匹配案例",
+    "noResultsDescription": "可以试试 portrait、product、restore、sticker、interior 等关键词。",
+    "importedCount": "已导入案例",
+    "recommended": "优先看"
+  }
+}

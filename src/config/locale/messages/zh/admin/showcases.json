@@ -1,0 +1,15 @@
+{
+  "title": "案例展示",
+  "description": "在这里管理您的案例展示。",
+  "add": "添加",
+  "edit": "编辑",
+  "delete": "删除",
+  "form": {
+    "title": "标题",
+    "description": "描述",
+    "prompt": "提示词",
+    "image": "图片",
+    "tags": "标签",
+    "createdAt": "创建时间"
+  }
+}

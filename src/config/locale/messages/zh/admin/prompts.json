@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "title": "标题",
+    "description": "描述",
+    "image": "图片",
+    "prompt_title": "提示词标题",
+    "prompt_description": "提示词描述",
+    "status": "状态",
+    "created_at": "创建时间",
+    "updated_at": "更新时间"
+  },
+  "list": {
+    "title": "提示词",
+    "crumbs": {
+      "admin": "管理后台",
+      "prompts": "提示词"
+    },
+    "buttons": {
+      "add": "添加提示词",
+      "edit": "编辑提示词",
+      "view": "查看提示词",
+      "delete": "删除提示词"
+    }
+  },
+  "add": {
+    "title": "添加提示词",
+    "crumbs": {
+      "admin": "管理后台",
+      "prompts": "提示词",
+      "add": "添加提示词"
+    },
+    "buttons": {
+      "submit": "添加提示词"
+    }
+  },
+  "edit": {
+    "title": "编辑提示词",
+    "crumbs": {
+      "admin": "管理后台",
+      "prompts": "提示词",
+      "edit": "编辑提示词"
+    },
+    "buttons": {
+      "submit": "编辑提示词"
+    }
+  }
+}

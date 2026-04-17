@@ -1,0 +1,53 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"main": ".open-next/worker.js",
+	"name": "gptimg2art",
+	"compatibility_date": "2025-12-02",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"r2_buckets": [
+		// Use R2 incremental cache
+		// See https://opennext.js.org/cloudflare/caching
+		{
+			"binding": "NEXT_INC_CACHE_R2_BUCKET",
+			// Create the bucket before deploying
+			// You can change the bucket name if you want
+			// See https://developers.cloudflare.com/workers/wrangler/commands/#r2-bucket-create
+			"bucket_name": "nanobanana2ai"
+		}
+	],
+	   // ！！！这里是新增hyperdrive配置！！！【可删除掉中文备注】
+	"hyperdrive": [
+		{
+			"binding": "HYPERDRIVE", // 固定值 不要改【可删除掉中文备注】
+			"id": "5b38f49672424428bf8422c1b0bbe861", // 上面复制的Hyperdrive 配置 ID【可删除掉中文备注】
+			"localConnectionString": "postgresql://postgres:nanobanana2ai123Q@db.uhkgrfogderxsezmwgjb.supabase.co:5432/postgres" // 这个是从Supabase复制过来的，注意格式和我的要一致，端口是5432，其中[Your Password]改成你的数据库密码【可删除掉中文备注】
+		}
+	],
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1,
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1,
+			"invocation_logs": true
+		}
+	},
+    //  ！！！这里是环境变量的配置 ！！！注意：这个会提交到git上，一定要私有仓库，避免泄露，部分值做了xxx处理【【可删除这条注释】
+	"vars": {
+		"NEXT_PUBLIC_APP_URL": "https://gptimg2.art", 
+		"NEXT_PUBLIC_APP_NAME": "gptimg2art",
+		"NEXT_PUBLIC_THEME": "default",
+		"NEXT_PUBLIC_APPEARANCE": "system",
+		"DATABASE_URL": "postgresql://postgres.uhkgrfogderxsezmwgjb:nanobanana2ai123Q@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres",
+		"DATABASE_PROVIDER": "postgresql",
+		"DB_SINGLETON_ENABLED": "false",
+		"DB_MAX_CONNECTIONS": "10",
+        // 将 `openssl rand -base64 32` 复制粘贴到你的终端然后回车，就会生成一段值，复制粘贴到下面(也可以用你`.env.development`中的该字段值)
+		"AUTH_SECRET": "dhh4mZYZXFm/j3By3S60Vq/k9EynLii173dwEVoY1h4=",
+		"NEXT_PUBLIC_ASSET_CDN_BASE": "https://img.cdance.ai/uploads"
+	}
+}

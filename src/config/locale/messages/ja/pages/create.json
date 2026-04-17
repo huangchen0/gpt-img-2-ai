@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "AI動画・画像を作成 | ハッピーホース",
+    "description": "ハッピーホースのワークスペースで AI 動画と AI 画像を作成できます。作成ページを離れずに動画と画像のモードを切り替えられます。"
+  },
+  "page": {
+    "title": "AI動画または画像を作成",
+    "description": "ハッピーホースのワークスペースで AI 動画と AI 画像を作成できます。"
+  },
+  "generator_switcher": {
+    "video": "AI 動画",
+    "image": "AI 画像",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "マルチモーダル参照、カメラ制御、映画的な出力に向いています。",
+    "kling_description": "マルチショット構成、要素の一貫性、ネイティブ音声に向いています。",
+    "sr_only_video": "AI 動画ジェネレーター",
+    "sr_only_image": "AI 画像ジェネレーター",
+    "sr_only_kling": "Kling 3 動画ジェネレーター"
+  },
+  "generator": {
+    "title": "AI 画像ジェネレーター",
+    "description": "テキストプロンプトや参考画像から画像を生成・編集できます。",
+    "tabs": {
+      "text-to-image": "テキスト→画像",
+      "image-to-image": "画像→画像"
+    },
+    "form": {
+      "provider": "プロバイダー",
+      "model": "モデル",
+      "select_provider": "プロバイダーを選択",
+      "select_model": "モデルを選択",
+      "prompt": "プロンプト",
+      "prompt_placeholder": "色・動き・スタイルなど具体的に記述してください",
+      "reference_image": "参考画像",
+      "reference_image_placeholder": "複数枚アップロード可能",
+      "some_images_failed_to_upload": "一部の画像がアップロードに失敗しました。削除して再試行してください。",
+      "prompt_too_long": "プロンプトが長すぎます。内容を短くしてください。"
+    },
+    "generate": "画像を生成",
+    "checking_account": "アカウントを確認中...",
+    "loading": "読み込み中...",
+    "generating": "生成中...",
+    "sign_in_to_generate": "ログインして画像生成を開始",
+    "credits_cost": "{credits} クレジット消費",
+    "credits_remaining": "残り {credits} クレジット",
+    "buy_credits": "クレジットを購入",
+    "progress": "進行状況",
+    "generated_images": "生成画像",
+    "ready_to_generate": "生成の準備完了",
+    "ready_for_generating": "生成待機中",
+    "no_images_generated": "まだ画像は生成されていません"
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "metadata": {
+    "title": "GPT Image 2 AI画像生成 | プロフィール写真、商品画像、参考画像編集",
+    "description": "GPT Image 2でプロフィール写真、商品画像、部屋の完成イメージ、参考画像を使った編集をすばやく作成できます。GPT Image 2とGPT Image 2 Proの違い、クレジット、プロンプト例もまとめて確認できます。",
+    "keywords": "nano banana,nano banana ai画像生成,nano banana プロンプト例,nano banana 参考画像編集,nano banana クレジット,nano banana 料金,nano banana プロフィール写真,nano banana 商品画像"
+  },
+  "page": {
+    "title": "GPT Image 2 AI画像生成",
+    "description": "GPT Image 2を使ってプロフィール写真、商品画像、インテリアの完成イメージ、テイスト違いの画像を作成できます。テキスト入力と参考画像アップロードの両方に対応しています。",
+    "heroTitle": "GPT Image 2 AI画像生成",
+    "heroDescription": "プロフィール写真、EC商品画像、部屋の模様替えイメージ、ビフォーアフター比較用の編集に向いています。プロンプトを入力するか参考画像をアップロードしてすぐ始められます。",
+    "benefitsTitle": "GPT Image 2のよくある使い方",
+    "benefitsDescription": "よりきれいな結果、より速い修正、そしてそのまま使いやすい画像を求めるなら、まずは次の使い方から始めるのがおすすめです。",
+    "benefitsItems": [
+      {
+        "title": "プロフィール写真が必要なクリエイターやチーム",
+        "description": "LinkedInプロフィール、クリエイター写真、登壇者紹介写真、個人ブランディング画像に向いており、人物らしさを安定して保ちやすくなります。",
+        "imageAlt": "GPT Image 2 プロフィール写真の例"
+      },
+      {
+        "title": "商品ビジュアルが必要な販売者やブランド",
+        "description": "白背景の商品画像、商品補正画像、ポスター風の商品ビジュアルに向いており、毎回最初から作り直す必要がありません。",
+        "imageAlt": "GPT Image 2 商品画像の例"
+      },
+      {
+        "title": "参考画像を何度も調整するチーム",
+        "description": "部屋のリデザイン、ステッカースタイル、コンセプト修正、参考画像ベースの再編集に向いており、元画像に近いまま調整したいときに便利です。",
+        "imageAlt": "GPT Image 2 編集例"
+      }
+    ],
+    "usageLabel": "よくある作業",
+    "usageTitle": "GPT Image 2でできること",
+    "usageDescription": "多くのユーザーはまずこれらの作業から始めます。結果をそのまま調整しやすく、すぐ使いやすいからです。",
+    "usageItems": [
+      {
+        "title": "複数のプロフィール写真作成",
+        "description": "ビジネス用プロフィール、クリエイター写真、チーム写真をまとめて作るとき、全体の雰囲気をそろえやすくなります。"
+      },
+      {
+        "title": "参考画像ベースの商品画像",
+        "description": "参考画像をアップロードすると、商品の形や配置、全体の方向性をより保ったまま仕上げやすくなります。"
+      },
+      {
+        "title": "部屋のリデザインやコンセプト修正",
+        "description": "空間の変更案、ビフォーアフター画像、新しいビジュアル方向を素早く試せて、毎回一から作り直す必要がありません。"
+      },
+      {
+        "title": "マーケティング画像をすばやく作成",
+        "description": "キャンペーン画像、SNS画像、ランディングページ用ビジュアルのように、複数案を短時間で作りたいときに便利です。"
+      }
+    ],
+    "featuresTitle": "GPT Image 2が使い続けられる理由",
+    "featuresDescription": "次の機能は、画像を生成し続けたり、修正したり、複数パターンを試したりするときによく使われます。",
+    "featuresItems": [
+      {
+        "title": "GPT Image 2 参考画像ベースの編集",
+        "description": "人物、商品、レイアウトを元画像に近いまま整えたいときに便利です。"
+      },
+      {
+        "title": "GPT Image 2 プロンプト例",
+        "description": "そのまま使える例から始めれば、毎回ゼロから試してクレジットを消費しすぎずに済みます。"
+      },
+      {
+        "title": "GPT Image 2 プロフィール写真作成",
+        "description": "LinkedInプロフィール、クリエイター紹介写真、チームページ写真、ビジネス向け個人画像に適しています。"
+      },
+      {
+        "title": "GPT Image 2 商品画像プロンプト",
+        "description": "EC向け白背景画像、商品補正画像、ポスター風の商品ビジュアルに適しています。"
+      },
+      {
+        "title": "GPT Image 2 と Google Search",
+        "description": "Google SearchはGPT Image 2で使え、1回の生成ごとに2クレジット追加されます。最新情報や補足の文脈が必要なときに便利です。"
+      },
+      {
+        "title": "GPT Image 2 クレジットと料金",
+        "description": "大量生成の前にクレジットと料金を確認すると、品質・速度・コストを調整しやすくなります。"
+      }
+    ],
+    "testimonialsTitle": "ユーザーの声",
+    "testimonialsDescription": "デザイナー、クリエイター、マーケティングチーム、プロダクトチームからの実際の声です。",
+    "testimonials": [
+      {
+        "name": "Mia Carter",
+        "role": "クリエイティブストラテジスト",
+        "quote": "GPT Image 2は、ぼんやりしていたプロフィール写真のアイデアを、すぐに共有できる方向に変えるのをとても速くしてくれました。",
+        "avatar": {
+          "src": "/imgs/avatars/1.png",
+          "alt": "Mia Carter avatar"
+        }
+      },
+      {
+        "name": "Daniel Brooks",
+        "role": "グロースデザイナー",
+        "quote": "商品画像や部屋のモック作成に使っています。修正が速く、レビューに出せる品質の結果が得られます。",
+        "avatar": {
+          "src": "/imgs/avatars/5.png",
+          "alt": "Daniel Brooks avatar"
+        }
+      },
+      {
+        "name": "Sophia Reed",
+        "role": "コンテンツリード",
+        "quote": "一番便利なのは、例とプロンプトをそのまま使い始められることです。チームが毎回ゼロから試す必要がありません。",
+        "avatar": {
+          "src": "/imgs/avatars/7.png",
+          "alt": "Sophia Reed avatar"
+        }
+      }
+    ],
+    "faqTitle": "GPT Image 2 FAQ",
+    "faqDescription": "プロンプトの書き方、参考画像を使った編集、Google Search、クレジット、商用利用について手早く確認できます。",
+    "faqItems": [
+      {
+        "question": "GPT Image 2はどんな用途に向いていますか？",
+        "answer": "GPT Image 2は、人物画像、商品画像、スタイル編集、参考画像ベースの編集など、希望に近い結果を得たいときに向いています。"
+      },
+      {
+        "question": "GPT Image 2のプロンプトはどう書けばよいですか？",
+        "answer": "まず被写体、シーン、スタイル、照明、構図を書き、その後は一度に一つの要素だけ変えるのがおすすめです。"
+      },
+      {
+        "question": "GPT Image 2は参考画像を使った編集に対応していますか？",
+        "answer": "対応しています。プロフィール写真、商品補正、部屋の編集、テイスト変更などで参考画像をアップロードすると、より安定した結果を得やすくなります。"
+      },
+      {
+        "question": "GPT Image 2はビジネス用プロフィール写真に向いていますか？",
+        "answer": "はい。人物の印象、服装、背景、撮影イメージを具体的に書けば、ビジネスプロフィールやLinkedIn向け写真づくりに向いています。"
+      },
+      {
+        "question": "GPT Image 2で商品画像も作れますか？",
+        "answer": "可能です。背景、照明、素材感、整理ルールを明確に書けば、とくに白背景の商品画像で良い結果が出やすいです。"
+      },
+      {
+        "question": "GPT Image 2は1回で何クレジット使いますか？",
+        "answer": "使用クレジットはモデル、解像度、生成方法によって異なります。大量生成の前に料金セクションを確認することをおすすめします。"
+      },
+      {
+        "question": "Google Searchを使うと追加クレジットが必要ですか？",
+        "answer": "はい。現在はGPT Image 2のみ対応で、1回の生成ごとに2クレジット追加されます。最新情報や補足の文脈が必要なときに便利です。"
+      },
+      {
+        "question": "GPT Image 2とGPT Image 2 Proはどちらを選ぶべきですか？",
+        "answer": "速度とコストを重視するならGPT Image 2、細部と最終品質を重視するならGPT Image 2 Proがおすすめです。"
+      },
+      {
+        "question": "GPT Image 2の結果をより安定させるには？",
+        "answer": "安定した参考画像を使い、比率を先に固定し、小さな変更を重ね、一つのプロンプトに多くのスタイル指示を詰め込みすぎないことが大切です。"
+      },
+      {
+        "question": "GPT Image 2で作った画像は商用利用できますか？",
+        "answer": "通常は可能ですが、参考画像、ロゴ、商品画像、最終成果物に対して適切な権利を持っている必要があります。"
+      }
+    ],
+    "ctaTitle": "最初の1枚を作ってみましょう",
+    "ctaDescription": "プロンプトを入力するか参考画像をアップロードして、プロフィール写真、商品画像、部屋のリデザイン画像を作成し、速度と細部に応じてGPT Image 2またはGPT Image 2 Proを選んでください。",
+    "primaryCta": "GPT Image 2を試す",
+    "secondaryCta": "料金を見る"
+  },
+  "overview": {
+    "eyebrow": "基本情報",
+    "title": "GPT Image 2でよく作られている画像",
+    "description": "ただ数枚試すだけではなく、よりきれいで時間を節約できる結果を求めるときにGPT Image 2は向いています。",
+    "mainLabel": "プロフィール写真",
+    "sideTopLabel": "商品画像",
+    "sideBottomLabel": "部屋のリデザイン",
+    "items": [
+      {
+        "title": "短いプロンプトから始める",
+        "description": "シンプルなアイデアだけでも、あとから調整しやすい画像の方向性をすぐ作れます。"
+      },
+      {
+        "title": "参考画像から編集を始める",
+        "description": "顔、構図、商品の形をできるだけ保ちたいなら、参考画像ベースの編集が使いやすいです。"
+      },
+      {
+        "title": "1か所で複数の画像を作る",
+        "description": "プロフィール写真、商品画像、部屋編集、スタイル画像をここでまとめて作れます。"
+      },
+      {
+        "title": "拡張前にクレジット確認",
+        "description": "まず数枚試して方向が合っているか確認し、その後クレジットと料金を見て大量生成するか決められます。"
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "利用シーン",
+    "title": "厳選したGPT Image 2のビフォーアフター事例",
+    "description": "プロフィール写真、商品画像、古い写真の修復、部屋の模様替え、ストーリーボード、スタイルステッカーなど、よく使われる事例をまとめました。各事例にはプロンプトとビフォーアフター結果が付いています。",
+    "featuredLabel": "注目の事例",
+    "archiveLabel": "事例ライブラリ",
+    "archiveDescription": "取り込んだ53件のビフォーアフター画像とプロンプトを閲覧できます。まず上の人気例を見て、さらにアイデアが必要なら全ライブラリを開いてください。",
+    "selectedLabel": "現在の例",
+    "before": "変更前",
+    "beforeCaption": "参考画像",
+    "after": "変更後",
+    "afterCaption": "GPT Image 2の結果",
+    "promptLabel": "プロンプト",
+    "promptTipLabel": "プロンプトのヒント",
+    "promptSummary": "そのままコピーすることも、自分の画像に合わせて調整することもできます。",
+    "showFullPrompt": "全文を見る",
+    "showLessPrompt": "閉じる",
+    "copyPrompt": "プロンプトをコピー",
+    "copiedPrompt": "コピーしました",
+    "promptCopyFailed": "コピーに失敗しました",
+    "tryPrompt": "このプロンプトを使う",
+    "openArchive": "53件すべてを見る",
+    "closeArchive": "ライブラリを閉じる",
+    "searchLabel": "取り込んだ例を検索",
+    "searchPlaceholder": "タイトル、タグ、プロンプトで検索",
+    "searchResults": "件の一致",
+    "noResultsTitle": "一致する例がありません",
+    "noResultsDescription": "人物(portrait)、商品(product)、復元(restore)、ステッカー(sticker)、インテリア(interior) など、もう少し広いキーワードを試してください。",
+    "importedCount": "取り込んだ例",
+    "recommended": "おすすめ"
+  }
+}

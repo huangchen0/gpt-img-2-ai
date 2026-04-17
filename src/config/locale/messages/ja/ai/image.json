@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "title": "AI画像ジェネレーター",
+    "description": "AIモデルで画像を生成します。テキストから画像、画像から画像に対応しています。"
+  },
+  "page": {
+    "title": "AI画像ジェネレーター",
+    "description": "AIモデルで画像を生成します。テキストから画像、画像から画像に対応しています。"
+  },
+  "generator": {
+    "title": "画像ジェネレーター",
+    "description": "AIモデルで画像を生成します。テキストから画像、画像から画像に対応しています。",
+    "tabs": {
+      "text-to-image": "テキストから画像",
+      "image-to-image": "画像から画像"
+    },
+    "form": {
+      "provider": "プロバイダー",
+      "model": "モデル",
+      "select_provider": "プロバイダーを選択",
+      "select_model": "モデルを選択",
+      "model_hint": "GPT Image 2: 高速でコスト効率が高く、Google Search に対応。GPT Image 2 Pro: 本番向けの高品質で細部表現に優れています。",
+      "resolution": "解像度",
+      "select_resolution": "解像度を選択",
+      "aspect_ratio": "アスペクト比",
+      "select_aspect_ratio": "アスペクト比を選択",
+      "output_format": "出力形式",
+      "select_output_format": "出力形式を選択",
+      "google_search": "Google Search",
+      "google_search_hint": "GPT Image 2 のみ対応（+2クレジット）",
+      "prompt": "プロンプト",
+      "prompt_placeholder": "色、形、質感など、画像の詳細を説明してください。",
+      "reference_image": "参照画像",
+      "reference_image_placeholder": "参照画像をアップロード。複数枚対応",
+      "some_images_failed_to_upload": "一部の画像のアップロードに失敗しました。削除して再アップロードしてください。",
+      "prompt_too_long": "プロンプトが長すぎます。内容を少し削除してください"
+    },
+    "generate": "画像を生成",
+    "checking_account": "アカウントを確認中...",
+    "loading": "読み込み中...",
+    "generating": "生成中...",
+    "sign_in_to_generate": "ログインして画像を生成",
+    "credits_cost": "{credits}クレジット消費",
+    "credits_remaining": "残り {credits} クレジット",
+    "buy_credits": "クレジットを購入",
+    "progress": "進行状況",
+    "generated_images": "画像プレビュー",
+    "ready_to_generate": "生成の準備完了",
+    "ready_for_generating": "生成の準備完了",
+    "no_images_generated": "画像はまだ生成されていません"
+  }
+}

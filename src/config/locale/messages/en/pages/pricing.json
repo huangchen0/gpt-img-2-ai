@@ -1,0 +1,473 @@
+{
+  "metadata": {
+    "title": "ChatGPT Image 2 Generator Price",
+    "description": "Choose a ChatGPT Image 2 Generator plan for AI image generation, image editing, and flexible credit-based creation."
+  },
+  "pricing": {
+    "id": "pricing",
+    "sr_only_title": "ChatGPT Image 2 Generator Pricing",
+    "title": "Minimal Pricing, Start Creating Now.",
+    "description": "Join 5,000+ creators worldwide. Pay once and keep credits ready when inspiration hits.",
+    "trust_badges": [
+      {
+        "icon": "RiCheckDoubleLine",
+        "title": "Cancel Anytime",
+        "description": "Flexible plans you can switch anytime."
+      },
+      {
+        "icon": "RiShieldCheckLine",
+        "title": "Bank-Level Security",
+        "description": "Encrypted checkout for every payment."
+      },
+      {
+        "icon": "RiRefreshLine",
+        "title": "Long-Lasting Credits",
+        "description": "One-time credits stay valid for 12 months."
+      }
+    ],
+    "groups": [
+      {
+        "name": "monthly",
+        "title": "Monthly"
+      },
+      {
+        "name": "yearly",
+        "title": "Yearly",
+        "label": "Best value",
+        "is_featured": true
+      },
+      {
+        "name": "packs",
+        "title": "Credit Packs"
+      }
+    ],
+    "items": [
+      {
+        "title": "Starter Monthly",
+        "description": "About the cost of one coffee a day, with your creativity always online.",
+        "features_title": "You get",
+        "features": [
+          {
+            "text": "4,000 image credits each month",
+            "note": "Estimated using standard 1K text-to-image generation at 40 credits each. Actual usage varies by model, resolution, mode, and optional search features."
+          },
+          {
+            "text": "Faster generation priority, less waiting",
+            "note": "You receive higher queue priority during busy periods. Actual wait time still depends on real-time system load."
+          },
+          "Distraction-free workflow, no ads",
+          {
+            "text": "Watermark-free exports ready to deliver",
+            "note": "Exports are generated without a platform watermark. If you use third-party assets, rights clearance is still your responsibility."
+          },
+          "Cloud asset library (30-day storage)",
+          {
+            "text": "Commercial rights included",
+            "note": "Available for commercial use within the current Terms of Service. If your work includes third-party assets, you still need to confirm usage rights yourself."
+          },
+          "Flexible billing, cancel anytime"
+        ],
+        "interval": "month",
+        "amount": 2490,
+        "currency": "USD",
+        "price": "$24.9",
+        "original_price": "$29.9",
+        "unit": "/ month",
+        "tip": "Best for first-time subscribers • About the price of one coffee a day",
+        "button": {
+          "title": "Start Your Pro Journey",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "starter-monthly",
+        "legacy_product_ids": [
+          "starter-monthly",
+          "lite-monthly-v2"
+        ],
+        "product_name": "Starter Monthly Membership",
+        "credits": 4000,
+        "valid_days": 30,
+        "group": "monthly",
+        "plan_name": "Starter Monthly",
+        "label": "Easy start"
+      },
+      {
+        "title": "Creator Monthly",
+        "description": "Built for creators who publish often and want a smoother workflow.",
+        "label": "Most popular",
+        "features_title": "Everything in Starter, plus",
+        "features": [
+          {
+            "text": "6,500 image credits each month",
+            "note": "Estimated using standard 1K text-to-image generation at 40 credits each. Actual usage varies by model, resolution, mode, and optional search features."
+          },
+          "62% more credits than Starter",
+          {
+            "text": "Faster generation priority, less waiting",
+            "note": "You receive higher queue priority during busy periods. Actual wait time still depends on real-time system load."
+          },
+          "Distraction-free workflow, no ads",
+          {
+            "text": "Watermark-free exports ready to deliver",
+            "note": "Exports are generated without a platform watermark. If you use third-party assets, rights clearance is still your responsibility."
+          },
+          "Cloud asset library (90-day storage)",
+          {
+            "text": "Commercial rights included",
+            "note": "Available for commercial use within the current Terms of Service. If your work includes third-party assets, you still need to confirm usage rights yourself."
+          }
+        ],
+        "interval": "month",
+        "amount": 3990,
+        "currency": "USD",
+        "price": "$39.9",
+        "original_price": "$49.9",
+        "unit": "/ month",
+        "is_featured": true,
+        "tip": "Used by high-frequency creators • Built for steady output",
+        "button": {
+          "title": "Upgrade Now",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "creator-monthly-v2",
+        "product_name": "Creator Monthly Membership",
+        "credits": 6500,
+        "valid_days": 30,
+        "group": "monthly",
+        "plan_name": "Creator Monthly"
+      },
+      {
+        "title": "Pro Annual Plan",
+        "description": "Lock in 50% off creation costs and keep your production steady.",
+        "label": "Annual Best Seller",
+        "features_title": "Pro annual benefits",
+        "features": [
+          {
+            "text": "48,000 image credits per year",
+            "note": "Estimated using standard 1K text-to-image generation at 40 credits each. Actual usage varies by model, resolution, mode, and optional search features."
+          },
+          {
+            "text": "Faster generation priority, less waiting",
+            "note": "You receive higher queue priority during busy periods. Actual wait time still depends on real-time system load."
+          },
+          {
+            "text": "Commercial-grade privacy, visible only to you",
+            "note": "Projects follow a private-by-default workflow and are not shown publicly. Final visibility still depends on your current sharing and privacy settings."
+          },
+          "Distraction-free workflow, no ads",
+          {
+            "text": "Watermark-free exports ready to deliver",
+            "note": "Exports are generated without a platform watermark. If you use third-party assets, rights clearance is still your responsibility."
+          },
+          {
+            "text": "Pro-grade detail enhancement and image polish",
+            "note": "Designed to improve lighting, texture, text clarity, and fine visual detail. Results vary by source material and model."
+          },
+          {
+            "text": "Early access to new features",
+            "note": "Lets you try selected new features before their full public release. Availability may change with rollout schedules."
+          },
+          "Cloud asset library (6-month storage)",
+          "Priority premium support"
+        ],
+        "interval": "year",
+        "amount": 15480,
+        "currency": "USD",
+        "price": "$12.9",
+        "original_price": "$29.9",
+        "unit": "/ month",
+        "is_featured": true,
+        "tip": "Save $200+ per year • Top pick for creators",
+        "button": {
+          "title": "Start the Pro Plan",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "premium-yearly",
+        "legacy_product_ids": [
+          "premium-yearly"
+        ],
+        "product_name": "Pro Yearly Membership",
+        "credits": 48000,
+        "valid_days": 365,
+        "group": "yearly",
+        "plan_name": "Pro Yearly"
+      },
+      {
+        "title": "Studio Flagship Plan",
+        "description": "A flagship plan built for high-frequency creative teams.",
+        "label": "Best Unit Price",
+        "features_title": "Studio flagship benefits",
+        "features": [
+          {
+            "text": "96,000 image credits per year",
+            "note": "Estimated using standard 1K text-to-image generation at 40 credits each. Actual usage varies by model, resolution, mode, and optional search features."
+          },
+          {
+            "text": "Faster generation priority, less waiting",
+            "note": "You receive higher queue priority during busy periods. Actual wait time still depends on real-time system load."
+          },
+          {
+            "text": "Commercial-grade privacy, visible only to you",
+            "note": "Projects follow a private-by-default workflow and are not shown publicly. Final visibility still depends on your current sharing and privacy settings."
+          },
+          "Distraction-free workflow, no ads",
+          {
+            "text": "Watermark-free exports ready to deliver",
+            "note": "Exports are generated without a platform watermark. If you use third-party assets, rights clearance is still your responsibility."
+          },
+          {
+            "text": "Pro-grade detail enhancement and image polish",
+            "note": "Designed to improve lighting, texture, text clarity, and fine visual detail. Results vary by source material and model."
+          },
+          {
+            "text": "Early access to new features",
+            "note": "Lets you try selected new features before their full public release. Availability may change with rollout schedules."
+          },
+          "Unlimited history for finished work",
+          "Priority premium support",
+          "Higher upload limits for large projects"
+        ],
+        "interval": "year",
+        "amount": 23880,
+        "currency": "USD",
+        "price": "$19.9",
+        "original_price": "$49.9",
+        "unit": "/ month",
+        "tip": "Save $400+ per year • Best price per output",
+        "button": {
+          "title": "Start the Flagship Plan",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "studio-yearly-v2",
+        "product_name": "Studio Yearly Membership",
+        "credits": 96000,
+        "valid_days": 365,
+        "group": "yearly",
+        "plan_name": "Studio Yearly"
+      },
+      {
+        "title": "Starter Pack",
+        "description": "Use it instantly and start creating right away. Top up only when you need more.",
+        "label": "Starter Pick",
+        "features_title": "Perfect For Testing",
+        "features": [
+          {
+            "text": "Create up to ~100 standard 1K images",
+            "note": "Estimated using standard 1K text-to-image generation at 40 credits each. Actual output count varies by model, resolution, mode, and optional search features."
+          },
+          "Test prompts and quality risk-free",
+          "Text-to-image and image-to-image",
+          "Valid for 1 full year",
+          {
+            "text": "Commercial-ready image creation included",
+            "note": "Available for commercial use within the current Terms of Service. If your work includes third-party assets, you still need to confirm usage rights yourself."
+          }
+        ],
+        "interval": "one-time",
+        "amount": 2990,
+        "currency": "USD",
+        "price": "$29.9",
+        "original_price": "$39.9",
+        "unit": "one-time",
+        "tip": "No subscription • Use anytime in 12 months • 25% off today",
+        "button": {
+          "title": "Get capacity for ~100 images",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "credits-package",
+        "legacy_product_ids": [
+          "credits-package"
+        ],
+        "product_name": "Starter Credit Pack",
+        "credits": 4000,
+        "valid_days": 365,
+        "group": "packs"
+      },
+      {
+        "title": "Creator Pack",
+        "description": "A flexible top-up option for creators who generate and edit images more often.",
+        "label": "High Frequency",
+        "features_title": "More Credits, Better Price",
+        "features": [
+          {
+            "text": "Create up to ~225 standard 1K images",
+            "note": "Estimated using standard 1K text-to-image generation at 40 credits each. Actual output count varies by model, resolution, mode, and optional search features."
+          },
+          "33% better value per credit",
+          "Great for weekly creation",
+          "Valid for 1 full year",
+          {
+            "text": "Commercial-ready image creation included",
+            "note": "Available for commercial use within the current Terms of Service. If your work includes third-party assets, you still need to confirm usage rights yourself."
+          }
+        ],
+        "interval": "one-time",
+        "amount": 5990,
+        "currency": "USD",
+        "price": "$59.9",
+        "original_price": "$79.9",
+        "unit": "one-time",
+        "tip": "Most popular top-up • 25% off today • No expiry pressure",
+        "button": {
+          "title": "Get capacity for ~225 images",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "creator-pack-v2",
+        "product_name": "Creator Credit Pack",
+        "credits": 9000,
+        "valid_days": 365,
+        "group": "packs"
+      },
+      {
+        "title": "Pro Pack",
+        "description": "A flagship credit pack built for heavy creators and batch work.",
+        "features_title": "Maximum Value",
+        "features": [
+          {
+            "text": "Create up to ~400 standard 1K images",
+            "note": "Estimated using standard 1K text-to-image generation at 40 credits each. Actual output count varies by model, resolution, mode, and optional search features."
+          },
+          "Best price per credit",
+          "Perfect for batch creation",
+          "Valid for 1 full year",
+          {
+            "text": "Commercial-ready image creation included",
+            "note": "Available for commercial use within the current Terms of Service. If your work includes third-party assets, you still need to confirm usage rights yourself."
+          }
+        ],
+        "interval": "one-time",
+        "amount": 9990,
+        "currency": "USD",
+        "price": "$99.9",
+        "original_price": "$129.9",
+        "unit": "one-time",
+        "tip": "Lowest per-credit cost • 23% off today • Stock up and save",
+        "button": {
+          "title": "Get capacity for ~400 images",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "pro-pack-v2",
+        "product_name": "Pro Credit Pack",
+        "credits": 16000,
+        "valid_days": 365,
+        "group": "packs",
+        "label": "Lowest Unit Cost"
+      }
+    ],
+    "sections": [
+      {
+        "id": "membership",
+        "title": "Pro Plans",
+        "description": "Unlock more image output with lower long-term creation costs.",
+        "group_names": [
+          "monthly",
+          "yearly"
+        ],
+        "default_group": "yearly"
+      },
+      {
+        "id": "credits",
+        "title": "Buy On Demand, Create Flexibly",
+        "description": "Use credits instantly, top up anytime, no subscription required.",
+        "group_names": [
+          "packs"
+        ],
+        "default_group": "packs"
+      }
+    ],
+    "usage_examples_title": "How Image Credits Work",
+    "usage_examples_description": "Credit usage depends on model, resolution, generation mode, and optional search features.",
+    "usage_examples": [
+      {
+        "title": "1K / text-to-image / standard",
+        "description": "40 credits"
+      },
+      {
+        "title": "1K / image-to-image / standard",
+        "description": "60 credits"
+      },
+      {
+        "title": "4K / text-to-image / pro",
+        "description": "120 credits"
+      }
+    ],
+    "messages": {
+      "feature_note_label": "View details"
+    }
+  },
+  "faq": {
+    "id": "faq",
+    "title": "Key Questions Before You Buy",
+    "description": "Pricing, credits, cancellation, refunds, and commercial use explained clearly before checkout.",
+    "items": [
+      {
+        "question": "What is the difference between credit packs and membership?",
+        "answer": "Credit packs are one-time purchases with no auto-renewal, making them a good fit for trying the product, topping up, or project-based work. Memberships renew automatically on a monthly or yearly basis, but usually offer a lower cost per creation and are better for ongoing use."
+      },
+      {
+        "question": "Do credits expire?",
+        "answer": "One-time credit packs stay valid for 12 months from the purchase date. Membership credits are issued for the current billing cycle and expire or refresh at the end of that cycle. You can check your remaining balance and expiration time on the billing and credits pages."
+      },
+      {
+        "question": "Does canceling a subscription take effect immediately?",
+        "answer": "No. You can cancel at any time, and the cancellation takes effect at the end of the current billing period. Until then, you can continue using the benefits included in your current plan."
+      },
+      {
+        "question": "How many credits does it take to generate one image?",
+        "answer": "Standard 1K text-to-image starts at 40 credits, and standard 1K image-to-image starts at 60 credits. Higher-resolution outputs and pro modes cost more. The examples on the pricing page are useful references, but the final amount shown inside the creator should be treated as the source of truth."
+      },
+      {
+        "question": "Can the current plans be used commercially?",
+        "answer": "Yes. All plans currently shown on the pricing page include commercial usage rights. You still need to make sure you have the legal right to use any uploaded assets, likenesses, brand elements, music, and voice content, and that your usage complies with the platform terms."
+      },
+      {
+        "question": "Do you offer refunds?",
+        "answer": "Under the current terms of service, payments are generally non-refundable unless required by law or approved by the platform. If you experience duplicate charges or a system error, contact support@gptimg2.art as soon as possible."
+      },
+      {
+        "question": "Will prices increase later? Does yearly billing lock in the price?",
+        "answer": "We may adjust pricing over time as model capabilities, infrastructure costs, and features change. Yearly plans are a better fit if you want to lock in your annual creation costs in advance. Active subscriptions will continue to be honored for the current billing cycle."
+      },
+      {
+        "question": "What if I need higher limits or team purchasing?",
+        "answer": "If you need higher usage limits, centralized team purchasing, support for large batch creation, or a longer-term project plan, contact us at support@gptimg2.art and tell us what you need."
+      }
+    ]
+  },
+  "page": {
+    "title": "ChatGPT Image 2 Generator Pricing",
+    "sections": {
+      "pricing": {
+        "id": "pricing",
+        "title": "ChatGPT Image 2 Generator Plan",
+        "description": "Get started with ChatGPT Image 2 Generator for AI image generation and editing. Standard 1K text-to-image starts at 40 credits, and standard 1K image-to-image starts at 60 credits."
+      }
+    }
+  },
+  "messages": {
+    "current_plan": "Current Plan",
+    "processing": "Processing",
+    "original_price_label": "Original",
+    "billed_annually_total": "Billed annually at {amount}",
+    "vs_monthly_price": "vs monthly {price}",
+    "credits_count": "{credits} credits",
+    "included_credits": "Includes {credits} credits",
+    "per_100_credits": "~{amount} per 100 credits",
+    "flash_sale_title": "⚡ Flash Sale Active",
+    "flash_sale_title_with_savings": "⚡ Flash Sale: Save Up To {percent}% Right Now",
+    "flash_sale_description": "This price disappears when the timer hits zero. Lock it in now or pay full price tomorrow.",
+    "flash_sale_countdown": "Ends in {time}",
+    "flash_sale_ends_at": "Sale ends: {date}",
+    "flash_sale_price_note": "Prices shown are already discounted. What you see is what you pay at checkout.",
+    "flash_sale_save_percent": "Save {percent}%",
+    "flash_sale_cta": "Claim {percent}% Off Now",
+    "flash_sale_cta_note": "Early-bird pricing is available this month only. Standard pricing returns after the promotion ends.",
+    "per_video_price": "About {amount} / video"
+  }
+}

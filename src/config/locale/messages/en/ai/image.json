@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "title": "AI Image Generator",
+    "description": "Generate images with AI models, support text-to-image and image-to-image."
+  },
+  "page": {
+    "title": "AI Image Generator",
+    "description": "Generate images with AI models, support text-to-image and image-to-image."
+  },
+  "generator": {
+    "title": "Image Generator",
+    "description": "Generate images with AI models, support text-to-image and image-to-image.",
+    "tabs": {
+      "text-to-image": "Text to Image",
+      "image-to-image": "Image to Image"
+    },
+    "form": {
+      "provider": "Provider",
+      "model": "Model",
+      "select_provider": "Select Provider",
+      "select_model": "Select Model",
+      "model_hint": "GPT Image 2: faster, better value, supports Google Search. GPT Image 2 Pro: higher quality and detail for production.",
+      "resolution": "Resolution",
+      "select_resolution": "Select Resolution",
+      "aspect_ratio": "Aspect Ratio",
+      "select_aspect_ratio": "Select Aspect Ratio",
+      "output_format": "Output Format",
+      "select_output_format": "Select Output Format",
+      "google_search": "Google Search",
+      "google_search_hint": "GPT Image 2 only (+2 credits)",
+      "prompt": "Prompt",
+      "prompt_placeholder": "Describe the details of the image, such as color, shape, texture, etc.",
+      "reference_image": "Reference Image",
+      "reference_image_placeholder": "Upload reference images, support multiple images",
+      "some_images_failed_to_upload": "Some images failed to upload, please delete them and re-upload",
+      "prompt_too_long": "Prompt is too long, please delete some content"
+    },
+    "generate": "Generate Images",
+    "checking_account": "Checking Account...",
+    "loading": "Loading...",
+    "generating": "Generating...",
+    "sign_in_to_generate": "Sign In to Generate Image",
+    "credits_cost": "Cost {credits} credits",
+    "credits_remaining": "Remaining {credits} credits",
+    "buy_credits": "Buy Credits",
+    "queue": {
+      "title": "High Demand Right Now",
+      "description": "Free users are currently queued. Members can start immediately and get priority rendering.",
+      "task_label": "Image generation",
+      "remaining_label": "Estimated wait",
+      "upgrade": "Skip the Queue, Generate Now",
+      "cancel": "Cancel Queue",
+      "retry": "Retry Now",
+      "submitting": "Starting your real generation...",
+      "submit_failed": "We couldn't start your generation just now. You can retry without losing your place.",
+      "button_waiting": "Queued. Members can generate now",
+      "membership_checking": "Checking membership status. Please try again in a moment."
+    },
+    "credit_fallback": {
+      "title": "Current mode needs more credits",
+      "description": "This generation needs {requested} credits, while your balance is {remaining}. You can switch to a lower-cost mode and keep creating, or add more credits to stay on the current mode.",
+      "current_mode": "Current mode",
+      "remaining_credits": "Current balance",
+      "switch": "Switch and Continue",
+      "buy_credits": "Get More Credits",
+      "close": "Not now",
+      "standard_badge": "Standard",
+      "image_standard_title": "GPT Image 2 · 1K",
+      "image_standard_description": "Lower-cost image mode for quick creation."
+    },
+    "progress": "Progress",
+    "generated_images": "Image Preview",
+    "ready_to_generate": "Ready to Generate",
+    "ready_for_generating": "Ready for Generating",
+    "no_images_generated": "No Images Generated"
+  }
+}

@@ -1,0 +1,473 @@
+{
+  "metadata": {
+    "title": "ChatGPT Image 2 Generator 价格",
+    "description": "选择适合的 ChatGPT Image 2 Generator 套餐，用积分完成 AI 图片生成、图片编辑和高分辨率创作。"
+  },
+  "pricing": {
+    "id": "pricing",
+    "sr_only_title": "ChatGPT Image 2 Generator 价格方案",
+    "title": "极简定价，即刻创作",
+    "description": "加入全球 5,000+ 创作者。一次付费，长期拥有创作额度。",
+    "trust_badges": [
+      {
+        "icon": "RiCheckDoubleLine",
+        "title": "随时取消",
+        "description": "灵活订阅，随时切换。"
+      },
+      {
+        "icon": "RiShieldCheckLine",
+        "title": "银行级安全",
+        "description": "支付加密，全程更安心。"
+      },
+      {
+        "icon": "RiRefreshLine",
+        "title": "积分长期有效",
+        "description": "一次性积分包购买后 12 个月内有效。"
+      }
+    ],
+    "groups": [
+      {
+        "name": "monthly",
+        "title": "月付"
+      },
+      {
+        "name": "yearly",
+        "title": "年付",
+        "label": "最划算",
+        "is_featured": true
+      },
+      {
+        "name": "packs",
+        "title": "积分包"
+      }
+    ],
+    "items": [
+      {
+        "title": "入门月付",
+        "description": "每天仅需一杯咖啡钱，让灵感全天候在线。",
+        "features_title": "你将获得",
+        "features": [
+          {
+            "text": "每月 4,000 图片积分",
+            "note": "按标准 1K 文生图每次 40 积分估算，约可生成 ~100 张图片。实际消耗会随模式、模型、分辨率和搜索功能变化。"
+          },
+          {
+            "text": "高峰期享受更快生成优先级",
+            "note": "表示在高峰期获得更高处理优先级，实际等待时间仍会随系统负载变化。"
+          },
+          "纯净创作，不被打断",
+          {
+            "text": "直接生成可交付成片，无水印",
+            "note": "导出结果默认不带平台水印，但涉及第三方素材时仍需自行确认版权与使用范围。"
+          },
+          "云端素材库 (30 天存储)",
+          {
+            "text": "可商用 - 包含商业授权",
+            "note": "可用于符合当前服务条款的商业场景；若作品包含第三方素材，你仍需自行确认授权范围。"
+          },
+          "订阅无忧，灵活退订"
+        ],
+        "interval": "month",
+        "amount": 2490,
+        "currency": "USD",
+        "price": "$24.9",
+        "original_price": "$29.9",
+        "unit": "/ 月",
+        "tip": "新订阅用户首选 • 每天不到一杯咖啡钱",
+        "button": {
+          "title": "开启 Pro 创作之旅",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "starter-monthly",
+        "legacy_product_ids": [
+          "starter-monthly",
+          "lite-monthly-v2"
+        ],
+        "product_name": "入门月付会员",
+        "credits": 4000,
+        "valid_days": 30,
+        "group": "monthly",
+        "plan_name": "入门月付",
+        "label": "轻松入门"
+      },
+      {
+        "title": "创作者月付",
+        "description": "面向高频更新的创作者，稳定输出更省心。",
+        "label": "最多人选",
+        "features_title": "入门方案的全部,再加上",
+        "features": [
+          {
+            "text": "每月 6,500 图片积分",
+            "note": "按标准 1K 文生图每次 40 积分估算，约可生成 ~162 张图片。实际消耗会随模式、模型、分辨率和搜索功能变化。"
+          },
+          "比入门多 62% 积分",
+          {
+            "text": "高峰期享受更快生成优先级",
+            "note": "表示在高峰期获得更高处理优先级，实际等待时间仍会随系统负载变化。"
+          },
+          "纯净创作，不被打断",
+          {
+            "text": "直接生成可交付成片，无水印",
+            "note": "导出结果默认不带平台水印，但涉及第三方素材时仍需自行确认版权与使用范围。"
+          },
+          "云端素材库 (90 天存储)",
+          {
+            "text": "可商用 - 包含商业授权",
+            "note": "可用于符合当前服务条款的商业场景；若作品包含第三方素材，你仍需自行确认授权范围。"
+          }
+        ],
+        "interval": "month",
+        "amount": 3990,
+        "currency": "USD",
+        "price": "$39.9",
+        "original_price": "$49.9",
+        "unit": "/ 月",
+        "is_featured": true,
+        "tip": "高频创作者都在用 • 稳定输出更省心",
+        "button": {
+          "title": "立即升级",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "creator-monthly-v2",
+        "product_name": "创作者月付会员",
+        "credits": 6500,
+        "valid_days": 30,
+        "group": "monthly",
+        "plan_name": "创作者月付"
+      },
+      {
+        "title": "Pro 年度计划",
+        "description": "锁定 50% 创作折扣，释放稳定生产力。",
+        "label": "年度最热销",
+        "features_title": "Pro 年度权益",
+        "features": [
+          {
+            "text": "全年 48,000 图片积分",
+            "note": "按标准 1K 文生图每次 40 积分估算，约可生成 ~1,200 张图片。实际消耗会随模式、模型、分辨率和搜索功能变化。"
+          },
+          {
+            "text": "高峰期享受更快生成优先级",
+            "note": "表示在高峰期获得更高处理优先级，实际等待时间仍会随系统负载变化。"
+          },
+          {
+            "text": "商业级隐私保护，仅自己可见",
+            "note": "默认按私密创作流程处理，作品不会公开展示；最终仍以你当前的发布和隐私设置为准。"
+          },
+          "纯净创作，不被打断",
+          {
+            "text": "直接生成可交付成片，无水印",
+            "note": "导出结果默认不带平台水印，但涉及第三方素材时仍需自行确认版权与使用范围。"
+          },
+          {
+            "text": "Pro 级细节增强与图像精修",
+            "note": "适用于更细致的光影、材质、文字清晰度和画面细节优化，实际效果会随素材与模型而变化。"
+          },
+          {
+            "text": "抢先体验新功能",
+            "note": "可优先试用正在灰度开放的新功能，开放范围和时间会随版本发布安排调整。"
+          },
+          "作品保留 6 个月",
+          "高级支持 - 快速响应"
+        ],
+        "interval": "year",
+        "amount": 15480,
+        "currency": "USD",
+        "price": "$12.9",
+        "original_price": "$29.9",
+        "unit": "/ 月",
+        "is_featured": true,
+        "tip": "每年立省 $200+，创作者首选",
+        "button": {
+          "title": "立即开启专业计划",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "premium-yearly",
+        "legacy_product_ids": [
+          "premium-yearly"
+        ],
+        "product_name": "专业年付会员",
+        "credits": 48000,
+        "valid_days": 365,
+        "group": "yearly",
+        "plan_name": "专业年付"
+      },
+      {
+        "title": "Studio 旗舰计划",
+        "description": "专为高频创作团队打造的旗舰方案。",
+        "label": "极致性价比",
+        "features_title": "Studio 旗舰权益",
+        "features": [
+          {
+            "text": "全年 96,000 图片积分",
+            "note": "按标准 1K 文生图每次 40 积分估算，约可生成 ~2,400 张图片。实际消耗会随模式、模型、分辨率和搜索功能变化。"
+          },
+          {
+            "text": "高峰期享受更快生成优先级",
+            "note": "表示在高峰期获得更高处理优先级，实际等待时间仍会随系统负载变化。"
+          },
+          {
+            "text": "商业级隐私保护，仅自己可见",
+            "note": "默认按私密创作流程处理，作品不会公开展示；最终仍以你当前的发布和隐私设置为准。"
+          },
+          "纯净创作，不被打断",
+          {
+            "text": "直接生成可交付成片，无水印",
+            "note": "导出结果默认不带平台水印，但涉及第三方素材时仍需自行确认版权与使用范围。"
+          },
+          {
+            "text": "Pro 级细节增强与图像精修",
+            "note": "适用于更细致的光影、材质、文字清晰度和画面细节优化，实际效果会随素材与模型而变化。"
+          },
+          {
+            "text": "抢先体验新功能",
+            "note": "可优先试用正在灰度开放的新功能，开放范围和时间会随版本发布安排调整。"
+          },
+          "永不丢失 - 无限历史记录",
+          "高级支持 - 优先响应",
+          "更高上传限制,适合大项目"
+        ],
+        "interval": "year",
+        "amount": 23880,
+        "currency": "USD",
+        "price": "$19.9",
+        "original_price": "$49.9",
+        "unit": "/ 月",
+        "tip": "每年立省 $400+，尽享最高单价优惠",
+        "button": {
+          "title": "立即开启旗舰计划",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "studio-yearly-v2",
+        "product_name": "工作室年付会员",
+        "credits": 96000,
+        "valid_days": 365,
+        "group": "yearly",
+        "plan_name": "工作室年付"
+      },
+      {
+        "title": "入门积分包",
+        "description": "即买即用，立即开启创作。按需补充，无需订阅。",
+        "label": "新手推荐",
+        "features_title": "立即开做",
+        "features": [
+          {
+            "text": "约可生成 ~100 张标准 1K 图片",
+            "note": "按标准 1K 文生图每次 40 积分估算。实际可生成数量会随模式、模型、分辨率和搜索功能变化。"
+          },
+          "即买即用，低门槛开做",
+          "文生图和图生图",
+          "有效期整整 1 年",
+          {
+            "text": "可用于商用图片创作 - 包含商业授权",
+            "note": "可用于符合当前服务条款的商业场景；若作品包含第三方素材，你仍需自行确认授权范围。"
+          }
+        ],
+        "interval": "one-time",
+        "amount": 2990,
+        "currency": "USD",
+        "price": "$29.9",
+        "original_price": "$39.9",
+        "unit": "一次性",
+        "tip": "无需订阅 • 12 个月内随时用 • 今天省 25%",
+        "button": {
+          "title": "立即获取约 100 张图片额度",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "credits-package",
+        "legacy_product_ids": [
+          "credits-package"
+        ],
+        "product_name": "入门积分包",
+        "credits": 4000,
+        "valid_days": 365,
+        "group": "packs"
+      },
+      {
+        "title": "创作者积分包",
+        "description": "适合高频生成或编辑图片的创作者，按项目补量更灵活。",
+        "label": "高频创作",
+        "features_title": "更高频率，更低顾虑",
+        "features": [
+          {
+            "text": "约可生成 ~225 张标准 1K 图片",
+            "note": "按标准 1K 文生图每次 40 积分估算。实际可生成数量会随模式、模型、分辨率和搜索功能变化。"
+          },
+          "更适合高频补量",
+          "按项目购买，节奏更自由",
+          "有效期整整 1 年",
+          {
+            "text": "可用于商用图片创作 - 包含商业授权",
+            "note": "可用于符合当前服务条款的商业场景；若作品包含第三方素材，你仍需自行确认授权范围。"
+          }
+        ],
+        "interval": "one-time",
+        "amount": 5990,
+        "currency": "USD",
+        "price": "$59.9",
+        "original_price": "$79.9",
+        "unit": "一次性",
+        "tip": "高频创作者常选 • 今天省 25% • 用完再补",
+        "button": {
+          "title": "立即获取约 225 张图片额度",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "creator-pack-v2",
+        "product_name": "创作者积分包",
+        "credits": 9000,
+        "valid_days": 365,
+        "group": "packs"
+      },
+      {
+        "title": "专业积分包",
+        "description": "生产力旗舰。专为重度创作者打造。",
+        "label": "单价最优",
+        "features_title": "旗舰创作额度",
+        "features": [
+          {
+            "text": "约可生成 ~400 张标准 1K 图片",
+            "note": "按标准 1K 文生图每次 40 积分估算。实际可生成数量会随模式、模型、分辨率和搜索功能变化。"
+          },
+          "单位积分成本更低",
+          "适合批量创作与长期储备",
+          "有效期整整 1 年",
+          {
+            "text": "可用于商用图片创作 - 包含商业授权",
+            "note": "可用于符合当前服务条款的商业场景；若作品包含第三方素材，你仍需自行确认授权范围。"
+          }
+        ],
+        "interval": "one-time",
+        "amount": 9990,
+        "currency": "USD",
+        "price": "$99.9",
+        "original_price": "$129.9",
+        "unit": "一次性",
+        "tip": "单位成本更低 • 今天省 23% • 重度创作更从容",
+        "button": {
+          "title": "立即获取约 400 张图片额度",
+          "url": "/#pricing",
+          "icon": "RiBankCardLine"
+        },
+        "product_id": "pro-pack-v2",
+        "product_name": "专业积分包",
+        "credits": 16000,
+        "valid_days": 365,
+        "group": "packs"
+      }
+    ],
+    "sections": [
+      {
+        "id": "membership",
+        "title": "Pro 计划",
+        "description": "释放更多图片创作能力，锁定更低的长期生成成本。",
+        "group_names": [
+          "monthly",
+          "yearly"
+        ],
+        "default_group": "yearly"
+      },
+      {
+        "id": "credits",
+        "title": "按需购买，灵活创作",
+        "description": "即买即用，立即开启创作。按需补充，无需订阅。",
+        "group_names": [
+          "packs"
+        ],
+        "default_group": "packs"
+      }
+    ],
+    "usage_examples_title": "图片积分如何消耗",
+    "usage_examples_description": "积分消耗会随生成模式、模型、分辨率和搜索功能而变化。",
+    "usage_examples": [
+      {
+        "title": "标准 1K / 文生图",
+        "description": "40 积分"
+      },
+      {
+        "title": "标准 1K / 图生图",
+        "description": "60 积分"
+      },
+      {
+        "title": "Pro 4K / 文生图",
+        "description": "120 积分"
+      }
+    ],
+    "messages": {
+      "feature_note_label": "查看说明"
+    }
+  },
+  "faq": {
+    "id": "faq",
+    "title": "常见问题与保障",
+    "description": "价格、额度、取消、退款和商用规则，这里一次讲清。",
+    "items": [
+      {
+        "question": "积分包和会员有什么区别？",
+        "answer": "积分包是一次性购买,不会自动续费,适合试用、补量和项目制购买; 会员是按月或按年订阅,会自动续费,但单次创作成本通常更低,更适合稳定创作。"
+      },
+      {
+        "question": "积分会过期吗？",
+        "answer": "一次性积分包自购买起 12 个月内有效。会员积分按当前订阅周期发放,并在周期结束时到期或刷新。你可以在账单和积分页面查看自己的剩余积分与到期时间。"
+      },
+      {
+        "question": "取消订阅后会立刻失效吗？",
+        "answer": "不会。你可以随时取消订阅,取消会在当前计费周期结束时生效。在此之前,你仍然可以继续使用当前方案对应的权益。"
+      },
+      {
+        "question": "生成一张图片要多少积分？",
+        "answer": "标准 1K 文生图最低 40 积分起，标准 1K 图生图最低 60 积分起；更高分辨率或 Pro 模式会消耗更多积分。价格页列出的示例适合作为常见参考，实际以创作器内显示为准。"
+      },
+      {
+        "question": "现在的套餐可以商用吗？",
+        "answer": "可以。当前价格页中的套餐都包含商业使用权限。但你仍需要确保自己对上传素材、人物形象、品牌元素、音乐与配音等拥有合法使用权,并遵守平台条款。"
+      },
+      {
+        "question": "支持退款吗？",
+        "answer": "根据当前服务条款,付款通常不可退款,除非法律另有要求或平台另行决定。如果出现重复扣费或系统异常,请尽快联系 support@gptimg2.art 处理。"
+      },
+      {
+        "question": "以后会涨价吗？年付会锁价吗？",
+        "answer": "我们可能会随着模型能力、基础设施成本和新功能变化调整价格。年付方案更适合希望提前锁定年度创作成本的用户; 已生效订阅会按当前订阅周期继续履约。"
+      },
+      {
+        "question": "如果我需要更大额度或团队采购怎么办？",
+        "answer": "如果你需要更大额度、团队统一采购、批量创作支持或更长期的项目方案,可以通过 support@gptimg2.art 联系我们说明需求。"
+      }
+    ]
+  },
+  "page": {
+    "title": "ChatGPT Image 2 Generator 价格方案",
+    "sections": {
+      "pricing": {
+        "id": "pricing",
+        "title": "ChatGPT Image 2 Generator 方案",
+        "description": "立即开始使用 ChatGPT Image 2 Generator 进行 AI 图片生成与图片编辑。标准 1K 文生图 40 积分起，标准 1K 图生图 60 积分起。"
+      }
+    }
+  },
+  "messages": {
+    "current_plan": "当前方案",
+    "processing": "处理中",
+    "original_price_label": "原价",
+    "billed_annually_total": "年付 {amount}，一次性支付",
+    "vs_monthly_price": "对比月付 {price}",
+    "credits_count": "{credits} 积分",
+    "included_credits": "包含 {credits} 积分",
+    "per_100_credits": "约 {amount} / 100 积分",
+    "flash_sale_title": "⚡ 限时特惠进行中",
+    "flash_sale_title_with_savings": "⚡ 限时特惠:最高立省 {percent}%",
+    "flash_sale_description": "倒计时归零就恢复原价。现在锁定优惠,明天就要多花钱。",
+    "flash_sale_countdown": "还剩 {time}",
+    "flash_sale_ends_at": "活动截止:{date}",
+    "flash_sale_price_note": "显示价格已包含限时优惠，结账时就是这个价。",
+    "flash_sale_cta_note": "早鸟优惠价格仅限本月，随后将恢复原价。",
+    "per_video_price": "约 {amount} / 视频",
+    "flash_sale_save_percent": "省 {percent}%",
+    "flash_sale_cta": "立即省 {percent}%"
+  }
+}

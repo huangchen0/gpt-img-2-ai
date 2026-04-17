@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "title": "创建 AI 视频和图片 | ChatGPT Image 2 Generator",
+    "description": "在 ChatGPT Image 2 Generator 工作台中创建 AI 视频与 AI 图片，无需离开创建页即可切换视频与图片模式。"
+  },
+  "page": {
+    "title": "创建 AI 视频或图片",
+    "description": "在同一个 ChatGPT Image 2 Generator 工作台中完成 AI 视频与 AI 图片创作。"
+  },
+  "generator": {
+    "title": "AI 图片生成器",
+    "description": "输入提示词或上传参考图，生成或编辑高质量 AI 图片。",
+    "tabs": {
+      "text-to-image": "文生图",
+      "image-to-image": "图生图"
+    },
+    "form": {
+      "provider": "服务商",
+      "model": "模型",
+      "select_provider": "选择服务商",
+      "select_model": "选择模型",
+      "prompt": "提示词",
+      "prompt_placeholder": "描述图像的细节，如颜色、形状、纹理等。",
+      "reference_image": "参考图片",
+      "reference_image_placeholder": "上传参考图片，支持多张图片",
+      "some_images_failed_to_upload": "部分图片上传失败，请删除后重新上传",
+      "prompt_too_long": "提示词过长，请删除部分内容"
+    },
+    "generate": "生成图片",
+    "checking_account": "正在检查账户...",
+    "loading": "加载中...",
+    "generating": "生成中...",
+    "sign_in_to_generate": "登录后开始生成",
+    "credits_cost": "消耗 {credits} 积分",
+    "credits_remaining": "剩余 {credits} 积分",
+    "buy_credits": "购买积分",
+    "progress": "进度",
+    "generated_images": "已生成图片",
+    "ready_to_generate": "准备生成",
+    "ready_for_generating": "准备生成中",
+    "no_images_generated": "暂无生成的图片"
+  },
+  "generator_switcher": {
+    "video": "AI 视频",
+    "image": "AI 图片",
+    "seedance": "Seedance 2.0",
+    "kling": "Kling 3",
+    "seedance_description": "更适合多模态参考、镜头控制和更强电影感生成。",
+    "kling_description": "更适合多镜叙事、元素连贯和原声音轨。",
+    "sr_only_video": "AI 视频生成器",
+    "sr_only_image": "AI 图片生成器",
+    "sr_only_kling": "Kling 3 视频生成器"
+  }
+}
