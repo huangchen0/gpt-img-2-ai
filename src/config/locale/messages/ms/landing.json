@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "title": "GPT Image 2 Penjana Imej AI ChatGPT Percuma Online",
-    "description": "GPT Image 2 ialah penjana imej AI untuk imej realistik, teks yang jelas, skrin UI, mockup dan suntingan imej pantas.",
-    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+    "title": "GPT Image 2 AI | Penjana Imej AI ChatGPT Percuma Online",
+    "description": "GPT Image 2 AI ialah penjana imej AI berasaskan ChatGPT untuk suntingan imej yang tepat, hasil fotorealistik, pemaparan teks padat, transformasi kreatif, tangkapan skrin UI dan penjanaan imej yang pantas.",
+    "keywords": "GPT Image 2 AI, GPT Image 2, gpt image 2 ai, gpt image 2, gpt-image-2, gpt image v2, gpt image 2.0, chatgpt image 2, openai gpt image 2, open ai image 2, openai image gen 2, gpt image 2 api, gpt image 2 how to use, gpt image 2 release date, gpt image generator"
   },
   "header": {
     "id": "header",
     "brand": {
-      "title": "GPT Image 2",
+      "title": "GPT Image 2 AI",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2"
+        "alt": "GPT Image 2 AI"
       },
       "url": "/"
     },
@@ -80,8 +80,8 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 - Penjana imej AI untuk ChatGPT",
-    "description": "Dengan GPT Image 2, anda boleh menghasilkan imej realistik, skrin antaramuka, mockup produk dan bahan visual pemasaran dengan lebih pantas. Ia dibina di atas ChatGPT Image dan lebih baik dalam memahami arahan, memaparkan teks dalam imej, serta memudahkan proses suntingan selepas penjanaan.",
+    "title": "GPT Image 2 AI - Penjana imej AI untuk ChatGPT",
+    "description": "Dengan GPT Image 2 AI, anda boleh menghasilkan imej realistik, skrin antaramuka, mockup produk dan bahan visual pemasaran dengan lebih pantas. Ia diinspirasikan oleh pengalaman imej ChatGPT yang baharu, dengan kekuatan pada suntingan tepat, pematuhan arahan, teks dalam imej, transformasi kreatif dan iterasi yang lebih pantas.",
     "buttons": [
       {
         "title": "Cuba Imej AI",
@@ -103,12 +103,12 @@
     "show_award": false,
     "background_image": {
       "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
-      "alt": "Penjana Imej AI ChatGPT GPT Image 2"
+      "alt": "Penjana Imej AI ChatGPT GPT Image 2 AI"
     }
   },
   "showcases-flow": {
     "id": "showcases",
-    "title": "Contoh GPT Image 2",
+    "title": "Contoh GPT Image 2 AI",
     "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
     "items": [
       {
@@ -198,8 +198,8 @@
   },
   "introduce": {
     "id": "introduce",
-    "title": "Apa itu GPT Image 2",
-    "description": "GPT Image 2 ialah penjana imej berasaskan ChatGPT Image yang lebih sesuai untuk kerja sebenar. Ia membantu menghasilkan visual fotorealistik, imej dengan teks yang lebih kemas, paparan UI, idea berpandukan rujukan dan suntingan imej melalui arahan biasa.",
+    "title": "Apa itu GPT Image 2 AI",
+    "description": "GPT Image 2 AI ialah penjana imej berasaskan ChatGPT yang lebih sesuai untuk kerja sebenar. Ia membantu menghasilkan visual fotorealistik, imej dengan teks yang lebih kemas, paparan UI, suntingan imej yang tepat dan idea berpandukan rujukan.",
     "items": [
       {
         "title": "Lebih sesuai untuk imej yang mengandungi teks",
@@ -225,8 +225,8 @@
   },
   "benefits": {
     "id": "benefits",
-    "title": "Mengapa pilih GPT Image 2",
-    "description": "GPT Image 2 bukan sekadar menghasilkan imej yang cantik, tetapi juga membantu anda sampai kepada hasil yang benar-benar boleh digunakan dengan lebih cepat.",
+    "title": "Mengapa pilih GPT Image 2 AI",
+    "description": "GPT Image 2 AI bukan sekadar menghasilkan imej yang cantik, tetapi juga membantu anda sampai kepada hasil yang benar-benar boleh digunakan dengan lebih cepat melalui suntingan lebih tepat, pematuhan arahan dan penjanaan lebih pantas.",
     "items": [
       {
         "title": "Ulang kaji lebih cepat",
@@ -485,11 +485,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "GPT Image 2",
-      "description": "GPT Image 2 ialah alat berasaskan ChatGPT Image untuk menjana, menyunting dan memperhalusi imej dalam satu aliran kerja yang lancar.",
+      "title": "GPT Image 2 AI",
+      "description": "GPT Image 2 AI ialah alat berasaskan ChatGPT untuk menjana, menyunting dengan tepat dan memperhalusi imej dalam satu aliran kerja yang lancar.",
       "logo": {
         "src": "/logo.png",
-        "alt": "Penjana Imej AI ChatGPT GPT Image 2"
+        "alt": "Penjana Imej AI ChatGPT GPT Image 2 AI"
       },
       "url": "/"
     },
@@ -558,7 +558,7 @@
     "show_locale": true
   },
   "generator_switcher": {
-    "title": "Cipta dengan GPT Image 2",
+    "title": "Cipta dengan GPT Image 2 AI",
     "subtitle": "Jana imej realistik terus dari halaman utama dan laraskan hasilnya dengan cepat.",
     "video": "Penjanaan imej",
     "image": "Suntingan imej",
@@ -566,8 +566,8 @@
     "kling": "Kling 3",
     "seedance_description": "Terbaik untuk rujukan multimodal, kawalan kamera, dan hasil lebih sinematik.",
     "kling_description": "Terbaik untuk naratif multi-shot, kesinambungan elemen, dan audio natif.",
-    "sr_only_video": "Penjana Imej AI ChatGPT GPT Image 2",
-    "sr_only_image": "Suntingan imej GPT Image 2",
+    "sr_only_video": "Penjana Imej AI ChatGPT GPT Image 2 AI",
+    "sr_only_image": "Suntingan imej GPT Image 2 AI",
     "sr_only_kling": "Penjana Video Kling 3"
   }
 }

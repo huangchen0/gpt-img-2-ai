@@ -1,23 +1,23 @@
 {
   "metadata": {
-    "title": "GPT Image 2 ChatGPT AI Image Generator Free Online",
-    "description": "GPT Image 2 is an AI image generator for photoreal images, text rendering, UI screenshots, mockups, and fast image editing.",
-    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+    "title": "GPT Image 2 AI | ChatGPT AI Image Generator Free Online",
+    "description": "GPT Image 2 AI is a ChatGPT-powered AI image generator for precise image editing, photoreal outputs, dense text rendering, creative transformations, UI screenshots, and fast image generation.",
+    "keywords": "GPT Image 2 AI, GPT Image 2, gpt image 2 ai, gpt image 2, gpt-image-2, gpt image v2, gpt image 2.0, chatgpt image 2, openai gpt image 2, open ai image 2, openai image gen 2, gpt image 2 api, gpt image 2 how to use, gpt image 2 release date, gpt image generator"
   },
   "header": {
     "id": "header",
     "brand": {
-      "title": "GPT Image 2",
+      "title": "GPT Image 2 AI",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2"
+        "alt": "GPT Image 2 AI"
       },
       "url": "/"
     },
     "nav": {
       "items": [
         {
-          "title": "GPT Image 2",
+          "title": "GPT Image 2 AI",
           "url": "/models/gpt-image-2",
           "icon": "Image"
         },
@@ -80,11 +80,11 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 — ChatGPT AI Image Generator",
-    "description": "Create photoreal images, polished UI screenshots, product mockups, and editable visual concepts with GPT Image 2. Built on the ChatGPT Image model for strong prompt following, clear in-image text, and fast iteration.",
+    "title": "GPT Image 2 AI — ChatGPT AI Image Generator",
+    "description": "Create photoreal images, polished UI screenshots, product mockups, and editable visual concepts with GPT Image 2 AI. Inspired by the latest ChatGPT image experience, it is built for precise edits, stronger instruction following, clearer in-image text, creative transformations, and faster iteration.",
     "buttons": [
       {
-        "title": "Try GPT Image 2",
+        "title": "Try GPT Image 2 AI",
         "icon": "Image",
         "url": "/models/gpt-image-2",
         "target": "_self",
@@ -99,17 +99,17 @@
       }
     ],
     "show_avatars": false,
-    "avatars_tip": "Built for creators exploring GPT Image 2 preview workflows",
+    "avatars_tip": "Built for creators exploring GPT Image 2 AI workflows",
     "show_award": false,
     "background_image": {
       "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
-      "alt": "GPT Image 2 ChatGPT AI Image Generator"
+      "alt": "GPT Image 2 AI ChatGPT AI Image Generator"
     }
   },
   "showcases-flow": {
     "id": "showcases",
-    "title": "GPT Image 2 Showcases",
-    "description": "Curated GPT Image 2 examples for realistic images, text-heavy visuals, product mockups, and UI concepts.",
+    "title": "GPT Image 2 AI Showcases",
+    "description": "Curated GPT Image 2 AI examples for realistic images, text-rich visuals, product mockups, UI concepts, and precise image edits.",
     "items": [
       {
         "title": "GPT Image 2 Showcase 1",
@@ -198,12 +198,12 @@
   },
   "introduce": {
     "id": "introduce",
-    "title": "What Is GPT Image 2?",
-    "description": "GPT Image 2 is an AI image generator based on the ChatGPT Image model. It is designed for photoreal image creation, reliable text rendering, realistic screenshot generation, image editing, and reference-driven visual ideation.",
+    "title": "What Is GPT Image 2 AI?",
+    "description": "GPT Image 2 AI is a ChatGPT-powered AI image generator designed for photoreal image creation, reliable text rendering, realistic screenshot generation, precise image editing, and reference-driven creative ideation.",
     "items": [
       {
-        "title": "Text Rendering That Actually Works",
-        "description": "Generate posters, menus, labels, ad creatives, and social graphics with clearer, more reliable in-image text than older image workflows.",
+        "title": "Sharper Dense Text Rendering",
+        "description": "Generate posters, menus, labels, ad creatives, and social graphics with clearer, more reliable in-image text, including denser layouts and smaller copy.",
         "icon": "RiFileTextLine"
       },
       {
@@ -217,20 +217,20 @@
         "icon": "RiMagicLine"
       },
       {
-        "title": "Natural Language Image Editing",
-        "description": "Refine images with conversational instructions to change copy, layout, styling, objects, or composition without rebuilding from scratch.",
+        "title": "Precise Natural Language Editing",
+        "description": "Refine images with conversational instructions to change copy, layout, styling, objects, or composition while preserving important details across edits.",
         "icon": "RiSparklingLine"
       }
     ]
   },
   "benefits": {
     "id": "benefits",
-    "title": "Why Create with GPT Image 2?",
-    "description": "GPT Image 2 helps teams go from prompt to usable visual assets faster with strong instruction following, practical text rendering, and flexible image generation workflows.",
+    "title": "Why Create with GPT Image 2 AI?",
+    "description": "GPT Image 2 AI helps teams go from prompt to usable visual assets faster with stronger instruction following, practical text rendering, flexible image editing, and quicker generation workflows.",
     "items": [
       {
         "title": "Faster Creative Iteration",
-        "description": "Move from idea to polished image quickly, then keep refining prompts, layout, and detail without slowing down.",
+        "description": "Move from idea to polished image quickly, then keep refining prompts, layout, and detail with less waiting between generations.",
         "icon": "RiRocketLine"
       },
       {
@@ -239,8 +239,8 @@
         "icon": "RiUserSmileLine"
       },
       {
-        "title": "Better Prompt Control",
-        "description": "Handle multi-part prompts more reliably for composition, copy, color, and subject details.",
+        "title": "Stronger Instruction Following",
+        "description": "Handle multi-part prompts more reliably for composition, copy, color, subject details, and relationship consistency.",
         "icon": "RiTimeLine"
       },
       {
@@ -483,11 +483,11 @@
   },
   "faq": {
     "id": "faq",
-    "title": "Frequently Asked Questions About GPT Image 2",
+    "title": "Frequently Asked Questions About GPT Image 2 AI",
     "items": [
       {
-        "question": "What is GPT Image 2?",
-        "answer": "GPT Image 2 is an AI image generator based on the ChatGPT Image model, focused on photoreal images, better text rendering, UI screenshots, and more reliable prompt following."
+        "question": "What is GPT Image 2 AI?",
+        "answer": "GPT Image 2 AI is an AI image generator based on the ChatGPT image model experience, focused on photoreal images, better text rendering, precise editing, creative transformations, and more reliable prompt following."
       },
       {
         "question": "Can I use GPT Image 2 for free?",
@@ -498,8 +498,8 @@
         "answer": "You can create product mockups, social graphics, UI screenshots, posters, concept art, branded visuals, and edited versions of existing images from natural language prompts."
       },
       {
-        "question": "What makes GPT Image 2 different from older image models?",
-        "answer": "GPT Image 2 appears to improve text rendering, screenshot realism, prompt following, and photoreal output quality, making it more practical for real production assets."
+        "question": "What makes GPT Image 2 AI different from older image models?",
+        "answer": "GPT Image 2 AI emphasizes more precise editing, denser text rendering, stronger prompt following, faster generation, and more practical photoreal output for real production assets."
       },
       {
         "question": "Is there a GPT Image 2 API?",
@@ -541,11 +541,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "GPT Image 2",
-      "description": "GPT Image 2 is a ChatGPT Image model based AI image generator for text-to-image creation, editing, UI mockups, and product visuals.",
+      "title": "GPT Image 2 AI",
+      "description": "GPT Image 2 AI is a ChatGPT-powered AI image generator for text-to-image creation, precise editing, UI mockups, product visuals, and creative transformations.",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2 ChatGPT AI Image Generator"
+        "alt": "GPT Image 2 AI ChatGPT AI Image Generator"
       },
       "url": "/"
     },
@@ -618,16 +618,16 @@
     "show_locale": true
   },
   "generator_switcher": {
-    "title": "Create With GPT Image 2",
-    "subtitle": "Generate realistic AI images with GPT Image 2 right from the homepage.",
+    "title": "Create With GPT Image 2 AI",
+    "subtitle": "Generate realistic AI images with GPT Image 2 AI right from the homepage.",
     "video": "AI Video",
     "image": "AI Image",
     "seedance": "Seedance 2.0",
     "kling": "Kling 3",
     "seedance_description": "Best for multimodal references, stronger camera direction, and cinematic output.",
     "kling_description": "Best for multi-shot storytelling, element consistency, and native audio.",
-    "sr_only_video": "GPT Image 2 ChatGPT AI Image Generator",
-    "sr_only_image": "GPT Image 2 Image Editing",
+    "sr_only_video": "GPT Image 2 AI ChatGPT AI Image Generator",
+    "sr_only_image": "GPT Image 2 AI Image Editing",
     "sr_only_kling": "Kling 3 Video Generator"
   }
 }

@@ -84,6 +84,7 @@ export interface Hero extends Section {
   avatars_tip?: string;
   show_award?: boolean;
   highlight_text?: string;
+  gallery_images?: Image[];
   background_image?: Image;
   background_video?: {
     src?: string;

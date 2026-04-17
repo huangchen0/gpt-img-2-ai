@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI генератор зображень ChatGPT безкоштовно",
-    "description": "GPT Image 2 — AI генератор для реалістичних зображень, чіткого тексту, UI-скриншотів, мокапів і швидкого редагування.",
-    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+    "title": "GPT Image 2 AI | AI генератор зображень ChatGPT безкоштовно",
+    "description": "GPT Image 2 AI — це генератор зображень на базі ChatGPT для точного редагування, фотореалістичних результатів, щільного рендерингу тексту, креативних трансформацій, UI-скриншотів і швидкої генерації.",
+    "keywords": "GPT Image 2 AI, GPT Image 2, gpt image 2 ai, gpt image 2, gpt-image-2, gpt image v2, gpt image 2.0, chatgpt image 2, openai gpt image 2, open ai image 2, openai image gen 2, gpt image 2 api, gpt image 2 how to use, gpt image 2 release date, gpt image generator"
   },
   "header": {
     "id": "header",
     "brand": {
-      "title": "GPT Image 2",
+      "title": "GPT Image 2 AI",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2"
+        "alt": "GPT Image 2 AI"
       },
       "url": "/"
     },
@@ -80,8 +80,8 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 - AI генератор зображень для ChatGPT",
-    "description": "За допомогою GPT Image 2 можна швидко створювати реалістичні зображення, UI-екрани, продуктові мокапи та маркетингові візуали. Сервіс працює на основі ChatGPT Image і краще справляється з інструкціями, текстом усередині зображень та подальшим редагуванням.",
+    "title": "GPT Image 2 AI - AI генератор зображень для ChatGPT",
+    "description": "За допомогою GPT Image 2 AI можна швидко створювати реалістичні зображення, UI-екрани, продуктові мокапи та маркетингові візуали. Сервіс спирається на новий досвід зображень у ChatGPT і сильніший у точному редагуванні, дотриманні інструкцій, тексті в кадрі, креативних трансформаціях і швидшій ітерації.",
     "buttons": [
       {
         "title": "Спробувати AI Зображення",
@@ -103,12 +103,12 @@
     "show_award": false,
     "background_image": {
       "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
-      "alt": "GPT Image 2 AI генератор зображень ChatGPT"
+      "alt": "GPT Image 2 AI генератор зображень ChatGPT AI"
     }
   },
   "showcases-flow": {
     "id": "showcases",
-    "title": "Приклади GPT Image 2",
+    "title": "Приклади GPT Image 2 AI",
     "description": "Перегляньте приклади реалістичних зображень, дизайнів із текстом, продуктових мокапів і UI-концептів, створених у GPT Image 2.",
     "items": [
       {
@@ -198,8 +198,8 @@
   },
   "introduce": {
     "id": "introduce",
-    "title": "Що таке GPT Image 2",
-    "description": "GPT Image 2 — це генератор зображень на базі ChatGPT Image, орієнтований на реальні робочі задачі. Він добре підходить для фотореалістичних сцен, читабельного тексту в кадрі, UI-візуалів, редагування зображень і роботи з референсами.",
+    "title": "Що таке GPT Image 2 AI",
+    "description": "GPT Image 2 AI — це генератор зображень на базі ChatGPT, орієнтований на реальні робочі задачі. Він добре підходить для фотореалістичних сцен, читабельного тексту в кадрі, UI-візуалів, точного редагування зображень і роботи з референсами.",
     "items": [
       {
         "title": "Краще працює з текстом у зображеннях",
@@ -225,8 +225,8 @@
   },
   "benefits": {
     "id": "benefits",
-    "title": "Чому варто обрати GPT Image 2",
-    "description": "GPT Image 2 не просто генерує красиві картинки, а допомагає швидше довести їх до стану, придатного для реальної роботи.",
+    "title": "Чому варто обрати GPT Image 2 AI",
+    "description": "GPT Image 2 AI не просто генерує красиві картинки, а допомагає швидше довести їх до стану, придатного для реальної роботи, завдяки точнішому редагуванню, кращому дотриманню інструкцій і швидшій генерації.",
     "items": [
       {
         "title": "Швидше проходить цикл ітерацій",
@@ -485,11 +485,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "GPT Image 2",
-      "description": "GPT Image 2 — це інструмент на базі ChatGPT Image для генерації, редагування та доопрацювання зображень в одному робочому процесі.",
+      "title": "GPT Image 2 AI",
+      "description": "GPT Image 2 AI — це інструмент на базі ChatGPT для генерації, точного редагування та доопрацювання зображень в одному робочому процесі.",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2 AI генератор зображень ChatGPT"
+        "alt": "GPT Image 2 AI генератор зображень ChatGPT AI"
       },
       "url": "/"
     },
@@ -558,16 +558,16 @@
     "show_locale": true
   },
   "generator_switcher": {
-    "title": "Створюйте з GPT Image 2",
-    "subtitle": "Генеруйте реалістичні зображення прямо з головної сторінки та швидко доводьте їх до потрібного вигляду.",
+    "title": "Створюйте з GPT Image 2 AI",
+    "subtitle": "Генеруйте реалістичні зображення прямо з головної сторінки за допомогою GPT Image 2 AI та швидко доводьте їх до потрібного вигляду.",
     "video": "Генерація зображень",
     "image": "Редагування зображень",
     "seedance": "Seedance 2.0",
     "kling": "Kling 3",
     "seedance_description": "Краще підходить для мультимодальних референсів, керування камерою та кінематографічного результату.",
     "kling_description": "Краще підходить для мультишот-оповіді, цілісності елементів і нативного аудіо.",
-    "sr_only_video": "GPT Image 2 AI генератор зображень ChatGPT",
-    "sr_only_image": "Редагування зображень GPT Image 2",
+    "sr_only_video": "GPT Image 2 AI генератор зображень ChatGPT AI",
+    "sr_only_image": "Редагування зображень GPT Image 2 AI",
     "sr_only_kling": "Відеогенератор Kling 3"
   }
 }

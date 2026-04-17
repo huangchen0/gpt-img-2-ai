@@ -1,23 +1,23 @@
 {
   "metadata": {
-    "title": "GPT Image 2 ChatGPT AI 图像生成器 免费在线",
-    "description": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，适合写实图片、清晰文字渲染、UI 截图、产品效果图和高效图像编辑。",
-    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+    "title": "GPT Image 2 AI | ChatGPT AI 图像生成器 免费在线",
+    "description": "GPT Image 2 AI 是一款基于 ChatGPT 图像能力的 AI 图像生成器，支持精准图片编辑、写实生成、密集文字渲染、创意风格转换、UI 截图和更快的图像生成体验。",
+    "keywords": "GPT Image 2 AI, GPT Image 2, gpt image 2 ai, gpt image 2, gpt-image-2, gpt image v2, gpt image 2.0, chatgpt image 2, openai gpt image 2, open ai image 2, openai image gen 2, gpt image 2 api, gpt image 2 如何使用, gpt image 2 使用, gpt image 2 release date, gpt image generator"
   },
   "header": {
     "id": "header",
     "brand": {
-      "title": "GPT Image 2",
+      "title": "GPT Image 2 AI",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2"
+        "alt": "GPT Image 2 AI"
       },
       "url": "/"
     },
     "nav": {
       "items": [
         {
-          "title": "GPT Image 2",
+          "title": "GPT Image 2 AI",
           "url": "/models/gpt-image-2",
           "icon": "Image"
         },
@@ -80,11 +80,11 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 — ChatGPT AI 图像生成器",
-    "description": "使用 GPT Image 2 生成写实图片、精致的 UI 截图、产品效果图和可编辑的视觉概念图。基于 ChatGPT Image 模型，具备更强的提示词理解、更清晰的图中文字和更快的迭代效率。",
+    "title": "GPT Image 2 AI — ChatGPT AI 图像生成器",
+    "description": "使用 GPT Image 2 AI 生成写实图片、精致的 UI 截图、产品效果图和可编辑的视觉概念图。参考 OpenAI 最新 ChatGPT 图像体验，它更强调精准编辑、更强的指令遵循、更清晰的图中文字、创意风格转换和更快的迭代效率。",
     "buttons": [
       {
-        "title": "体验 GPT Image 2",
+        "title": "体验 GPT Image 2 AI",
         "icon": "Image",
         "url": "/models/gpt-image-2",
         "target": "_self",
@@ -99,17 +99,17 @@
       }
     ],
     "show_avatars": false,
-    "avatars_tip": "适合探索 GPT Image 2 preview 工作流的创作者",
+    "avatars_tip": "适合探索 GPT Image 2 AI 工作流的创作者",
     "show_award": false,
     "background_image": {
       "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
-      "alt": "GPT Image 2 ChatGPT AI 图像生成器"
+      "alt": "GPT Image 2 AI ChatGPT AI 图像生成器"
     }
   },
   "showcases-flow": {
     "id": "showcases",
-    "title": "GPT Image 2 作品展示",
-    "description": "精选 GPT Image 2 示例，覆盖写实图片、文字海报、产品效果图和 UI 概念图。",
+    "title": "GPT Image 2 AI 作品展示",
+    "description": "精选 GPT Image 2 AI 示例，覆盖写实图片、文字海报、产品效果图、UI 概念图和精准改图场景。",
     "items": [
       {
         "title": "GPT Image 2 示例 1",
@@ -198,12 +198,12 @@
   },
   "introduce": {
     "id": "introduce",
-    "title": "什么是 GPT Image 2？",
-    "description": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，适合写实图像生成、可靠的文字渲染、逼真的截图生成、图像编辑和参考图驱动的创意探索。",
+    "title": "什么是 GPT Image 2 AI？",
+    "description": "GPT Image 2 AI 是一款基于 ChatGPT 图像能力的 AI 图像生成器，适合写实图像生成、可靠的文字渲染、逼真的截图生成、精准图像编辑和参考图驱动的创意探索。",
     "items": [
       {
-        "title": "更可靠的图中文字渲染",
-        "description": "可用于生成海报、菜单、标签、广告素材和社媒图片，图中文字相比旧版图像工作流更清晰、更可用。",
+        "title": "更可靠的密集文字渲染",
+        "description": "可用于生成海报、菜单、标签、广告素材和社媒图片，图中文字相比旧版图像工作流更清晰，也更适合更密集、更小字号的文字内容。",
         "icon": "RiFileTextLine"
       },
       {
@@ -217,20 +217,20 @@
         "icon": "RiMagicLine"
       },
       {
-        "title": "自然语言图像编辑",
-        "description": "通过对话式指令修改文案、布局、风格、物体或构图，无需从头重做整张图片。",
+        "title": "精准自然语言图像编辑",
+        "description": "通过对话式指令修改文案、布局、风格、物体或构图，并尽量保留人物特征、光线和画面关键信息，无需从头重做整张图片。",
         "icon": "RiSparklingLine"
       }
     ]
   },
   "benefits": {
     "id": "benefits",
-    "title": "为什么选择 GPT Image 2？",
-    "description": "GPT Image 2 通过更强的指令遵循、更实用的文字渲染和灵活的图像生成流程，帮助团队更快产出可用视觉素材。",
+    "title": "为什么选择 GPT Image 2 AI？",
+    "description": "GPT Image 2 AI 通过更强的指令遵循、更实用的文字渲染、更灵活的图像编辑流程和更快的生成体验，帮助团队更快产出可用视觉素材。",
     "items": [
       {
         "title": "更快的创意迭代",
-        "description": "从想法到成图速度更快，并且可以持续优化提示词、布局和细节。",
+        "description": "从想法到成图速度更快，并且可以在更少等待时间下持续优化提示词、布局和细节。",
         "icon": "RiRocketLine"
       },
       {
@@ -239,8 +239,8 @@
         "icon": "RiUserSmileLine"
       },
       {
-        "title": "更强的提示词控制",
-        "description": "对构图、文案、颜色和主体细节等多条件提示词有更稳定的表现。",
+        "title": "更强的指令遵循",
+        "description": "对构图、文案、颜色、主体细节和元素关系等多条件提示词有更稳定的表现。",
         "icon": "RiTimeLine"
       },
       {
@@ -483,11 +483,11 @@
   },
   "faq": {
     "id": "faq",
-    "title": "关于 GPT Image 2 的常见问题",
+    "title": "关于 GPT Image 2 AI 的常见问题",
     "items": [
       {
-        "question": "什么是 GPT Image 2？",
-        "answer": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，重点提升了写实图像、文字渲染、UI 截图和提示词遵循能力。"
+        "question": "什么是 GPT Image 2 AI？",
+        "answer": "GPT Image 2 AI 是一款基于 ChatGPT 图像能力的 AI 图像生成器，重点强调写实图像、文字渲染、精准编辑、创意风格转换和更可靠的提示词遵循能力。"
       },
       {
         "question": "GPT Image 2 可以免费使用吗？",
@@ -498,8 +498,8 @@
         "answer": "你可以用它生成产品效果图、社媒图片、UI 截图、海报、概念图，以及基于自然语言编辑已有图片。"
       },
       {
-        "question": "GPT Image 2 和旧版图像模型有什么不同？",
-        "answer": "GPT Image 2 在文字渲染、截图真实感、提示词遵循和写实质量上看起来更进一步，更适合真实生产素材。"
+        "question": "GPT Image 2 AI 和旧版图像模型有什么不同？",
+        "answer": "GPT Image 2 AI 在精准编辑、密集文字渲染、截图真实感、提示词遵循、创意转换和生成速度上更进一步，更适合真实生产素材。"
       },
       {
         "question": "GPT Image 2 API 已经开放了吗？",
@@ -541,11 +541,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "GPT Image 2",
-      "description": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，适用于文生图、图像编辑、UI 原型和产品视觉创作。",
+      "title": "GPT Image 2 AI",
+      "description": "GPT Image 2 AI 是一款基于 ChatGPT 图像能力的 AI 图像生成器，适用于文生图、精准图像编辑、UI 原型、产品视觉和创意风格转换。",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2 ChatGPT AI 图像生成器"
+        "alt": "GPT Image 2 AI ChatGPT AI 图像生成器"
       },
       "url": "/"
     },
@@ -619,16 +619,16 @@
     "show_locale": true
   },
   "generator_switcher": {
-    "title": "使用 GPT Image 2 创作",
-    "subtitle": "直接在首页生成逼真的 GPT Image 2 AI 图像。",
+    "title": "使用 GPT Image 2 AI 创作",
+    "subtitle": "直接在首页生成逼真的 GPT Image 2 AI 图像，并体验更精准的改图能力。",
     "video": "AI 视频",
     "image": "AI 图片",
     "seedance": "Seedance 2.0",
     "kling": "Kling 3",
     "seedance_description": "更适合多模态参考、镜头控制和更强电影感生成。",
     "kling_description": "更适合多镜叙事、元素连贯和原声音轨。",
-    "sr_only_video": "GPT Image 2 ChatGPT AI 图像生成器",
-    "sr_only_image": "GPT Image 2 图像编辑",
+    "sr_only_video": "GPT Image 2 AI ChatGPT AI 图像生成器",
+    "sr_only_image": "GPT Image 2 AI 图像编辑",
     "sr_only_kling": "Kling 3 视频生成器"
   }
 }
