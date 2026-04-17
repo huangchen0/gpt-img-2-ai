@@ -1,5 +1,7 @@
 'use client';
 
+import { Star } from 'lucide-react';
+
 import { LazyImage } from '@/shared/blocks/common';
 import { ScrollAnimation } from '@/shared/components/ui/scroll-animation';
 import { Section, SectionItem } from '@/shared/types/blocks/landing';
@@ -12,29 +14,58 @@ export function Testimonials({
   className?: string;
 }) {
   const TestimonialCard = ({ item }: { item: SectionItem }) => {
+    const imageSrc = item.image?.src || item.avatar?.src || '';
+    const imageAlt = item.image?.alt || item.avatar?.alt || item.name || '';
+    const rating = Number(item.rating ?? 5);
+
     return (
-      <div className="bg-card/25 ring-foreground/[0.07] flex flex-col justify-end gap-6 rounded-(--radius) border border-transparent p-8 ring-1">
-        <p className='text-foreground self-end text-balance before:mr-1 before:content-["\201C"] after:ml-1 after:content-["\201D"]'>
-          {item.quote || item.description}
-        </p>
-        <div className="flex items-center gap-3">
-          <div className="ring-foreground/10 aspect-square size-9 overflow-hidden rounded-lg border border-transparent shadow-md ring-1 shadow-black/15">
-            <LazyImage
-              src={item.image?.src || item.avatar?.src || ''}
-              alt={item.image?.alt || item.avatar?.alt || item.name || ''}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <h3 className="sr-only">
-            {item.name}, {item.role || item.title}
-          </h3>
-          <div className="space-y-px">
-            <p className="text-sm font-medium">{item.name} </p>
-            <p className="text-muted-foreground text-xs">
-              {item.role || item.title}
-            </p>
-          </div>
+      <div className="group relative min-h-[520px] overflow-hidden rounded-[2rem] border border-white/10 bg-black shadow-[0_24px_80px_rgba(0,0,0,0.3)]">
+        <div className="absolute inset-0">
+          <LazyImage
+            src={imageSrc}
+            alt={imageAlt}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
+          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/95 via-black/65 to-transparent" />
         </div>
+
+        <div className="relative flex h-full flex-col justify-end gap-5 p-7 text-white md:p-8">
+          <div className="flex items-center gap-1 text-[#ffcc00]">
+            {Array.from({ length: 5 }).map((_, index) => (
+              <Star
+                key={index}
+                className={`h-5 w-5 ${
+                  index < rating ? 'fill-current' : 'fill-transparent opacity-40'
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-end gap-3">
+            {item.avatar?.src && (
+              <div className="ring-white/15 aspect-square size-10 overflow-hidden rounded-full ring-1">
+                <LazyImage
+                  src={item.avatar.src}
+                  alt={item.avatar.alt || item.name || ''}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            )}
+            <div>
+              <h3 className="text-2xl font-semibold tracking-tight">{item.name}</h3>
+              <p className="text-base text-white/75">{item.role || item.title}</p>
+            </div>
+          </div>
+
+          <p className='max-w-xl text-lg leading-9 text-white/80 before:mr-1 before:content-["\201C"] after:ml-1 after:content-["\201D"]'>
+            {item.quote || item.description}
+          </p>
+        </div>
+
+        <h3 className="sr-only">
+          {item.name}, {item.role || item.title}
+        </h3>
       </div>
     );
   };
@@ -42,26 +73,24 @@ export function Testimonials({
   return (
     <section
       id={section.id}
-      className={`py-16 md:py-24 ${section.className} ${className}`}
+      className={`bg-[#17171b] py-16 text-white md:py-24 ${section.className} ${className}`}
     >
       <div className="container">
         <ScrollAnimation>
-          <div className="mx-auto max-w-2xl text-center text-balance">
-            <h2 className="text-foreground mb-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          <div className="mx-auto max-w-3xl text-center text-balance">
+            <h2 className="mb-4 text-3xl font-semibold tracking-tight text-white md:text-5xl">
               {section.title}
             </h2>
-            <p className="text-muted-foreground mb-6 md:mb-12 lg:mb-16">
+            <p className="mb-6 text-white/65 md:mb-12 lg:mb-16">
               {section.description}
             </p>
           </div>
         </ScrollAnimation>
         <ScrollAnimation delay={0.2}>
-          <div className="border-border/50 relative rounded-(--radius)">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-px lg:*:nth-1:rounded-t-none lg:*:nth-2:rounded-tl-none lg:*:nth-2:rounded-br-none lg:*:nth-3:rounded-l-none lg:*:nth-4:rounded-r-none lg:*:nth-5:rounded-tl-none lg:*:nth-5:rounded-br-none lg:*:nth-6:rounded-b-none">
-              {section.items?.map((item, index) => (
-                <TestimonialCard key={index} item={item} />
-              ))}
-            </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {section.items?.map((item, index) => (
+              <TestimonialCard key={index} item={item} />
+            ))}
           </div>
         </ScrollAnimation>
       </div>

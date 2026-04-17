@@ -381,61 +381,67 @@
   },
   "testimonials": {
     "id": "testimonials",
-    "title": "真实用户评价",
-    "description": "看看创作者如何使用 GPT Image 2 制作视觉设计、营销素材、产品效果图和品牌内容。",
+    "title": "创作者、营销团队与产品团队都在使用",
+    "description": "看看大家如何用 GPT Image 2 AI 制作职业头像、产品视觉、生活方式内容、社媒素材和更精致的营销图片。",
     "items": [
       {
-        "name": "李明",
-        "role": "社媒视觉设计师",
-        "quote": "GPT Image 2 让带文字的营销视觉图更容易落地，我现在几分钟就能从想法做到可发布素材。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=liming",
-          "alt": "李明"
+        "name": "J.K.",
+        "role": "内容创作者",
+        "rating": 5,
+        "quote": "我会用 GPT Image 2 AI 生成更精致的职业头像和生活方式图片，用在博客和社媒内容里。画面看起来很真实，光线自然，后期调整也比手动处理省事很多。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-headshot.webp",
+          "alt": "GPT Image 2 AI 内容创作者评价背景图"
         }
       },
       {
-        "name": "王芳",
-        "role": "增长营销经理",
-        "quote": "我们会用 GPT Image 2 做落地页原型、广告创意和产品营销图，截图质感特别有帮助。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=wangfang",
-          "alt": "王芳"
+        "name": "M.L.",
+        "role": "电商经理",
+        "rating": 5,
+        "quote": "GPT Image 2 AI 让商品视觉制作轻松很多。我不用搭复杂棚拍环境，也能快速得到干净、真实的产品图，很适合做商品详情页和营销活动素材。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-product.webp",
+          "alt": "GPT Image 2 AI 电商经理评价背景图"
         }
       },
       {
-        "name": "张伟",
+        "name": "A.R.",
+        "role": "自由摄影师",
+        "rating": 5,
+        "quote": "作为自由摄影师，我很在意效率，但也不希望成片看起来太假。GPT Image 2 AI 很适合做肖像概念图和棚拍风职业头像，整体质感可信，而且成图完成度很高。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-portrait.webp",
+          "alt": "GPT Image 2 AI 自由摄影师评价背景图"
+        }
+      },
+      {
+        "name": "S.T.",
+        "role": "时尚博主",
+        "rating": 5,
+        "quote": "我会用 GPT Image 2 AI 提前测试穿搭和内容方向，从服装变化到更干净的时尚图都很顺手。这样在正式拍摄前就能先判断视觉效果，节省很多时间。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-lifestyle.webp",
+          "alt": "GPT Image 2 AI 时尚博主评价背景图"
+        }
+      },
+      {
+        "name": "R.K.",
+        "role": "数字营销人员",
+        "rating": 5,
+        "quote": "GPT Image 2 AI 很适合做社媒素材、营销视觉和真实感编辑内容。需要快速出多版图的时候特别省力，能更快把品牌内容做得完整、统一、可发布。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/how-to/highlight-ai-photo-editor.webp",
+          "alt": "GPT Image 2 AI 数字营销人员评价背景图"
+        }
+      },
+      {
+        "name": "L.N.",
         "role": "产品设计师",
-        "quote": "它生成的 UI 图已经足够拿来跟团队讨论流程，很多想法在打开 Figma 之前就能验证。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=zhangwei",
-          "alt": "张伟"
-        }
-      },
-      {
-        "name": "陈静",
-        "role": "创意总监",
-        "quote": "写实效果在光线、材质和构图上更成熟，很适合前期视觉方向探索。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=chenjing",
-          "alt": "陈静"
-        }
-      },
-      {
-        "name": "刘强",
-        "role": "电商品牌创始人",
-        "quote": "产品效果图和包装概念出的很快，能先测试创意方向再进入正式制作。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=liuqiang",
-          "alt": "刘强"
-        }
-      },
-      {
-        "name": "赵敏",
-        "role": "品牌设计师",
-        "quote": "自然语言改图非常省时间，小范围改文案和样式不用整张重做。",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=zhaomin",
-          "alt": "赵敏"
+        "rating": 5,
+        "quote": "当我需要为汇报和提案准备更真实的概念图时，GPT Image 2 AI 可以明显加快节奏。它输出的细节足够清晰，适合内部评审、演示文稿和前期产品叙事。",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/showcases/photogpt-case-e-commerce.webp",
+          "alt": "GPT Image 2 AI 产品设计师评价背景图"
         }
       }
     ]

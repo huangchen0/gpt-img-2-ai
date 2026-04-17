@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI | Generador de Imágenes IA de ChatGPT Gratis",
-    "description": "GPT Image 2 AI es un generador de imágenes con IA impulsado por ChatGPT para edición precisa, resultados fotorrealistas, renderizado de texto denso, transformaciones creativas, capturas de UI y generación rápida.",
-    "keywords": "GPT Image 2 AI, GPT Image 2, gpt image 2 ai, gpt image 2, gpt-image-2, gpt image v2, gpt image 2.0, chatgpt image 2, openai gpt image 2, open ai image 2, openai image gen 2, gpt image 2 api, gpt image 2 how to use, gpt image 2 release date, gpt image generator"
+    "title": "GPT Image 2 AI | Generador, editor y creador de mockups con GPT Image 2 AI",
+    "description": "GPT Image 2 AI es una herramienta de generación y edición visual pensada para imágenes fotorrealistas, diseños con texto, pantallas UI, mockups de producto y retoque a partir de referencias. Con GPT Image 2 AI puedes producir piezas listas para usar mucho más rápido.",
+    "keywords": "GPT Image 2 AI, gpt image 2 ai, GPT Image 2 AI generador, GPT Image 2 AI editor, GPT Image 2 AI mockups, GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, openai gpt image 2, openai image gen 2, gpt image 2 api, gpt image generator"
   },
   "header": {
     "id": "header",
@@ -80,8 +80,8 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 AI - Generador de imágenes con IA para ChatGPT",
-    "description": "Con GPT Image 2 AI puedes crear imágenes realistas, pantallas de interfaz, mockups de producto y piezas visuales listas para marketing en muy poco tiempo. Inspirado en la nueva experiencia de imágenes de ChatGPT, destaca por la edición precisa, el mejor seguimiento de instrucciones, el texto dentro de la imagen y una iteración más rápida.",
+    "title": "GPT Image 2 AI para imágenes realistas, retoque preciso y mockups UI",
+    "description": "GPT Image 2 AI te ayuda a crear imágenes realistas, pantallas de interfaz, visuales de producto y creatividades publicitarias dentro de un mismo flujo. Está orientado a los casos de uso por los que la gente busca GPT Image 2 AI: editar mejor, seguir instrucciones complejas y sacar piezas visuales que sí se puedan publicar.",
     "buttons": [
       {
         "title": "Probar Imagen AI",
@@ -199,7 +199,7 @@
   "introduce": {
     "id": "introduce",
     "title": "Qué es GPT Image 2 AI",
-    "description": "GPT Image 2 AI es un generador de imágenes impulsado por ChatGPT pensado para usos reales. Permite crear escenas fotorrealistas, imágenes con texto más legible, pantallas tipo UI, composiciones a partir de referencias y ediciones precisas guiadas por instrucciones naturales.",
+    "description": "GPT Image 2 AI está pensado para trabajo real de marketing, producto y diseño, no solo para inspiración. GPT Image 2 AI sirve especialmente bien para escenas fotorrealistas, imágenes con texto, pantallas tipo UI, mockups y edición fina guiada por instrucciones naturales.",
     "items": [
       {
         "title": "Mejor para imágenes con texto",
@@ -225,8 +225,8 @@
   },
   "benefits": {
     "id": "benefits",
-    "title": "Por qué usar GPT Image 2 AI",
-    "description": "GPT Image 2 AI no solo genera imágenes atractivas; también ayuda a llegar antes a un resultado útil para trabajo real gracias a mejor edición, seguimiento de instrucciones y generación más rápida.",
+    "title": "Por qué los equipos eligen GPT Image 2 AI",
+    "description": "GPT Image 2 AI acelera el paso del prompt a la pieza final gracias a un mejor seguimiento de instrucciones, texto más útil dentro de la imagen, edición flexible y menos rondas de corrección.",
     "items": [
       {
         "title": "Iteración mucho más rápida",

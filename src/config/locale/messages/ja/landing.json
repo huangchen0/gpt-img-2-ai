@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI | ChatGPT AI画像生成ツール 無料オンライン",
-    "description": "GPT Image 2 AI は ChatGPTベースのAI画像ジェネレーターで、高精度な画像編集、写実的な生成、密度の高いテキスト描画、クリエイティブ変換、UIスクリーンショット、高速生成に対応します。",
-    "keywords": "GPT Image 2 AI, GPT Image 2, gpt image 2 ai, gpt image 2, gpt-image-2, gpt image v2, gpt image 2.0, chatgpt image 2, openai gpt image 2, open ai image 2, openai image gen 2, gpt image 2 api, gpt image 2 how to use, gpt image 2 release date, gpt image generator"
+    "title": "GPT Image 2 AI | GPT Image 2 AIで画像生成・編集・UIモック作成",
+    "description": "GPT Image 2 AI は、写実画像、文字入りビジュアル、UIスクリーン、商品モック、参考画像ベースの修正に向いた画像生成・編集ツールです。GPT Image 2 AI を使えば、実務向けのビジュアルをより短時間で作れます。",
+    "keywords": "GPT Image 2 AI, gpt image 2 ai, GPT Image 2 AI 画像生成, GPT Image 2 AI 画像編集, GPT Image 2 AI モック, GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, openai gpt image 2, openai image gen 2, gpt image 2 api, gpt image generator"
   },
   "header": {
     "id": "header",
@@ -80,8 +80,8 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 AI - ChatGPT対応のAI画像生成ツール",
-    "description": "GPT Image 2 AI なら、写真風のビジュアル、UIイメージ、商品モックアップ、販促用の画像をすばやく作成できます。最新のChatGPT画像体験を参考に、より正確な編集、指示追従、文字表現、クリエイティブ変換、高速な反復に強みがあります。",
+    "title": "GPT Image 2 AIで写実画像、画像編集、UIモックを一気に作成",
+    "description": "GPT Image 2 AI は、写真風ビジュアル、UIイメージ、商品モック、広告用クリエイティブまで一つの流れで作れるのが特長です。GPT Image 2 AI に期待される、細かな編集、複雑な指示への追従、文字入り画像、素早い試行錯誤にしっかり対応します。",
     "buttons": [
       {
         "title": "AI画像を試す",
@@ -199,7 +199,7 @@
   "introduce": {
     "id": "introduce",
     "title": "GPT Image 2 AI とは",
-    "description": "GPT Image 2 AI は、ChatGPTベースの画像生成サービスです。リアルな写真表現、読みやすい文字入り画像、UIイメージ、精密な画像編集、参考画像を使った発想出しまで、実務に使いやすいのが特長です。",
+    "description": "GPT Image 2 AI は、ひらめき用途だけでなく実務向けの制作にも使いやすい画像生成サービスです。GPT Image 2 AI は、写実画像、文字入りバナー、UIモック、商品ビジュアル、参考画像を使った調整に特に向いています。",
     "items": [
       {
         "title": "文字入り画像を作りやすい",
@@ -225,8 +225,8 @@
   },
   "benefits": {
     "id": "benefits",
-    "title": "GPT Image 2 AI が選ばれる理由",
-    "description": "GPT Image 2 AI は、画像を出すだけでなく、より正確な編集、文字描画、指示反映、素早い反復によって実務レベルまで仕上げやすいのが強みです。",
+    "title": "チームがGPT Image 2 AIを選ぶ理由",
+    "description": "GPT Image 2 AI は、指示追従の強さ、実用的な文字表現、柔軟な画像編集、短い確認サイクルによって、プロンプトから公開できる素材までをより速くつなぎます。",
     "items": [
       {
         "title": "試行錯誤がしやすい",
