@@ -21,8 +21,16 @@ import { toast } from 'sonner';
 import { useRouter } from '@/core/i18n/navigation';
 import { AIMediaType, AITaskStatus } from '@/extensions/ai/types';
 import { ImageUploader, ImageUploaderValue } from '@/shared/blocks/common';
+import {
+  getGenerationCreditRewardAmounts,
+  useGenerationCreditEarnActions,
+} from '@/shared/blocks/generator/credit-earning-actions';
 import { GenerationCreditFallbackDialog } from '@/shared/blocks/generator/generation-credit-fallback-dialog';
 import { MembershipPriorityQueueCard } from '@/shared/blocks/generator/membership-priority-queue-card';
+import {
+  PaidDownloadDialog,
+  usePaidDownloadGate,
+} from '@/shared/blocks/generator/paid-download-dialog';
 import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -55,6 +63,7 @@ import { useAppContext } from '@/shared/contexts/app';
 import { useMembershipPriorityQueue } from '@/shared/hooks/use-membership-priority-queue';
 import {
   buildGeneratorPromptHref,
+  createGenerationCreditFallbackPayload,
   GenerationCreditFallbackPayload,
   IMAGE_STANDARD_FALLBACK_CREDITS,
   isGenerationCreditFallbackPayload,
@@ -189,8 +198,8 @@ const GENERATION_TIMEOUT = 900000;
 const MAX_PROMPT_LENGTH = 2500;
 const KLING_QUEUE_SCOPE = 'kling-video';
 const KLING_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  1 * 60 * 1000,
-  3 * 60 * 1000,
+  (1 * 60 + 30) * 1000,
+  (3 * 60 + 30) * 1000,
 ];
 const IMAGE_QUEUE_RETURN_HREF = '/ai-image';
 const VIDEO_QUEUE_RETURN_HREF = '/ai-video';
@@ -692,12 +701,10 @@ function MediaPicker({
 export function KlingVideoGenerator({
   id,
   srOnlyTitle,
-  redirectToPricingOnInsufficientCredits = false,
   pricingSectionId = 'pricing',
 }: {
   id?: string;
   srOnlyTitle?: string;
-  redirectToPricingOnInsufficientCredits?: boolean;
   pricingSectionId?: string;
 }) {
   const t = useTranslations('pages.models.kling-3.generator');
@@ -712,6 +719,7 @@ export function KlingVideoGenerator({
     hasFetchedCurrentSubscription,
     isFetchingCurrentSubscription,
     fetchCurrentSubscription,
+    configs,
   } = useAppContext();
 
   const [createMode, setCreateMode] = useState<CreateMode>('single-scene');
@@ -740,6 +748,7 @@ export function KlingVideoGenerator({
   const [downloadingVideoId, setDownloadingVideoId] = useState<string | null>(
     null
   );
+  const { canDownload, paidDownloadDialogProps } = usePaidDownloadGate();
   const [isHydrated, setIsHydrated] = useState(false);
   const [referenceUploaderResetKey, setReferenceUploaderResetKey] = useState(0);
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
@@ -1196,6 +1205,67 @@ export function KlingVideoGenerator({
     }),
     [costCredits, creditFallback, queueT, remainingCredits, t]
   );
+  const { checkinCredits, referralCredits } = useMemo(
+    () => getGenerationCreditRewardAmounts(configs),
+    [configs]
+  );
+  const creditEarnCopy = useMemo(
+    () => ({
+      checkInTitle: queueT.has('credit_fallback.checkin_title')
+        ? queueT('credit_fallback.checkin_title')
+        : 'Daily check-in',
+      checkInDescription: queueT.has('credit_fallback.checkin_description')
+        ? queueT('credit_fallback.checkin_description', {
+            credits: checkinCredits,
+          })
+        : `Claim ${checkinCredits} free credits today.`,
+      checkInAction: queueT.has('credit_fallback.checkin')
+        ? queueT('credit_fallback.checkin')
+        : 'Check in',
+      checkedInAction: queueT.has('credit_fallback.checked_in')
+        ? queueT('credit_fallback.checked_in')
+        : 'Checked in today',
+      checkingInAction: queueT.has('credit_fallback.checking_in')
+        ? queueT('credit_fallback.checking_in')
+        : 'Checking in',
+      checkInSuccess: queueT.has('credit_fallback.checkin_success')
+        ? queueT('credit_fallback.checkin_success')
+        : 'Daily credits added',
+      checkInFailed: queueT.has('credit_fallback.checkin_failed')
+        ? queueT('credit_fallback.checkin_failed')
+        : 'Check-in failed',
+      inviteTitle: queueT.has('credit_fallback.invite_title')
+        ? queueT('credit_fallback.invite_title')
+        : 'Invite friends',
+      inviteDescription: queueT.has('credit_fallback.invite_description')
+        ? queueT('credit_fallback.invite_description', {
+            credits: referralCredits,
+          })
+        : `Earn ${referralCredits} credits for each friend who signs up.`,
+      copyInviteAction: queueT.has('credit_fallback.copy_invite')
+        ? queueT('credit_fallback.copy_invite')
+        : 'Copy invite link',
+      inviteCopied: queueT.has('credit_fallback.invite_copied')
+        ? queueT('credit_fallback.invite_copied')
+        : 'Invite link copied',
+      openRewardsAction: queueT.has('credit_fallback.open_rewards')
+        ? queueT('credit_fallback.open_rewards')
+        : 'Open rewards',
+      copyFailed: queueT.has('credit_fallback.copy_failed')
+        ? queueT('credit_fallback.copy_failed')
+        : 'Copy failed',
+    }),
+    [checkinCredits, queueT, referralCredits]
+  );
+  const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
+    setCreditFallback((prev) =>
+      prev ? { ...prev, remainingCredits: nextRemaining } : prev
+    );
+  }, []);
+  const creditEarnActions = useGenerationCreditEarnActions({
+    copy: creditEarnCopy,
+    onCreditsChanged: handleCreditBalanceChanged,
+  });
   const generationRequest = useMemo<PendingKlingGenerationRequest>(() => {
     const imageUrls = referenceImages
       .map((item) => item.url)
@@ -2219,12 +2289,13 @@ export function KlingVideoGenerator({
     }
 
     if (currentSubscriptionForAttempt && remainingCredits < costCredits) {
-      if (redirectToPricingOnInsufficientCredits) {
-        toast.error(t('insufficient_credits_redirecting'));
-        redirectToPricingSection();
-      } else {
-        toast.error(t('insufficient_credits'));
-      }
+      setCreditFallback(
+        createGenerationCreditFallbackPayload({
+          mediaType: 'video',
+          requestedCostCredits: costCredits,
+          remainingCredits,
+        })
+      );
       return;
     }
 
@@ -2262,6 +2333,10 @@ export function KlingVideoGenerator({
   };
 
   const handleDownload = async (video: GeneratedVideo) => {
+    if (!(await canDownload('video'))) {
+      return;
+    }
+
     try {
       setDownloadingVideoId(video.id);
       const resp = await fetch(
@@ -3148,6 +3223,7 @@ export function KlingVideoGenerator({
                             src={video.url}
                             autoPlay
                             controls
+                            controlsList="nodownload"
                             loop
                             muted
                             playsInline
@@ -3217,7 +3293,7 @@ export function KlingVideoGenerator({
         </div>
       </div>
       <GenerationCreditFallbackDialog
-        open={Boolean(creditFallback) && creditFallbackActions.length > 0}
+        open={Boolean(creditFallback)}
         onOpenChange={(open) => {
           if (!open) {
             handleCloseCreditFallback();
@@ -3238,7 +3314,14 @@ export function KlingVideoGenerator({
         closeLabel={creditFallbackCopy.closeLabel}
         onUpgrade={handleUpgradeFromCreditFallback}
         actions={creditFallbackActions}
+        earnTitle={
+          queueT.has('credit_fallback.earn_title')
+            ? queueT('credit_fallback.earn_title')
+            : 'Free ways to get credits'
+        }
+        earnActions={creditEarnActions}
       />
+      <PaidDownloadDialog {...paidDownloadDialogProps} />
     </section>
   );
 }

@@ -23,8 +23,16 @@ import { toast } from 'sonner';
 import { Link, useRouter } from '@/core/i18n/navigation';
 import { AIMediaType, AITaskStatus } from '@/extensions/ai/types';
 import { ImageUploader, ImageUploaderValue } from '@/shared/blocks/common';
+import {
+  getGenerationCreditRewardAmounts,
+  useGenerationCreditEarnActions,
+} from '@/shared/blocks/generator/credit-earning-actions';
 import { GenerationCreditFallbackDialog } from '@/shared/blocks/generator/generation-credit-fallback-dialog';
 import { MembershipPriorityQueueCard } from '@/shared/blocks/generator/membership-priority-queue-card';
+import {
+  PaidDownloadDialog,
+  usePaidDownloadGate,
+} from '@/shared/blocks/generator/paid-download-dialog';
 import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -55,6 +63,7 @@ import { useAppContext } from '@/shared/contexts/app';
 import { useMembershipPriorityQueue } from '@/shared/hooks/use-membership-priority-queue';
 import {
   buildGeneratorPromptHref,
+  createGenerationCreditFallbackPayload,
   GenerationCreditFallbackPayload,
   IMAGE_STANDARD_FALLBACK_CREDITS,
   isGenerationCreditFallbackPayload,
@@ -125,7 +134,6 @@ interface VideoGeneratorProps {
   id?: string;
   maxSizeMB?: number;
   srOnlyTitle?: string;
-  redirectToPricingOnInsufficientCredits?: boolean;
   pricingSectionId?: string;
   showDemoPreview?: boolean;
   defaultSeedanceMode?: Seedance2Mode;
@@ -250,8 +258,8 @@ const ASSET_TIMEOUT = 300000;
 const MAX_PROMPT_LENGTH = 2500;
 const PROVIDER = 'kie';
 const VIDEO_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  1 * 60 * 1000,
-  3 * 60 * 1000,
+  (1 * 60 + 30) * 1000,
+  (3 * 60 + 30) * 1000,
 ];
 const IMAGE_QUEUE_RETURN_HREF = '/models/gpt-image-2#nano-banana-generator';
 const VIDEO_QUEUE_RETURN_HREF =
@@ -1079,7 +1087,6 @@ export function VideoGenerator({
   id,
   maxSizeMB = 30,
   srOnlyTitle,
-  redirectToPricingOnInsufficientCredits = false,
   pricingSectionId = 'pricing',
   showDemoPreview = true,
   defaultSeedanceMode = 'text',
@@ -1172,6 +1179,7 @@ export function VideoGenerator({
   const [downloadingAssetId, setDownloadingAssetId] = useState<string | null>(
     null
   );
+  const { canDownload, paidDownloadDialogProps } = usePaidDownloadGate();
   const [isMounted, setIsMounted] = useState(false);
   const pollAttemptRef = useRef(0);
   const [creditFallback, setCreditFallback] =
@@ -1928,6 +1936,67 @@ export function VideoGenerator({
     }),
     [creditFallback, costCredits, remainingCredits, t]
   );
+  const { checkinCredits, referralCredits } = useMemo(
+    () => getGenerationCreditRewardAmounts(configs),
+    [configs]
+  );
+  const creditEarnCopy = useMemo(
+    () => ({
+      checkInTitle: t.has('credit_fallback.checkin_title')
+        ? t('credit_fallback.checkin_title')
+        : 'Daily check-in',
+      checkInDescription: t.has('credit_fallback.checkin_description')
+        ? t('credit_fallback.checkin_description', {
+            credits: checkinCredits,
+          })
+        : `Claim ${checkinCredits} free credits today.`,
+      checkInAction: t.has('credit_fallback.checkin')
+        ? t('credit_fallback.checkin')
+        : 'Check in',
+      checkedInAction: t.has('credit_fallback.checked_in')
+        ? t('credit_fallback.checked_in')
+        : 'Checked in today',
+      checkingInAction: t.has('credit_fallback.checking_in')
+        ? t('credit_fallback.checking_in')
+        : 'Checking in',
+      checkInSuccess: t.has('credit_fallback.checkin_success')
+        ? t('credit_fallback.checkin_success')
+        : 'Daily credits added',
+      checkInFailed: t.has('credit_fallback.checkin_failed')
+        ? t('credit_fallback.checkin_failed')
+        : 'Check-in failed',
+      inviteTitle: t.has('credit_fallback.invite_title')
+        ? t('credit_fallback.invite_title')
+        : 'Invite friends',
+      inviteDescription: t.has('credit_fallback.invite_description')
+        ? t('credit_fallback.invite_description', {
+            credits: referralCredits,
+          })
+        : `Earn ${referralCredits} credits for each friend who signs up.`,
+      copyInviteAction: t.has('credit_fallback.copy_invite')
+        ? t('credit_fallback.copy_invite')
+        : 'Copy invite link',
+      inviteCopied: t.has('credit_fallback.invite_copied')
+        ? t('credit_fallback.invite_copied')
+        : 'Invite link copied',
+      openRewardsAction: t.has('credit_fallback.open_rewards')
+        ? t('credit_fallback.open_rewards')
+        : 'Open rewards',
+      copyFailed: t.has('credit_fallback.copy_failed')
+        ? t('credit_fallback.copy_failed')
+        : 'Copy failed',
+    }),
+    [checkinCredits, referralCredits, t]
+  );
+  const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
+    setCreditFallback((prev) =>
+      prev ? { ...prev, remainingCredits: nextRemaining } : prev
+    );
+  }, []);
+  const creditEarnActions = useGenerationCreditEarnActions({
+    copy: creditEarnCopy,
+    onCreditsChanged: handleCreditBalanceChanged,
+  });
   const queuePayload = useMemo(
     () =>
       JSON.stringify({
@@ -3916,12 +3985,13 @@ export function VideoGenerator({
     }
 
     if (currentSubscriptionForAttempt && remainingCredits < costCredits) {
-      if (redirectToPricingOnInsufficientCredits) {
-        showGenerationError(t('insufficient_credits_redirecting'));
-        redirectToPricingSection();
-      } else {
-        showGenerationError(t('errors.insufficient_credits'));
-      }
+      setCreditFallback(
+        createGenerationCreditFallbackPayload({
+          mediaType: 'video',
+          requestedCostCredits: costCredits,
+          remainingCredits,
+        })
+      );
       return;
     }
 
@@ -3969,6 +4039,10 @@ export function VideoGenerator({
     fallbackType: 'mp4' | 'png';
   }) => {
     if (!url) {
+      return;
+    }
+
+    if (!(await canDownload(fallbackType === 'mp4' ? 'video' : 'image'))) {
       return;
     }
 
@@ -4946,6 +5020,7 @@ export function VideoGenerator({
                           <video
                             src={video.url}
                             controls
+                            controlsList="nodownload"
                             className="h-auto w-full"
                             preload="metadata"
                           />
@@ -5075,7 +5150,7 @@ export function VideoGenerator({
         </div>
       </div>
       <GenerationCreditFallbackDialog
-        open={Boolean(creditFallback) && creditFallbackActions.length > 0}
+        open={Boolean(creditFallback)}
         onOpenChange={(open) => {
           if (!open) {
             handleCloseCreditFallback();
@@ -5096,7 +5171,14 @@ export function VideoGenerator({
         closeLabel={creditFallbackCopy.closeLabel}
         onUpgrade={handleUpgradeFromCreditFallback}
         actions={creditFallbackActions}
+        earnTitle={
+          t.has('credit_fallback.earn_title')
+            ? t('credit_fallback.earn_title')
+            : 'Free ways to get credits'
+        }
+        earnActions={creditEarnActions}
       />
+      <PaidDownloadDialog {...paidDownloadDialogProps} />
     </section>
   );
 }

@@ -28,6 +28,59 @@ function createOption(id: GenerationCreditFallbackOptionId) {
   } satisfies GenerationCreditFallbackOption;
 }
 
+function canUseOption(
+  option: GenerationCreditFallbackOption,
+  remainingCredits: number
+) {
+  return remainingCredits >= option.requiredCredits;
+}
+
+export function createGenerationCreditFallbackPayload({
+  mediaType,
+  requestedCostCredits,
+  remainingCredits,
+}: {
+  mediaType: string;
+  requestedCostCredits: number;
+  remainingCredits: number;
+}): GenerationCreditFallbackPayload {
+  const fallbackOptions: GenerationCreditFallbackOption[] = [];
+
+  if (mediaType === 'image') {
+    const option = createOption('image_standard');
+    if (
+      requestedCostCredits > option.requiredCredits &&
+      canUseOption(option, remainingCredits)
+    ) {
+      fallbackOptions.push(option);
+    }
+  } else if (mediaType === 'video') {
+    const videoOption = createOption('video_classic');
+    const imageOption = createOption('image_standard');
+
+    if (
+      requestedCostCredits > videoOption.requiredCredits &&
+      canUseOption(videoOption, remainingCredits)
+    ) {
+      fallbackOptions.push(videoOption);
+    }
+
+    if (
+      requestedCostCredits > imageOption.requiredCredits &&
+      canUseOption(imageOption, remainingCredits)
+    ) {
+      fallbackOptions.push(imageOption);
+    }
+  }
+
+  return {
+    type: 'insufficient_credits_with_fallback',
+    requestedCostCredits,
+    remainingCredits,
+    fallbackOptions,
+  };
+}
+
 export function buildGenerationCreditFallbackPayload({
   mediaType,
   requestedCostCredits,
@@ -37,37 +90,15 @@ export function buildGenerationCreditFallbackPayload({
   requestedCostCredits: number;
   remainingCredits: number;
 }): GenerationCreditFallbackPayload | null {
-  if (
-    requestedCostCredits <= 0 ||
-    remainingCredits >= requestedCostCredits ||
-    remainingCredits < MIN_GENERATION_FALLBACK_CREDITS
-  ) {
+  if (requestedCostCredits <= 0 || remainingCredits >= requestedCostCredits) {
     return null;
   }
 
-  const fallbackOptions: GenerationCreditFallbackOption[] = [];
-
-  if (mediaType === 'image') {
-    if (requestedCostCredits > IMAGE_STANDARD_FALLBACK_CREDITS) {
-      fallbackOptions.push(createOption('image_standard'));
-    }
-  } else if (mediaType === 'video') {
-    if (requestedCostCredits > VIDEO_CLASSIC_FALLBACK_CREDITS) {
-      fallbackOptions.push(createOption('video_classic'));
-      fallbackOptions.push(createOption('image_standard'));
-    }
-  }
-
-  if (fallbackOptions.length === 0) {
-    return null;
-  }
-
-  return {
-    type: 'insufficient_credits_with_fallback',
+  return createGenerationCreditFallbackPayload({
+    mediaType,
     requestedCostCredits,
     remainingCredits,
-    fallbackOptions,
-  };
+  });
 }
 
 function isGenerationCreditFallbackOption(

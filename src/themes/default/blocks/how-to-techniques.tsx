@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 import { Link } from '@/core/i18n/navigation';
 import { LazyImage } from '@/shared/blocks/common';
@@ -22,7 +22,7 @@ export function HowToTechniques({
     <section
       id={section.id || section.name}
       className={cn(
-        'bg-[#17171b] py-20 text-white md:py-28',
+        'bg-[#111111] [background-image:radial-gradient(circle_at_top,_rgba(250,204,21,0.08),_transparent_36%)] py-20 text-white md:py-28',
         section.className,
         className
       )}
@@ -35,35 +35,20 @@ export function HowToTechniques({
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-7xl">
-            {section.title}
-            {section.highlight_text && (
-              <>
-                {' '}
-                <span className="bg-[linear-gradient(90deg,#5b7cff_0%,#b55ff6_35%,#ff8fb1_65%,#f1d04f_100%)] bg-clip-text text-transparent">
-                  {section.highlight_text}
-                </span>
-              </>
-            )}
-          </h2>
-          <p className="mx-auto mt-6 max-w-4xl text-lg leading-8 text-white/60 md:text-2xl md:leading-10">
-            {section.description}
-          </p>
-          {(section.badge_text || section.image?.src) && (
-            <div className="mt-8 flex justify-center">
-              {section.image?.src ? (
-                <LazyImage
-                  src={section.image.src}
-                  alt={section.image.alt ?? section.title ?? ''}
-                  className="h-auto max-w-[280px] opacity-95"
-                />
-              ) : (
-                <p className="text-sm text-white/65 md:text-base">
-                  {section.badge_text}
-                </p>
-              )}
+          {section.tip && (
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 backdrop-blur-sm">
+              <Sparkles className="h-4 w-4 text-amber-300" />
+              <span>{section.tip}</span>
             </div>
           )}
+          <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl lg:text-7xl">
+            <span className="bg-gradient-to-r from-amber-300 via-yellow-400 to-yellow-200 bg-clip-text text-transparent">
+              {section.title}
+            </span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/60 md:text-2xl md:leading-10">
+            {section.description}
+          </p>
         </motion.div>
 
         <div className="mt-16 space-y-10 md:mt-24 md:space-y-16">
@@ -75,7 +60,7 @@ export function HowToTechniques({
               <motion.div
                 key={item.title || index}
                 className={cn(
-                  'grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16',
+                  'grid items-center gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16',
                   isImageLeft &&
                     'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1'
                 )}
@@ -88,8 +73,8 @@ export function HowToTechniques({
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                <div className="space-y-5 px-2 lg:px-0">
-                  <h3 className="max-w-xl text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+                <div className="space-y-5">
+                  <h3 className="max-w-xl text-3xl leading-tight font-semibold text-white sm:text-4xl lg:text-5xl">
                     {item.title}
                   </h3>
                   <p className="max-w-2xl text-lg leading-9 text-white/60">
@@ -98,8 +83,8 @@ export function HowToTechniques({
                   {item.button && (
                     <Button
                       asChild
-                      variant="secondary"
-                      className="h-14 rounded-xl bg-white px-8 text-lg font-medium text-[#17171b] hover:bg-white/90"
+                      variant="link"
+                      className="h-auto p-0 text-lg font-semibold text-amber-300 hover:text-amber-200"
                     >
                       <Link
                         href={item.button.url || ''}
@@ -112,8 +97,8 @@ export function HowToTechniques({
                   )}
                 </div>
 
-                <div className="rounded-[2rem] bg-white p-4 shadow-[0_24px_80px_rgba(0,0,0,0.28)] md:p-5">
-                  <div className="overflow-hidden rounded-[1.5rem] bg-[#f6f3eb]">
+                <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_30px_90px_rgba(0,0,0,0.35)]">
+                  <div className="overflow-hidden rounded-[1.5rem] bg-black/20">
                     <LazyImage
                       src={item.image?.src ?? ''}
                       alt={item.image?.alt ?? item.title ?? ''}

@@ -17,6 +17,7 @@ export function FollowUp({
   chatInstance: UseChatHelpers<UIMessage>;
 }) {
   const params = useParams();
+  const activeChatId = Array.isArray(params?.id) ? params.id[0] : params?.id;
   const { chat } = useChatContext();
   const {
     messages,
@@ -131,7 +132,7 @@ export function FollowUp({
   useEffect(() => {
     if (
       chat?.id &&
-      chat.id === params.id &&
+      chat.id === activeChatId &&
       chat.content &&
       chat.createdAt &&
       messages.length === 0
@@ -139,7 +140,7 @@ export function FollowUp({
       // auto send message in new chat
       submitMessage(chat.content, chat.metadata ?? {});
     }
-  }, [params.id, chat, submitMessage, messages.length]);
+  }, [activeChatId, chat, submitMessage, messages.length]);
 
   if (!chat) {
     return null;

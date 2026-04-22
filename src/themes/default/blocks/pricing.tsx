@@ -289,19 +289,21 @@ function formatPerHundredCredits(item: PricingItem, locale: string) {
   }
 }
 
-function formatPerVideoPrice(item: PricingItem, locale: string) {
+const STANDARD_IMAGE_CREDITS = 40;
+
+function formatPerImagePrice(item: PricingItem, locale: string) {
   const credits = item.credits;
 
   if (!credits || credits <= 0) {
     return null;
   }
 
-  const estimatedVideos =
+  const estimatedImages =
     item.interval === 'year'
-      ? Math.round(credits / 12 / 40)
-      : Math.round(credits / 40);
+      ? Math.floor(credits / 12 / STANDARD_IMAGE_CREDITS)
+      : Math.floor(credits / STANDARD_IMAGE_CREDITS);
 
-  if (!estimatedVideos || estimatedVideos <= 0) {
+  if (!estimatedImages || estimatedImages <= 0) {
     return null;
   }
 
@@ -313,17 +315,17 @@ function formatPerVideoPrice(item: PricingItem, locale: string) {
     return null;
   }
 
-  const pricePerVideo = amount / estimatedVideos;
+  const pricePerImage = amount / estimatedImages;
 
   try {
     return new Intl.NumberFormat(locale, {
       style: 'currency',
       currency: item.currency.toUpperCase(),
       maximumFractionDigits: 2,
-      minimumFractionDigits: pricePerVideo < 1 ? 2 : 0,
-    }).format(pricePerVideo);
+      minimumFractionDigits: pricePerImage < 1 ? 2 : 0,
+    }).format(pricePerImage);
   } catch {
-    return `${pricePerVideo.toFixed(2)} ${item.currency.toUpperCase()}`;
+    return `${pricePerImage.toFixed(2)} ${item.currency.toUpperCase()}`;
   }
 }
 
@@ -1017,10 +1019,10 @@ export function Pricing({
             }
           )
         : null;
-    const perVideoPrice = formatPerVideoPrice(normalizedDisplayedItem, locale);
-    const perVideoPriceLabel = perVideoPrice
-      ? tm('per_video_price', `~${perVideoPrice} / video`, {
-          amount: perVideoPrice,
+    const perImagePrice = formatPerImagePrice(normalizedDisplayedItem, locale);
+    const perImagePriceLabel = perImagePrice
+      ? tm('per_image_price', `~${perImagePrice} / image`, {
+          amount: perImagePrice,
         })
       : null;
     const creditsMetaParts = [
@@ -1142,9 +1144,9 @@ export function Pricing({
               {yearlyComparisonLabel}
             </div>
           )}
-          {perVideoPriceLabel && (
+          {perImagePriceLabel && (
             <div className="text-muted-foreground/80 mt-1 text-[11px]">
-              {perVideoPriceLabel}
+              {perImagePriceLabel}
             </div>
           )}
 

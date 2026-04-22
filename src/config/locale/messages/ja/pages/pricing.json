@@ -80,10 +80,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "starter-monthly",
-        "legacy_product_ids": [
-          "starter-monthly",
-          "lite-monthly-v2"
-        ],
+        "legacy_product_ids": ["starter-monthly", "lite-monthly-v2"],
         "product_name": "Starter 月額メンバーシップ",
         "credits": 4000,
         "valid_days": 30,
@@ -185,9 +182,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "premium-yearly",
-        "legacy_product_ids": [
-          "premium-yearly"
-        ],
+        "legacy_product_ids": ["premium-yearly"],
         "product_name": "Pro 年額メンバーシップ",
         "credits": 48000,
         "valid_days": 365,
@@ -279,9 +274,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "credits-package",
-        "legacy_product_ids": [
-          "credits-package"
-        ],
+        "legacy_product_ids": ["credits-package"],
         "product_name": "Starter クレジットパック",
         "credits": 4000,
         "valid_days": 365,
@@ -365,19 +358,14 @@
         "id": "membership",
         "title": "Pro プラン",
         "description": "より低い長期レンダリングコストで、安定した制作量を確保。",
-        "group_names": [
-          "monthly",
-          "yearly"
-        ],
+        "group_names": ["monthly", "yearly"],
         "default_group": "yearly"
       },
       {
         "id": "credits",
         "title": "必要な分だけ購入、柔軟に創作",
         "description": "買ってすぐ使える。必要な時に追加でき、サブスク不要。",
-        "group_names": [
-          "packs"
-        ],
+        "group_names": ["packs"],
         "default_group": "packs"
       }
     ],
@@ -468,6 +456,6 @@
     "flash_sale_save_percent": "{percent}%オフ",
     "flash_sale_cta": "今すぐ{percent}%オフを確保",
     "flash_sale_cta_note": "早期割引価格は今月限定です。終了後は通常価格に戻ります。",
-    "per_video_price": "約 {amount} / 100クレジット"
+    "per_image_price": "約 {amount} / 画像"
   }
 }

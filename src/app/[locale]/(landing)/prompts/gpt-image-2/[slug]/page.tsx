@@ -9,15 +9,15 @@ import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import { getAlternateLanguageUrlsByLocales } from '@/shared/lib/seo';
 import {
+  getPromptLibraryItem,
+  getRelatedPromptLibraryItems,
+} from '@/shared/prompt-library/data';
+import {
   getCustomizationTips,
   getPrimaryCategory,
   getPromptUseCaseSentence,
   getSuggestedSettings,
 } from '@/shared/prompt-library/insights';
-import {
-  getPromptLibraryItem,
-  getRelatedPromptLibraryItems,
-} from '@/shared/prompt-library/data';
 import {
   buildPromptDetailJsonLd,
   getCanonicalUrl,
@@ -97,7 +97,10 @@ export default async function GptImage2PromptDetailPage({
     item.slug,
     category
   );
-  const canonicalUrl = getCanonicalUrl(`/prompts/gpt-image-2/${item.slug}`, 'en');
+  const canonicalUrl = getCanonicalUrl(
+    `/prompts/gpt-image-2/${item.slug}`,
+    'en'
+  );
   const jsonLd = buildPromptDetailJsonLd({ item, url: canonicalUrl });
   const settings = getSuggestedSettings(item);
   const tips = getCustomizationTips(item);
@@ -126,31 +129,33 @@ export default async function GptImage2PromptDetailPage({
                   key={`${mediaItem.url}-${index}`}
                   src={mediaItem.url}
                   alt={getPromptVisualAltText(item, index)}
-                  className="w-full rounded-lg border bg-muted object-cover shadow-sm"
+                  className="bg-muted w-full rounded-lg border object-cover shadow-sm"
                 />
               ))
             ) : (
-              <div className="flex aspect-[4/3] items-center justify-center rounded-lg border bg-muted text-muted-foreground">
+              <div className="bg-muted text-muted-foreground flex aspect-[4/3] items-center justify-center rounded-lg border">
                 No preview image
               </div>
             )}
           </section>
 
           <section className="space-y-6">
-            <div className="rounded-lg border bg-card p-5 shadow-sm">
+            <div className="bg-card rounded-lg border p-5 shadow-sm">
               <div className="mb-4 flex flex-wrap gap-2">
                 <Badge>{category}</Badge>
                 {item.featured && <Badge variant="secondary">Featured</Badge>}
-                {item.language && <Badge variant="outline">{item.language}</Badge>}
+                {item.language && (
+                  <Badge variant="outline">{item.language}</Badge>
+                )}
               </div>
 
               <h1 className="font-display text-3xl leading-tight font-semibold tracking-normal md:text-5xl">
                 {item.title}
               </h1>
-              <p className="mt-4 text-base leading-7 text-muted-foreground">
+              <p className="text-muted-foreground mt-4 text-base leading-7">
                 {item.description}
               </p>
-              <p className="mt-4 rounded-md border bg-muted/45 p-4 text-sm leading-6 text-muted-foreground">
+              <p className="bg-muted/45 text-muted-foreground mt-4 rounded-md border p-4 text-sm leading-6">
                 {getPromptUseCaseSentence(item)}
               </p>
 
@@ -162,11 +167,11 @@ export default async function GptImage2PromptDetailPage({
                   </a>
                 </Button>
                 <CopyPromptButton prompt={item.prompt} />
-                <SharePromptButton title={item.title} text={item.description} />
+                <SharePromptButton />
               </div>
 
               {item.authorName && (
-                <p className="mt-5 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-5 text-sm">
                   Source creator:{' '}
                   <a
                     className="font-medium underline underline-offset-4"
@@ -181,39 +186,51 @@ export default async function GptImage2PromptDetailPage({
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-lg border bg-card p-4">
-                <p className="text-xs font-medium text-muted-foreground">Aspect ratio</p>
-                <p className="mt-2 text-sm font-semibold">{settings.aspectRatio}</p>
+              <div className="bg-card rounded-lg border p-4">
+                <p className="text-muted-foreground text-xs font-medium">
+                  Aspect ratio
+                </p>
+                <p className="mt-2 text-sm font-semibold">
+                  {settings.aspectRatio}
+                </p>
               </div>
-              <div className="rounded-lg border bg-card p-4">
-                <p className="text-xs font-medium text-muted-foreground">Quality pass</p>
+              <div className="bg-card rounded-lg border p-4">
+                <p className="text-muted-foreground text-xs font-medium">
+                  Quality pass
+                </p>
                 <p className="mt-2 text-sm font-semibold">{settings.quality}</p>
               </div>
-              <div className="rounded-lg border bg-card p-4">
-                <p className="text-xs font-medium text-muted-foreground">Workflow</p>
-                <p className="mt-2 text-sm font-semibold">{settings.workflow}</p>
+              <div className="bg-card rounded-lg border p-4">
+                <p className="text-muted-foreground text-xs font-medium">
+                  Workflow
+                </p>
+                <p className="mt-2 text-sm font-semibold">
+                  {settings.workflow}
+                </p>
               </div>
             </div>
           </section>
         </div>
 
         <section className="mt-8 grid gap-6 lg:grid-cols-3">
-          <div className="rounded-lg border bg-card p-5 shadow-sm lg:col-span-2">
+          <div className="bg-card rounded-lg border p-5 shadow-sm lg:col-span-2">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-2xl font-semibold">Full GPT Image 2 prompt</h2>
+              <h2 className="text-2xl font-semibold">
+                Full GPT Image 2 prompt
+              </h2>
               <CopyPromptButton prompt={item.prompt} />
             </div>
-            <pre className="overflow-x-auto rounded-md border bg-background p-4 font-mono text-sm leading-7 whitespace-pre-wrap">
+            <pre className="bg-background overflow-x-auto rounded-md border p-4 font-mono text-sm leading-7 whitespace-pre-wrap">
               {item.prompt}
             </pre>
           </div>
 
           <aside className="space-y-4">
-            <div className="rounded-lg border bg-card p-5 shadow-sm">
+            <div className="bg-card rounded-lg border p-5 shadow-sm">
               <h2 className="text-xl font-semibold">How to customize it</h2>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+              <ul className="text-muted-foreground mt-4 space-y-3 text-sm leading-6">
                 {tips.map((tip) => (
-                  <li key={tip} className="rounded-md border bg-background p-3">
+                  <li key={tip} className="bg-background rounded-md border p-3">
                     {tip}
                   </li>
                 ))}
@@ -232,24 +249,30 @@ export default async function GptImage2PromptDetailPage({
         </section>
 
         {relatedItems.length > 0 && (
-          <section className="mt-8 rounded-lg border bg-card p-5 shadow-sm">
-            <h2 className="text-2xl font-semibold">Related GPT Image 2 prompts</h2>
+          <section className="bg-card mt-8 rounded-lg border p-5 shadow-sm">
+            <h2 className="text-2xl font-semibold">
+              Related GPT Image 2 prompts
+            </h2>
             <div className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
               {relatedItems.map((relatedItem) => (
                 <Link
                   key={relatedItem.id}
                   href={`/prompts/gpt-image-2/${relatedItem.slug}`}
-                  className="rounded-lg border bg-background p-4 transition hover:bg-muted/60"
+                  className="bg-background hover:bg-muted/60 rounded-lg border p-4 transition"
                 >
                   <div className="mb-2 flex flex-wrap gap-2">
-                    {relatedItem.categories.slice(0, 1).map((relatedCategory) => (
-                      <Badge key={relatedCategory} variant="secondary">
-                        {relatedCategory}
-                      </Badge>
-                    ))}
+                    {relatedItem.categories
+                      .slice(0, 1)
+                      .map((relatedCategory) => (
+                        <Badge key={relatedCategory} variant="secondary">
+                          {relatedCategory}
+                        </Badge>
+                      ))}
                   </div>
-                  <h3 className="line-clamp-2 font-semibold">{relatedItem.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">
+                  <h3 className="line-clamp-2 font-semibold">
+                    {relatedItem.title}
+                  </h3>
+                  <p className="text-muted-foreground mt-2 line-clamp-2 text-sm leading-6">
                     {relatedItem.description}
                   </p>
                 </Link>

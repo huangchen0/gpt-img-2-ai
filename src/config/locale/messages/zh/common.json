@@ -1,15 +1,15 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI | ChatGPT AI 图像生成器 免费在线",
-    "description": "GPT Image 2 AI 是一款基于 ChatGPT 图像能力的 AI 图像生成器，支持精准图片编辑、写实生成、密集文字渲染、创意风格转换、UI 截图和更快的图像生成体验。",
-    "keywords": "GPT Image 2 AI, GPT Image 2, AI 图像生成, 图片编辑, ChatGPT image 2"
+    "title": "GPT Image 2 ChatGPT AI 图像生成器 免费在线",
+    "description": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，适合生成写实图片、清晰文字内容、UI 截图和高可控的创意图像。",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
   },
   "actions": {
     "continue": "继续"
   },
   "sign": {
     "sign_in_title": "登录",
-    "sign_in_description": "免费注册领取 60 积分，可生成 2 次 GPT Image 2。",
+    "sign_in_description": "免费注册领取 60 积分，可免费生成 GPT Image 2。",
     "sign_in_reward_hint": "免费注册领取 60 积分",
     "entry_cta_title": "免费开始",
     "entry_modal_title": "开始使用",

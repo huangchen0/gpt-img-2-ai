@@ -2,25 +2,26 @@ import { unstable_cache } from 'next/cache';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getMetadata } from '@/shared/lib/seo';
-import { buildCombinedShowcaseItems } from '@/shared/lib/showcase-feed';
+import {
+  buildHomeImageShowcaseItems,
+  HOME_SHOWCASE_LIMIT,
+} from '@/shared/lib/showcase-feed';
 import { getLatestShowcases } from '@/shared/models/showcase';
 import { ShowcasesFlowDynamic } from '@/themes/default/blocks/showcases-flow-dynamic';
-
-const SHOWCASES_PAGE_LIMIT = 48;
 
 export const generateMetadata = getMetadata({
   metadataKey: 'pages.showcases.metadata',
   canonicalUrl: '/showcases',
 });
 
-const getCachedShowcasesPageItems = unstable_cache(
+const getCachedHomeShowcases = unstable_cache(
   async () =>
     getLatestShowcases({
       excludeTags: 'hairstyles',
       sortOrder: 'desc',
-      limit: SHOWCASES_PAGE_LIMIT,
+      limit: HOME_SHOWCASE_LIMIT,
     }),
-  ['showcases-page-items'],
+  ['landing-home-showcases'],
   { revalidate: 300 }
 );
 
@@ -32,20 +33,25 @@ export default async function ShowcasesPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('pages.showcases');
+  const t = await getTranslations('landing');
   const showcasesData = t.raw('showcases-flow');
-  const rawShowcases = await getCachedShowcasesPageItems();
-  const initialShowcases = buildCombinedShowcaseItems({
+  const rawShowcases = await getCachedHomeShowcases();
+  const initialShowcases = buildHomeImageShowcaseItems({
     locale,
     showcases: rawShowcases,
-    limit: SHOWCASES_PAGE_LIMIT,
+    limit: HOME_SHOWCASE_LIMIT,
   });
 
   return (
     <ShowcasesFlowDynamic
+      id={showcasesData.id}
       title={showcasesData.title}
       description={showcasesData.description}
       containerClassName="py-14"
+      excludeTags="hairstyles"
+      sortOrder="desc"
+      hideCreateButton={true}
+      imagesOnly={true}
       initialItems={initialShowcases}
       disableFetch={true}
     />

@@ -67,11 +67,9 @@ const nextConfig = {
     return config;
   },
   experimental: {
-    turbopackFileSystemCacheForDev: true,
     // Disable mdxRs for Vercel deployment compatibility with fumadocs-mdx
     ...(process.env.VERCEL ? {} : { mdxRs: true }),
   },
-  reactCompiler: true,
 };
 
 export default withBundleAnalyzer(withNextIntl(withMDX(nextConfig)));

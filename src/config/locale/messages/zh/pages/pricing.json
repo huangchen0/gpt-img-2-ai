@@ -80,10 +80,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "starter-monthly",
-        "legacy_product_ids": [
-          "starter-monthly",
-          "lite-monthly-v2"
-        ],
+        "legacy_product_ids": ["starter-monthly", "lite-monthly-v2"],
         "product_name": "入门月付会员",
         "credits": 4000,
         "valid_days": 30,
@@ -185,9 +182,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "premium-yearly",
-        "legacy_product_ids": [
-          "premium-yearly"
-        ],
+        "legacy_product_ids": ["premium-yearly"],
         "product_name": "专业年付会员",
         "credits": 48000,
         "valid_days": 365,
@@ -279,9 +274,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "credits-package",
-        "legacy_product_ids": [
-          "credits-package"
-        ],
+        "legacy_product_ids": ["credits-package"],
         "product_name": "入门积分包",
         "credits": 4000,
         "valid_days": 365,
@@ -365,19 +358,14 @@
         "id": "membership",
         "title": "Pro 计划",
         "description": "释放更多图片创作能力，锁定更低的长期生成成本。",
-        "group_names": [
-          "monthly",
-          "yearly"
-        ],
+        "group_names": ["monthly", "yearly"],
         "default_group": "yearly"
       },
       {
         "id": "credits",
         "title": "按需购买，灵活创作",
         "description": "即买即用，立即开启创作。按需补充，无需订阅。",
-        "group_names": [
-          "packs"
-        ],
+        "group_names": ["packs"],
         "default_group": "packs"
       }
     ],
@@ -466,7 +454,7 @@
     "flash_sale_ends_at": "活动截止:{date}",
     "flash_sale_price_note": "显示价格已包含限时优惠，结账时就是这个价。",
     "flash_sale_cta_note": "早鸟优惠价格仅限本月，随后将恢复原价。",
-    "per_video_price": "约 {amount} / 视频",
+    "per_image_price": "约 {amount} / 张图片",
     "flash_sale_save_percent": "省 {percent}%",
     "flash_sale_cta": "立即省 {percent}%"
   }

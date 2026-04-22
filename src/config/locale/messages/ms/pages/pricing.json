@@ -80,10 +80,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "starter-monthly",
-        "legacy_product_ids": [
-          "starter-monthly",
-          "lite-monthly-v2"
-        ],
+        "legacy_product_ids": ["starter-monthly", "lite-monthly-v2"],
         "product_name": "Keahlian Starter Bulanan",
         "credits": 4000,
         "valid_days": 30,
@@ -185,9 +182,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "premium-yearly",
-        "legacy_product_ids": [
-          "premium-yearly"
-        ],
+        "legacy_product_ids": ["premium-yearly"],
         "product_name": "Keahlian Pro Tahunan",
         "credits": 48000,
         "valid_days": 365,
@@ -279,9 +274,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "credits-package",
-        "legacy_product_ids": [
-          "credits-package"
-        ],
+        "legacy_product_ids": ["credits-package"],
         "product_name": "Pek Kredit Starter",
         "credits": 4000,
         "valid_days": 365,
@@ -365,19 +358,14 @@
         "id": "membership",
         "title": "Pelan Pro",
         "description": "Buka lebih banyak output dengan kos render jangka panjang yang lebih rendah.",
-        "group_names": [
-          "monthly",
-          "yearly"
-        ],
+        "group_names": ["monthly", "yearly"],
         "default_group": "yearly"
       },
       {
         "id": "credits",
         "title": "Beli ikut keperluan, cipta dengan fleksibel",
         "description": "Guna serta-merta, tambah nilai bila-bila masa, tanpa langganan.",
-        "group_names": [
-          "packs"
-        ],
+        "group_names": ["packs"],
         "default_group": "packs"
       }
     ],
@@ -468,6 +456,6 @@
     "flash_sale_save_percent": "Jimat {percent}%",
     "flash_sale_cta": "Tuntut {percent}% Off Sekarang",
     "flash_sale_cta_note": "Harga early-bird hanya untuk bulan ini. Selepas promosi tamat, harga biasa akan kembali.",
-    "per_video_price": "Kira-kira {amount} / 100 kredit"
+    "per_image_price": "Kira-kira {amount} / imej"
   }
 }

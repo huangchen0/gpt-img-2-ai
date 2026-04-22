@@ -459,7 +459,6 @@ function GeneratorSwitcher({
           <SeedanceVideoGenerator
             id={seedanceGeneratorId}
             srOnlyTitle={copy.srOnlyVideo}
-            redirectToPricingOnInsufficientCredits={true}
             pricingSectionId={pricingSectionId}
             defaultSeedanceMode={defaultSeedanceMode}
           />
@@ -467,7 +466,6 @@ function GeneratorSwitcher({
           <HomeKlingVideoGenerator
             id={klingGeneratorId}
             srOnlyTitle={copy.srOnlyKling}
-            redirectToPricingOnInsufficientCredits={true}
             pricingSectionId={pricingSectionId}
           />
         )

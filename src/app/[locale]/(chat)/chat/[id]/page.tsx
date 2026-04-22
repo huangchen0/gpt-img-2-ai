@@ -10,6 +10,7 @@ import { Chat } from '@/shared/types/chat';
 
 export default function ChatPage() {
   const params = useParams();
+  const chatId = Array.isArray(params?.id) ? params.id[0] : params?.id;
 
   const [initialChat, setInitialChat] = useState<Chat | null>(null);
   const [initialMessages, setInitialMessages] = useState<UIMessage[] | null>(
@@ -78,8 +79,10 @@ export default function ChatPage() {
   };
 
   useEffect(() => {
-    fetchChat(params.id as string);
-  }, [params.id]);
+    if (!chatId) return;
+
+    fetchChat(chatId);
+  }, [chatId]);
 
   return initialChat && initialMessages ? (
     <ChatBox initialChat={initialChat} initialMessages={initialMessages} />

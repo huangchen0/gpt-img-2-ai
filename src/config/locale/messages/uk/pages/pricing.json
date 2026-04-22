@@ -80,10 +80,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "starter-monthly",
-        "legacy_product_ids": [
-          "starter-monthly",
-          "lite-monthly-v2"
-        ],
+        "legacy_product_ids": ["starter-monthly", "lite-monthly-v2"],
         "product_name": "Starter щомісячна підписка",
         "credits": 4000,
         "valid_days": 30,
@@ -185,9 +182,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "premium-yearly",
-        "legacy_product_ids": [
-          "premium-yearly"
-        ],
+        "legacy_product_ids": ["premium-yearly"],
         "product_name": "Pro щорічна підписка",
         "credits": 48000,
         "valid_days": 365,
@@ -279,9 +274,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "credits-package",
-        "legacy_product_ids": [
-          "credits-package"
-        ],
+        "legacy_product_ids": ["credits-package"],
         "product_name": "Starter пакет кредитів",
         "credits": 4000,
         "valid_days": 365,
@@ -365,19 +358,14 @@
         "id": "membership",
         "title": "Плани Pro",
         "description": "Більше результату з нижчою довгостроковою вартістю рендеру.",
-        "group_names": [
-          "monthly",
-          "yearly"
-        ],
+        "group_names": ["monthly", "yearly"],
         "default_group": "yearly"
       },
       {
         "id": "credits",
         "title": "Купуйте за потреби, створюйте гнучко",
         "description": "Миттєве використання, поповнення в будь-який момент, без підписки.",
-        "group_names": [
-          "packs"
-        ],
+        "group_names": ["packs"],
         "default_group": "packs"
       }
     ],
@@ -468,6 +456,6 @@
     "flash_sale_save_percent": "Економія {percent}%",
     "flash_sale_cta": "Отримати знижку {percent}% зараз",
     "flash_sale_cta_note": "Early-bird ціна діє лише цього місяця. Після завершення акції повернеться стандартна вартість.",
-    "per_video_price": "близько {amount} / 100 кредитів"
+    "per_image_price": "близько {amount} / зображення"
   }
 }

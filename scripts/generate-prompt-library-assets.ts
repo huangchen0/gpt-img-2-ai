@@ -25,12 +25,18 @@ const promptSitemapLimit = Number.parseInt(
   process.env.PROMPT_SITEMAP_LIMIT || '5',
   10
 );
+const fetchTimeoutMs = Number.parseInt(
+  process.env.PROMPT_LIBRARY_FETCH_TIMEOUT_MS || '20000',
+  10
+);
 
 function getPromptPreview(prompt: string) {
   return prompt.replace(/\s+/g, ' ').trim().slice(0, 360);
 }
 
-type PromptLibrarySourceDataset = PromptLibraryDataset | PromptLibraryIndexDataset;
+type PromptLibrarySourceDataset =
+  | PromptLibraryDataset
+  | PromptLibraryIndexDataset;
 type PromptLibrarySourceItem = PromptLibrarySourceDataset['items'][number];
 
 function getSourcePromptPreview(item: PromptLibrarySourceItem) {
@@ -66,6 +72,7 @@ function toIndexItem(item: PromptLibrarySourceItem): PromptLibraryIndexItem {
 async function fetchJson<T>(url: string): Promise<T> {
   const response = await fetch(url, {
     headers: { accept: 'application/json' },
+    signal: AbortSignal.timeout(fetchTimeoutMs),
   });
 
   if (!response.ok) {
@@ -82,7 +89,41 @@ async function getPromptLibraryDataset(): Promise<PromptLibrarySourceDataset> {
 }
 
 async function main() {
-  const dataset = await getPromptLibraryDataset();
+  let dataset: PromptLibrarySourceDataset;
+
+  try {
+    dataset = await getPromptLibraryDataset();
+  } catch (error) {
+    if (generateLocalAssets) {
+      throw error;
+    }
+
+    fs.rmSync(path.join(process.cwd(), 'public/prompt-library'), {
+      recursive: true,
+      force: true,
+    });
+
+    const existingSitemap = path.join(
+      process.cwd(),
+      'public/prompt-sitemap.xml'
+    );
+    if (fs.existsSync(existingSitemap)) {
+      console.warn(
+        `Skipping prompt sitemap refresh because CDN data could not be fetched: ${error instanceof Error ? error.message : String(error)}`
+      );
+      return;
+    }
+
+    dataset = {
+      model: 'gpt-image-2',
+      source: 'cdn',
+      sourceUrl: promptLibraryBaseUrl,
+      total: 0,
+      syncedAt: new Date().toISOString(),
+      items: [],
+    };
+  }
+
   const indexDataset: PromptLibraryIndexDataset = {
     model: dataset.model,
     source: dataset.source,
@@ -93,7 +134,10 @@ async function main() {
   };
 
   if (generateLocalAssets) {
-    const outputDir = path.join(process.cwd(), 'public/prompt-library/gpt-image-2');
+    const outputDir = path.join(
+      process.cwd(),
+      'public/prompt-library/gpt-image-2'
+    );
     const itemsDir = path.join(outputDir, 'items');
     fs.rmSync(outputDir, { recursive: true, force: true });
     fs.mkdirSync(itemsDir, { recursive: true });
@@ -162,7 +206,10 @@ ${sitemapUrls
 </urlset>
 `;
 
-  fs.writeFileSync(path.join(process.cwd(), 'public/prompt-sitemap.xml'), sitemapXml);
+  fs.writeFileSync(
+    path.join(process.cwd(), 'public/prompt-sitemap.xml'),
+    sitemapXml
+  );
 
   console.log(
     generateLocalAssets

@@ -20,7 +20,16 @@ import {
   ImageUploaderValue,
   LazyImage,
 } from '@/shared/blocks/common';
+import {
+  getGenerationCreditRewardAmounts,
+  useGenerationCreditEarnActions,
+} from '@/shared/blocks/generator/credit-earning-actions';
+import { GenerationCreditFallbackDialog } from '@/shared/blocks/generator/generation-credit-fallback-dialog';
 import { MembershipPriorityQueueCard } from '@/shared/blocks/generator/membership-priority-queue-card';
+import {
+  PaidDownloadDialog,
+  usePaidDownloadGate,
+} from '@/shared/blocks/generator/paid-download-dialog';
 import { Button } from '@/shared/components/ui/button';
 import {
   Card,
@@ -35,6 +44,7 @@ import { Textarea } from '@/shared/components/ui/textarea';
 import { useAppContext } from '@/shared/contexts/app';
 import { useMembershipPriorityQueue } from '@/shared/hooks/use-membership-priority-queue';
 import {
+  createGenerationCreditFallbackPayload,
   GenerationCreditFallbackPayload,
   isGenerationCreditFallbackPayload,
 } from '@/shared/lib/generation-credit-fallback';
@@ -103,11 +113,21 @@ const GENERATION_TIMEOUT = 10 * 60 * 1000;
 const MAX_PROMPT_LENGTH = 20000;
 const IMAGE_CREDITS_MULTIPLIER = 10;
 const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  1 * 60 * 1000,
-  3 * 60 * 1000,
+  (1 * 60 + 30) * 1000,
+  (3 * 60 + 30) * 1000,
 ];
 const DEFAULT_PROMPT =
   'Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat, calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.';
+const GPT_IMAGE_2_DEMO_EXAMPLES = [
+  {
+    src: 'https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/3d-case-presentation.webp',
+    alt: 'GPT Image 2 3D case presentation demo',
+  },
+  {
+    src: 'https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.webp',
+    alt: 'GPT Image 2 ecommerce product model demo',
+  },
+] as const;
 
 function parseTaskResult(taskResult: string | null): any {
   if (!taskResult) {
@@ -234,6 +254,7 @@ export function GptImage2Generator({
   const transientPollErrorCountRef = useRef(0);
   const hasLoadedCreditsRef = useRef(false);
   const userIdRef = useRef<string | null>(null);
+  const { canDownload, paidDownloadDialogProps } = usePaidDownloadGate();
 
   const {
     user,
@@ -395,6 +416,100 @@ export function GptImage2Generator({
     }),
     [costCredits, creditFallback?.requestedCostCredits, t]
   );
+  const creditFallbackCopy = useMemo(
+    () => ({
+      title: t.has('credit_fallback.title')
+        ? t('credit_fallback.title')
+        : 'Current mode needs more credits',
+      description: t.has('credit_fallback.description')
+        ? t('credit_fallback.description', {
+            requested: creditFallback?.requestedCostCredits ?? costCredits,
+            remaining: creditFallback?.remainingCredits ?? remainingCredits,
+          })
+        : `This generation needs ${
+            creditFallback?.requestedCostCredits ?? costCredits
+          } credits, while your balance is ${
+            creditFallback?.remainingCredits ?? remainingCredits
+          }. You can add more credits, check in, or invite friends to continue.`,
+      currentModeLabel: t.has('credit_fallback.current_mode')
+        ? t('credit_fallback.current_mode')
+        : 'Current mode',
+      remainingCreditsLabel: t.has('credit_fallback.remaining_credits')
+        ? t('credit_fallback.remaining_credits')
+        : 'Current balance',
+      switchLabel: t.has('credit_fallback.switch')
+        ? t('credit_fallback.switch')
+        : 'Switch and Continue',
+      upgradeLabel: t.has('credit_fallback.buy_credits')
+        ? t('credit_fallback.buy_credits')
+        : t('buy_credits'),
+      closeLabel: t.has('credit_fallback.close')
+        ? t('credit_fallback.close')
+        : 'Not now',
+    }),
+    [creditFallback, costCredits, remainingCredits, t]
+  );
+  const { checkinCredits, referralCredits } = useMemo(
+    () => getGenerationCreditRewardAmounts(configs),
+    [configs]
+  );
+  const creditEarnCopy = useMemo(
+    () => ({
+      checkInTitle: t.has('credit_fallback.checkin_title')
+        ? t('credit_fallback.checkin_title')
+        : 'Daily check-in',
+      checkInDescription: t.has('credit_fallback.checkin_description')
+        ? t('credit_fallback.checkin_description', {
+            credits: checkinCredits,
+          })
+        : `Claim ${checkinCredits} free credits today.`,
+      checkInAction: t.has('credit_fallback.checkin')
+        ? t('credit_fallback.checkin')
+        : 'Check in',
+      checkedInAction: t.has('credit_fallback.checked_in')
+        ? t('credit_fallback.checked_in')
+        : 'Checked in today',
+      checkingInAction: t.has('credit_fallback.checking_in')
+        ? t('credit_fallback.checking_in')
+        : 'Checking in',
+      checkInSuccess: t.has('credit_fallback.checkin_success')
+        ? t('credit_fallback.checkin_success')
+        : 'Daily credits added',
+      checkInFailed: t.has('credit_fallback.checkin_failed')
+        ? t('credit_fallback.checkin_failed')
+        : 'Check-in failed',
+      inviteTitle: t.has('credit_fallback.invite_title')
+        ? t('credit_fallback.invite_title')
+        : 'Invite friends',
+      inviteDescription: t.has('credit_fallback.invite_description')
+        ? t('credit_fallback.invite_description', {
+            credits: referralCredits,
+          })
+        : `Earn ${referralCredits} credits for each friend who signs up.`,
+      copyInviteAction: t.has('credit_fallback.copy_invite')
+        ? t('credit_fallback.copy_invite')
+        : 'Copy invite link',
+      inviteCopied: t.has('credit_fallback.invite_copied')
+        ? t('credit_fallback.invite_copied')
+        : 'Invite link copied',
+      openRewardsAction: t.has('credit_fallback.open_rewards')
+        ? t('credit_fallback.open_rewards')
+        : 'Open rewards',
+      copyFailed: t.has('credit_fallback.copy_failed')
+        ? t('credit_fallback.copy_failed')
+        : 'Copy failed',
+    }),
+    [checkinCredits, referralCredits, t]
+  );
+  const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
+    setCreditFallback((prev) =>
+      prev ? { ...prev, remainingCredits: nextRemaining } : prev
+    );
+  }, []);
+  const creditEarnActions = useGenerationCreditEarnActions({
+    copy: creditEarnCopy,
+    onCreditsChanged: handleCreditBalanceChanged,
+  });
   const queueSnapshotPayload = useMemo(
     () =>
       JSON.stringify({
@@ -810,6 +925,13 @@ export function GptImage2Generator({
     },
     trackingConfigs: configs,
   });
+  const handleCloseCreditFallback = useCallback(() => {
+    setCreditFallback(null);
+  }, []);
+  const handleUpgradeFromCreditFallback = useCallback(() => {
+    setCreditFallback(null);
+    router.push('/pricing');
+  }, [router]);
   const isCurrentRequestRetryable =
     queueState?.status === 'submit_failed' &&
     queueState.snapshotDigest === queueSnapshotDigest;
@@ -841,7 +963,13 @@ export function GptImage2Generator({
     }
 
     if (currentSubscriptionForAttempt && remainingCredits < costCredits) {
-      toast.error('Insufficient credits. Please top up to keep creating.');
+      setCreditFallback(
+        createGenerationCreditFallbackPayload({
+          mediaType: 'image',
+          requestedCostCredits: costCredits,
+          remainingCredits,
+        })
+      );
       return;
     }
 
@@ -900,6 +1028,10 @@ export function GptImage2Generator({
 
   const handleDownloadImage = async (image: GeneratedImage) => {
     if (!image.url) {
+      return;
+    }
+
+    if (!(await canDownload('image'))) {
       return;
     }
 
@@ -1218,18 +1350,34 @@ export function GptImage2Generator({
                         : t('tabs.image-to-image')}
                     </div>
                   </div>
-                  <div className="flex flex-col items-center justify-center text-center">
-                    <ImageIcon className="text-muted-foreground mb-4 h-10 w-10" />
-                    <p className="text-lg font-semibold">
-                      {isGenerating
-                        ? t('ready_to_generate')
-                        : queueCopy.readyTitle}
-                    </p>
-                    <p className="text-muted-foreground mt-2 max-w-sm text-sm">
-                      {isGenerating
-                        ? queueCopy.resultHint
-                        : queueCopy.readyDescription}
-                    </p>
+                  <div className="flex flex-1 flex-col items-center justify-center gap-5 py-6 text-center">
+                    <div className="grid w-full max-w-2xl gap-3 md:grid-cols-2">
+                      {GPT_IMAGE_2_DEMO_EXAMPLES.map((item) => (
+                        <div
+                          key={item.src}
+                          className="bg-background aspect-[4/3] overflow-hidden rounded-md border shadow-sm"
+                        >
+                          <LazyImage
+                            src={item.src}
+                            alt={item.alt}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div>
+                      <ImageIcon className="text-muted-foreground mx-auto mb-4 h-10 w-10" />
+                      <p className="text-lg font-semibold">
+                        {isGenerating
+                          ? t('ready_to_generate')
+                          : queueCopy.readyTitle}
+                      </p>
+                      <p className="text-muted-foreground mt-2 max-w-sm text-sm">
+                        {isGenerating
+                          ? queueCopy.resultHint
+                          : queueCopy.readyDescription}
+                      </p>
+                    </div>
                   </div>
                   <div className="text-muted-foreground flex items-center justify-between border-t pt-4 text-xs">
                     <span>GPT Image 2</span>
@@ -1247,11 +1395,44 @@ export function GptImage2Generator({
       </div>
     </div>
   );
+  const fallbackDialog = (
+    <GenerationCreditFallbackDialog
+      open={Boolean(creditFallback)}
+      onOpenChange={(open) => {
+        if (!open) {
+          handleCloseCreditFallback();
+        }
+      }}
+      title={creditFallbackCopy.title}
+      description={creditFallbackCopy.description}
+      currentModeLabel={creditFallbackCopy.currentModeLabel}
+      currentModeValue={t('credits_cost', {
+        credits: creditFallback?.requestedCostCredits ?? costCredits,
+      })}
+      remainingCreditsLabel={creditFallbackCopy.remainingCreditsLabel}
+      remainingCreditsValue={t('credits_remaining', {
+        credits: creditFallback?.remainingCredits ?? remainingCredits,
+      })}
+      switchLabel={creditFallbackCopy.switchLabel}
+      upgradeLabel={creditFallbackCopy.upgradeLabel}
+      closeLabel={creditFallbackCopy.closeLabel}
+      onUpgrade={handleUpgradeFromCreditFallback}
+      actions={[]}
+      earnTitle={
+        t.has('credit_fallback.earn_title')
+          ? t('credit_fallback.earn_title')
+          : 'Free ways to get credits'
+      }
+      earnActions={creditEarnActions}
+    />
+  );
 
   if (embedded) {
     return (
       <div id={id} className={className}>
         {content}
+        {fallbackDialog}
+        <PaidDownloadDialog {...paidDownloadDialogProps} />
       </div>
     );
   }
@@ -1259,6 +1440,8 @@ export function GptImage2Generator({
   return (
     <section className={cn('py-16 md:py-24', className)} id={id}>
       {content}
+      {fallbackDialog}
+      <PaidDownloadDialog {...paidDownloadDialogProps} />
     </section>
   );
 }

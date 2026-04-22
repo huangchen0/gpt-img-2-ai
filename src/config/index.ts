@@ -34,7 +34,7 @@ export const envConfigs: ConfigMap = {
     process.env.PROMPT_LIBRARY_BASE_URL ??
     'https://img.cdance.ai/uploads/prompt-library',
   theme: process.env.NEXT_PUBLIC_THEME ?? 'default',
-  appearance: process.env.NEXT_PUBLIC_APPEARANCE ?? 'system',
+  appearance: process.env.NEXT_PUBLIC_APPEARANCE ?? 'dark',
   locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'en',
   database_url: process.env.DATABASE_URL ?? '',
   database_auth_token: process.env.DATABASE_AUTH_TOKEN ?? '',
@@ -84,7 +84,8 @@ export const envConfigs: ConfigMap = {
     process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ??
     process.env.GOOGLE_ANALYTICS_ID ??
     '',
-  clarity_id: process.env.NEXT_PUBLIC_CLARITY_ID ?? process.env.CLARITY_ID ?? '',
+  clarity_id:
+    process.env.NEXT_PUBLIC_CLARITY_ID ?? process.env.CLARITY_ID ?? '',
   plausible_domain:
     process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ??
     process.env.PLAUSIBLE_DOMAIN ??

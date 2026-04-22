@@ -8,6 +8,26 @@ import {
 } from '@/extensions/ai';
 import { Configs, getAllConfigs } from '@/shared/models/config';
 
+function readBooleanConfig(value: unknown, defaultValue: boolean) {
+  if (value === undefined || value === null || value === '') {
+    return defaultValue;
+  }
+
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  const normalized = String(value).trim().toLowerCase();
+  if (['true', '1', 'yes', 'on'].includes(normalized)) {
+    return true;
+  }
+  if (['false', '0', 'no', 'off'].includes(normalized)) {
+    return false;
+  }
+
+  return defaultValue;
+}
+
 /**
  * get ai manager with configs
  */
@@ -19,6 +39,10 @@ export function getAIManagerWithConfigs(configs: Configs) {
       new KieProvider({
         apiKey: configs.kie_api_key,
         customStorage: configs.kie_custom_storage === 'true',
+        nsfwChecker: readBooleanConfig(
+          configs.kie_nsfw_checker || configs.nsfw_checker,
+          true
+        ),
       })
     );
   }

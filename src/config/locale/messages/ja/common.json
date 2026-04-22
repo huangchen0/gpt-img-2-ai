@@ -1,15 +1,15 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI | ChatGPT AI画像生成ツール 無料オンライン",
-    "description": "GPT Image 2 AI は ChatGPTベースのAI画像ジェネレーターで、高精度な画像編集、写実的な生成、密度の高いテキスト描画、クリエイティブ変換、UIスクリーンショット、高速生成に対応します。",
-    "keywords": "GPT Image 2 AI, GPT Image 2, AI画像生成, 画像編集, ChatGPT image 2"
+    "title": "GPT Image 2 ChatGPT AI画像生成ツール 無料オンライン",
+    "description": "GPT Image 2 は ChatGPT Image モデルをベースにした AI画像ジェネレーターで、リアルな画像生成、正確な文字表現、UIスクリーンショット、柔軟なプロンプト制御に対応します。",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
   },
   "actions": {
     "continue": "続ける"
   },
   "sign": {
     "sign_in_title": "ログイン",
-    "sign_in_description": "アカウントにログイン",
+    "sign_in_description": "無料登録で60クレジットを受け取り、GPT Image 2を無料生成できます。",
     "sign_in_reward_hint": "ログインして無料クレジットを受け取る",
     "entry_cta_title": "無料で始める",
     "entry_modal_title": "使い始める",

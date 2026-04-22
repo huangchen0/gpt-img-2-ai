@@ -1,15 +1,15 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI | AI генератор зображень ChatGPT безкоштовно",
-    "description": "GPT Image 2 AI — це генератор зображень на базі ChatGPT для точного редагування, фотореалістичних результатів, щільного рендерингу тексту, креативних трансформацій, UI-скриншотів і швидкої генерації.",
-    "keywords": "GPT Image 2 AI, GPT Image 2, AI генератор зображень, редактор зображень"
+    "title": "GPT Image 2 AI генератор зображень ChatGPT безкоштовно",
+    "description": "GPT Image 2 — AI генератор для реалістичних зображень, чіткого тексту, UI-скриншотів, мокапів і швидкого редагування.",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
   },
   "actions": {
     "continue": "Continue"
   },
   "sign": {
     "sign_in_title": "Sign In",
-    "sign_in_description": "Sign in to your account",
+    "sign_in_description": "Зареєструйтеся безкоштовно й отримайте 60 кредитів, щоб безкоштовно створювати GPT Image 2.",
     "sign_in_reward_hint": "Sign in to claim free credits",
     "entry_cta_title": "Start for Free",
     "entry_modal_title": "Get Started",

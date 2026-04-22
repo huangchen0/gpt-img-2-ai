@@ -456,6 +456,6 @@
     "flash_sale_save_percent": "{percent}% 절약",
     "flash_sale_cta": "지금 {percent}% 할인 확보",
     "flash_sale_cta_note": "얼리버드 가격은 이번 달까지만 적용되며 이후 정가로 돌아갑니다.",
-    "per_video_price": "약 {amount} / 100크레딧"
+    "per_image_price": "약 {amount} / 이미지"
   }
 }

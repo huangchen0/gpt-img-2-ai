@@ -38,6 +38,7 @@ export function ChatLibrary({}) {
 
   const t = useTranslations('ai.chat.library');
   const params = useParams();
+  const activeChatId = Array.isArray(params?.id) ? params.id[0] : params?.id;
 
   const { user } = useAppContext();
 
@@ -93,7 +94,7 @@ export function ChatLibrary({}) {
               <SidebarMenuButton
                 asChild
                 className={
-                  params.id === chat.id
+                  activeChatId === chat.id
                     ? 'bg-sidebar-accent text-sidebar-accent-foreground'
                     : ''
                 }

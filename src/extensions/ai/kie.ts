@@ -374,6 +374,7 @@ function normalizeSeedanceReferenceUrls(
 export interface KieConfigs extends AIConfigs {
   apiKey: string;
   customStorage?: boolean; // use custom storage to save files
+  nsfwChecker?: boolean;
 }
 
 /**
@@ -626,7 +627,7 @@ export class KieProvider implements AIProvider {
     };
 
     if (isKieGptImageModel(params.model)) {
-      payload.input.nsfw_checker = true;
+      payload.input.nsfw_checker = this.configs.nsfwChecker ?? true;
 
       if (
         isKieGptImageToImageModel(params.model) &&

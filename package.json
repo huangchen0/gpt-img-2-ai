@@ -4,6 +4,11 @@
   "private": true,
   "author": "gpt-image-2-ai.org",
   "homepage": "https://gpt-image-2-ai.org",
+  "packageManager": "pnpm@9.7.1",
+  "engines": {
+    "node": ">=20.11.0 <25",
+    "pnpm": ">=9 <10"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Happy Horseai/Happy Horse-template-two"
@@ -18,11 +23,12 @@
     "ai-saas-development"
   ],
   "scripts": {
+    "clean:next": "rm -rf .next",
     "generate:prompt-library": "tsx scripts/generate-prompt-library-assets.ts",
     "dev": "pnpm generate:prompt-library && next dev",
     "dev:turbo": "pnpm generate:prompt-library && next dev --turbopack",
-    "build": "pnpm generate:prompt-library && next build",
-    "build:fast": "pnpm generate:prompt-library && NODE_OPTIONS='--max-old-space-size=4096' next build",
+    "build": "pnpm clean:next && pnpm generate:prompt-library && NODE_OPTIONS='--max-old-space-size=4096' next build",
+    "build:fast": "pnpm clean:next && pnpm generate:prompt-library && NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -177,4 +183,4 @@
       "@types/react-dom": "19.2.2"
     }
   }
-} 
+}

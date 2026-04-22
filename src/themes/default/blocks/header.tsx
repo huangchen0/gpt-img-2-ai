@@ -66,6 +66,25 @@ export function Header({ header }: { header: HeaderType }) {
   const isHomePage = pathname === '/';
   const isHeroOverlay = isHomePage && !isScrolled && !isMobileMenuOpen;
 
+  const NavBadge = ({
+    children,
+    subtle = false,
+  }: {
+    children: React.ReactNode;
+    subtle?: boolean;
+  }) => (
+    <span
+      className={cn(
+        'inline-flex h-4 shrink-0 items-center rounded-full px-1.5 text-[10px] leading-none font-semibold',
+        subtle || !isHeroOverlay
+          ? 'bg-rose-500/12 text-rose-600 ring-1 ring-rose-500/20 dark:bg-rose-400/15 dark:text-rose-300 dark:ring-rose-400/20'
+          : 'bg-rose-400 text-rose-950 shadow-sm shadow-black/20'
+      )}
+    >
+      {children}
+    </span>
+  );
+
   useEffect(() => {
     // Listen to scroll event to enable header styles on scroll
     const handleScroll = () => {
@@ -121,7 +140,8 @@ export function Header({ header }: { header: HeaderType }) {
                     )}
                   >
                     {item.icon && <SmartIcon name={item.icon as string} />}
-                    {item.title}
+                    <span>{item.title}</span>
+                    {item.badge && <NavBadge>{item.badge}</NavBadge>}
                   </Link>
                 </NavigationMenuLink>
               );
@@ -133,7 +153,8 @@ export function Header({ header }: { header: HeaderType }) {
                   {item.icon && (
                     <SmartIcon name={item.icon as string} className="h-4 w-4" />
                   )}
-                  {item.title}
+                  <span>{item.title}</span>
+                  {item.badge && <NavBadge>{item.badge}</NavBadge>}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="min-w-2xs origin-top p-0.5">
                   <div className="border-foreground/5 bg-card ring-foreground/5 rounded-[calc(var(--radius)-2px)] border border-transparent p-2 shadow ring-1">
@@ -184,7 +205,10 @@ export function Header({ header }: { header: HeaderType }) {
                 {item.children && item.children.length > 0 ? (
                   <>
                     <AccordionTrigger className="data-[state=open]:bg-muted flex items-center justify-between px-4 py-3 text-lg **:!font-normal">
-                      {item.title}
+                      <span className="inline-flex items-center gap-2">
+                        {item.title}
+                        {item.badge && <NavBadge subtle>{item.badge}</NavBadge>}
+                      </span>
                     </AccordionTrigger>
                     <AccordionContent className="pb-5">
                       <ul>
@@ -216,7 +240,10 @@ export function Header({ header }: { header: HeaderType }) {
                     onClick={closeMenu}
                     className="data-[state=open]:bg-muted flex items-center justify-between px-4 py-3 text-lg **:!font-normal"
                   >
-                    {item.title}
+                    <span className="inline-flex items-center gap-2">
+                      {item.title}
+                      {item.badge && <NavBadge subtle>{item.badge}</NavBadge>}
+                    </span>
                   </Link>
                 )}
               </AccordionItem>

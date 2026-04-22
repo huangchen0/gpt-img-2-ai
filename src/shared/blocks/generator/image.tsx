@@ -21,8 +21,16 @@ import {
   ImageUploaderValue,
   LazyImage,
 } from '@/shared/blocks/common';
+import {
+  getGenerationCreditRewardAmounts,
+  useGenerationCreditEarnActions,
+} from '@/shared/blocks/generator/credit-earning-actions';
 import { GenerationCreditFallbackDialog } from '@/shared/blocks/generator/generation-credit-fallback-dialog';
 import { MembershipPriorityQueueCard } from '@/shared/blocks/generator/membership-priority-queue-card';
+import {
+  PaidDownloadDialog,
+  usePaidDownloadGate,
+} from '@/shared/blocks/generator/paid-download-dialog';
 import { Button } from '@/shared/components/ui/button';
 import {
   Card,
@@ -45,6 +53,7 @@ import { Textarea } from '@/shared/components/ui/textarea';
 import { useAppContext } from '@/shared/contexts/app';
 import { useMembershipPriorityQueue } from '@/shared/hooks/use-membership-priority-queue';
 import {
+  createGenerationCreditFallbackPayload,
   GenerationCreditFallbackPayload,
   IMAGE_STANDARD_FALLBACK_CREDITS,
   isGenerationCreditFallbackPayload,
@@ -112,8 +121,8 @@ const GENERATION_TIMEOUT = 180000;
 const MAX_PROMPT_LENGTH = 20000;
 const IMAGE_CREDITS_MULTIPLIER = 10;
 const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  1 * 60 * 1000,
-  3 * 60 * 1000,
+  (1 * 60 + 30) * 1000,
+  (3 * 60 + 30) * 1000,
 ];
 const IMAGE_QUEUE_RETURN_HREF = '/models/gpt-image-2#nano-banana-generator';
 const VIDEO_QUEUE_RETURN_HREF =
@@ -328,6 +337,7 @@ export function ImageGenerator({
   const lastAppliedPromptRef = useRef<string | null>(null);
   const [creditFallback, setCreditFallback] =
     useState<GenerationCreditFallbackPayload | null>(null);
+  const { canDownload, paidDownloadDialogProps } = usePaidDownloadGate();
 
   const {
     user,
@@ -592,6 +602,67 @@ export function ImageGenerator({
     }),
     [creditFallback, costCredits, remainingCredits, t]
   );
+  const { checkinCredits, referralCredits } = useMemo(
+    () => getGenerationCreditRewardAmounts(configs),
+    [configs]
+  );
+  const creditEarnCopy = useMemo(
+    () => ({
+      checkInTitle: t.has('credit_fallback.checkin_title')
+        ? t('credit_fallback.checkin_title')
+        : 'Daily check-in',
+      checkInDescription: t.has('credit_fallback.checkin_description')
+        ? t('credit_fallback.checkin_description', {
+            credits: checkinCredits,
+          })
+        : `Claim ${checkinCredits} free credits today.`,
+      checkInAction: t.has('credit_fallback.checkin')
+        ? t('credit_fallback.checkin')
+        : 'Check in',
+      checkedInAction: t.has('credit_fallback.checked_in')
+        ? t('credit_fallback.checked_in')
+        : 'Checked in today',
+      checkingInAction: t.has('credit_fallback.checking_in')
+        ? t('credit_fallback.checking_in')
+        : 'Checking in',
+      checkInSuccess: t.has('credit_fallback.checkin_success')
+        ? t('credit_fallback.checkin_success')
+        : 'Daily credits added',
+      checkInFailed: t.has('credit_fallback.checkin_failed')
+        ? t('credit_fallback.checkin_failed')
+        : 'Check-in failed',
+      inviteTitle: t.has('credit_fallback.invite_title')
+        ? t('credit_fallback.invite_title')
+        : 'Invite friends',
+      inviteDescription: t.has('credit_fallback.invite_description')
+        ? t('credit_fallback.invite_description', {
+            credits: referralCredits,
+          })
+        : `Earn ${referralCredits} credits for each friend who signs up.`,
+      copyInviteAction: t.has('credit_fallback.copy_invite')
+        ? t('credit_fallback.copy_invite')
+        : 'Copy invite link',
+      inviteCopied: t.has('credit_fallback.invite_copied')
+        ? t('credit_fallback.invite_copied')
+        : 'Invite link copied',
+      openRewardsAction: t.has('credit_fallback.open_rewards')
+        ? t('credit_fallback.open_rewards')
+        : 'Open rewards',
+      copyFailed: t.has('credit_fallback.copy_failed')
+        ? t('credit_fallback.copy_failed')
+        : 'Copy failed',
+    }),
+    [checkinCredits, referralCredits, t]
+  );
+  const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
+    setCreditFallback((prev) =>
+      prev ? { ...prev, remainingCredits: nextRemaining } : prev
+    );
+  }, []);
+  const creditEarnActions = useGenerationCreditEarnActions({
+    copy: creditEarnCopy,
+    onCreditsChanged: handleCreditBalanceChanged,
+  });
   const queuePayload = useMemo(
     () =>
       JSON.stringify({
@@ -1178,7 +1249,13 @@ export function ImageGenerator({
     }
 
     if (currentSubscriptionForAttempt && remainingCredits < costCredits) {
-      toast.error('Insufficient credits. Please top up to keep creating.');
+      setCreditFallback(
+        createGenerationCreditFallbackPayload({
+          mediaType: 'image',
+          requestedCostCredits: costCredits,
+          remainingCredits,
+        })
+      );
       return;
     }
 
@@ -1261,6 +1338,10 @@ export function ImageGenerator({
 
   const handleDownloadImage = async (image: GeneratedImage) => {
     if (!image.url) {
+      return;
+    }
+
+    if (!(await canDownload('image'))) {
       return;
     }
 
@@ -1717,29 +1798,38 @@ export function ImageGenerator({
   );
 
   const fallbackDialog = (
-    <GenerationCreditFallbackDialog
-      open={Boolean(creditFallback) && creditFallbackActions.length > 0}
-      onOpenChange={(open) => {
-        if (!open) {
-          handleCloseCreditFallback();
+    <>
+      <GenerationCreditFallbackDialog
+        open={Boolean(creditFallback)}
+        onOpenChange={(open) => {
+          if (!open) {
+            handleCloseCreditFallback();
+          }
+        }}
+        title={creditFallbackCopy.title}
+        description={creditFallbackCopy.description}
+        currentModeLabel={creditFallbackCopy.currentModeLabel}
+        currentModeValue={t('credits_cost', {
+          credits: creditFallback?.requestedCostCredits ?? costCredits,
+        })}
+        remainingCreditsLabel={creditFallbackCopy.remainingCreditsLabel}
+        remainingCreditsValue={t('credits_remaining', {
+          credits: creditFallback?.remainingCredits ?? remainingCredits,
+        })}
+        switchLabel={creditFallbackCopy.switchLabel}
+        upgradeLabel={creditFallbackCopy.upgradeLabel}
+        closeLabel={creditFallbackCopy.closeLabel}
+        onUpgrade={handleUpgradeFromCreditFallback}
+        actions={creditFallbackActions}
+        earnTitle={
+          t.has('credit_fallback.earn_title')
+            ? t('credit_fallback.earn_title')
+            : 'Free ways to get credits'
         }
-      }}
-      title={creditFallbackCopy.title}
-      description={creditFallbackCopy.description}
-      currentModeLabel={creditFallbackCopy.currentModeLabel}
-      currentModeValue={t('credits_cost', {
-        credits: creditFallback?.requestedCostCredits ?? costCredits,
-      })}
-      remainingCreditsLabel={creditFallbackCopy.remainingCreditsLabel}
-      remainingCreditsValue={t('credits_remaining', {
-        credits: creditFallback?.remainingCredits ?? remainingCredits,
-      })}
-      switchLabel={creditFallbackCopy.switchLabel}
-      upgradeLabel={creditFallbackCopy.upgradeLabel}
-      closeLabel={creditFallbackCopy.closeLabel}
-      onUpgrade={handleUpgradeFromCreditFallback}
-      actions={creditFallbackActions}
-    />
+        earnActions={creditEarnActions}
+      />
+      <PaidDownloadDialog {...paidDownloadDialogProps} />
+    </>
   );
 
   if (embedded) {

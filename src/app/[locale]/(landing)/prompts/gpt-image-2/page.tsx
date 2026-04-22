@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import { setRequestLocale } from 'next-intl/server';
 
-import { envConfigs } from '@/config';
 import { getAlternateLanguageUrlsByLocales } from '@/shared/lib/seo';
+import { getCanonicalAppUrl } from '@/shared/prompt-library/seo';
 
 import { GptImage2PromptGalleryClient } from './prompt-gallery-client';
 
@@ -23,7 +23,7 @@ const promptLibrarySeoConfig = {
 };
 
 function getCanonicalUrl(path: string) {
-  return `${envConfigs.app_url.replace(/\/+$/, '')}${path}`;
+  return `${getCanonicalAppUrl()}${path}`;
 }
 
 function getPromptLibraryDatasetUrl() {

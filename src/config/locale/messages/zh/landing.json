@@ -1,30 +1,31 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI | GPT Image 2 AI 图像生成、改图与 Mockup 工具",
-    "description": "GPT Image 2 AI 是一款面向真实业务场景的 AI 图像生成与编辑工具，适合写实图片、带字海报、UI 截图、产品效果图和参考图改图。用 GPT Image 2 AI 可以更快产出可直接使用的视觉素材。",
-    "keywords": "GPT Image 2 AI, 图像生成, 图片编辑, mockup, ChatGPT image 2"
+    "title": "GPT Image 2 ChatGPT AI 图像生成器 免费在线",
+    "description": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，适合写实图片、清晰文字渲染、UI 截图、产品效果图和高效图像编辑。",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
   },
   "header": {
     "id": "header",
     "brand": {
-      "title": "GPT Image 2 AI",
+      "title": "GPT Image 2",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2 AI"
+        "alt": "GPT Image 2"
       },
       "url": "/"
     },
     "nav": {
       "items": [
         {
-          "title": "GPT Image 2 AI",
+          "title": "GPT Image 2",
           "url": "/models/gpt-image-2",
           "icon": "Image"
         },
         {
           "title": "提示词",
           "url": "/prompts/gpt-image-2",
-          "icon": "Sparkles"
+          "icon": "Sparkles",
+          "badge": "NEW"
         },
         {
           "title": "AI 视频",
@@ -85,11 +86,11 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 AI：写实出图、精准改图、UI Mockup 一站完成",
-    "description": "GPT Image 2 AI 适合生成写实图片、界面草图、产品效果图、广告素材和本地化营销视觉，一套流程即可完成生成与编辑。围绕用户搜索最多的 GPT Image 2 AI 场景，它在精准改图、指令遵循、图中文字和快速迭代上更实用。",
+    "title": "GPT Image 2 — ChatGPT AI 图像生成器",
+    "description": "使用 GPT Image 2 生成写实图片、精致的 UI 截图、产品效果图和可编辑的视觉概念图。基于 ChatGPT Image 模型，具备更强的提示词理解、更清晰的图中文字和更快的迭代效率。",
     "buttons": [
       {
-        "title": "体验 GPT Image 2 AI",
+        "title": "体验 GPT Image 2",
         "icon": "Image",
         "url": "/models/gpt-image-2",
         "target": "_self",
@@ -104,17 +105,17 @@
       }
     ],
     "show_avatars": false,
-    "avatars_tip": "适合探索 GPT Image 2 AI 工作流的创作者",
+    "avatars_tip": "适合探索 GPT Image 2 preview 工作流的创作者",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/hero/photogpt-case-e-commerce-hero-1920-q72.webp",
-      "alt": "GPT Image 2 AI ChatGPT AI 图像生成器"
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "alt": "GPT Image 2 ChatGPT AI 图像生成器"
     }
   },
   "showcases-flow": {
     "id": "showcases",
-    "title": "GPT Image 2 AI 案例与灵感",
-    "description": "查看 GPT Image 2 AI 在写实图片、带字视觉、产品效果图、UI 概念图和精准改图中的实际案例，方便快速判断它是否适合你的业务场景。",
+    "title": "GPT Image 2 作品展示",
+    "description": "精选 GPT Image 2 示例，覆盖写实图片、文字海报、产品效果图和 UI 概念图。",
     "items": [
       {
         "title": "GPT Image 2 示例 1",
@@ -203,12 +204,12 @@
   },
   "introduce": {
     "id": "introduce",
-    "title": "什么是 GPT Image 2 AI？",
-    "description": "GPT Image 2 AI 不是只适合做灵感图的工具，而是更偏向真实业务素材生产的 AI 图像生成器。GPT Image 2 AI 尤其适合写实出图、可编辑营销图、截图风 UI 视觉和基于参考图的精修改图。",
+    "title": "什么是 GPT Image 2？",
+    "description": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，适合写实图像生成、可靠的文字渲染、逼真的截图生成、图像编辑和参考图驱动的创意探索。",
     "items": [
       {
-        "title": "更可靠的密集文字渲染",
-        "description": "可用于生成海报、菜单、标签、广告素材和社媒图片，图中文字相比旧版图像工作流更清晰，也更适合更密集、更小字号的文字内容。",
+        "title": "更可靠的图中文字渲染",
+        "description": "可用于生成海报、菜单、标签、广告素材和社媒图片，图中文字相比旧版图像工作流更清晰、更可用。",
         "icon": "RiFileTextLine"
       },
       {
@@ -222,20 +223,20 @@
         "icon": "RiMagicLine"
       },
       {
-        "title": "精准自然语言图像编辑",
-        "description": "通过对话式指令修改文案、布局、风格、物体或构图，并尽量保留人物特征、光线和画面关键信息，无需从头重做整张图片。",
+        "title": "自然语言图像编辑",
+        "description": "通过对话式指令修改文案、布局、风格、物体或构图，无需从头重做整张图片。",
         "icon": "RiSparklingLine"
       }
     ]
   },
   "benefits": {
     "id": "benefits",
-    "title": "为什么团队更愿意用 GPT Image 2 AI？",
-    "description": "GPT Image 2 AI 通过更强的指令遵循、更实用的文字渲染、更灵活的图像编辑流程和更快的出图节奏，帮助团队更快产出可上线的视觉素材。",
+    "title": "为什么选择 GPT Image 2？",
+    "description": "GPT Image 2 通过更强的指令遵循、更实用的文字渲染和灵活的图像生成流程，帮助团队更快产出可用视觉素材。",
     "items": [
       {
         "title": "更快的创意迭代",
-        "description": "从想法到成图速度更快，并且可以在更少等待时间下持续优化提示词、布局和细节。",
+        "description": "从想法到成图速度更快，并且可以持续优化提示词、布局和细节。",
         "icon": "RiRocketLine"
       },
       {
@@ -244,8 +245,8 @@
         "icon": "RiUserSmileLine"
       },
       {
-        "title": "更强的指令遵循",
-        "description": "对构图、文案、颜色、主体细节和元素关系等多条件提示词有更稳定的表现。",
+        "title": "更强的提示词控制",
+        "description": "对构图、文案、颜色和主体细节等多条件提示词有更稳定的表现。",
         "icon": "RiTimeLine"
       },
       {
@@ -261,63 +262,104 @@
   "how-to-techniques": {
     "id": "how-to-techniques",
     "block": "how-to-techniques",
-    "title": "你可以用",
-    "highlight_text": "GPT Image 2 AI 创作什么？",
-    "description": "探索一组强大的功能，帮助你轻松生成、编辑并增强逼真的照片内容。",
-    "badge_text": "GPT Image 2 AI - Startup Fame 推荐",
+    "tip": "如何在真实创作工作流中高效使用 GPT Image 2",
+    "title": "如何使用 GPT Image 2 技巧",
+    "description": "看看 GPT Image 2 如何处理电商、设计和内容创作中的真实图片生成与编辑任务，不用在多个工具之间来回切换。",
     "items": [
       {
-        "title": "自然干净的照片增强",
-        "description": "GPT Image 2 AI 很适合做图像编辑，因为它能用更简单的方式优化清晰度、光线和质感。用户可以增强人像、商品图和日常照片，同时保留自然观感。GPT Image 2 AI 去掉了复杂步骤，让修图变得更快、更顺滑，也更容易上手。",
+        "title": "GPT Image 2 电商商品图编辑",
+        "description": "用 GPT Image 2 提升商品图的光线、材质和画面质感，把普通拍摄素材快速整理成更适合详情页、广告投放和店铺展示的商品视觉。",
         "image_position": "right",
         "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/how-to/highlight-ai-photo-editor.webp",
-          "alt": "GPT Image 2 AI 照片增强示例"
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.png",
+          "alt": "GPT Image 2 电商修图示例"
         },
         "button": {
-          "title": "立即尝试",
+          "title": "立即体验",
           "url": "/ai-image",
           "target": "_self"
         }
       },
       {
-        "title": "真实感服装变换",
-        "description": "GPT Image 2 AI 可以帮助用户调整服装风格，并保留准确的褶皱、颜色和光线平衡。这很适合时尚预览、创意内容和店铺视觉。借助 GPT Image 2 AI，换装结果会与原图保持一致，看起来更真实、融合也更自然。",
+        "title": "GPT Image 2 AI 虚拟试穿助手",
+        "description": "把服装参考图和人物照片放进同一流程，用 GPT Image 2 生成更直观的试穿效果图，适合服饰展示、搭配测试和购物转化场景。",
         "image_position": "left",
         "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/how-to/highlight-ai-clothes-changer.webp",
-          "alt": "GPT Image 2 AI 服装变换示例"
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/clothing-removal-tryon.jpg",
+          "alt": "GPT Image 2 虚拟试穿示例"
         },
         "button": {
-          "title": "更换服装",
+          "title": "立即体验",
           "url": "/ai-image",
           "target": "_self"
         }
       },
       {
-        "title": "专业头像制作更简单",
-        "description": "GPT Image 2 AI 可以帮助用户生成高质量职业头像，保留自然表情和干净背景。它很适合工作档案、企业页面和个人品牌展示。GPT Image 2 AI 让用户无需相机、灯光设备或摄影经验，也能快速得到精修级头像。",
+        "title": "GPT Image 2 动漫头像生成器",
+        "description": "把自拍、角色设定或人物参考变成更有表现力的动漫风形象，适合做头像、角色概念图、手办设定和二次元风格内容。",
         "image_position": "right",
         "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/how-to/highlight-ai-headshot-generator.webp",
-          "alt": "GPT Image 2 AI 职业头像示例"
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/anime-figure-1.png",
+          "alt": "GPT Image 2 动漫头像示例"
         },
         "button": {
-          "title": "免费开始",
+          "title": "立即体验",
           "url": "/ai-image",
           "target": "_self"
         }
       },
       {
-        "title": "真实效果发型预览",
-        "description": "GPT Image 2 AI 让发型预览更简单直观，它会根据面部特征匹配头发形状、发量和色调。用户可以更有信心地探索不同造型或提前规划风格想法。GPT Image 2 AI 提供更真实的预览结果，帮助用户更快做决定，减少试错。",
+        "title": "GPT Image 2 草图改图工具",
+        "description": "通过简单线稿、局部参考或画面提示，让 GPT Image 2 对指定区域做重绘、替换和增强，比整张图重做更适合精细编辑。",
         "image_position": "left",
         "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/how-to/highlight-ai-hairstyle-changer.webp",
-          "alt": "GPT Image 2 AI 发型预览示例"
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/graffiti-action.png",
+          "alt": "GPT Image 2 草图改图示例"
         },
         "button": {
-          "title": "尝试不同发型",
+          "title": "立即体验",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 背景移除与替换",
+        "description": "用 GPT Image 2 一键分离主体并替换背景，适合做人像精修、体育海报、创作者素材图和营销视觉，不用手工抠图也能快速出片。",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/element-replacement.png",
+          "alt": "GPT Image 2 背景替换示例"
+        },
+        "button": {
+          "title": "立即体验",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 换脸工作台",
+        "description": "结合人物参考与表情细节，让 GPT Image 2 生成更自然的换脸效果，适合做创意内容、人物实验图和娱乐向社媒素材。",
+        "image_position": "left",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/face-swap.png",
+          "alt": "GPT Image 2 换脸示例"
+        },
+        "button": {
+          "title": "立即体验",
+          "url": "/ai-image",
+          "target": "_self"
+        }
+      },
+      {
+        "title": "GPT Image 2 表情包与贴纸生成",
+        "description": "把人物参考图快速转成贴纸、表情包和角色小组件，用 GPT Image 2 做聊天素材、社区内容和社媒传播图会更顺手。",
+        "image_position": "right",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ai-meme-sticker-maker.jpeg",
+          "alt": "GPT Image 2 表情包与贴纸示例"
+        },
+        "button": {
+          "title": "立即体验",
           "url": "/ai-image",
           "target": "_self"
         }
@@ -326,8 +368,8 @@
   },
   "features": {
     "id": "features",
-    "title": "GPT Image 2 AI 核心功能",
-    "description": "了解 GPT Image 2 AI 在提示词出图、截图风视觉、多图融合、持续改图和生产级素材生成上的关键能力。",
+    "title": "GPT Image 2 核心功能",
+    "description": "探索 GPT Image 2 的核心图像生成能力，包括提示词生成、截图风格输出、多图融合和迭代编辑。",
     "items": [
       {
         "title": "ChatGPT Image 模型生成",
@@ -386,78 +428,72 @@
   },
   "testimonials": {
     "id": "testimonials",
-    "title": "创作者、营销团队与产品团队都在使用",
-    "description": "看看大家如何用 GPT Image 2 AI 制作职业头像、产品视觉、生活方式内容、社媒素材和更精致的营销图片。",
+    "title": "真实用户评价",
+    "description": "看看创作者如何使用 GPT Image 2 制作视觉设计、营销素材、产品效果图和品牌内容。",
     "items": [
       {
-        "name": "J.K.",
-        "role": "内容创作者",
-        "rating": 5,
-        "quote": "我会用 GPT Image 2 AI 生成更精致的职业头像和生活方式图片，用在博客和社媒内容里。画面看起来很真实，光线自然，后期调整也比手动处理省事很多。",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-1-optimized.webp",
-          "alt": "GPT Image 2 AI 内容创作者评价背景图"
+        "name": "李明",
+        "role": "社媒视觉设计师",
+        "quote": "GPT Image 2 让带文字的营销视觉图更容易落地，我现在几分钟就能从想法做到可发布素材。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=liming",
+          "alt": "李明"
         }
       },
       {
-        "name": "M.L.",
-        "role": "电商经理",
-        "rating": 5,
-        "quote": "GPT Image 2 AI 让商品视觉制作轻松很多。我不用搭复杂棚拍环境，也能快速得到干净、真实的产品图，很适合做商品详情页和营销活动素材。",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-2-optimized.webp",
-          "alt": "GPT Image 2 AI 电商经理评价背景图"
+        "name": "王芳",
+        "role": "增长营销经理",
+        "quote": "我们会用 GPT Image 2 做落地页原型、广告创意和产品营销图，截图质感特别有帮助。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=wangfang",
+          "alt": "王芳"
         }
       },
       {
-        "name": "A.R.",
-        "role": "自由摄影师",
-        "rating": 5,
-        "quote": "作为自由摄影师，我很在意效率，但也不希望成片看起来太假。GPT Image 2 AI 很适合做肖像概念图和棚拍风职业头像，整体质感可信，而且成图完成度很高。",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-3-optimized.webp",
-          "alt": "GPT Image 2 AI 自由摄影师评价背景图"
-        }
-      },
-      {
-        "name": "S.T.",
-        "role": "时尚博主",
-        "rating": 5,
-        "quote": "我会用 GPT Image 2 AI 提前测试穿搭和内容方向，从服装变化到更干净的时尚图都很顺手。这样在正式拍摄前就能先判断视觉效果，节省很多时间。",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-4-optimized.webp",
-          "alt": "GPT Image 2 AI 时尚博主评价背景图"
-        }
-      },
-      {
-        "name": "R.K.",
-        "role": "数字营销人员",
-        "rating": 5,
-        "quote": "GPT Image 2 AI 很适合做社媒素材、营销视觉和真实感编辑内容。需要快速出多版图的时候特别省力，能更快把品牌内容做得完整、统一、可发布。",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-5-optimized.webp",
-          "alt": "GPT Image 2 AI 数字营销人员评价背景图"
-        }
-      },
-      {
-        "name": "L.N.",
+        "name": "张伟",
         "role": "产品设计师",
-        "rating": 5,
-        "quote": "当我需要为汇报和提案准备更真实的概念图时，GPT Image 2 AI 可以明显加快节奏。它输出的细节足够清晰，适合内部评审、演示文稿和前期产品叙事。",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-6-optimized.webp",
-          "alt": "GPT Image 2 AI 产品设计师评价背景图"
+        "quote": "它生成的 UI 图已经足够拿来跟团队讨论流程，很多想法在打开 Figma 之前就能验证。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=zhangwei",
+          "alt": "张伟"
+        }
+      },
+      {
+        "name": "陈静",
+        "role": "创意总监",
+        "quote": "写实效果在光线、材质和构图上更成熟，很适合前期视觉方向探索。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=chenjing",
+          "alt": "陈静"
+        }
+      },
+      {
+        "name": "刘强",
+        "role": "电商品牌创始人",
+        "quote": "产品效果图和包装概念出的很快，能先测试创意方向再进入正式制作。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=liuqiang",
+          "alt": "刘强"
+        }
+      },
+      {
+        "name": "赵敏",
+        "role": "品牌设计师",
+        "quote": "自然语言改图非常省时间，小范围改文案和样式不用整张重做。",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=zhaomin",
+          "alt": "赵敏"
         }
       }
     ]
   },
   "faq": {
     "id": "faq",
-    "title": "关于 GPT Image 2 AI 的常见问题",
+    "title": "关于 GPT Image 2 的常见问题",
     "items": [
       {
-        "question": "什么是 GPT Image 2 AI？",
-        "answer": "GPT Image 2 AI 是一款面向真实创作场景的 AI 图像生成与编辑工具，灵感来自最新的 ChatGPT 图像工作流。很多用户搜索 GPT Image 2 AI 时，也会输入 chatgpt image 2、chatgpt image gen 2、chatgpt image generator 2 或 chatgpt 图像生成，本质上都在找更强的写实出图、文字渲染和精准改图能力。"
+        "question": "什么是 GPT Image 2？",
+        "answer": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，重点提升了写实图像、文字渲染、UI 截图和提示词遵循能力。"
       },
       {
         "question": "GPT Image 2 可以免费使用吗？",
@@ -468,20 +504,12 @@
         "answer": "你可以用它生成产品效果图、社媒图片、UI 截图、海报、概念图，以及基于自然语言编辑已有图片。"
       },
       {
-        "question": "GPT Image 2 AI 和旧版图像模型有什么不同？",
-        "answer": "GPT Image 2 AI 在精准编辑、密集文字渲染、截图真实感、提示词遵循、创意转换和生成速度上更进一步，更适合真实生产素材。"
-      },
-      {
-        "question": "GPT Image 2 AI 和 chatgpt image 2、chatgpt image gen 2 是一回事吗？",
-        "answer": "大多数搜索语境下可以这样理解。很多用户会用 chatgpt image 2、chatgpt image gen 2 或 chatgpt image generator 2 来描述新版 ChatGPT 图像生成体验，而这个页面聚焦的就是这类更强的生成、改图和文字渲染能力。"
+        "question": "GPT Image 2 和旧版图像模型有什么不同？",
+        "answer": "GPT Image 2 在文字渲染、截图真实感、提示词遵循和写实质量上看起来更进一步，更适合真实生产素材。"
       },
       {
         "question": "GPT Image 2 API 已经开放了吗？",
         "answer": "GPT Image 2 API 的开放时间和接入方式可能会变化。本站内容会优先适配 GPT Image 2 风格工作流，你也可以持续关注官方 API 更新。"
-      },
-      {
-        "question": "GPT Image 2 AI 支持 chatgpt 4.0图片 或 chatgpt image to text 吗？",
-        "answer": "很多人在搜索 chatgpt 4.0图片 时，本质上是在找更强的 ChatGPT 图像生成能力。GPT Image 2 AI 主要聚焦图片生成、参考图改图和创意编辑；如果你搜索的是 chatgpt image to text，这更接近图片理解或文字提取需求，不是本页的核心场景。"
       },
       {
         "question": "GPT Image 2 支持哪些输入？",
@@ -495,8 +523,8 @@
   },
   "cta": {
     "id": "cta",
-    "title": "开始使用 GPT Image 2 AI 创作",
-    "description": "先开启 GPT Image 2 AI 的图片生成与改图工作流，后续再扩展到 AI 视频，让整体创意链路更完整。",
+    "title": "开始使用 AI 图片和 AI 视频创作",
+    "description": "将图片生成与视频生成作为两个独立工作流来使用，也为后续扩展更多模型预留空间。",
     "buttons": [
       {
         "title": "使用 AI 图片",
@@ -519,11 +547,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "GPT Image 2 AI",
-      "description": "GPT Image 2 AI 是一款适合文生图、精准改图、UI Mockup、产品视觉、本地化营销图和创意风格转换的 AI 图像生成工具。",
+      "title": "GPT Image 2",
+      "description": "GPT Image 2 是一款基于 ChatGPT Image 模型的 AI 图像生成器，适用于文生图、图像编辑、UI 原型和产品视觉创作。",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2 AI ChatGPT AI 图像生成器"
+        "alt": "GPT Image 2 ChatGPT AI 图像生成器"
       },
       "url": "/"
     },
@@ -597,16 +625,16 @@
     "show_locale": true
   },
   "generator_switcher": {
-    "title": "使用 GPT Image 2 AI 创作",
-    "subtitle": "直接在首页生成逼真的 GPT Image 2 AI 图像，并体验更精准的改图能力。",
+    "title": "使用 GPT Image 2 创作",
+    "subtitle": "直接在首页生成逼真的 GPT Image 2 AI 图像。",
     "video": "AI 视频",
     "image": "AI 图片",
     "seedance": "Seedance 2.0",
     "kling": "Kling 3",
     "seedance_description": "更适合多模态参考、镜头控制和更强电影感生成。",
     "kling_description": "更适合多镜叙事、元素连贯和原声音轨。",
-    "sr_only_video": "GPT Image 2 AI ChatGPT AI 图像生成器",
-    "sr_only_image": "GPT Image 2 AI 图像编辑",
+    "sr_only_video": "GPT Image 2 ChatGPT AI 图像生成器",
+    "sr_only_image": "GPT Image 2 图像编辑",
     "sr_only_kling": "Kling 3 视频生成器"
   }
 }

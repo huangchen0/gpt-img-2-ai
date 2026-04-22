@@ -114,37 +114,35 @@ export async function updateAITaskById(id: string, updateAITask: UpdateAITask) {
   const result = await db().transaction(async (tx: any) => {
     // task failed, Revoke credit consumption record
     if (updateAITask.status === AITaskStatus.FAILED && updateAITask.creditId) {
-      // get consumed credit record
+      // Atomically claim the refund so concurrent query/notify updates cannot
+      // restore the same consumed credits more than once.
       const [consumedCredit] = await tx
-        .select()
-        .from(credit)
-        .where(eq(credit.id, updateAITask.creditId));
-      if (consumedCredit && consumedCredit.status === CreditStatus.ACTIVE) {
+        .update(credit)
+        .set({
+          status: CreditStatus.DELETED,
+        })
+        .where(
+          and(
+            eq(credit.id, updateAITask.creditId),
+            eq(credit.status, CreditStatus.ACTIVE)
+          )
+        )
+        .returning();
+
+      if (consumedCredit) {
         const consumedItems = JSON.parse(consumedCredit.consumedDetail || '[]');
 
-        // console.log('consumedItems', consumedItems);
-
         // add back consumed credits
-        await Promise.all(
-          consumedItems.map((item: any) => {
-            if (item && item.creditId && item.creditsConsumed > 0) {
-              return tx
-                .update(credit)
-                .set({
-                  remainingCredits: sql`${credit.remainingCredits} + ${item.creditsConsumed}`,
-                })
-                .where(eq(credit.id, item.creditId));
-            }
-          })
-        );
-
-        // delete consumed credit record
-        await tx
-          .update(credit)
-          .set({
-            status: CreditStatus.DELETED,
-          })
-          .where(eq(credit.id, updateAITask.creditId));
+        for (const item of consumedItems) {
+          if (item && item.creditId && item.creditsConsumed > 0) {
+            await tx
+              .update(credit)
+              .set({
+                remainingCredits: sql`${credit.remainingCredits} + ${item.creditsConsumed}`,
+              })
+              .where(eq(credit.id, item.creditId));
+          }
+        }
       }
     }
 

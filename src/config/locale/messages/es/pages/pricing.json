@@ -80,10 +80,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "starter-monthly",
-        "legacy_product_ids": [
-          "starter-monthly",
-          "lite-monthly-v2"
-        ],
+        "legacy_product_ids": ["starter-monthly", "lite-monthly-v2"],
         "product_name": "Membresía Starter Mensual",
         "credits": 4000,
         "valid_days": 30,
@@ -185,9 +182,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "premium-yearly",
-        "legacy_product_ids": [
-          "premium-yearly"
-        ],
+        "legacy_product_ids": ["premium-yearly"],
         "product_name": "Membresía Pro Anual",
         "credits": 48000,
         "valid_days": 365,
@@ -279,9 +274,7 @@
           "icon": "RiBankCardLine"
         },
         "product_id": "credits-package",
-        "legacy_product_ids": [
-          "credits-package"
-        ],
+        "legacy_product_ids": ["credits-package"],
         "product_name": "Paquete Starter de Créditos",
         "credits": 4000,
         "valid_days": 365,
@@ -365,19 +358,14 @@
         "id": "membership",
         "title": "Planes Pro",
         "description": "Produce más con un menor costo de render a largo plazo.",
-        "group_names": [
-          "monthly",
-          "yearly"
-        ],
+        "group_names": ["monthly", "yearly"],
         "default_group": "yearly"
       },
       {
         "id": "credits",
         "title": "Compra cuando quieras, crea con flexibilidad",
         "description": "Úsalos al instante, recarga cuando quieras y sin suscripción.",
-        "group_names": [
-          "packs"
-        ],
+        "group_names": ["packs"],
         "default_group": "packs"
       }
     ],
@@ -468,6 +456,6 @@
     "flash_sale_save_percent": "Ahorra {percent}%",
     "flash_sale_cta": "Reclama {percent}% Off Ahora",
     "flash_sale_cta_note": "El precio early-bird solo estará disponible este mes. Después volverá la tarifa estándar.",
-    "per_video_price": "Aprox. {amount} / 100 créditos"
+    "per_image_price": "Aprox. {amount} / imagen"
   }
 }

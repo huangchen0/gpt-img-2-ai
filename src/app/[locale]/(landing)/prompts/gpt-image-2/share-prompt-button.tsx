@@ -6,28 +6,13 @@ import { Check, Share2, X } from 'lucide-react';
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
 
-export function SharePromptButton({
-  title,
-  text,
-  className,
-}: {
-  title: string;
-  text: string;
-  className?: string;
-}) {
+export function SharePromptButton({ className }: { className?: string }) {
   const [shared, setShared] = useState(false);
   const [failed, setFailed] = useState(false);
 
   async function sharePrompt() {
     try {
-      const url = window.location.href;
-
-      if (navigator.share) {
-        await navigator.share({ title, text, url });
-      } else {
-        await navigator.clipboard.writeText(url);
-      }
-
+      await navigator.clipboard.writeText(window.location.href);
       setFailed(false);
       setShared(true);
       window.setTimeout(() => setShared(false), 1400);
@@ -52,7 +37,7 @@ export function SharePromptButton({
       ) : (
         <Share2 className="size-4" />
       )}
-      {failed ? 'Share failed' : shared ? 'Shared' : 'Share'}
+      {failed ? 'Copy failed' : shared ? 'Link copied' : 'Copy link'}
     </Button>
   );
 }

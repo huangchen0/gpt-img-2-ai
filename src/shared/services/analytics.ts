@@ -7,7 +7,6 @@ import {
   PlausibleAnalyticsProvider,
   VercelAnalyticsProvider,
 } from '@/extensions/analytics';
-import { envConfigs } from '@/config';
 import type { Configs } from '@/shared/models/config';
 
 /**
@@ -89,7 +88,10 @@ let analyticsService: AnalyticsManager | null = null;
 export async function getAnalyticsService(
   configs?: Configs
 ): Promise<AnalyticsManager> {
-  configs = configs || envConfigs;
+  if (!configs) {
+    const { getAllConfigs } = await import('@/shared/models/config');
+    configs = await getAllConfigs();
+  }
   analyticsService = getAnalyticsManagerWithConfigs(configs);
 
   return analyticsService;

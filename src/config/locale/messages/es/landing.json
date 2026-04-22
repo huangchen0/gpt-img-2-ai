@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "title": "GPT Image 2 AI | Generador, editor y creador de mockups con GPT Image 2 AI",
-    "description": "GPT Image 2 AI es una herramienta de generación y edición visual pensada para imágenes fotorrealistas, diseños con texto, pantallas UI, mockups de producto y retoque a partir de referencias. Con GPT Image 2 AI puedes producir piezas listas para usar mucho más rápido.",
-    "keywords": "GPT Image 2 AI, generador IA, editor de imagenes, mockups, ChatGPT image 2"
+    "title": "GPT Image 2 Generador de Imagenes IA de ChatGPT Gratis",
+    "description": "GPT Image 2 es un generador de imágenes con IA para imágenes realistas, texto nítido, capturas de UI, mockups y edición rápida.",
+    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
   },
   "header": {
     "id": "header",
     "brand": {
-      "title": "GPT Image 2 AI",
+      "title": "GPT Image 2",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2 AI"
+        "alt": "GPT Image 2"
       },
       "url": "/"
     },
@@ -20,6 +20,12 @@
           "title": "Imagen AI",
           "url": "/ai-image",
           "icon": "Image"
+        },
+        {
+          "title": "Prompts",
+          "url": "/prompts/gpt-image-2",
+          "icon": "Sparkles",
+          "badge": "NEW"
         },
         {
           "title": "Video AI",
@@ -80,8 +86,8 @@
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 AI para imágenes realistas, retoque preciso y mockups UI",
-    "description": "GPT Image 2 AI te ayuda a crear imágenes realistas, pantallas de interfaz, visuales de producto y creatividades publicitarias dentro de un mismo flujo. Está orientado a los casos de uso por los que la gente busca GPT Image 2 AI: editar mejor, seguir instrucciones complejas y sacar piezas visuales que sí se puedan publicar.",
+    "title": "GPT Image 2 - Generador de imágenes con IA para ChatGPT",
+    "description": "Con GPT Image 2 puedes crear imágenes realistas, pantallas de interfaz, mockups de producto y piezas visuales listas para marketing en muy poco tiempo. Funciona sobre ChatGPT Image y destaca por interpretar mejor las instrucciones, resolver texto dentro de la imagen y facilitar los retoques posteriores.",
     "buttons": [
       {
         "title": "Probar Imagen AI",
@@ -102,13 +108,13 @@
     "avatars_tip": "Ideal para quienes buscan resultados de GPT Image 2 que se puedan usar de verdad",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/hero/photogpt-case-e-commerce-hero-1920-q72.webp",
-      "alt": "GPT Image 2 AI Generador de Imágenes con IA de ChatGPT"
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
+      "alt": "GPT Image 2 Generador de Imágenes con IA de ChatGPT"
     }
   },
   "showcases-flow": {
     "id": "showcases",
-    "title": "Ejemplos de GPT Image 2 AI",
+    "title": "Ejemplos de GPT Image 2",
     "description": "Descubre imágenes realistas, diseños con texto, mockups de producto y conceptos de interfaz creados con GPT Image 2.",
     "items": [
       {
@@ -198,8 +204,8 @@
   },
   "introduce": {
     "id": "introduce",
-    "title": "Qué es GPT Image 2 AI",
-    "description": "GPT Image 2 AI está pensado para trabajo real de marketing, producto y diseño, no solo para inspiración. GPT Image 2 AI sirve especialmente bien para escenas fotorrealistas, imágenes con texto, pantallas tipo UI, mockups y edición fina guiada por instrucciones naturales.",
+    "title": "Qué es GPT Image 2",
+    "description": "GPT Image 2 es un generador de imágenes basado en ChatGPT Image pensado para usos reales. Permite crear escenas fotorrealistas, imágenes con texto más legible, pantallas tipo UI, composiciones a partir de referencias y ediciones guiadas por instrucciones naturales.",
     "items": [
       {
         "title": "Mejor para imágenes con texto",
@@ -225,8 +231,8 @@
   },
   "benefits": {
     "id": "benefits",
-    "title": "Por qué los equipos eligen GPT Image 2 AI",
-    "description": "GPT Image 2 AI acelera el paso del prompt a la pieza final gracias a un mejor seguimiento de instrucciones, texto más útil dentro de la imagen, edición flexible y menos rondas de corrección.",
+    "title": "Por qué usar GPT Image 2",
+    "description": "GPT Image 2 no solo genera imágenes bonitas; también ayuda a llegar antes a un resultado que se pueda usar en trabajo real.",
     "items": [
       {
         "title": "Iteración mucho más rápida",
@@ -366,67 +372,61 @@
   },
   "testimonials": {
     "id": "testimonials",
-    "title": "Creadores, marketers y equipos de producto ya lo usan",
-    "description": "Descubre cómo usan GPT Image 2 AI para headshots profesionales, visuales de producto, contenido lifestyle, creatividades para redes y materiales de marketing más pulidos.",
+    "title": "Opiniones de usuarios",
+    "description": "Así lo están usando otros equipos y creadores en proyectos reales.",
     "items": [
       {
-        "name": "J.K.",
-        "role": "Creadora de contenido",
-        "rating": 5,
-        "quote": "Uso GPT Image 2 AI para crear headshots más pulidos y visuales lifestyle para mi blog y mis redes. Las imágenes se ven realistas, la luz es natural y el ajuste final me lleva mucho menos tiempo que hacerlo todo a mano.",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-1-optimized.webp",
-          "alt": "Fondo de testimonio para creadora de contenido"
+        "name": "Sarah Chen",
+        "role": "Diseñadora de redes sociales",
+        "quote": "GPT Image 2 facilita muchísimo crear piezas de campaña con texto usable. Paso de la idea al gráfico final en minutos.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
+          "alt": "Sarah Chen"
         }
       },
       {
-        "name": "M.L.",
-        "role": "Responsable de e-commerce",
-        "rating": 5,
-        "quote": "GPT Image 2 AI hace mucho más fácil producir visuales de producto. Sin montar un estudio completo, puedo sacar imágenes limpias y realistas para fichas, campañas y nuevas creatividades comerciales.",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-2-optimized.webp",
-          "alt": "Fondo de testimonio para responsable de e-commerce"
+        "name": "Michael Rodriguez",
+        "role": "Responsable de growth",
+        "quote": "Lo usamos para mockups de landing pages, conceptos de anuncios y assets de marketing. La calidad de screenshots destaca mucho.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
+          "alt": "Michael Rodriguez"
         }
       },
       {
-        "name": "A.R.",
-        "role": "Fotógrafo freelance",
-        "rating": 5,
-        "quote": "Como fotógrafo freelance, valoro mucho la velocidad, pero no quiero resultados que se vean artificiales. GPT Image 2 AI me ayuda a desarrollar retratos y headshots tipo estudio con una apariencia creíble y una terminación muy cuidada.",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-3-optimized.webp",
-          "alt": "Fondo de testimonio para fotógrafo freelance"
+        "name": "David Kim",
+        "role": "Diseñador de producto",
+        "quote": "Las generaciones de UI son lo bastante buenas como para discutir flujos antes de abrir Figma.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
+          "alt": "David Kim"
         }
       },
       {
-        "name": "S.T.",
-        "role": "Blogger de moda",
-        "rating": 5,
-        "quote": "Uso GPT Image 2 AI para probar looks, cambios de outfit y direcciones visuales antes de una sesión. Me permite validar ideas rápido y mantener un acabado elegante y profesional en las imágenes finales.",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-4-optimized.webp",
-          "alt": "Fondo de testimonio para blogger de moda"
+        "name": "Emma Thompson",
+        "role": "Director creativo",
+        "quote": "La calidad fotorrealista se nota más pulida en iluminación, materiales y composición. Es excelente para dirección visual temprana.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
+          "alt": "Emma Thompson"
         }
       },
       {
-        "name": "R.K.",
-        "role": "Especialista en marketing digital",
-        "rating": 5,
-        "quote": "GPT Image 2 AI funciona muy bien para creatividades sociales, visuales de campaña y ediciones realistas que deben publicarse rápido. Cuando necesito varias versiones en poco tiempo, acelera mucho el proceso.",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-5-optimized.webp",
-          "alt": "Fondo de testimonio para especialista en marketing digital"
+        "name": "James Wilson",
+        "role": "Fundador de ecommerce",
+        "quote": "Los mockups de producto y packaging salen mucho más rápido. Nos ayuda a validar ideas antes de producirlas.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
+          "alt": "James Wilson"
         }
       },
       {
-        "name": "L.N.",
-        "role": "Diseñadora de producto",
-        "rating": 5,
-        "quote": "Cuando necesito imágenes conceptuales realistas para presentaciones y propuestas, GPT Image 2 AI me ayuda a avanzar más rápido. El nivel de detalle es suficiente para revisiones internas, decks y storytelling de producto en fases tempranas.",
-        "image": {
-          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-6-optimized.webp",
-          "alt": "Fondo de testimonio para diseñadora de producto"
+        "name": "Lisa Anderson",
+        "role": "Diseñadora de marca",
+        "quote": "La edición en lenguaje natural ahorra muchísimo tiempo. Ya no tengo que rehacer toda la imagen por pequeños cambios de texto o estilo.",
+        "avatar": {
+          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
+          "alt": "Lisa Anderson"
         }
       }
     ]
@@ -491,11 +491,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "GPT Image 2 AI",
-      "description": "GPT Image 2 AI es una herramienta impulsada por ChatGPT para generar, editar con precisión, retocar y adaptar imágenes dentro de un mismo flujo de trabajo.",
+      "title": "GPT Image 2",
+      "description": "GPT Image 2 es una herramienta basada en ChatGPT Image para generar, retocar y adaptar imágenes dentro de un mismo flujo de trabajo.",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2 AI Generador de Imágenes con IA de ChatGPT"
+        "alt": "GPT Image 2 Generador de Imágenes con IA de ChatGPT"
       },
       "url": "/"
     },
@@ -564,16 +564,16 @@
     "show_locale": true
   },
   "generator_switcher": {
-    "title": "Crear con GPT Image 2 AI",
-    "subtitle": "Genera imágenes realistas directamente desde la portada con GPT Image 2 AI y ajusta el resultado en pocos pasos.",
+    "title": "Crear con GPT Image 2",
+    "subtitle": "Genera imágenes realistas directamente desde la portada y ajusta el resultado en pocos pasos.",
     "video": "Generación de imágenes",
     "image": "Edición de imágenes",
     "seedance": "Seedance 2.0",
     "kling": "Kling 3",
     "seedance_description": "Mejor para referencias multimodales, control de cámara y resultados cinematográficos.",
     "kling_description": "Mejor para narrativa multi-shot, consistencia de elementos y audio nativo.",
-    "sr_only_video": "GPT Image 2 AI Generador de Imágenes con IA de ChatGPT",
-    "sr_only_image": "Edición de imágenes GPT Image 2 AI",
+    "sr_only_video": "GPT Image 2 Generador de Imágenes con IA de ChatGPT",
+    "sr_only_image": "Edición de imágenes GPT Image 2",
     "sr_only_kling": "Generador de Video Kling 3"
   }
 }
