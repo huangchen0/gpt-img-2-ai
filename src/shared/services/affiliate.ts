@@ -3,7 +3,8 @@ import {
   AffonsoAffiliateProvider,
   PromoteKitAffiliateProvider,
 } from '@/extensions/affiliate';
-import { Configs, getAllConfigs } from '@/shared/models/config';
+import { envConfigs } from '@/config';
+import type { Configs } from '@/shared/models/config';
 
 /**
  * get affiliate manager with configs
@@ -42,9 +43,7 @@ let affiliateService: AffiliateManager | null = null;
 export async function getAffiliateService(
   configs?: Configs
 ): Promise<AffiliateManager> {
-  if (!configs) {
-    configs = await getAllConfigs();
-  }
+  configs = configs || envConfigs;
   affiliateService = getAffiliateManagerWithConfigs(configs);
 
   return affiliateService;

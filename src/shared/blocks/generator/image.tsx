@@ -59,12 +59,14 @@ import { calculateImageCredits } from '@/shared/lib/image-pricing';
 import { cn } from '@/shared/lib/utils';
 
 interface ImageGeneratorProps {
+  id?: string;
   allowMultipleImages?: boolean;
   maxImages?: number;
   maxSizeMB?: number;
   srOnlyTitle?: string;
   className?: string;
   promptKey?: string;
+  embedded?: boolean;
 }
 
 interface GeneratedImage {
@@ -193,13 +195,13 @@ type AspectRatio = (typeof ASPECT_RATIO_OPTIONS)[NanoBananaModel][number];
 const MODEL_OPTIONS = [
   {
     value: MODEL_NANO_BANANA_2,
-    label: 'GPT Image 2',
+    label: 'Nano Banana',
     provider: 'kie',
     scenes: ['text-to-image', 'image-to-image'],
   },
   {
     value: MODEL_NANO_BANANA_PRO,
-    label: 'GPT Image 2 Pro',
+    label: 'Nano Banana Pro',
     provider: 'kie',
     scenes: ['text-to-image', 'image-to-image'],
   },
@@ -265,12 +267,14 @@ function extractImageUrls(result: any): string[] {
 }
 
 export function ImageGenerator({
+  id,
   allowMultipleImages = true,
   maxImages = 14,
   maxSizeMB = 5,
   srOnlyTitle,
   className,
   promptKey,
+  embedded = false,
 }: ImageGeneratorProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -1287,256 +1291,270 @@ export function ImageGenerator({
     }
   };
 
-  return (
-    <section className={cn('py-16 md:py-24', className)}>
-      <div className="container">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <Card>
-              <CardHeader>
-                {srOnlyTitle && <h2 className="sr-only">{srOnlyTitle}</h2>}
-                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
-                  <Wand className="h-5 w-5" />
-                  {t('title')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6 pb-8">
-                <Tabs value={activeTab} onValueChange={handleTabChange}>
-                  <TabsList className="bg-primary/10 grid w-full grid-cols-2">
-                    <TabsTrigger value="text-to-image">
-                      {t('tabs.text-to-image')}
-                    </TabsTrigger>
-                    <TabsTrigger value="image-to-image">
-                      {t('tabs.image-to-image')}
-                    </TabsTrigger>
-                  </TabsList>
-                </Tabs>
+  const content = (
+    <div className={cn(!embedded && 'container')}>
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          <Card>
+            <CardHeader>
+              {srOnlyTitle && <h2 className="sr-only">{srOnlyTitle}</h2>}
+              <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                <Wand className="h-5 w-5" />
+                {t('title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6 pb-8">
+              <Tabs value={activeTab} onValueChange={handleTabChange}>
+                <TabsList className="bg-primary/10 grid w-full grid-cols-2">
+                  <TabsTrigger value="text-to-image">
+                    {t('tabs.text-to-image')}
+                  </TabsTrigger>
+                  <TabsTrigger value="image-to-image">
+                    {t('tabs.image-to-image')}
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label>{t('form.model')}</Label>
-                    <Select value={model} onValueChange={handleModelChange}>
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={t('form.select_model')} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {MODEL_OPTIONS.filter((option) =>
-                          option.scenes.includes(activeTab)
-                        ).map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <p className="text-muted-foreground text-xs">
-                      {t('form.model_hint')}
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>{t('form.resolution')}</Label>
-                    <Select
-                      value={resolution}
-                      onValueChange={handleResolutionChange}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue
-                          placeholder={t('form.select_resolution')}
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {RESOLUTION_OPTIONS.map((option) => (
-                          <SelectItem key={option} value={option}>
-                            {option}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label>{t('form.model')}</Label>
+                  <Select value={model} onValueChange={handleModelChange}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t('form.select_model')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {MODEL_OPTIONS.filter((option) =>
+                        option.scenes.includes(activeTab)
+                      ).map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <p className="text-muted-foreground text-xs">
+                    {t('form.model_hint')}
+                  </p>
                 </div>
-
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label>{t('form.aspect_ratio')}</Label>
-                    <Select
-                      value={aspectRatio}
-                      onValueChange={handleAspectRatioChange}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue
-                          placeholder={t('form.select_aspect_ratio')}
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {modelAspectRatios.map((option) => (
-                          <SelectItem key={option} value={option}>
-                            {option}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>{t('form.output_format')}</Label>
-                    <Select
-                      value={outputFormat}
-                      onValueChange={handleOutputFormatChange}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue
-                          placeholder={t('form.select_output_format')}
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {OUTPUT_FORMAT_OPTIONS.map((option) => (
-                          <SelectItem key={option} value={option}>
-                            {option.toUpperCase()}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {isNanoBanana2 && (
-                  <div className="space-y-2">
-                    <Label className="flex items-center justify-between gap-2">
-                      <span>{t('form.google_search')}</span>
-                      <Switch
-                        checked={useGoogleSearch}
-                        onCheckedChange={setUseGoogleSearch}
-                      />
-                    </Label>
-                    <p className="text-muted-foreground text-xs">
-                      {t('form.google_search_hint')}
-                    </p>
-                  </div>
-                )}
-
-                {!isTextToImageMode && (
-                  <div className="space-y-4">
-                    <ImageUploader
-                      title={t('form.reference_image')}
-                      allowMultiple={allowMultipleImages}
-                      maxImages={effectiveMaxImages}
-                      maxSizeMB={maxSizeMB}
-                      onChange={handleReferenceImagesChange}
-                      emptyHint={t('form.reference_image_placeholder')}
-                    />
-
-                    {hasReferenceUploadError && (
-                      <p className="text-destructive text-xs">
-                        {t('form.some_images_failed_to_upload')}
-                      </p>
-                    )}
-                  </div>
-                )}
 
                 <div className="space-y-2">
-                  <Label htmlFor="image-prompt">{t('form.prompt')}</Label>
-                  <Textarea
-                    ref={promptTextareaRef}
-                    id="image-prompt"
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    placeholder={t('form.prompt_placeholder')}
-                    className="min-h-32"
-                  />
-                  <div className="text-muted-foreground flex items-center justify-between text-xs">
-                    <span>
-                      {promptLength} / {MAX_PROMPT_LENGTH}
-                    </span>
-                    {isPromptTooLong && (
-                      <span className="text-destructive">
-                        {t('form.prompt_too_long')}
-                      </span>
-                    )}
-                  </div>
+                  <Label>{t('form.resolution')}</Label>
+                  <Select
+                    value={resolution}
+                    onValueChange={handleResolutionChange}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder={t('form.select_resolution')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {RESOLUTION_OPTIONS.map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label>{t('form.aspect_ratio')}</Label>
+                  <Select
+                    value={aspectRatio}
+                    onValueChange={handleAspectRatioChange}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue
+                        placeholder={t('form.select_aspect_ratio')}
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {modelAspectRatios.map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                {!isMounted ? (
-                  <Button className="w-full" disabled size="lg">
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {t('loading')}
-                  </Button>
-                ) : isCheckSign ? (
-                  <Button className="w-full" disabled size="lg">
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    {t('checking_account')}
-                  </Button>
-                ) : user ? (
-                  <Button
-                    size="lg"
-                    className="w-full"
-                    onClick={handleGenerate}
-                    disabled={
-                      isQueueActive ||
-                      isGenerating ||
-                      isLoadingCredits ||
-                      isLoadingProviders ||
-                      isFetchingCurrentSubscription ||
-                      !prompt.trim() ||
-                      isPromptTooLong ||
-                      isReferenceUploading ||
-                      hasReferenceUploadError ||
-                      (!isLoadingCredits &&
-                        Boolean(currentSubscription) &&
-                        remainingCredits < costCredits)
-                    }
+                <div className="space-y-2">
+                  <Label>{t('form.output_format')}</Label>
+                  <Select
+                    value={outputFormat}
+                    onValueChange={handleOutputFormatChange}
                   >
-                    {isQueueActive ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {queueCopy.waitingButtonLabel}
-                      </>
-                    ) : isGenerating ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {t('generating')}
-                      </>
-                    ) : isLoadingProviders || isFetchingCurrentSubscription ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        {t('loading')}
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="mr-2 h-4 w-4" />
-                        {t('generate')}
-                      </>
-                    )}
-                  </Button>
-                ) : (
-                  <Button
-                    size="lg"
-                    className="w-full"
-                    onClick={() => setIsShowSignModal(true)}
-                  >
-                    <User className="mr-2 h-4 w-4" />
-                    {t('sign_in_to_generate')}
-                  </Button>
-                )}
+                    <SelectTrigger className="w-full">
+                      <SelectValue
+                        placeholder={t('form.select_output_format')}
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {OUTPUT_FORMAT_OPTIONS.map((option) => (
+                        <SelectItem key={option} value={option}>
+                          {option.toUpperCase()}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
 
-                {!isMounted || isLoadingCredits || isLoadingProviders ? (
-                  <div
-                    className={cn(
-                      'flex items-center text-sm',
-                      showCreditsCost ? 'justify-between' : 'justify-end'
-                    )}
-                  >
-                    {showCreditsCost ? (
-                      <span className="text-primary">
-                        {t('credits_cost', { credits: costCredits })}
-                      </span>
-                    ) : null}
-                    <span className="flex items-center gap-2">
-                      <Loader2 className="h-3 w-3 animate-spin" />
-                      {t('credits_remaining', { credits: 0 })}
+              {isNanoBanana2 && (
+                <div className="space-y-2">
+                  <Label className="flex items-center justify-between gap-2">
+                    <span>{t('form.google_search')}</span>
+                    <Switch
+                      checked={useGoogleSearch}
+                      onCheckedChange={setUseGoogleSearch}
+                    />
+                  </Label>
+                  <p className="text-muted-foreground text-xs">
+                    {t('form.google_search_hint')}
+                  </p>
+                </div>
+              )}
+
+              {!isTextToImageMode && (
+                <div className="space-y-4">
+                  <ImageUploader
+                    title={t('form.reference_image')}
+                    allowMultiple={allowMultipleImages}
+                    maxImages={effectiveMaxImages}
+                    maxSizeMB={maxSizeMB}
+                    onChange={handleReferenceImagesChange}
+                    emptyHint={t('form.reference_image_placeholder')}
+                  />
+
+                  {hasReferenceUploadError && (
+                    <p className="text-destructive text-xs">
+                      {t('form.some_images_failed_to_upload')}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <Label htmlFor="image-prompt">{t('form.prompt')}</Label>
+                <Textarea
+                  ref={promptTextareaRef}
+                  id="image-prompt"
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  placeholder={t('form.prompt_placeholder')}
+                  className="min-h-32"
+                />
+                <div className="text-muted-foreground flex items-center justify-between text-xs">
+                  <span>
+                    {promptLength} / {MAX_PROMPT_LENGTH}
+                  </span>
+                  {isPromptTooLong && (
+                    <span className="text-destructive">
+                      {t('form.prompt_too_long')}
                     </span>
-                  </div>
-                ) : user && remainingCredits > 0 ? (
+                  )}
+                </div>
+              </div>
+
+              {!isMounted ? (
+                <Button className="w-full" disabled size="lg">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {t('loading')}
+                </Button>
+              ) : isCheckSign ? (
+                <Button className="w-full" disabled size="lg">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {t('checking_account')}
+                </Button>
+              ) : user ? (
+                <Button
+                  size="lg"
+                  className="w-full"
+                  onClick={handleGenerate}
+                  disabled={
+                    isQueueActive ||
+                    isGenerating ||
+                    isLoadingCredits ||
+                    isLoadingProviders ||
+                    isFetchingCurrentSubscription ||
+                    !prompt.trim() ||
+                    isPromptTooLong ||
+                    isReferenceUploading ||
+                    hasReferenceUploadError ||
+                    (!isLoadingCredits &&
+                      Boolean(currentSubscription) &&
+                      remainingCredits < costCredits)
+                  }
+                >
+                  {isQueueActive ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {queueCopy.waitingButtonLabel}
+                    </>
+                  ) : isGenerating ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {t('generating')}
+                    </>
+                  ) : isLoadingProviders || isFetchingCurrentSubscription ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      {t('loading')}
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      {t('generate')}
+                    </>
+                  )}
+                </Button>
+              ) : (
+                <Button
+                  size="lg"
+                  className="w-full"
+                  onClick={() => setIsShowSignModal(true)}
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  {t('sign_in_to_generate')}
+                </Button>
+              )}
+
+              {!isMounted || isLoadingCredits || isLoadingProviders ? (
+                <div
+                  className={cn(
+                    'flex items-center text-sm',
+                    showCreditsCost ? 'justify-between' : 'justify-end'
+                  )}
+                >
+                  {showCreditsCost ? (
+                    <span className="text-primary">
+                      {t('credits_cost', { credits: costCredits })}
+                    </span>
+                  ) : null}
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                    {t('credits_remaining', { credits: 0 })}
+                  </span>
+                </div>
+              ) : user && remainingCredits > 0 ? (
+                <div
+                  className={cn(
+                    'flex items-center text-sm',
+                    showCreditsCost ? 'justify-between' : 'justify-end'
+                  )}
+                >
+                  {showCreditsCost ? (
+                    <span className="text-primary">
+                      {t('credits_cost', { credits: costCredits })}
+                    </span>
+                  ) : null}
+                  <span>
+                    {t('credits_remaining', { credits: remainingCredits })}
+                  </span>
+                </div>
+              ) : (
+                <div className="space-y-3">
                   <div
                     className={cn(
                       'flex items-center text-sm',
@@ -1552,190 +1570,191 @@ export function ImageGenerator({
                       {t('credits_remaining', { credits: remainingCredits })}
                     </span>
                   </div>
-                ) : (
-                  <div className="space-y-3">
-                    <div
-                      className={cn(
-                        'flex items-center text-sm',
-                        showCreditsCost ? 'justify-between' : 'justify-end'
-                      )}
-                    >
-                      {showCreditsCost ? (
-                        <span className="text-primary">
-                          {t('credits_cost', { credits: costCredits })}
-                        </span>
-                      ) : null}
-                      <span>
-                        {t('credits_remaining', { credits: remainingCredits })}
-                      </span>
-                    </div>
-                    <Link href="/pricing">
-                      <Button variant="outline" className="w-full" size="lg">
-                        <CreditCard className="mr-2 h-4 w-4" />
-                        {t('buy_credits')}
-                      </Button>
-                    </Link>
-                  </div>
-                )}
+                  <Link href="/pricing">
+                    <Button variant="outline" className="w-full" size="lg">
+                      <CreditCard className="mr-2 h-4 w-4" />
+                      {t('buy_credits')}
+                    </Button>
+                  </Link>
+                </div>
+              )}
 
-                {isQueueActive && queueState ? (
-                  <MembershipPriorityQueueCard
-                    title={queueCopy.title}
-                    description={queueCopy.description}
-                    taskLabel={queueCopy.taskLabel}
-                    remainingLabel={queueCopy.remainingLabel}
-                    remainingMs={queueState.remainingMs}
-                    upgradeLabel={queueCopy.upgradeLabel}
-                    cancelLabel={queueCopy.cancelLabel}
-                    submittingLabel={queueCopy.submittingLabel}
-                    onCancel={handleCancelQueue}
-                    onUpgradeClick={trackUpgradeClick}
-                    onRetry={isCurrentRequestRetryable ? retryQueue : undefined}
-                    upgradeHref="/pricing"
-                    isSubmitting={isQueueSubmitting}
-                    isSubmitFailed={isCurrentRequestRetryable}
-                    retryLabel={queueCopy.retryLabel}
-                    submitFailedLabel={queueCopy.submitFailedLabel}
-                  />
-                ) : isGenerating ? (
-                  <div className="space-y-2 rounded-lg border p-4">
-                    <div className="flex items-center justify-between text-sm">
-                      <span>{t('progress')}</span>
-                      <span>{progress}%</span>
-                    </div>
-                    <Progress value={progress} />
-                    {taskStatusLabel && (
-                      <p className="text-muted-foreground text-center text-xs">
-                        {taskStatusLabel}
-                      </p>
-                    )}
+              {isQueueActive && queueState ? (
+                <MembershipPriorityQueueCard
+                  title={queueCopy.title}
+                  description={queueCopy.description}
+                  taskLabel={queueCopy.taskLabel}
+                  remainingLabel={queueCopy.remainingLabel}
+                  remainingMs={queueState.remainingMs}
+                  upgradeLabel={queueCopy.upgradeLabel}
+                  cancelLabel={queueCopy.cancelLabel}
+                  submittingLabel={queueCopy.submittingLabel}
+                  onCancel={handleCancelQueue}
+                  onUpgradeClick={trackUpgradeClick}
+                  onRetry={isCurrentRequestRetryable ? retryQueue : undefined}
+                  upgradeHref="/pricing"
+                  isSubmitting={isQueueSubmitting}
+                  isSubmitFailed={isCurrentRequestRetryable}
+                  retryLabel={queueCopy.retryLabel}
+                  submitFailedLabel={queueCopy.submitFailedLabel}
+                />
+              ) : isGenerating ? (
+                <div className="space-y-2 rounded-lg border p-4">
+                  <div className="flex items-center justify-between text-sm">
+                    <span>{t('progress')}</span>
+                    <span>{progress}%</span>
                   </div>
-                ) : null}
-              </CardContent>
-            </Card>
+                  <Progress value={progress} />
+                  {taskStatusLabel && (
+                    <p className="text-muted-foreground text-center text-xs">
+                      {taskStatusLabel}
+                    </p>
+                  )}
+                </div>
+              ) : null}
+            </CardContent>
+          </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl font-semibold">
-                  <ImageIcon className="h-5 w-5" />
-                  {t('generated_images')}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pb-8">
-                {generatedImages.length > 0 ? (
-                  <div
-                    className={
-                      generatedImages.length === 1
-                        ? 'grid grid-cols-1 gap-6'
-                        : 'grid gap-6 sm:grid-cols-2'
-                    }
-                  >
-                    {generatedImages.map((image) => (
-                      <div key={image.id} className="space-y-3">
-                        <div
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-xl font-semibold">
+                <ImageIcon className="h-5 w-5" />
+                {t('generated_images')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pb-8">
+              {generatedImages.length > 0 ? (
+                <div
+                  className={
+                    generatedImages.length === 1
+                      ? 'grid grid-cols-1 gap-6'
+                      : 'grid gap-6 sm:grid-cols-2'
+                  }
+                >
+                  {generatedImages.map((image) => (
+                    <div key={image.id} className="space-y-3">
+                      <div
+                        className={
+                          generatedImages.length === 1
+                            ? 'relative overflow-hidden rounded-lg border'
+                            : 'relative aspect-square overflow-hidden rounded-lg border'
+                        }
+                      >
+                        <LazyImage
+                          src={image.url}
+                          alt={image.prompt || 'Generated image'}
                           className={
                             generatedImages.length === 1
-                              ? 'relative overflow-hidden rounded-lg border'
-                              : 'relative aspect-square overflow-hidden rounded-lg border'
+                              ? 'h-auto w-full'
+                              : 'h-full w-full object-cover'
                           }
-                        >
-                          <LazyImage
-                            src={image.url}
-                            alt={image.prompt || 'Generated image'}
-                            className={
-                              generatedImages.length === 1
-                                ? 'h-auto w-full'
-                                : 'h-full w-full object-cover'
-                            }
-                          />
+                        />
 
-                          <div className="absolute right-2 bottom-2 flex justify-end text-sm">
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="ml-auto gap-2 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60"
-                              onClick={() => handleDownloadImage(image)}
-                              disabled={downloadingImageId === image.id}
-                            >
-                              {downloadingImageId === image.id ? (
-                                <>
-                                  <Loader2 className="h-4 w-4 animate-spin" />
-                                  <span>Downloading</span>
-                                </>
-                              ) : (
-                                <>
-                                  <Download className="h-4 w-4" />
-                                  <span>Download</span>
-                                </>
-                              )}
-                            </Button>
-                          </div>
+                        <div className="absolute right-2 bottom-2 flex justify-end text-sm">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="ml-auto gap-2 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60"
+                            onClick={() => handleDownloadImage(image)}
+                            disabled={downloadingImageId === image.id}
+                          >
+                            {downloadingImageId === image.id ? (
+                              <>
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                                <span>Downloading</span>
+                              </>
+                            ) : (
+                              <>
+                                <Download className="h-4 w-4" />
+                                <span>Download</span>
+                              </>
+                            )}
+                          </Button>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center py-4 text-center">
-                    {previewImage && (
-                      <div className="mb-6 overflow-hidden rounded-lg border">
-                        <LazyImage
-                          src={previewImage}
-                          alt="Preview image"
-                          className="w-full"
-                        />
-                      </div>
-                    )}
-                    {!promptKey && (
-                      <div className="mb-6 grid w-full gap-3 sm:grid-cols-2">
-                        {IMAGE_DEMO_EXAMPLES.map((item) => (
-                          <div
-                            key={item.src}
-                            className="overflow-hidden rounded-lg border"
-                          >
-                            <LazyImage
-                              src={item.src}
-                              alt={item.alt}
-                              className="w-full"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <p className="text-muted-foreground">
-                      {isGenerating
-                        ? t('ready_to_generate')
-                        : t('no_images_generated')}
-                    </p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center py-4 text-center">
+                  {previewImage && (
+                    <div className="mb-6 overflow-hidden rounded-lg border">
+                      <LazyImage
+                        src={previewImage}
+                        alt="Preview image"
+                        className="w-full"
+                      />
+                    </div>
+                  )}
+                  {!promptKey && (
+                    <div className="mb-6 grid w-full gap-3 sm:grid-cols-2">
+                      {IMAGE_DEMO_EXAMPLES.map((item) => (
+                        <div
+                          key={item.src}
+                          className="overflow-hidden rounded-lg border"
+                        >
+                          <LazyImage
+                            src={item.src}
+                            alt={item.alt}
+                            className="w-full"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <p className="text-muted-foreground">
+                    {isGenerating
+                      ? t('ready_to_generate')
+                      : t('no_images_generated')}
+                  </p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </div>
-      <GenerationCreditFallbackDialog
-        open={Boolean(creditFallback) && creditFallbackActions.length > 0}
-        onOpenChange={(open) => {
-          if (!open) {
-            handleCloseCreditFallback();
-          }
-        }}
-        title={creditFallbackCopy.title}
-        description={creditFallbackCopy.description}
-        currentModeLabel={creditFallbackCopy.currentModeLabel}
-        currentModeValue={t('credits_cost', {
-          credits: creditFallback?.requestedCostCredits ?? costCredits,
-        })}
-        remainingCreditsLabel={creditFallbackCopy.remainingCreditsLabel}
-        remainingCreditsValue={t('credits_remaining', {
-          credits: creditFallback?.remainingCredits ?? remainingCredits,
-        })}
-        switchLabel={creditFallbackCopy.switchLabel}
-        upgradeLabel={creditFallbackCopy.upgradeLabel}
-        closeLabel={creditFallbackCopy.closeLabel}
-        onUpgrade={handleUpgradeFromCreditFallback}
-        actions={creditFallbackActions}
-      />
+    </div>
+  );
+
+  const fallbackDialog = (
+    <GenerationCreditFallbackDialog
+      open={Boolean(creditFallback) && creditFallbackActions.length > 0}
+      onOpenChange={(open) => {
+        if (!open) {
+          handleCloseCreditFallback();
+        }
+      }}
+      title={creditFallbackCopy.title}
+      description={creditFallbackCopy.description}
+      currentModeLabel={creditFallbackCopy.currentModeLabel}
+      currentModeValue={t('credits_cost', {
+        credits: creditFallback?.requestedCostCredits ?? costCredits,
+      })}
+      remainingCreditsLabel={creditFallbackCopy.remainingCreditsLabel}
+      remainingCreditsValue={t('credits_remaining', {
+        credits: creditFallback?.remainingCredits ?? remainingCredits,
+      })}
+      switchLabel={creditFallbackCopy.switchLabel}
+      upgradeLabel={creditFallbackCopy.upgradeLabel}
+      closeLabel={creditFallbackCopy.closeLabel}
+      onUpgrade={handleUpgradeFromCreditFallback}
+      actions={creditFallbackActions}
+    />
+  );
+
+  if (embedded) {
+    return (
+      <div id={id} className={className}>
+        {content}
+        {fallbackDialog}
+      </div>
+    );
+  }
+
+  return (
+    <section id={id} className={cn('py-16 md:py-24', className)}>
+      {content}
+      {fallbackDialog}
     </section>
   );
 }

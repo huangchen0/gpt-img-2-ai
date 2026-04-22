@@ -1,7 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
-import { ImageGenerator } from '@/shared/blocks/generator';
+import { ImageGeneratorSwitcher } from '@/shared/components/image-generator-switcher';
 import { getMetadata } from '@/shared/lib/seo';
 import { DynamicPage } from '@/shared/types/blocks/landing';
 
@@ -32,7 +32,9 @@ export default async function AiImagePage({
         },
       },
       generator: {
-        component: <ImageGenerator srOnlyTitle={t.raw('generator.title')} />,
+        component: (
+          <ImageGeneratorSwitcher srOnlyTitle={t.raw('generator.title')} />
+        ),
       },
       faq: tl.raw('faq'),
       cta: tl.raw('cta'),

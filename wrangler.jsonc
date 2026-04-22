@@ -23,8 +23,8 @@
 	"hyperdrive": [
 		{
 			"binding": "HYPERDRIVE", // 固定值 不要改【可删除掉中文备注】
-			"id": "5b38f49672424428bf8422c1b0bbe861", // 上面复制的Hyperdrive 配置 ID【可删除掉中文备注】
-			"localConnectionString": "postgresql://postgres:nanobanana2ai123Q@db.uhkgrfogderxsezmwgjb.supabase.co:5432/postgres" // 这个是从Supabase复制过来的，注意格式和我的要一致，端口是5432，其中[Your Password]改成你的数据库密码【可删除掉中文备注】
+			"id": "8f251d56d90944539ea66aea623e0cc6", // 上面复制的Hyperdrive 配置 ID【可删除掉中文备注】
+			"localConnectionString": "postgresql://postgres:gptimg2123q@db.exjwvyppcvbvwnnkjgea.supabase.co:5432/postgres" // 这个是从Supabase复制过来的，注意格式和我的要一致，端口是5432，其中[Your Password]改成你的数据库密码【可删除掉中文备注】
 		}
 	],
 	"observability": {
@@ -42,7 +42,7 @@
 		"NEXT_PUBLIC_APP_NAME": "gptimg2art",
 		"NEXT_PUBLIC_THEME": "default",
 		"NEXT_PUBLIC_APPEARANCE": "system",
-		"DATABASE_URL": "postgresql://postgres.uhkgrfogderxsezmwgjb:nanobanana2ai123Q@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres",
+		"DATABASE_URL": "postgresql://postgres:gptimg2123q@db.exjwvyppcvbvwnnkjgea.supabase.co:5432/postgres",
 		"DATABASE_PROVIDER": "postgresql",
 		"DB_SINGLETON_ENABLED": "false",
 		"DB_MAX_CONNECTIONS": "10",

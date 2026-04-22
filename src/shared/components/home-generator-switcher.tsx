@@ -220,8 +220,8 @@ const SeedanceVideoGenerator = dynamic(
 
 const HomeImageGenerator = dynamic(
   () =>
-    import('@/shared/blocks/generator/image').then((mod) => ({
-      default: mod.ImageGenerator,
+    import('@/shared/components/image-generator-switcher').then((mod) => ({
+      default: mod.ImageGeneratorSwitcher,
     })),
   {
     loading: () => <HomeGeneratorSkeleton variant="image" />,
@@ -472,7 +472,11 @@ function GeneratorSwitcher({
           />
         )
       ) : (
-        <HomeImageGenerator srOnlyTitle={copy.srOnlyImage} className="pt-0" />
+        <HomeImageGenerator
+          id="home-image-generator"
+          srOnlyTitle={copy.srOnlyImage}
+          className="pt-0"
+        />
       )}
     </>
   );

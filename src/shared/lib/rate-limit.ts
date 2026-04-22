@@ -15,21 +15,11 @@ type MinIntervalOptions = {
   extraKey?: string;
 };
 
-type StoreEntry = {
-  lastSeenAt: number;
-  intervalMs: number;
-};
-
-type Store = Map<string, StoreEntry>;
-
-const MAX_STORE_ENTRIES = 5000;
-const CLEANUP_INTERVAL_MS = 30 * 1000;
+type Store = Map<string, number>;
 
 declare global {
   // eslint-disable-next-line no-var
   var __minIntervalRateLimitStore: Store | undefined;
-  // eslint-disable-next-line no-var
-  var __minIntervalRateLimitLastCleanupAt: number | undefined;
 }
 
 function getClientIpFromRequest(request: Request): string {
@@ -51,38 +41,6 @@ function getStore(): Store {
     globalThis.__minIntervalRateLimitStore = new Map();
   }
   return globalThis.__minIntervalRateLimitStore;
-}
-
-function pruneExpiredEntries(store: Store, now: number) {
-  for (const [key, entry] of store) {
-    if (now - entry.lastSeenAt >= entry.intervalMs) {
-      store.delete(key);
-    }
-  }
-}
-
-function enforceStoreLimit(store: Store) {
-  while (store.size > MAX_STORE_ENTRIES) {
-    const oldestKey = store.keys().next().value;
-    if (!oldestKey) {
-      break;
-    }
-    store.delete(oldestKey);
-  }
-}
-
-function cleanupStore(store: Store, now: number) {
-  const lastCleanupAt = globalThis.__minIntervalRateLimitLastCleanupAt || 0;
-  if (
-    now - lastCleanupAt < CLEANUP_INTERVAL_MS &&
-    store.size <= MAX_STORE_ENTRIES
-  ) {
-    return;
-  }
-
-  pruneExpiredEntries(store, now);
-  enforceStoreLimit(store);
-  globalThis.__minIntervalRateLimitLastCleanupAt = now;
 }
 
 function buildKey(request: Request, opts: MinIntervalOptions): string {
@@ -109,12 +67,11 @@ export function enforceMinIntervalRateLimit(
 
   const now = Date.now();
   const store = getStore();
-  cleanupStore(store, now);
   const key = buildKey(request, opts);
-  const entry = store.get(key);
+  const last = store.get(key);
 
-  if (entry) {
-    const delta = now - entry.lastSeenAt;
+  if (typeof last === 'number') {
+    const delta = now - last;
     if (delta >= 0 && delta < intervalMs) {
       const retryAfterSeconds = Math.max(
         1,
@@ -136,13 +93,6 @@ export function enforceMinIntervalRateLimit(
     }
   }
 
-  if (entry) {
-    store.delete(key);
-  }
-  store.set(key, {
-    lastSeenAt: now,
-    intervalMs,
-  });
-  enforceStoreLimit(store);
+  store.set(key, now);
   return null;
 }

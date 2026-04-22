@@ -1,4 +1,4 @@
-import { and, count, desc, eq, sql } from 'drizzle-orm';
+import { and, count, desc, eq, gt, inArray, sql } from 'drizzle-orm';
 
 import { db } from '@/core/db';
 import { aiTask, credit } from '@/config/db/schema';
@@ -65,6 +65,47 @@ export async function findAITaskByProviderTaskId({
     .select()
     .from(aiTask)
     .where(and(eq(aiTask.provider, provider), eq(aiTask.taskId, taskId)));
+
+  return result;
+}
+
+export async function findRecentAITaskForRecovery({
+  userId,
+  mediaType,
+  provider,
+  model,
+  clientRequestId,
+  since,
+}: {
+  userId: string;
+  mediaType: string;
+  provider: string;
+  model: string;
+  clientRequestId: string;
+  since: Date;
+}) {
+  const clientRequestPattern = `%"clientRequestId":"${clientRequestId}"%`;
+
+  const [result] = await db()
+    .select()
+    .from(aiTask)
+    .where(
+      and(
+        eq(aiTask.userId, userId),
+        eq(aiTask.mediaType, mediaType),
+        eq(aiTask.provider, provider),
+        eq(aiTask.model, model),
+        gt(aiTask.createdAt, since),
+        sql`${aiTask.options} LIKE ${clientRequestPattern}`,
+        inArray(aiTask.status, [
+          AITaskStatus.PENDING,
+          AITaskStatus.PROCESSING,
+          AITaskStatus.SUCCESS,
+        ])
+      )
+    )
+    .orderBy(desc(aiTask.createdAt))
+    .limit(1);
 
   return result;
 }

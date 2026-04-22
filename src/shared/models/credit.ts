@@ -15,8 +15,7 @@ import { db } from '@/core/db';
 import { credit } from '@/config/db/schema';
 import { getSnowId, getUuid } from '@/shared/lib/hash';
 
-import { getAllConfigs } from './config';
-import { appendUserToResult, User } from './user';
+import { appendUserToResult, type User } from './user';
 
 export type Credit = typeof credit.$inferSelect & {
   user?: User;
@@ -393,36 +392,6 @@ export async function getRemainingCreditsByUserIds(
 }
 
 // grant credits for new user
-export async function grantCreditsForNewUser(user: User) {
-  // get configs from db
-  const configs = await getAllConfigs();
-
-  // if initial credits enabled
-  if (configs.initial_credits_enabled !== 'true') {
-    return;
-  }
-
-  // get initial credits amount and valid days
-  const credits = parseInt(configs.initial_credits_amount as string) || 0;
-  if (credits <= 0) {
-    return;
-  }
-
-  const creditsValidDays =
-    parseInt(configs.initial_credits_valid_days as string) || 0;
-
-  const description = configs.initial_credits_description || 'initial credits';
-
-  const newCredit = await grantCreditsForUser({
-    user: user,
-    credits: credits,
-    validDays: creditsValidDays,
-    description: description,
-  });
-
-  return newCredit;
-}
-
 // grant credits for user
 export async function grantCreditsForUser({
   user,

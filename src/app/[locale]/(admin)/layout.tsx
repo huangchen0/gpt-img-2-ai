@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { requireAdminAccess } from '@/core/rbac/permission';
+import { envConfigs } from '@/config';
 import { LocaleDetector } from '@/shared/blocks/common';
 import { DashboardLayout } from '@/shared/blocks/dashboard/layout';
-import { getAllConfigs } from '@/shared/models/config';
 import { Sidebar as SidebarType } from '@/shared/types/blocks/dashboard';
 
 /**
@@ -30,7 +30,7 @@ export default async function AdminLayout({
 
   const sidebar: SidebarType = t.raw('sidebar');
 
-  const configs = await getAllConfigs();
+  const configs = envConfigs;
   if (configs.app_name) {
     sidebar.header!.brand!.title = configs.app_name;
     sidebar.header!.brand!.logo!.alt = configs.app_name;

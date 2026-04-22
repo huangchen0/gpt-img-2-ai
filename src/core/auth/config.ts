@@ -15,10 +15,6 @@ import {
 import { getUuid } from '@/shared/lib/hash';
 import { getClientIp } from '@/shared/lib/ip';
 import { getCurrentSiteCode } from '@/shared/lib/site';
-import { grantCreditsForNewUser } from '@/shared/models/credit';
-import { getEmailService } from '@/shared/services/email';
-import { grantRoleForNewUser } from '@/shared/services/rbac';
-import { trackServerEvent } from '@/shared/tracking/server';
 
 // Best-effort dedupe to prevent sending verification emails too frequently.
 // This is especially helpful in dev/hot reload, transient network conditions,
@@ -173,14 +169,23 @@ export async function getAuthOptions(configs: Record<string, string>) {
                 .where(eq(schema.user.id, user.id));
 
               // grant credits for new user
+              const { grantCreditsForNewUser } = await import(
+                '@/shared/models/credit-grant'
+              );
               await grantCreditsForNewUser(user);
 
               // grant role for new user
+              const { grantRoleForNewUser } = await import(
+                '@/shared/services/rbac-grant'
+              );
               await grantRoleForNewUser(user);
             } catch (e) {
               console.log('grant credits or role for new user failed', e);
             }
 
+            const { trackServerEvent } = await import(
+              '@/shared/tracking/server'
+            );
             await trackServerEvent(
               {
                 eventName: 'sign_up',
@@ -235,6 +240,9 @@ export async function getAuthOptions(configs: Record<string, string>) {
                   recentVerificationEmailSentAt.set(key, now);
                 }
 
+                const { getEmailService } = await import(
+                  '@/shared/services/email'
+                );
                 const emailService = await getEmailService(configs as any);
                 const logoUrl = envConfigs.app_logo?.startsWith('http')
                   ? envConfigs.app_logo

@@ -24,6 +24,17 @@ function shouldLogSeedanceTask(task: {
   );
 }
 
+function isTransientProviderQueryError(error: unknown) {
+  const message =
+    error instanceof Error
+      ? error.message
+      : typeof error === 'string'
+        ? error
+        : '';
+
+  return /\bstatus:\s*(?:502|503|504)\b/i.test(message);
+}
+
 export async function POST(req: Request) {
   try {
     const { taskId, providerTaskId } = await req.json();
@@ -71,11 +82,29 @@ export async function POST(req: Request) {
       });
     }
 
-    const result = await aiProvider?.query?.({
-      taskId: queryTaskId,
-      mediaType: task.mediaType,
-      model: task.model,
-    });
+    let result;
+    try {
+      result = await aiProvider?.query?.({
+        taskId: queryTaskId,
+        mediaType: task.mediaType,
+        model: task.model,
+      });
+    } catch (error) {
+      if (isTransientProviderQueryError(error)) {
+        console.warn('[ai-query] transient provider query error', {
+          localTaskId: task.id,
+          providerTaskId: queryTaskId,
+          provider: task.provider,
+          model: task.model,
+          previousStatus: task.status,
+          error,
+        });
+
+        return respData(task);
+      }
+
+      throw error;
+    }
 
     if (!result?.taskStatus) {
       return respErr('query ai task failed');

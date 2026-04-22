@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
 import { VideoGenerator } from '@/shared/blocks/generator';
+import { ImageGeneratorSwitcher } from '@/shared/components/image-generator-switcher';
 import { getMetadata } from '@/shared/lib/seo';
 import { DynamicPage } from '@/shared/types/blocks/landing';
 
@@ -33,6 +34,9 @@ export default async function AiVideoPage({
       },
       generator: {
         component: <VideoGenerator srOnlyTitle={t.raw('generator.title')} />,
+      },
+      image_generator: {
+        component: <ImageGeneratorSwitcher id="image-generator" />,
       },
       faq: tl.raw('faq'),
       cta: tl.raw('cta'),

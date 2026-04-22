@@ -1,5 +1,9 @@
 import { nanoid } from 'nanoid';
 
+import {
+  isKieGptImageModel,
+  isKieGptImageToImageModel,
+} from '@/shared/lib/gpt-image';
 import { getUuid } from '@/shared/lib/hash';
 import {
   isKlingVideoModel,
@@ -621,13 +625,25 @@ export class KieProvider implements AIProvider {
       },
     };
 
-    if (params.options) {
+    if (isKieGptImageModel(params.model)) {
+      payload.input.nsfw_checker = true;
+
+      if (
+        isKieGptImageToImageModel(params.model) &&
+        Array.isArray(params.options?.image_input)
+      ) {
+        payload.input.input_urls = params.options.image_input;
+      }
+    } else if (params.options) {
       const options = params.options;
       if (options.image_input && Array.isArray(options.image_input)) {
         payload.input.image_input = options.image_input;
       }
       if (options.aspect_ratio) {
         payload.input.aspect_ratio = options.aspect_ratio;
+      }
+      if (options.quality) {
+        payload.input.quality = options.quality;
       }
       if (options.resolution) {
         payload.input.resolution = options.resolution;

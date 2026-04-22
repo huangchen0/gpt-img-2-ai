@@ -1,3 +1,9 @@
+import {
+  GPT_IMAGE_IMAGE_TO_IMAGE_MODEL,
+  GPT_IMAGE_PROVIDER,
+  GPT_IMAGE_TEXT_TO_IMAGE_MODEL,
+} from '@/shared/lib/gpt-image';
+
 export type ImageScene = 'text-to-image' | 'image-to-image';
 export type ImageResolution = '1K' | '2K' | '4K';
 export type CanonicalImageModel = 'nano-banana-2' | 'nano-banana-pro';
@@ -77,6 +83,14 @@ export function calculateImageCredits({
   googleSearch = false,
   multiplier = 1,
 }: CalculateImageCreditsInput): number {
+  if (
+    provider === GPT_IMAGE_PROVIDER &&
+    (model === GPT_IMAGE_TEXT_TO_IMAGE_MODEL ||
+      model === GPT_IMAGE_IMAGE_TO_IMAGE_MODEL)
+  ) {
+    return BASE_FALLBACK_CREDITS[scene] * multiplier;
+  }
+
   const canonicalModel = getAdvancedImageModel(provider, model);
   const normalizedResolution = normalizeImageResolution(resolution);
 

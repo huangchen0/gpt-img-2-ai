@@ -1,6 +1,12 @@
 import { envConfigs } from '@/config';
 import { AIMediaType, AITaskStatus, KieProvider } from '@/extensions/ai';
 import { buildGenerationCreditFallbackPayload } from '@/shared/lib/generation-credit-fallback';
+import {
+  getKieGptImageModelForScene,
+  GPT_IMAGE_MAX_REFERENCE_IMAGES,
+  GPT_IMAGE_PROVIDER,
+  isKieGptImageModel,
+} from '@/shared/lib/gpt-image';
 import { getUuid } from '@/shared/lib/hash';
 import {
   calculateImageCredits,
@@ -296,6 +302,62 @@ function validateApimartPublicReferenceUrls(options: Seedance2VideoOptions) {
   );
   if (invalidReferenceAudio) {
     return 'reference audios must use public http(s) URLs.';
+  }
+
+  return null;
+}
+
+function validateKieGptImageOptions({
+  model,
+  scene,
+  options,
+}: {
+  model?: string | null;
+  scene?: string | null;
+  options?: Record<string, unknown> | null;
+}) {
+  if (scene !== 'text-to-image' && scene !== 'image-to-image') {
+    return 'invalid scene';
+  }
+
+  if (model !== getKieGptImageModelForScene(scene)) {
+    return 'invalid model for GPT Image scene';
+  }
+
+  if (options?.aspect_ratio !== undefined) {
+    return 'aspect_ratio not supported for GPT Image';
+  }
+
+  if (options?.quality !== undefined) {
+    return 'quality not supported for GPT Image';
+  }
+
+  if (options?.resolution !== undefined) {
+    return 'resolution not supported for GPT Image';
+  }
+
+  if (options?.output_format !== undefined) {
+    return 'output_format not supported for GPT Image';
+  }
+
+  if (options?.google_search !== undefined) {
+    return 'google_search not supported for GPT Image';
+  }
+
+  const imageInput = Array.isArray(options?.image_input)
+    ? options.image_input.filter((url) => typeof url === 'string' && url.trim())
+    : [];
+
+  if (scene === 'image-to-image' && imageInput.length === 0) {
+    return 'reference image is required';
+  }
+
+  if (scene === 'text-to-image' && imageInput.length > 0) {
+    return 'text-to-image does not support reference images';
+  }
+
+  if (imageInput.length > GPT_IMAGE_MAX_REFERENCE_IMAGES) {
+    return 'too many reference images';
   }
 
   return null;
@@ -919,9 +981,22 @@ export async function POST(request: Request) {
         options?.resolution
       );
       const advancedImageModel = getAdvancedImageModel(provider, model);
+      const isGptImageModel =
+        provider === GPT_IMAGE_PROVIDER && isKieGptImageModel(model);
       const maxPromptLength = 20000;
       if (prompt && prompt.length > maxPromptLength) {
         throw new Error('prompt too long');
+      }
+
+      if (isGptImageModel) {
+        const gptImageError = validateKieGptImageOptions({
+          model,
+          scene,
+          options,
+        });
+        if (gptImageError) {
+          throw new Error(gptImageError);
+        }
       }
 
       const modelAspectRatios: Record<string, Set<string>> = {
@@ -958,6 +1033,7 @@ export async function POST(request: Request) {
       };
 
       if (
+        !isGptImageModel &&
         !advancedImageModel &&
         (options?.aspect_ratio || options?.resolution || options?.output_format)
       ) {

@@ -8,7 +8,7 @@ import {
   getRemainingCreditsByUserIds,
 } from '@/shared/models/credit';
 import { getUsers, getUsersCount, User } from '@/shared/models/user';
-import { getUserRoles } from '@/shared/services/rbac';
+import { getUsersRolesByUserIds } from '@/shared/services/rbac';
 import { Crumb, Search } from '@/shared/types/blocks/common';
 import { type Table } from '@/shared/types/blocks/table';
 
@@ -58,6 +58,8 @@ export default async function AdminUsersPage({
     // Continue with empty credits map - users will show 0 credits
   }
 
+  const rolesMap = await getUsersRolesByUserIds(userIds);
+
   const crumbs: Crumb[] = [
     { title: t('list.crumbs.admin'), url: '/admin' },
     { title: t('list.crumbs.users'), is_active: true },
@@ -85,7 +87,7 @@ export default async function AdminUsersPage({
         name: 'roles',
         title: t('fields.roles'),
         callback: async (item: User) => {
-          const roles = await getUserRoles(item.id);
+          const roles = rolesMap[item.id] || [];
 
           return (
             <div className="flex flex-col gap-2">

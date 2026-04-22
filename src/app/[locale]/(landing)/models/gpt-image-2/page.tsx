@@ -5,6 +5,7 @@ import { loadMessages } from '@/core/i18n/request';
 import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
 import { defaultLocale } from '@/config/locale';
+import { ImageGeneratorSwitcher } from '@/shared/components/image-generator-switcher';
 import { FAQSchema } from '@/shared/components/seo';
 import { getAlternateLanguageUrls } from '@/shared/lib/seo';
 
@@ -75,6 +76,23 @@ export default async function GptImage2Page({
   }
 
   const Page = await getThemePage('dynamic-page');
+  const page = {
+    title: messages.page.title,
+    description: messages.page.description,
+    sections: {
+      hero: {
+        title: messages.page.heroTitle ?? messages.page.title,
+        description: messages.page.heroDescription ?? messages.page.description,
+        background_image: {
+          src: '/imgs/bg/tree.jpg',
+          alt: messages.page.title,
+        },
+      },
+      generator: {
+        component: <ImageGeneratorSwitcher id="generator" />,
+      },
+    },
+  };
   const faqItems = Array.isArray(messages.page.faqItems)
     ? messages.page.faqItems.filter(
         (item: { question?: string; answer?: string }) =>
@@ -84,7 +102,7 @@ export default async function GptImage2Page({
 
   return (
     <>
-      <Page locale={locale} page={messages.page} />
+      <Page locale={locale} page={page} />
       {faqItems.length > 0 && (
         <FAQSchema
           faqs={faqItems.map((item: { question: string; answer: string }) => ({

@@ -3,7 +3,8 @@ import {
   CustomerServiceManager,
   TawkCustomerServiceProvider,
 } from '@/extensions/customer-service';
-import { Configs, getAllConfigs } from '@/shared/models/config';
+import { envConfigs } from '@/config';
+import type { Configs } from '@/shared/models/config';
 
 /**
  * get affiliate manager with configs
@@ -49,9 +50,7 @@ let customerServiceManager: CustomerServiceManager | null = null;
 export async function getCustomerService(
   configs?: Configs
 ): Promise<CustomerServiceManager> {
-  if (!configs) {
-    configs = await getAllConfigs();
-  }
+  configs = configs || envConfigs;
   customerServiceManager = getCustomerServiceWithConfigs(configs);
 
   return customerServiceManager;

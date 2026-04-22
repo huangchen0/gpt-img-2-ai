@@ -6,7 +6,7 @@ import { db } from '@/core/db';
 import { account, user } from '@/config/db/schema';
 import { getCurrentSiteCode } from '@/shared/lib/site';
 
-import { Permission, Role } from '../services/rbac';
+import type { Permission, Role } from '../services/rbac';
 import { getRemainingCredits } from './credit';
 
 export interface UserCredits {

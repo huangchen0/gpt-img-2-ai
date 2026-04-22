@@ -1,4 +1,16 @@
-import { eq, desc, asc, ne, isNull, or, and, like, notLike, ilike, notIlike } from 'drizzle-orm';
+import {
+  and,
+  asc,
+  desc,
+  eq,
+  ilike,
+  isNull,
+  like,
+  ne,
+  notIlike,
+  notLike,
+  or,
+} from 'drizzle-orm';
 
 import { db } from '@/core/db';
 import { showcase } from '@/config/db/schema';
@@ -50,21 +62,27 @@ export async function getLatestShowcases({
   sortOrder = 'desc',
 }: GetLatestShowcasesOptions = {}): Promise<Showcase[]> {
   try {
+    const safeLimit = Number.isFinite(limit)
+      ? Math.min(Math.max(Math.floor(limit), 1), 100)
+      : 20;
     const conditions = [];
 
     if (tags) {
       // Support multiple tags separated by comma
       // All tags must be present in the showcase.tags field
-      const tagList = tags.split(',').map(t => t.trim()).filter(Boolean);
+      const tagList = tags
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean);
       if (tagList.length > 0) {
         // Use word boundary matching to avoid partial matches
         // e.g., "men" should not match "women"
-        const tagConditions = tagList.map(tag => 
+        const tagConditions = tagList.map((tag) =>
           or(
-            ilike(showcase.tags, `${tag},%`),  // tag at start: "men,..."
+            ilike(showcase.tags, `${tag},%`), // tag at start: "men,..."
             ilike(showcase.tags, `%,${tag},%`), // tag in middle: "...,men,..."
-            ilike(showcase.tags, `%,${tag}`),   // tag at end: "...,men"
-            ilike(showcase.tags, tag)           // tag alone: "men"
+            ilike(showcase.tags, `%,${tag}`), // tag at end: "...,men"
+            ilike(showcase.tags, tag) // tag alone: "men"
           )
         );
         conditions.push(and(...tagConditions));
@@ -87,9 +105,7 @@ export async function getLatestShowcases({
       );
     }
 
-    let query = db()
-      .select()
-      .from(showcase);
+    let query = db().select().from(showcase);
 
     // Only apply where clause if there are conditions
     if (conditions.length > 0) {
@@ -97,8 +113,10 @@ export async function getLatestShowcases({
     }
 
     const result = await query
-      .orderBy(sortOrder === 'asc' ? asc(showcase.createdAt) : desc(showcase.createdAt))
-      .limit(limit);
+      .orderBy(
+        sortOrder === 'asc' ? asc(showcase.createdAt) : desc(showcase.createdAt)
+      )
+      .limit(safeLimit);
     return result;
   } catch (error) {
     console.error('Failed to get showcases:', error);
@@ -119,7 +137,6 @@ export async function getUserShowcases(userId: string): Promise<Showcase[]> {
     return [];
   }
 }
-
 
 export async function getShowcase(id: string): Promise<Showcase | null> {
   try {

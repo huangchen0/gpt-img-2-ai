@@ -13,7 +13,10 @@ export const dynamic = 'force-dynamic';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get('limit') || '20', 10);
+    const requestedLimit = parseInt(searchParams.get('limit') || '20', 10);
+    const limit = Number.isFinite(requestedLimit)
+      ? Math.min(Math.max(requestedLimit, 1), 100)
+      : 20;
     const tags = searchParams.get('tags') || undefined;
     const excludeTags = searchParams.get('excludeTags') || undefined;
     const searchTerm = searchParams.get('searchTerm') || undefined;
@@ -57,11 +60,19 @@ export async function GET(request: NextRequest) {
 
         console.log(`Found ${transformedData.length} prompts`);
 
-        return NextResponse.json({
-          code: 0,
-          message: 'success',
-          data: transformedData,
-        });
+        return NextResponse.json(
+          {
+            code: 0,
+            message: 'success',
+            data: transformedData,
+          },
+          {
+            headers: {
+              'Cache-Control':
+                'public, s-maxage=300, stale-while-revalidate=600',
+            },
+          }
+        );
       }
 
       // Otherwise, fetch from showcases table
@@ -81,11 +92,18 @@ export async function GET(request: NextRequest) {
           : transformedShowcases;
       console.log(`Found ${data.length} showcases`);
 
-      return NextResponse.json({
-        code: 0,
-        message: 'success',
-        data,
-      });
+      return NextResponse.json(
+        {
+          code: 0,
+          message: 'success',
+          data,
+        },
+        {
+          headers: {
+            'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+          },
+        }
+      );
     } catch (err: any) {
       console.error('Error fetching showcases inside route handler:', err);
       throw err;

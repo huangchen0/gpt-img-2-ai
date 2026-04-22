@@ -4,8 +4,6 @@ import { and, eq, gt, inArray, isNull, or } from 'drizzle-orm';
 import { db } from '@/core/db';
 import { permission, role, rolePermission, userRole } from '@/config/db/schema';
 import { getUuid } from '@/shared/lib/hash';
-import { getAllConfigs } from '@/shared/models/config';
-import { User } from '@/shared/models/user';
 
 // Types
 export type Role = typeof role.$inferSelect;
@@ -242,6 +240,47 @@ export const getUserRoles = cache(async (userId: string): Promise<Role[]> => {
   return result;
 });
 
+export async function getUsersRolesByUserIds(
+  userIds: string[]
+): Promise<Record<string, Role[]>> {
+  if (!userIds.length) {
+    return {};
+  }
+
+  const now = new Date();
+  const rows = await db()
+    .select({
+      userId: userRole.userId,
+      id: role.id,
+      name: role.name,
+      title: role.title,
+      description: role.description,
+      status: role.status,
+      createdAt: role.createdAt,
+      updatedAt: role.updatedAt,
+      sort: role.sort,
+    })
+    .from(userRole)
+    .innerJoin(role, eq(userRole.roleId, role.id))
+    .where(
+      and(
+        inArray(userRole.userId, userIds),
+        eq(role.status, RoleStatus.ACTIVE),
+        or(isNull(userRole.expiresAt), gt(userRole.expiresAt, now))
+      )
+    );
+
+  const rolesByUserId: Record<string, Role[]> = {};
+
+  for (const row of rows) {
+    const { userId, ...roleItem } = row;
+    rolesByUserId[userId] = rolesByUserId[userId] || [];
+    rolesByUserId[userId].push(roleItem);
+  }
+
+  return rolesByUserId;
+}
+
 /**
  * Get user's permissions (through roles)
  */
@@ -420,34 +459,4 @@ export async function getUsersByRole(roleId: string): Promise<string[]> {
     .where(eq(userRole.roleId, roleId));
 
   return result.map((r: any) => r.userId);
-}
-
-export async function grantRoleForNewUser(user: User) {
-  try {
-    // get configs from db
-    const configs = await getAllConfigs();
-
-    // initial role not enabled
-    if (configs.initial_role_enabled !== 'true') {
-      return;
-    }
-
-    const roleName = configs.initial_role_name;
-
-    // initial role name not set
-    if (!roleName) {
-      return;
-    }
-
-    const role = await getRoleByName(roleName);
-
-    // initial role not found
-    if (!role) {
-      return;
-    }
-
-    await assignRoleToUser(user.id, role.id, user.createdAt);
-  } catch (e) {
-    console.error('grant role for new user failed', e);
-  }
 }

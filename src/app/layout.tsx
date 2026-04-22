@@ -9,7 +9,6 @@ import { locales } from '@/config/locale';
 import { ReferrerCapture } from '@/shared/blocks/common/referrer-capture';
 import { SiteActivityCapture } from '@/shared/blocks/common/site-activity-capture';
 import { UtmCapture } from '@/shared/blocks/common/utm-capture';
-import { getAllConfigs } from '@/shared/models/config';
 import { getAdsService } from '@/shared/services/ads';
 import { getAffiliateService } from '@/shared/services/affiliate';
 import { getAnalyticsService } from '@/shared/services/analytics';
@@ -72,7 +71,7 @@ export default async function RootLayout({
   let customerServiceBodyScripts = null;
 
   if (isProduction || isDebug) {
-    const configs = await getAllConfigs();
+    const configs = envConfigs;
 
     const [adsService, analyticsService, affiliateService, customerService] =
       await Promise.all([

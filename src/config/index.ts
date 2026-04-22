@@ -76,6 +76,67 @@ export const envConfigs: ConfigMap = {
     process.env.GOOGLE_ADS_SIGN_UP_SEND_TO ??
     '',
   ga4_api_secret: process.env.GA4_API_SECRET ?? '',
+  google_analytics_id:
+    process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ??
+    process.env.GOOGLE_ANALYTICS_ID ??
+    '',
+  clarity_id: process.env.NEXT_PUBLIC_CLARITY_ID ?? process.env.CLARITY_ID ?? '',
+  plausible_domain:
+    process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ??
+    process.env.PLAUSIBLE_DOMAIN ??
+    '',
+  plausible_src:
+    process.env.NEXT_PUBLIC_PLAUSIBLE_SRC ?? process.env.PLAUSIBLE_SRC ?? '',
+  openpanel_client_id:
+    process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID ??
+    process.env.OPENPANEL_CLIENT_ID ??
+    '',
+  adsense_code:
+    process.env.NEXT_PUBLIC_ADSENSE_CODE ?? process.env.ADSENSE_CODE ?? '',
+  affonso_enabled:
+    process.env.NEXT_PUBLIC_AFFONSO_ENABLED ??
+    process.env.AFFONSO_ENABLED ??
+    '',
+  affonso_id:
+    process.env.NEXT_PUBLIC_AFFONSO_ID ?? process.env.AFFONSO_ID ?? '',
+  affonso_cookie_duration:
+    process.env.NEXT_PUBLIC_AFFONSO_COOKIE_DURATION ??
+    process.env.AFFONSO_COOKIE_DURATION ??
+    '',
+  promotekit_enabled:
+    process.env.NEXT_PUBLIC_PROMOTEKIT_ENABLED ??
+    process.env.PROMOTEKIT_ENABLED ??
+    '',
+  promotekit_id:
+    process.env.NEXT_PUBLIC_PROMOTEKIT_ID ?? process.env.PROMOTEKIT_ID ?? '',
+  crisp_enabled:
+    process.env.NEXT_PUBLIC_CRISP_ENABLED ?? process.env.CRISP_ENABLED ?? '',
+  crisp_website_id:
+    process.env.NEXT_PUBLIC_CRISP_WEBSITE_ID ??
+    process.env.CRISP_WEBSITE_ID ??
+    '',
+  tawk_enabled:
+    process.env.NEXT_PUBLIC_TAWK_ENABLED ?? process.env.TAWK_ENABLED ?? '',
+  tawk_property_id:
+    process.env.NEXT_PUBLIC_TAWK_PROPERTY_ID ??
+    process.env.TAWK_PROPERTY_ID ??
+    '',
+  tawk_widget_id:
+    process.env.NEXT_PUBLIC_TAWK_WIDGET_ID ?? process.env.TAWK_WIDGET_ID ?? '',
+  email_auth_enabled: process.env.EMAIL_AUTH_ENABLED ?? '',
+  email_verification_enabled: process.env.EMAIL_VERIFICATION_ENABLED ?? '',
+  resend_api_key: process.env.RESEND_API_KEY ?? '',
+  google_client_id:
+    process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ??
+    process.env.GOOGLE_CLIENT_ID ??
+    '',
+  google_client_secret: process.env.GOOGLE_CLIENT_SECRET ?? '',
+  google_one_tap_enabled:
+    process.env.NEXT_PUBLIC_GOOGLE_ONE_TAP_ENABLED ??
+    process.env.GOOGLE_ONE_TAP_ENABLED ??
+    '',
+  github_client_id: process.env.GITHUB_CLIENT_ID ?? '',
+  github_client_secret: process.env.GITHUB_CLIENT_SECRET ?? '',
   version: packageJson.version,
   locale_detect_enabled:
     process.env.NEXT_PUBLIC_LOCALE_DETECT_ENABLED ?? 'false',
