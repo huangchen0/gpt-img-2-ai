@@ -456,6 +456,17 @@
     "flash_sale_save_percent": "Економія {percent}%",
     "flash_sale_cta": "Отримати знижку {percent}% зараз",
     "flash_sale_cta_note": "Early-bird ціна діє лише цього місяця. Після завершення акції повернеться стандартна вартість.",
-    "per_image_price": "близько {amount} / зображення"
+    "per_image_price": "близько {amount} / зображення",
+    "checkout_trust_note": "Безпечна оплата · кредити додаються миттєво · підписку можна скасувати будь-коли",
+    "checkout_recovery_title": "Оплату не завершено",
+    "checkout_recovery_description": "Обраний план усе ще очікує на вас. Завершіть оплату, щоб отримати кредити, експорт без водяного знака та швидшу генерацію.",
+    "checkout_recovery_benefit_credits": "Кредити додаються миттєво",
+    "checkout_recovery_benefit_exports": "Експорт без водяного знака",
+    "checkout_recovery_benefit_priority": "Вищий пріоритет генерації",
+    "checkout_recovery_benefit_commercial": "Права на комерційне використання включено",
+    "checkout_recovery_failed": "Не вдалося знову відкрити оплату. Будь ласка, виберіть план ще раз.",
+    "choose_another_plan": "Вибрати інший план",
+    "continue_checkout": "Продовжити оплату",
+    "recovering_checkout": "Відкриваємо оплату..."
   }
 }

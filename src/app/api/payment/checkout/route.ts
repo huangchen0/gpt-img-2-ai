@@ -201,6 +201,7 @@ export async function POST(req: Request) {
       paymentType === PaymentType.SUBSCRIPTION
         ? `${callbackBaseUrl}/settings/billing`
         : `${callbackBaseUrl}/settings/payments`;
+    const cancelUrl = `${callbackBaseUrl}/pricing?checkout=cancelled&order_no=${orderNo}`;
 
     // build checkout order
     const checkoutOrder: PaymentOrder = {
@@ -217,7 +218,7 @@ export async function POST(req: Request) {
         ...(metadata || {}),
       },
       successUrl: `${configs.app_url}/api/payment/callback?order_no=${orderNo}`,
-      cancelUrl: `${callbackBaseUrl}/pricing`,
+      cancelUrl,
     };
 
     // checkout with predefined product
@@ -289,7 +290,10 @@ export async function POST(req: Request) {
         paymentProvider: result.provider,
       });
 
-      return respData(result.checkoutInfo);
+      return respData({
+        ...result.checkoutInfo,
+        orderNo,
+      });
     } catch (e: any) {
       // update order status to completed, means checkout failed
       await updateOrderByOrderNo(orderNo, {

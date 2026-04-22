@@ -456,6 +456,17 @@
     "flash_sale_save_percent": "Jimat {percent}%",
     "flash_sale_cta": "Tuntut {percent}% Off Sekarang",
     "flash_sale_cta_note": "Harga early-bird hanya untuk bulan ini. Selepas promosi tamat, harga biasa akan kembali.",
-    "per_image_price": "Kira-kira {amount} / imej"
+    "per_image_price": "Kira-kira {amount} / imej",
+    "checkout_trust_note": "Checkout selamat · kredit ditambah serta-merta · langganan boleh dibatalkan bila-bila masa",
+    "checkout_recovery_title": "Pembayaran belum selesai",
+    "checkout_recovery_description": "Pelan yang anda pilih masih tersedia. Lengkapkan checkout untuk membuka kredit, eksport tanpa tera air dan penjanaan lebih pantas.",
+    "checkout_recovery_benefit_credits": "Kredit ditambah serta-merta",
+    "checkout_recovery_benefit_exports": "Eksport tanpa tera air",
+    "checkout_recovery_benefit_priority": "Keutamaan penjanaan lebih pantas",
+    "checkout_recovery_benefit_commercial": "Hak penggunaan komersial disertakan",
+    "checkout_recovery_failed": "Tidak dapat membuka semula checkout. Sila pilih pelan sekali lagi.",
+    "choose_another_plan": "Pilih pelan lain",
+    "continue_checkout": "Teruskan checkout",
+    "recovering_checkout": "Membuka checkout..."
   }
 }

@@ -456,6 +456,17 @@
     "flash_sale_save_percent": "{percent}% 절약",
     "flash_sale_cta": "지금 {percent}% 할인 확보",
     "flash_sale_cta_note": "얼리버드 가격은 이번 달까지만 적용되며 이후 정가로 돌아갑니다.",
-    "per_image_price": "약 {amount} / 이미지"
+    "per_image_price": "약 {amount} / 이미지",
+    "checkout_trust_note": "안전한 결제 · 결제 후 크레딧 즉시 지급 · 구독은 언제든 취소 가능",
+    "checkout_recovery_title": "결제가 완료되지 않았습니다",
+    "checkout_recovery_description": "선택한 플랜이 아직 유지되어 있습니다. 결제를 완료하면 크레딧, 워터마크 없는 내보내기, 더 빠른 생성을 사용할 수 있습니다.",
+    "checkout_recovery_benefit_credits": "크레딧 즉시 지급",
+    "checkout_recovery_benefit_exports": "워터마크 없는 내보내기",
+    "checkout_recovery_benefit_priority": "더 빠른 생성 우선순위",
+    "checkout_recovery_benefit_commercial": "상업적 사용 권한 포함",
+    "checkout_recovery_failed": "결제 페이지를 다시 열 수 없습니다. 플랜을 다시 선택해 주세요.",
+    "choose_another_plan": "다른 플랜 선택",
+    "continue_checkout": "결제 계속하기",
+    "recovering_checkout": "결제 페이지 여는 중..."
   }
 }

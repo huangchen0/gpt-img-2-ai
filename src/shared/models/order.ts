@@ -1,4 +1,4 @@
-import { and, count, desc, eq, or } from 'drizzle-orm';
+import { and, count, desc, eq, lte, or } from 'drizzle-orm';
 
 import { db } from '@/core/db';
 import { credit, order, subscription } from '@/config/db/schema';
@@ -49,6 +49,7 @@ export async function getOrders({
   getUser,
   paymentType,
   paymentProvider,
+  createdBefore,
   page = 1,
   limit = 30,
 }: {
@@ -58,6 +59,7 @@ export async function getOrders({
   getUser?: boolean;
   paymentType?: PaymentType;
   paymentProvider?: string;
+  createdBefore?: Date;
   page?: number;
   limit?: number;
 } = {}): Promise<Order[]> {
@@ -70,7 +72,10 @@ export async function getOrders({
         userId ? eq(order.userId, userId) : undefined,
         status ? eq(order.status, status) : undefined,
         paymentType ? eq(order.paymentType, paymentType) : undefined,
-        paymentProvider ? eq(order.paymentProvider, paymentProvider) : undefined
+        paymentProvider
+          ? eq(order.paymentProvider, paymentProvider)
+          : undefined,
+        createdBefore ? lte(order.createdAt, createdBefore) : undefined
       )
     )
     .orderBy(desc(order.createdAt))
@@ -93,12 +98,14 @@ export async function getOrdersCount({
   paymentType,
   status,
   paymentProvider,
+  createdBefore,
 }: {
   orderNo?: string;
   userId?: string;
   paymentType?: PaymentType;
   paymentProvider?: string;
   status?: OrderStatus;
+  createdBefore?: Date;
 } = {}): Promise<number> {
   const [result] = await db()
     .select({ count: count() })
@@ -109,7 +116,10 @@ export async function getOrdersCount({
         userId ? eq(order.userId, userId) : undefined,
         status ? eq(order.status, status) : undefined,
         paymentType ? eq(order.paymentType, paymentType) : undefined,
-        paymentProvider ? eq(order.paymentProvider, paymentProvider) : undefined
+        paymentProvider
+          ? eq(order.paymentProvider, paymentProvider)
+          : undefined,
+        createdBefore ? lte(order.createdAt, createdBefore) : undefined
       )
     );
 
@@ -305,7 +315,9 @@ export async function updateOrderInTransaction({
     // If no order was updated and we're trying to set status to PAID,
     // it means the order was already processed
     if (!orderResult && updateOrder.status === OrderStatus.PAID) {
-      console.log(`Order ${orderNo} already paid or not in CREATED status, skipping update`);
+      console.log(
+        `Order ${orderNo} already paid or not in CREATED status, skipping update`
+      );
     }
 
     result.order = orderResult;

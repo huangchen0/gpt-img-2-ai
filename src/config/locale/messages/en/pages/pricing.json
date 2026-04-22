@@ -456,6 +456,17 @@
     "flash_sale_save_percent": "Save {percent}%",
     "flash_sale_cta": "Claim {percent}% Off Now",
     "flash_sale_cta_note": "Early-bird pricing is available this month only. Standard pricing returns after the promotion ends.",
-    "per_image_price": "About {amount} / image"
+    "per_image_price": "About {amount} / image",
+    "checkout_trust_note": "Secure checkout · credits are added instantly · subscriptions can be canceled anytime",
+    "checkout_recovery_title": "Payment not completed",
+    "checkout_recovery_description": "Your selected plan is still waiting. Complete checkout to unlock credits, watermark-free exports, and faster generation.",
+    "checkout_recovery_benefit_credits": "Credits added instantly",
+    "checkout_recovery_benefit_exports": "Watermark-free exports",
+    "checkout_recovery_benefit_priority": "Faster generation priority",
+    "checkout_recovery_benefit_commercial": "Commercial usage rights included",
+    "checkout_recovery_failed": "Could not reopen checkout. Please choose a plan again.",
+    "choose_another_plan": "Choose another plan",
+    "continue_checkout": "Continue checkout",
+    "recovering_checkout": "Opening checkout..."
   }
 }

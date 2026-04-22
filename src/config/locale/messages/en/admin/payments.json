@@ -29,6 +29,7 @@
           "all": "All",
           "paid": "Paid",
           "created": "Created",
+          "abandoned": "Potential Abandoned (Stripe 15m+)",
           "failed": "Failed"
         }
       },

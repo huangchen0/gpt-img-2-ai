@@ -142,12 +142,18 @@ export async function handleCheckoutSuccess({
   }
 
   // Only process orders in CREATED or PENDING status
-  if (order.status !== OrderStatus.CREATED && order.status !== OrderStatus.PENDING) {
+  if (
+    order.status !== OrderStatus.CREATED &&
+    order.status !== OrderStatus.PENDING
+  ) {
     console.log(`Order ${orderNo} status is ${order.status}, not processing`);
     return;
   }
 
-  if (order.paymentType === PaymentType.SUBSCRIPTION) {
+  if (
+    session.paymentStatus === PaymentStatus.SUCCESS &&
+    order.paymentType === PaymentType.SUBSCRIPTION
+  ) {
     if (!session.subscriptionId || !session.subscriptionInfo) {
       throw new Error('subscription id or subscription info not found');
     }
@@ -301,6 +307,66 @@ export async function handleCheckoutSuccess({
   } else {
     throw new Error('unknown payment status');
   }
+}
+
+export async function syncCheckoutOrderPaymentStatus({
+  order,
+  configs,
+}: {
+  order: Order;
+  configs?: Configs;
+}) {
+  if (!order.orderNo || !order.paymentProvider || !order.paymentSessionId) {
+    return {
+      order,
+      session: null,
+      synced: false,
+    };
+  }
+
+  if (
+    order.status !== OrderStatus.CREATED &&
+    order.status !== OrderStatus.PENDING
+  ) {
+    return {
+      order,
+      session: null,
+      synced: false,
+    };
+  }
+
+  const paymentService = await getPaymentService(configs);
+  const paymentProvider = paymentService.getProvider(order.paymentProvider);
+  if (!paymentProvider) {
+    throw new Error('payment provider not found');
+  }
+
+  const session = await paymentProvider.getPaymentSession({
+    sessionId: order.paymentSessionId,
+  });
+
+  if (
+    session.paymentStatus === PaymentStatus.SUCCESS ||
+    session.paymentStatus === PaymentStatus.FAILED ||
+    session.paymentStatus === PaymentStatus.CANCELED
+  ) {
+    await handleCheckoutSuccess({
+      order,
+      session,
+    });
+
+    return {
+      order: (await findOrderByOrderNo(order.orderNo)) || order,
+      session,
+      synced: true,
+    };
+  }
+
+  return {
+    order,
+    session,
+    synced: false,
+  };
 }
 
 /**

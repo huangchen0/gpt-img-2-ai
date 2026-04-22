@@ -456,6 +456,17 @@
     "flash_sale_save_percent": "{percent}%オフ",
     "flash_sale_cta": "今すぐ{percent}%オフを確保",
     "flash_sale_cta_note": "早期割引価格は今月限定です。終了後は通常価格に戻ります。",
-    "per_image_price": "約 {amount} / 画像"
+    "per_image_price": "約 {amount} / 画像",
+    "checkout_trust_note": "安全なチェックアウト · クレジットは支払い後すぐに追加 · サブスクリプションはいつでも解約可能",
+    "checkout_recovery_title": "支払いが完了していません",
+    "checkout_recovery_description": "選択したプランはまだ保持されています。支払いを完了すると、クレジット、透かしなしの書き出し、より速い生成を利用できます。",
+    "checkout_recovery_benefit_credits": "クレジットはすぐに追加",
+    "checkout_recovery_benefit_exports": "透かしなしの書き出し",
+    "checkout_recovery_benefit_priority": "より速い生成優先度",
+    "checkout_recovery_benefit_commercial": "商用利用権を含む",
+    "checkout_recovery_failed": "チェックアウトを再開できませんでした。もう一度プランを選択してください。",
+    "choose_another_plan": "別のプランを選ぶ",
+    "continue_checkout": "支払いを続ける",
+    "recovering_checkout": "チェックアウトを開いています..."
   }
 }

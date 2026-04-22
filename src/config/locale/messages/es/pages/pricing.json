@@ -456,6 +456,17 @@
     "flash_sale_save_percent": "Ahorra {percent}%",
     "flash_sale_cta": "Reclama {percent}% Off Ahora",
     "flash_sale_cta_note": "El precio early-bird solo estará disponible este mes. Después volverá la tarifa estándar.",
-    "per_image_price": "Aprox. {amount} / imagen"
+    "per_image_price": "Aprox. {amount} / imagen",
+    "checkout_trust_note": "Pago seguro · los créditos se agregan al instante · las suscripciones se pueden cancelar en cualquier momento",
+    "checkout_recovery_title": "El pago no se completó",
+    "checkout_recovery_description": "El plan que elegiste sigue disponible. Completa el pago para desbloquear créditos, exportaciones sin marca de agua y generación más rápida.",
+    "checkout_recovery_benefit_credits": "Créditos agregados al instante",
+    "checkout_recovery_benefit_exports": "Exportaciones sin marca de agua",
+    "checkout_recovery_benefit_priority": "Prioridad de generación más rápida",
+    "checkout_recovery_benefit_commercial": "Derechos de uso comercial incluidos",
+    "checkout_recovery_failed": "No se pudo reabrir el pago. Elige un plan de nuevo.",
+    "choose_another_plan": "Elegir otro plan",
+    "continue_checkout": "Continuar pago",
+    "recovering_checkout": "Abriendo el pago..."
   }
 }

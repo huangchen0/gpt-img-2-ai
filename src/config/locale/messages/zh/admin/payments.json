@@ -29,6 +29,7 @@
           "all": "全部",
           "paid": "已支付",
           "created": "已创建",
+          "abandoned": "疑似放弃支付 (Stripe 15分钟+)",
           "failed": "支付失败"
         }
       },

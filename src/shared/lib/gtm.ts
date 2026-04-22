@@ -328,8 +328,9 @@ export function trackConfiguredGtmSignUp({
     ? resolveGoogleAdsSignUpSendTo(configs)
     : '';
   const trackingEnabled = configs?.tracking_enabled !== 'false';
-  const gtmId = String(configs?.google_tag_manager_id || configs?.gtm_id || '')
-    .trim();
+  const gtmId = String(
+    configs?.google_tag_manager_id || configs?.gtm_id || ''
+  ).trim();
   const hasGtm = !!gtmId;
   let didComplete = false;
   let completionTimer: number | null = null;
@@ -548,6 +549,7 @@ export function trackGtmBeginCheckout({
     eventName: 'begin_checkout',
     dedupeKey,
     sessionId,
+    orderNo,
     properties: {
       currency: normalizedCurrency || undefined,
       value,

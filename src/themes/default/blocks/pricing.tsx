@@ -17,6 +17,14 @@ import {
   CardTitle,
 } from '@/shared/components/ui/card';
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/components/ui/dialog';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -98,10 +106,12 @@ function trackPricingAddToCart(
 function trackPricingBeginCheckout({
   item,
   paymentProvider,
+  orderNo,
   configs,
 }: {
   item: PricingItem;
   paymentProvider?: string;
+  orderNo?: string;
   configs?: Record<string, string>;
 }) {
   trackGtmBeginCheckout({
@@ -111,6 +121,7 @@ function trackPricingBeginCheckout({
     paymentProvider: paymentProvider || '',
     paymentType: item.interval === 'one-time' ? 'one-time' : 'subscription',
     productId: item.product_id,
+    orderNo,
     configs,
   });
 }
@@ -583,12 +594,122 @@ export function Pricing({
     Record<string, { selectedCurrency: string; displayedItem: PricingItem }>
   >({});
   const [nowMs, setNowMs] = useState<number | null>(null);
+  const [checkoutRecovery, setCheckoutRecovery] = useState<{
+    open: boolean;
+    orderNo: string;
+    isRecovering: boolean;
+  } | null>(null);
+
+  const clearCheckoutRecoveryParams = () => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.delete('checkout');
+    nextUrl.searchParams.delete('order_no');
+    window.history.replaceState(
+      null,
+      '',
+      `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`
+    );
+  };
+
+  const dismissCheckoutRecovery = () => {
+    setCheckoutRecovery((current) =>
+      current ? { ...current, open: false, isRecovering: false } : current
+    );
+    clearCheckoutRecoveryParams();
+  };
+
+  const handleRecoverCheckout = async () => {
+    if (!checkoutRecovery?.orderNo) {
+      return;
+    }
+
+    try {
+      setCheckoutRecovery((current) =>
+        current ? { ...current, isRecovering: true } : current
+      );
+
+      const response = await fetch('/api/payment/recover-checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          order_no: checkoutRecovery.orderNo,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`request failed with status ${response.status}`);
+      }
+
+      const { code, message, data } = await response.json();
+      if (code !== 0) {
+        if (
+          String(message || '')
+            .toLowerCase()
+            .includes('no auth')
+        ) {
+          setIsShowSignModal(true);
+        }
+        throw new Error(message);
+      }
+
+      if (data?.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+        return;
+      }
+
+      if (data?.redirectUrl) {
+        window.location.href = data.redirectUrl;
+        return;
+      }
+
+      throw new Error('checkout url not found');
+    } catch (error: any) {
+      toast.error(
+        tm(
+          'checkout_recovery_failed',
+          'Could not reopen checkout. Please choose a plan again.'
+        )
+      );
+      setCheckoutRecovery((current) =>
+        current ? { ...current, isRecovering: false } : current
+      );
+      console.log('recover checkout failed:', error);
+    }
+  };
 
   useEffect(() => {
     if (!hasFetchedConfigs) {
       void fetchConfigs();
     }
   }, [fetchConfigs, hasFetchedConfigs]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('checkout') !== 'cancelled') {
+      return;
+    }
+
+    const orderNo = String(params.get('order_no') || '').trim();
+    if (!orderNo) {
+      return;
+    }
+
+    setCheckoutRecovery({
+      open: true,
+      orderNo,
+      isRecovering: false,
+    });
+  }, []);
 
   useEffect(() => {
     if (currentSubscription) {
@@ -845,7 +966,7 @@ export function Pricing({
         throw new Error(message);
       }
 
-      const { checkoutUrl } = data;
+      const { checkoutUrl, orderNo } = data;
       if (!checkoutUrl) {
         throw new Error('checkout url not found');
       }
@@ -853,6 +974,7 @@ export function Pricing({
       trackPricingBeginCheckout({
         item,
         paymentProvider: paymentProvider || configs.default_payment_provider,
+        orderNo,
         configs,
       });
 
@@ -1209,6 +1331,12 @@ export function Pricing({
                   </>
                 )}
               </Button>
+              <p className="text-muted-foreground/75 mt-2 text-center text-[11px] leading-relaxed">
+                {tm(
+                  'checkout_trust_note',
+                  'Secure checkout · credits are added instantly · subscriptions can be canceled anytime'
+                )}
+              </p>
             </>
           )}
         </CardHeader>
@@ -1532,6 +1660,76 @@ export function Pricing({
           handleCheckout(item, paymentProvider)
         }
       />
+
+      <Dialog
+        open={checkoutRecovery?.open === true}
+        onOpenChange={(open) => {
+          if (!open) {
+            dismissCheckoutRecovery();
+          }
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {tm('checkout_recovery_title', 'Payment not completed')}
+            </DialogTitle>
+            <DialogDescription>
+              {tm(
+                'checkout_recovery_description',
+                'Your selected plan is still waiting. Complete checkout to unlock credits, watermark-free exports, and faster generation.'
+              )}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="grid gap-2 text-sm">
+            {[
+              tm(
+                'checkout_recovery_benefit_credits',
+                'Credits added instantly'
+              ),
+              tm('checkout_recovery_benefit_exports', 'Watermark-free exports'),
+              tm(
+                'checkout_recovery_benefit_priority',
+                'Faster generation priority'
+              ),
+              tm(
+                'checkout_recovery_benefit_commercial',
+                'Commercial usage rights included'
+              ),
+            ].map((benefit) => (
+              <div key={benefit} className="flex items-start gap-2">
+                <Check className="text-primary mt-0.5 size-4 shrink-0" />
+                <span>{benefit}</span>
+              </div>
+            ))}
+          </div>
+
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={dismissCheckoutRecovery}
+            >
+              {tm('choose_another_plan', 'Choose another plan')}
+            </Button>
+            <Button
+              type="button"
+              onClick={handleRecoverCheckout}
+              disabled={checkoutRecovery?.isRecovering === true}
+            >
+              {checkoutRecovery?.isRecovering ? (
+                <>
+                  <Loader2 className="size-4 animate-spin" />
+                  {tm('recovering_checkout', 'Opening checkout...')}
+                </>
+              ) : (
+                tm('continue_checkout', 'Continue checkout')
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }

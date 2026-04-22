@@ -456,6 +456,17 @@
     "flash_sale_cta_note": "早鸟优惠价格仅限本月，随后将恢复原价。",
     "per_image_price": "约 {amount} / 张图片",
     "flash_sale_save_percent": "省 {percent}%",
-    "flash_sale_cta": "立即省 {percent}%"
+    "flash_sale_cta": "立即省 {percent}%",
+    "checkout_trust_note": "安全支付 · 积分支付后立即到账 · 订阅可随时取消",
+    "checkout_recovery_title": "付款还没有完成",
+    "checkout_recovery_description": "你刚才选择的套餐还保留着。完成支付后即可获得积分、无水印导出和更快生成体验。",
+    "checkout_recovery_benefit_credits": "积分支付后立即到账",
+    "checkout_recovery_benefit_exports": "无水印导出",
+    "checkout_recovery_benefit_priority": "更快生成优先级",
+    "checkout_recovery_benefit_commercial": "包含商业使用权限",
+    "checkout_recovery_failed": "暂时无法重新打开付款页，请重新选择套餐。",
+    "choose_another_plan": "换个套餐",
+    "continue_checkout": "继续支付",
+    "recovering_checkout": "正在打开付款页..."
   }
 }

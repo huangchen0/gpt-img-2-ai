@@ -8,6 +8,9 @@ import { getOrders, getOrdersCount, OrderStatus } from '@/shared/models/order';
 import { Crumb, Filter, Search, Tab } from '@/shared/types/blocks/common';
 import { type Table } from '@/shared/types/blocks/table';
 
+const ABANDONED_STATUS_FILTER = 'abandoned';
+const ABANDONED_CHECKOUT_AGE_MS = 15 * 60 * 1000;
+
 export default async function PaymentsPage({
   params,
   searchParams,
@@ -44,6 +47,21 @@ export default async function PaymentsPage({
   } = await searchParams;
   const page = pageNum || 1;
   const limit = pageSize || 30;
+  const isAbandonedFilter = status === ABANDONED_STATUS_FILTER;
+  const statusFilter =
+    status && status !== 'all' && !isAbandonedFilter
+      ? (status as OrderStatus)
+      : isAbandonedFilter
+        ? OrderStatus.CREATED
+        : undefined;
+  const abandonedCreatedBefore = isAbandonedFilter
+    ? new Date(Date.now() - ABANDONED_CHECKOUT_AGE_MS)
+    : undefined;
+  const providerFilter = isAbandonedFilter
+    ? 'stripe'
+    : provider && provider !== 'all'
+      ? (provider as string)
+      : undefined;
 
   const crumbs: Crumb[] = [
     { title: t('list.crumbs.admin'), url: '/admin' },
@@ -87,6 +105,10 @@ export default async function PaymentsPage({
           label: t('list.filters.status.options.created'),
         },
         {
+          value: ABANDONED_STATUS_FILTER,
+          label: t('list.filters.status.options.abandoned'),
+        },
+        {
           value: OrderStatus.FAILED,
           label: t('list.filters.status.options.failed'),
         },
@@ -128,17 +150,17 @@ export default async function PaymentsPage({
   const total = await getOrdersCount({
     orderNo: orderNo ? (orderNo as string) : undefined,
     paymentType: type as PaymentType,
-    paymentProvider:
-      provider && provider !== 'all' ? (provider as string) : undefined,
-    status: status && status !== 'all' ? (status as OrderStatus) : undefined,
+    paymentProvider: providerFilter,
+    status: statusFilter,
+    createdBefore: abandonedCreatedBefore,
   });
 
   const payments = await getOrders({
     orderNo: orderNo ? (orderNo as string) : undefined,
     paymentType: type as PaymentType,
-    paymentProvider:
-      provider && provider !== 'all' ? (provider as string) : undefined,
-    status: status && status !== 'all' ? (status as OrderStatus) : undefined,
+    paymentProvider: providerFilter,
+    status: statusFilter,
+    createdBefore: abandonedCreatedBefore,
     getUser: true,
     page,
     limit,
