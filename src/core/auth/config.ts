@@ -59,6 +59,12 @@ const authOptions = {
         required: false,
         defaultValue: '',
       },
+      referralCode: {
+        type: 'string',
+        input: false,
+        required: false,
+        defaultValue: '',
+      },
     },
   },
   advanced: {
@@ -151,16 +157,20 @@ export async function getAuthOptions(configs: Record<string, string>) {
             }
             return user;
           },
-          after: async (user: any) => {
+          after: async (user: any, ctx: any) => {
             try {
               if (!user.id) {
                 throw new Error('user id is required');
               }
 
               const siteCode = getCurrentSiteCode();
+              const { createReferralCode } = await import(
+                '@/shared/models/referral'
+              );
               await db()
                 .update(schema.user)
                 .set({
+                  referralCode: createReferralCode(user.id, configs),
                   signupSite: siteCode,
                   firstSeenSite: siteCode,
                   lastSeenSite: siteCode,
@@ -173,6 +183,15 @@ export async function getAuthOptions(configs: Record<string, string>) {
                 '@/shared/models/credit-grant'
               );
               await grantCreditsForNewUser(user);
+
+              const { grantReferralRewardForNewUser } = await import(
+                '@/shared/models/referral'
+              );
+              await grantReferralRewardForNewUser({
+                user,
+                ctx,
+                configs,
+              });
 
               // grant role for new user
               const { grantRoleForNewUser } = await import(

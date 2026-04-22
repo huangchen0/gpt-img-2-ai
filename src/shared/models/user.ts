@@ -4,6 +4,7 @@ import { and, count, desc, eq, inArray } from 'drizzle-orm';
 import { getAuth } from '@/core/auth';
 import { db } from '@/core/db';
 import { account, user } from '@/config/db/schema';
+import { md5 } from '@/shared/lib/hash';
 import { getCurrentSiteCode } from '@/shared/lib/site';
 
 import type { Permission, Role } from '../services/rbac';
@@ -83,6 +84,47 @@ export async function markUserActivatedIfEligible(
 
 export async function findUserById(userId: string) {
   const [result] = await db().select().from(user).where(eq(user.id, userId));
+
+  return result;
+}
+
+export function createUserReferralCode(userId: string, prefix = 'r') {
+  const safePrefix = prefix.replace(/[^\w-]/g, '').slice(0, 8) || 'r';
+  return `${safePrefix}${md5(userId).slice(0, 15)}`;
+}
+
+export async function ensureUserReferralCode(userId: string) {
+  const [existingUser] = await db()
+    .select()
+    .from(user)
+    .where(eq(user.id, userId))
+    .limit(1);
+
+  if (!existingUser) {
+    return null;
+  }
+
+  if (existingUser.referralCode) {
+    return existingUser.referralCode;
+  }
+
+  const { getAllConfigs } = await import('./config');
+  const configs = await getAllConfigs();
+  const referralCode = createUserReferralCode(
+    userId,
+    configs.referral_code_prefix || 'r'
+  );
+  await db().update(user).set({ referralCode }).where(eq(user.id, userId));
+
+  return referralCode;
+}
+
+export async function findUserByReferralCode(referralCode: string) {
+  const [result] = await db()
+    .select()
+    .from(user)
+    .where(eq(user.referralCode, referralCode))
+    .limit(1);
 
   return result;
 }

@@ -1,0 +1,2 @@
+ALTER TABLE "user" ADD COLUMN "referral_code" text DEFAULT '' NOT NULL;--> statement-breakpoint
+CREATE UNIQUE INDEX "uq_user_referral_code" ON "user" USING btree ("referral_code") WHERE "user"."referral_code" <> '';

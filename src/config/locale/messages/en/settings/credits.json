@@ -22,5 +22,33 @@
     "buttons": {
       "purchase": "Purchase Credits"
     }
+  },
+  "rewards": {
+    "signup": {
+      "title": "Signup bonus",
+      "description": "New accounts receive {credits} free credits for GPT Image 2.",
+      "label": "One time"
+    },
+    "referral": {
+      "title": "Invite friends",
+      "description": "Invite a friend to sign up and earn {credits} credits.",
+      "label": "{credits} each",
+      "invited": "Invited",
+      "earned": "Earned"
+    },
+    "checkin": {
+      "title": "Daily check-in",
+      "description": "Come back each day and claim free credits.",
+      "label": "Daily"
+    },
+    "actions": {
+      "title": "Earn credits",
+      "copy_invite": "Copy invite link",
+      "copied": "Invite link copied",
+      "check_in": "Check in",
+      "checked_in": "Checked in today",
+      "checking_in": "Checking in",
+      "check_in_success": "Daily credits added"
+    }
   }
 }

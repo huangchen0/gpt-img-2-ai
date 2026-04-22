@@ -22,5 +22,33 @@
     "buttons": {
       "purchase": "购买积分"
     }
+  },
+  "rewards": {
+    "signup": {
+      "title": "注册奖励",
+      "description": "新账号可获得 {credits} 免费积分，用于 GPT Image 2 生成。",
+      "label": "一次性"
+    },
+    "referral": {
+      "title": "邀请好友",
+      "description": "邀请好友注册成功，你将获得 {credits} 积分。",
+      "label": "每人 {credits}",
+      "invited": "已邀请",
+      "earned": "已获得"
+    },
+    "checkin": {
+      "title": "每日签到",
+      "description": "每天回来签到，即可领取免费积分。",
+      "label": "每天"
+    },
+    "actions": {
+      "title": "赚取积分",
+      "copy_invite": "复制邀请链接",
+      "copied": "邀请链接已复制",
+      "check_in": "签到",
+      "checked_in": "今日已签到",
+      "checking_in": "签到中",
+      "check_in_success": "签到积分已到账"
+    }
   }
 }

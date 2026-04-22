@@ -22,6 +22,11 @@
           "icon": "Image"
         },
         {
+          "title": "Prompts",
+          "url": "/prompts/gpt-image-2",
+          "icon": "Sparkles"
+        },
+        {
           "title": "AI Video",
           "url": "/ai-video",
           "icon": "Video"

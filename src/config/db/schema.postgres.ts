@@ -1,3 +1,4 @@
+import { sql } from 'drizzle-orm';
 import {
   boolean,
   index,
@@ -43,6 +44,7 @@ export const user = table(
     lastActiveAt: timestamp('last_active_at'),
     ip: text('ip').notNull().default(''),
     locale: text('locale').notNull().default(''),
+    referralCode: text('referral_code').notNull().default(''),
   },
   (table) => [
     // Search users by name in admin dashboard
@@ -52,6 +54,9 @@ export const user = table(
     index('idx_user_signup_site').on(table.signupSite),
     index('idx_user_last_seen_site').on(table.lastSeenSite),
     index('idx_user_last_active_at').on(table.lastActiveAt),
+    uniqueIndex('uq_user_referral_code')
+      .on(table.referralCode)
+      .where(sql`${table.referralCode} <> ''`),
   ]
 );
 
@@ -362,6 +367,94 @@ export const credit = table(
     index('idx_credit_order_no').on(table.orderNo),
     // Query credits by subscription number
     index('idx_credit_subscription_no').on(table.subscriptionNo),
+  ]
+);
+
+export const referral = table(
+  'referral',
+  {
+    id: text('id').primaryKey(),
+    referrerUserId: text('referrer_user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    referredUserId: text('referred_user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    referralCode: text('referral_code').notNull(),
+    rewardCredits: integer('reward_credits').notNull().default(0),
+    rewardStatus: text('reward_status').notNull().default('pending'),
+    ip: text('ip').notNull().default(''),
+    userAgent: text('user_agent').notNull().default(''),
+    creditId: text('credit_id'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+    rewardedAt: timestamp('rewarded_at'),
+  },
+  (table) => [
+    uniqueIndex('uq_referral_referred_user').on(table.referredUserId),
+    uniqueIndex('uq_referral_referrer_referred').on(
+      table.referrerUserId,
+      table.referredUserId
+    ),
+    index('idx_referral_referrer_created').on(
+      table.referrerUserId,
+      table.createdAt
+    ),
+  ]
+);
+
+export const referralRewardDaily = table(
+  'referral_reward_daily',
+  {
+    id: text('id').primaryKey(),
+    referrerUserId: text('referrer_user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    rewardDate: text('reward_date').notNull(),
+    rewardCount: integer('reward_count').notNull().default(0),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex('uq_referral_reward_daily_user_date').on(
+      table.referrerUserId,
+      table.rewardDate
+    ),
+    index('idx_referral_reward_daily_user_date').on(
+      table.referrerUserId,
+      table.rewardDate
+    ),
+  ]
+);
+
+export const dailyCheckin = table(
+  'daily_checkin',
+  {
+    id: text('id').primaryKey(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    checkinDate: text('checkin_date').notNull(),
+    credits: integer('credits').notNull().default(0),
+    creditId: text('credit_id'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex('uq_daily_checkin_user_date').on(
+      table.userId,
+      table.checkinDate
+    ),
+    index('idx_daily_checkin_user_created').on(table.userId, table.createdAt),
   ]
 );
 

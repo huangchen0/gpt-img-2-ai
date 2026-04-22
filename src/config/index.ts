@@ -29,6 +29,10 @@ export const envConfigs: ConfigMap = {
   app_favicon: process.env.NEXT_PUBLIC_APP_FAVICON ?? '/favicon.ico',
   app_preview_image:
     process.env.NEXT_PUBLIC_APP_PREVIEW_IMAGE ?? '/preview.png',
+  prompt_library_base_url:
+    process.env.NEXT_PUBLIC_PROMPT_LIBRARY_BASE_URL ??
+    process.env.PROMPT_LIBRARY_BASE_URL ??
+    'https://img.cdance.ai/uploads/prompt-library',
   theme: process.env.NEXT_PUBLIC_THEME ?? 'default',
   appearance: process.env.NEXT_PUBLIC_APPEARANCE ?? 'system',
   locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'en',

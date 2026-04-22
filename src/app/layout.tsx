@@ -6,6 +6,7 @@ import NextTopLoader from 'nextjs-toploader';
 
 import { envConfigs } from '@/config';
 import { locales } from '@/config/locale';
+import { ReferralCapture } from '@/shared/blocks/common/referral-capture';
 import { ReferrerCapture } from '@/shared/blocks/common/referrer-capture';
 import { SiteActivityCapture } from '@/shared/blocks/common/site-activity-capture';
 import { UtmCapture } from '@/shared/blocks/common/utm-capture';
@@ -166,6 +167,7 @@ export default async function RootLayout({
 
         {children}
         <UtmCapture />
+        <ReferralCapture />
         <ReferrerCapture />
         <SiteActivityCapture />
 

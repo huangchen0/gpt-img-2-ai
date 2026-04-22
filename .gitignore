@@ -46,6 +46,7 @@ yarn-error.log*
 next-env.d.ts
 
 data*
+!src/shared/prompt-library/data.ts
 *debug*
 
 *.db
@@ -54,8 +55,6 @@ data*
 wrangler.toml
 .wrangler
 src/shared/types/cloudflare.d.ts
-
-src/config/db/migrations
 
 .debug 
 .test

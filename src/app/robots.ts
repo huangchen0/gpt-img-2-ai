@@ -21,6 +21,6 @@ export default function robots(): MetadataRoute.Robots {
         '/api/*',
       ],
     },
-    sitemap: `${appUrl}/sitemap.xml`,
+    sitemap: [`${appUrl}/sitemap.xml`, `${appUrl}/prompt-sitemap.xml`],
   };
 }

@@ -13,6 +13,8 @@ const BASE_FALLBACK_CREDITS: Record<ImageScene, number> = {
   'image-to-image': 6,
 };
 
+export const GPT_IMAGE_2_CREDITS = 40;
+
 const NANO_BANANA_MODEL_PRICING: Record<
   CanonicalImageModel,
   Record<ImageResolution, number>
@@ -73,6 +75,7 @@ interface CalculateImageCreditsInput {
   resolution?: string;
   googleSearch?: boolean;
   multiplier?: number;
+  gptImageCredits?: number;
 }
 
 export function calculateImageCredits({
@@ -82,13 +85,16 @@ export function calculateImageCredits({
   resolution,
   googleSearch = false,
   multiplier = 1,
+  gptImageCredits,
 }: CalculateImageCreditsInput): number {
   if (
     provider === GPT_IMAGE_PROVIDER &&
     (model === GPT_IMAGE_TEXT_TO_IMAGE_MODEL ||
       model === GPT_IMAGE_IMAGE_TO_IMAGE_MODEL)
   ) {
-    return BASE_FALLBACK_CREDITS[scene] * multiplier;
+    return gptImageCredits && gptImageCredits > 0
+      ? gptImageCredits
+      : GPT_IMAGE_2_CREDITS;
   }
 
   const canonicalModel = getAdvancedImageModel(provider, model);

@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import './theme.css';
 
+@source not '../../../public/prompt-library/**';
+@source not '../../content/prompt-library/**';
+
 @custom-variant dark (&:is(.dark *));
 
 @plugin 'tailwindcss-animate';

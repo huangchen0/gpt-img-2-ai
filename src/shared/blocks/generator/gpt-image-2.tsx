@@ -245,7 +245,15 @@ export function GptImage2Generator({
     isFetchingCurrentSubscription,
     fetchCurrentSubscription,
     configs,
+    fetchConfigs,
+    hasFetchedConfigs,
   } = useAppContext();
+
+  useEffect(() => {
+    if (!hasFetchedConfigs) {
+      void fetchConfigs();
+    }
+  }, [fetchConfigs, hasFetchedConfigs]);
 
   useEffect(() => {
     fetch('/api/ai/providers')
@@ -296,8 +304,9 @@ export function GptImage2Generator({
         provider: GPT_IMAGE_PROVIDER,
         model,
         multiplier: IMAGE_CREDITS_MULTIPLIER,
+        gptImageCredits: parseInt(configs.gpt_image_2_credits || '40', 10),
       }),
-    [activeTab, model]
+    [activeTab, configs.gpt_image_2_credits, model]
   );
   const isCurrentMember = Boolean(currentSubscription);
   const showCreditsCost = hasFetchedCurrentSubscription && isCurrentMember;

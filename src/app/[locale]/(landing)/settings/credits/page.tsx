@@ -1,8 +1,11 @@
 import { getTranslations } from 'next-intl/server';
 
+import { envConfigs } from '@/config';
 import { Empty } from '@/shared/blocks/common';
+import { RewardsPanel } from '@/shared/blocks/credits/rewards-panel';
 import { PanelCard } from '@/shared/blocks/panel';
 import { TableCard } from '@/shared/blocks/table';
+import { getAllConfigs } from '@/shared/models/config';
 import {
   Credit,
   CreditStatus,
@@ -11,7 +14,9 @@ import {
   getCreditsCount,
   getRemainingCredits,
 } from '@/shared/models/credit';
-import { getUserInfo } from '@/shared/models/user';
+import { getDailyCheckinStatus } from '@/shared/models/daily-checkin';
+import { getReferralSummary } from '@/shared/models/referral';
+import { ensureUserReferralCode, getUserInfo } from '@/shared/models/user';
 import { Tab } from '@/shared/types/blocks/common';
 import { type Table } from '@/shared/types/blocks/table';
 
@@ -95,6 +100,23 @@ export default async function CreditsPage({
   };
 
   const remainingCredits = await getRemainingCredits(user.id);
+  const configs = await getAllConfigs();
+  const referralSummary = await getReferralSummary(user.id);
+  const checkinStatus = await getDailyCheckinStatus(user.id);
+  const referralCode = (await ensureUserReferralCode(user.id)) || '';
+  const inviteUrl = `${envConfigs.app_url || ''}?ref=${encodeURIComponent(referralCode)}`;
+  const signupCredits = parseInt(configs.initial_credits_amount || '60', 10);
+  const checkinCredits = parseInt(configs.daily_checkin_credits || '3', 10);
+  const referralCredits = parseInt(configs.referral_reward_credits || '60', 10);
+  const displaySignupCredits = Number.isFinite(signupCredits)
+    ? signupCredits
+    : 60;
+  const displayReferralCredits = Number.isFinite(referralCredits)
+    ? referralCredits
+    : 60;
+  const displayCheckinCredits = Number.isFinite(checkinCredits)
+    ? checkinCredits
+    : 3;
 
   const tabs: Tab[] = [
     {
@@ -134,6 +156,72 @@ export default async function CreditsPage({
         <div className="text-primary text-3xl font-bold">
           {remainingCredits}
         </div>
+      </PanelCard>
+      <div className="grid gap-4 md:grid-cols-3">
+        <PanelCard
+          title={t('rewards.signup.title')}
+          description={t('rewards.signup.description', {
+            credits: displaySignupCredits,
+          })}
+          label={t('rewards.signup.label')}
+        >
+          <div className="text-foreground text-2xl font-semibold">
+            {displaySignupCredits}
+          </div>
+        </PanelCard>
+        <PanelCard
+          title={t('rewards.referral.title')}
+          description={t('rewards.referral.description', {
+            credits: displayReferralCredits,
+          })}
+          label={t('rewards.referral.label', {
+            credits: displayReferralCredits,
+          })}
+        >
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div>
+                <div className="text-muted-foreground">
+                  {t('rewards.referral.invited')}
+                </div>
+                <div className="text-foreground text-xl font-semibold">
+                  {referralSummary.invitedCount}
+                </div>
+              </div>
+              <div>
+                <div className="text-muted-foreground">
+                  {t('rewards.referral.earned')}
+                </div>
+                <div className="text-foreground text-xl font-semibold">
+                  {referralSummary.rewardCredits}
+                </div>
+              </div>
+            </div>
+          </div>
+        </PanelCard>
+        <PanelCard
+          title={t('rewards.checkin.title')}
+          description={t('rewards.checkin.description')}
+          label={t('rewards.checkin.label')}
+        >
+          <div className="text-foreground text-2xl font-semibold">
+            {displayCheckinCredits}
+          </div>
+        </PanelCard>
+      </div>
+      <PanelCard title={t('rewards.actions.title')}>
+        <RewardsPanel
+          inviteUrl={inviteUrl}
+          checkedInToday={checkinStatus.checkedInToday}
+          copy={{
+            copyInvite: t('rewards.actions.copy_invite'),
+            copied: t('rewards.actions.copied'),
+            checkIn: t('rewards.actions.check_in'),
+            checkedIn: t('rewards.actions.checked_in'),
+            checkingIn: t('rewards.actions.checking_in'),
+            checkInSuccess: t('rewards.actions.check_in_success'),
+          }}
+        />
       </PanelCard>
       <TableCard title={t('list.title')} tabs={tabs} table={table} />
     </div>

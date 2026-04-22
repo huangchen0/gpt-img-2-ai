@@ -1079,6 +1079,7 @@ export async function POST(request: Request) {
         resolution: normalizedResolution,
         googleSearch: Boolean(options?.google_search),
         multiplier: 10,
+        gptImageCredits: parseInt(configs.gpt_image_2_credits || '40', 10),
       });
     } else if (mediaType === AIMediaType.VIDEO) {
       if (

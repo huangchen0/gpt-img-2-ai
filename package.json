@@ -18,10 +18,11 @@
     "ai-saas-development"
   ],
   "scripts": {
-    "dev": "next dev",
-    "dev:turbo": "next dev --turbopack",
-    "build": "next build",
-    "build:fast": "NODE_OPTIONS='--max-old-space-size=4096' next build",
+    "generate:prompt-library": "tsx scripts/generate-prompt-library-assets.ts",
+    "dev": "pnpm generate:prompt-library && next dev",
+    "dev:turbo": "pnpm generate:prompt-library && next dev --turbopack",
+    "build": "pnpm generate:prompt-library && next build",
+    "build:fast": "pnpm generate:prompt-library && NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",

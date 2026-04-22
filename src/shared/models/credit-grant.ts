@@ -1,16 +1,15 @@
-import type { User } from './user';
-
 import { grantCreditsForUser } from './credit';
+import type { User } from './user';
 
 export async function grantCreditsForNewUser(user: User) {
   const { getAllConfigs } = await import('./config');
   const configs = await getAllConfigs();
 
-  if (configs.initial_credits_enabled !== 'true') {
+  if (configs.initial_credits_enabled === 'false') {
     return;
   }
 
-  const credits = parseInt(configs.initial_credits_amount as string) || 0;
+  const credits = parseInt(configs.initial_credits_amount as string) || 60;
   if (credits <= 0) {
     return;
   }
