@@ -27,10 +27,7 @@ function getCanonicalUrl(path: string) {
 }
 
 function getPromptLibraryDatasetUrl() {
-  const baseUrl = envConfigs.prompt_library_base_url.replace(/\/+$/, '');
-  return baseUrl
-    ? `${baseUrl}/gpt-image-2/index.json`
-    : '/prompt-library/gpt-image-2/index.json';
+  return '/api/prompt-library/gpt-image-2/index.json';
 }
 
 export async function generateMetadata({
@@ -48,7 +45,10 @@ export async function generateMetadata({
     keywords: [...promptLibrarySeoConfig.collectionKeywords],
     alternates: {
       canonical: canonicalUrl,
-      languages: getAlternateLanguageUrlsByLocales(promptLibrarySeoConfig.path, ['en']),
+      languages: getAlternateLanguageUrlsByLocales(
+        promptLibrarySeoConfig.path,
+        ['en']
+      ),
     },
     openGraph: {
       type: 'website',

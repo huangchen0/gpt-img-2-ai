@@ -20,6 +20,15 @@ const datasetFiles: Record<PromptLibraryModel, string> = {
 const indexCache = new Map<string, PromptLibraryIndexDataset>();
 const itemCache = new Map<string, PromptLibraryItem>();
 
+class PromptLibraryAssetError extends Error {
+  constructor(
+    public status: number,
+    public url: string
+  ) {
+    super(`Failed to fetch prompt library asset: ${status} ${url}`);
+  }
+}
+
 function trimTrailingSlash(value: string) {
   return value.replace(/\/+$/, '');
 }
@@ -54,7 +63,7 @@ async function fetchPromptLibraryJson<T>(url: string): Promise<T> {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch prompt library asset: ${response.status} ${url}`);
+    throw new PromptLibraryAssetError(response.status, url);
   }
 
   return (await response.json()) as T;
@@ -141,7 +150,15 @@ export async function getRelatedPromptLibraryItems(
 export async function getPromptLibraryItem(model: PromptLibraryModel, slug: string) {
   const remoteUrl = getRemoteAssetUrl(model, `items/${slug}.json`);
   if (remoteUrl) {
-    return fetchPromptLibraryJson<PromptLibraryItem>(remoteUrl);
+    try {
+      return await fetchPromptLibraryJson<PromptLibraryItem>(remoteUrl);
+    } catch (error) {
+      if (error instanceof PromptLibraryAssetError && error.status === 404) {
+        return undefined;
+      }
+
+      throw error;
+    }
   }
 
   const cacheKey = `${model}:${slug}`;
