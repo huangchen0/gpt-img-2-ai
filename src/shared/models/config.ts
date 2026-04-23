@@ -126,7 +126,7 @@ export async function getAllConfigsUncached(): Promise<Configs> {
     try {
       const result = await db().select().from(config);
       dbConfigs = Object.fromEntries(
-        result.map((item) => [item.name, item.value ?? ''])
+        result.map((item: Config) => [item.name, item.value ?? ''])
       );
     } catch (e) {
       console.log(`get configs from db failed:`, e);
