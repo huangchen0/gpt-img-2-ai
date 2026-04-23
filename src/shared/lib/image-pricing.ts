@@ -1,7 +1,6 @@
 import {
-  GPT_IMAGE_IMAGE_TO_IMAGE_MODEL,
-  GPT_IMAGE_PROVIDER,
-  GPT_IMAGE_TEXT_TO_IMAGE_MODEL,
+  isAnyGptImageModel,
+  normalizeGptImageProvider,
 } from '@/shared/lib/gpt-image';
 
 export type ImageScene = 'text-to-image' | 'image-to-image';
@@ -87,11 +86,7 @@ export function calculateImageCredits({
   multiplier = 1,
   gptImageCredits,
 }: CalculateImageCreditsInput): number {
-  if (
-    provider === GPT_IMAGE_PROVIDER &&
-    (model === GPT_IMAGE_TEXT_TO_IMAGE_MODEL ||
-      model === GPT_IMAGE_IMAGE_TO_IMAGE_MODEL)
-  ) {
+  if (normalizeGptImageProvider(provider) && isAnyGptImageModel(model)) {
     return gptImageCredits && gptImageCredits > 0
       ? gptImageCredits
       : GPT_IMAGE_2_CREDITS;

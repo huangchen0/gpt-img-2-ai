@@ -108,12 +108,21 @@ export default async function CreditsPage({
   const signupCredits = parseInt(configs.initial_credits_amount || '60', 10);
   const checkinCredits = parseInt(configs.daily_checkin_credits || '3', 10);
   const referralCredits = parseInt(configs.referral_reward_credits || '60', 10);
+  const referralSubscriptionBonusPercent = parseInt(
+    configs.referral_subscription_bonus_percent || '20',
+    10
+  );
   const displaySignupCredits = Number.isFinite(signupCredits)
     ? signupCredits
     : 60;
   const displayReferralCredits = Number.isFinite(referralCredits)
     ? referralCredits
     : 60;
+  const displayReferralSubscriptionBonusPercent = Number.isFinite(
+    referralSubscriptionBonusPercent
+  )
+    ? referralSubscriptionBonusPercent
+    : 20;
   const displayCheckinCredits = Number.isFinite(checkinCredits)
     ? checkinCredits
     : 3;
@@ -173,9 +182,11 @@ export default async function CreditsPage({
           title={t('rewards.referral.title')}
           description={t('rewards.referral.description', {
             credits: displayReferralCredits,
+            percent: displayReferralSubscriptionBonusPercent,
           })}
           label={t('rewards.referral.label', {
             credits: displayReferralCredits,
+            percent: displayReferralSubscriptionBonusPercent,
           })}
         >
           <div className="space-y-3">

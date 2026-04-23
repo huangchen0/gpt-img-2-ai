@@ -602,10 +602,8 @@ export function ImageGenerator({
     }),
     [creditFallback, costCredits, remainingCredits, t]
   );
-  const { checkinCredits, referralCredits } = useMemo(
-    () => getGenerationCreditRewardAmounts(configs),
-    [configs]
-  );
+  const { checkinCredits, referralCredits, referralSubscriptionBonusPercent } =
+    useMemo(() => getGenerationCreditRewardAmounts(configs), [configs]);
   const creditEarnCopy = useMemo(
     () => ({
       checkInTitle: t.has('credit_fallback.checkin_title')
@@ -637,8 +635,9 @@ export function ImageGenerator({
       inviteDescription: t.has('credit_fallback.invite_description')
         ? t('credit_fallback.invite_description', {
             credits: referralCredits,
+            percent: referralSubscriptionBonusPercent,
           })
-        : `Earn ${referralCredits} credits for each friend who signs up.`,
+        : `Earn ${referralCredits} credits when a friend signs up. When they first buy a subscription, both of you get ${referralSubscriptionBonusPercent}% extra subscription credits.`,
       copyInviteAction: t.has('credit_fallback.copy_invite')
         ? t('credit_fallback.copy_invite')
         : 'Copy invite link',
@@ -652,7 +651,7 @@ export function ImageGenerator({
         ? t('credit_fallback.copy_failed')
         : 'Copy failed',
     }),
-    [checkinCredits, referralCredits, t]
+    [checkinCredits, referralCredits, referralSubscriptionBonusPercent, t]
   );
   const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
     setCreditFallback((prev) =>

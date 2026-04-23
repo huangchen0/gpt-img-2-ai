@@ -206,7 +206,7 @@
       "checkin_success": "Daily credits added",
       "checkin_failed": "Check-in failed",
       "invite_title": "Invite friends",
-      "invite_description": "Earn {credits} credits for each friend who signs up.",
+      "invite_description": "Earn {credits} credits when a friend signs up. When that friend buys their first subscription, both of you get {percent}% extra subscription credits. The extra bonus applies only to the first subscription purchase.",
       "copy_invite": "Copy invite link",
       "invite_copied": "Invite link copied",
       "open_rewards": "Open rewards",

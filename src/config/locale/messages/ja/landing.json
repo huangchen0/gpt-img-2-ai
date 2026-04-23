@@ -71,15 +71,15 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "limited-time-offer-2026-04-15",
+      "id": "referral-subscription-bonus-2026-04-23",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
-        "alt": "期間限定セール"
+        "alt": "紹介サブスクリプション特典"
       },
-      "text": "期間限定 <strong>50%</strong> OFF!",
+      "text": "期間限定の紹介特典：友達の初回サブスク購入で、双方にサブスククレジットを<strong>20%</strong>追加。",
       "closeLabel": "バナーを閉じる",
-      "buttonText": "料金を見る",
-      "href": "/pricing",
+      "buttonText": "友達を招待",
+      "href": "/settings/credits",
       "target": "_self",
       "dismissedExpiryDays": 7
     }

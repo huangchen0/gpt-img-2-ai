@@ -71,15 +71,15 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "limited-time-offer-2026-04-15",
+      "id": "referral-subscription-bonus-2026-04-23",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
-        "alt": "Обмежена пропозиція"
+        "alt": "Бонус за першу підписку друга"
       },
-      "text": "Лише зараз <strong>50%</strong> OFF!",
+      "text": "Обмежена реферальна пропозиція: запросіть друга, і ви обоє отримаєте на <strong>20%</strong> більше кредитів підписки під час його першої підписки.",
       "closeLabel": "Закрити банер",
-      "buttonText": "Переглянути ціни",
-      "href": "/pricing",
+      "buttonText": "Запросити друга",
+      "href": "/settings/credits",
       "target": "_self",
       "dismissedExpiryDays": 7
     }

@@ -1,7 +1,14 @@
-import { and, count, eq, sql } from 'drizzle-orm';
+import { and, count, eq, inArray, like, ne, sql } from 'drizzle-orm';
 
 import { db } from '@/core/db';
-import { credit, referral, referralRewardDaily } from '@/config/db/schema';
+import {
+  credit,
+  order as orderTable,
+  referral,
+  referralRewardDaily,
+  user as userTable,
+} from '@/config/db/schema';
+import { PaymentType } from '@/extensions/payment/types';
 import { getCookieFromCtx, getHeaderValue } from '@/shared/lib/cookie';
 import { getSnowId, getUuid } from '@/shared/lib/hash';
 import { REFERRAL_COOKIE_NAME } from '@/shared/lib/referral';
@@ -11,6 +18,7 @@ import {
   CreditStatus,
   CreditTransactionScene,
   CreditTransactionType,
+  type NewCredit,
 } from './credit';
 import {
   createUserReferralCode,
@@ -19,6 +27,8 @@ import {
 } from './user';
 
 export type Referral = typeof referral.$inferSelect;
+
+const REFERRAL_SUBSCRIPTION_BONUS_TYPE = 'referral_subscription_bonus';
 
 function parsePositiveInt(value: string | undefined, fallback: number) {
   const parsed = parseInt(String(value || ''), 10);
@@ -63,7 +73,11 @@ export async function grantReferralRewardForNewUser({
   ctx?: any;
   configs: Record<string, string>;
 }) {
-  if (configs.referral_reward_enabled === 'false') {
+  const signupRewardEnabled = configs.referral_reward_enabled !== 'false';
+  const subscriptionBonusEnabled =
+    configs.referral_subscription_bonus_enabled !== 'false';
+
+  if (!signupRewardEnabled && !subscriptionBonusEnabled) {
     return null;
   }
 
@@ -79,7 +93,9 @@ export async function grantReferralRewardForNewUser({
     return null;
   }
 
-  const rewardCredits = parsePositiveInt(configs.referral_reward_credits, 60);
+  const rewardCredits = signupRewardEnabled
+    ? parsePositiveInt(configs.referral_reward_credits, 60)
+    : 0;
   const dailyLimit = parsePositiveInt(configs.referral_daily_limit, 5);
   const timezoneOffsetMinutes = parseInt(
     configs.referral_reward_timezone_offset_minutes ||
@@ -93,6 +109,29 @@ export async function grantReferralRewardForNewUser({
   const now = new Date();
 
   return db().transaction(async (tx: any) => {
+    const [referralRecord] = await tx
+      .insert(referral)
+      .values({
+        id: getUuid(),
+        referrerUserId: referrer.id,
+        referredUserId: user.id,
+        referralCode,
+        rewardCredits,
+        rewardStatus: signupRewardEnabled ? 'pending' : 'disabled',
+        ip: user.ip || '',
+        userAgent: (getHeaderValue(ctx, 'user-agent') || '').slice(0, 500),
+      })
+      .onConflictDoNothing()
+      .returning();
+
+    if (!referralRecord) {
+      return null;
+    }
+
+    if (!signupRewardEnabled) {
+      return { referral: referralRecord, credit: null };
+    }
+
     await tx
       .insert(referralRewardDaily)
       .values({
@@ -116,26 +155,12 @@ export async function grantReferralRewardForNewUser({
       .for('update');
 
     if (!dailyReward || dailyReward.rewardCount >= dailyLimit) {
-      return null;
-    }
+      await tx
+        .update(referral)
+        .set({ rewardStatus: 'limited' })
+        .where(eq(referral.id, referralRecord.id));
 
-    const [referralRecord] = await tx
-      .insert(referral)
-      .values({
-        id: getUuid(),
-        referrerUserId: referrer.id,
-        referredUserId: user.id,
-        referralCode,
-        rewardCredits,
-        rewardStatus: 'pending',
-        ip: user.ip || '',
-        userAgent: (getHeaderValue(ctx, 'user-agent') || '').slice(0, 500),
-      })
-      .onConflictDoNothing()
-      .returning();
-
-    if (!referralRecord) {
-      return null;
+      return { referral: referralRecord, credit: null };
     }
 
     const [creditRecord] = await tx
@@ -183,21 +208,198 @@ export async function grantReferralRewardForNewUser({
 }
 
 export async function getReferralSummary(userId: string) {
-  const [row] = await db()
-    .select({
-      invitedCount: count(),
-      rewardCredits: sql<number>`coalesce(sum(${referral.rewardCredits}), 0)`,
-    })
-    .from(referral)
-    .where(
-      and(
-        eq(referral.referrerUserId, userId),
-        eq(referral.rewardStatus, 'paid')
-      )
-    );
+  const [row, bonusRow] = await Promise.all([
+    db()
+      .select({
+        invitedCount: count(),
+        rewardCredits: sql<number>`coalesce(sum(case when ${referral.rewardStatus} = 'paid' then ${referral.rewardCredits} else 0 end), 0)`,
+      })
+      .from(referral)
+      .where(eq(referral.referrerUserId, userId)),
+    db()
+      .select({
+        rewardCredits: sql<number>`coalesce(sum(${credit.credits}), 0)`,
+      })
+      .from(credit)
+      .where(
+        and(
+          eq(credit.userId, userId),
+          eq(credit.transactionType, CreditTransactionType.GRANT),
+          eq(credit.transactionScene, CreditTransactionScene.REWARD),
+          eq(credit.status, CreditStatus.ACTIVE),
+          like(
+            credit.metadata,
+            `%"type":"${REFERRAL_SUBSCRIPTION_BONUS_TYPE}"%`
+          ),
+          like(credit.metadata, `%"role":"referrer"%`)
+        )
+      ),
+  ]);
+
+  const signupRewardCredits = Number(row[0]?.rewardCredits || 0);
+  const subscriptionRewardCredits = Number(bonusRow[0]?.rewardCredits || 0);
 
   return {
-    invitedCount: Number(row?.invitedCount || 0),
-    rewardCredits: Number(row?.rewardCredits || 0),
+    invitedCount: Number(row[0]?.invitedCount || 0),
+    rewardCredits: signupRewardCredits + subscriptionRewardCredits,
+    signupRewardCredits,
+    subscriptionRewardCredits,
   };
+}
+
+export async function buildReferralSubscriptionBonusCredits({
+  tx,
+  referredUserId,
+  referredUserEmail,
+  orderNo,
+  subscriptionNo,
+  baseCredits,
+  creditsValidDays,
+  currentPeriodEnd,
+  configs,
+}: {
+  tx: any;
+  referredUserId: string;
+  referredUserEmail?: string | null;
+  orderNo: string;
+  subscriptionNo?: string | null;
+  baseCredits: number;
+  creditsValidDays: number;
+  currentPeriodEnd?: Date;
+  configs: Record<string, string>;
+}): Promise<NewCredit[]> {
+  if (configs.referral_subscription_bonus_enabled === 'false') {
+    return [];
+  }
+
+  if (!referredUserId || !orderNo || !baseCredits || baseCredits <= 0) {
+    return [];
+  }
+
+  const bonusPercent = parsePositiveInt(
+    configs.referral_subscription_bonus_percent,
+    20
+  );
+  const bonusCredits = Math.floor((baseCredits * bonusPercent) / 100);
+  if (bonusCredits <= 0) {
+    return [];
+  }
+
+  const [referralRecord] = await tx
+    .select()
+    .from(referral)
+    .where(eq(referral.referredUserId, referredUserId))
+    .limit(1)
+    .for('update');
+
+  if (!referralRecord) {
+    return [];
+  }
+
+  const [previousSubscriptionOrder] = await tx
+    .select({ id: orderTable.id })
+    .from(orderTable)
+    .where(
+      and(
+        eq(orderTable.userId, referredUserId),
+        eq(orderTable.status, 'paid'),
+        inArray(orderTable.paymentType, [
+          PaymentType.SUBSCRIPTION,
+          PaymentType.RENEW,
+        ]),
+        ne(orderTable.orderNo, orderNo)
+      )
+    )
+    .limit(1);
+
+  if (previousSubscriptionOrder) {
+    return [];
+  }
+
+  const [existingBonus] = await tx
+    .select({ id: credit.id })
+    .from(credit)
+    .where(
+      and(
+        eq(credit.transactionType, CreditTransactionType.GRANT),
+        eq(credit.transactionScene, CreditTransactionScene.REWARD),
+        like(credit.metadata, `%"type":"${REFERRAL_SUBSCRIPTION_BONUS_TYPE}"%`),
+        like(credit.metadata, `%"referralId":"${referralRecord.id}"%`)
+      )
+    )
+    .limit(1);
+
+  if (existingBonus) {
+    return [];
+  }
+
+  const [referrer] = await tx
+    .select()
+    .from(userTable)
+    .where(eq(userTable.id, referralRecord.referrerUserId))
+    .limit(1);
+
+  if (!referrer || referrer.id === referredUserId) {
+    return [];
+  }
+
+  const expiresAt = calculateCreditExpirationTime({
+    creditsValidDays,
+    currentPeriodEnd,
+  });
+
+  const sharedMetadata = {
+    type: REFERRAL_SUBSCRIPTION_BONUS_TYPE,
+    referralId: referralRecord.id,
+    orderNo,
+    referredUserId,
+    referrerUserId: referrer.id,
+    baseCredits,
+    bonusCredits,
+    bonusPercent,
+    scope: 'first_subscription_purchase',
+  };
+
+  return [
+    {
+      id: getUuid(),
+      userId: referredUserId,
+      userEmail: referredUserEmail || '',
+      orderNo,
+      subscriptionNo: subscriptionNo || '',
+      transactionNo: getSnowId(),
+      transactionType: CreditTransactionType.GRANT,
+      transactionScene: CreditTransactionScene.REWARD,
+      credits: bonusCredits,
+      remainingCredits: bonusCredits,
+      description: 'Referral first subscription bonus',
+      expiresAt,
+      status: CreditStatus.ACTIVE,
+      metadata: JSON.stringify({
+        ...sharedMetadata,
+        role: 'referred',
+        dedupeKey: `${REFERRAL_SUBSCRIPTION_BONUS_TYPE}:${referralRecord.id}:referred`,
+      }),
+    },
+    {
+      id: getUuid(),
+      userId: referrer.id,
+      userEmail: referrer.email,
+      orderNo,
+      subscriptionNo: subscriptionNo || '',
+      transactionNo: getSnowId(),
+      transactionType: CreditTransactionType.GRANT,
+      transactionScene: CreditTransactionScene.REWARD,
+      credits: bonusCredits,
+      remainingCredits: bonusCredits,
+      description: 'Referral first subscription reward',
+      expiresAt,
+      status: CreditStatus.ACTIVE,
+      metadata: JSON.stringify({
+        ...sharedMetadata,
+        role: 'referrer',
+        dedupeKey: `${REFERRAL_SUBSCRIPTION_BONUS_TYPE}:${referralRecord.id}:referrer`,
+      }),
+    },
+  ];
 }

@@ -71,15 +71,15 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "limited-time-offer-2026-04-15",
+      "id": "referral-subscription-bonus-2026-04-23",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
-        "alt": "Oferta por tiempo limitado"
+        "alt": "Bono de suscripción por invitación"
       },
-      "text": "Oferta por tiempo limitado: <strong>50%</strong> OFF!",
+      "text": "Oferta de invitación por tiempo limitado: invita amigos y ambos reciben un <strong>20%</strong> extra de créditos de suscripción en su primera suscripción.",
       "closeLabel": "Cerrar aviso",
-      "buttonText": "Ver precios",
-      "href": "/pricing",
+      "buttonText": "Invitar amigos",
+      "href": "/settings/credits",
       "target": "_self",
       "dismissedExpiryDays": 7
     }

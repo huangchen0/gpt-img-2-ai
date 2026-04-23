@@ -1205,10 +1205,8 @@ export function KlingVideoGenerator({
     }),
     [costCredits, creditFallback, queueT, remainingCredits, t]
   );
-  const { checkinCredits, referralCredits } = useMemo(
-    () => getGenerationCreditRewardAmounts(configs),
-    [configs]
-  );
+  const { checkinCredits, referralCredits, referralSubscriptionBonusPercent } =
+    useMemo(() => getGenerationCreditRewardAmounts(configs), [configs]);
   const creditEarnCopy = useMemo(
     () => ({
       checkInTitle: queueT.has('credit_fallback.checkin_title')
@@ -1240,8 +1238,9 @@ export function KlingVideoGenerator({
       inviteDescription: queueT.has('credit_fallback.invite_description')
         ? queueT('credit_fallback.invite_description', {
             credits: referralCredits,
+            percent: referralSubscriptionBonusPercent,
           })
-        : `Earn ${referralCredits} credits for each friend who signs up.`,
+        : `Earn ${referralCredits} credits when a friend signs up. When they first buy a subscription, both of you get ${referralSubscriptionBonusPercent}% extra subscription credits.`,
       copyInviteAction: queueT.has('credit_fallback.copy_invite')
         ? queueT('credit_fallback.copy_invite')
         : 'Copy invite link',
@@ -1255,7 +1254,7 @@ export function KlingVideoGenerator({
         ? queueT('credit_fallback.copy_failed')
         : 'Copy failed',
     }),
-    [checkinCredits, queueT, referralCredits]
+    [checkinCredits, queueT, referralCredits, referralSubscriptionBonusPercent]
   );
   const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
     setCreditFallback((prev) =>

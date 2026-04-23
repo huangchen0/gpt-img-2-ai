@@ -1936,10 +1936,8 @@ export function VideoGenerator({
     }),
     [creditFallback, costCredits, remainingCredits, t]
   );
-  const { checkinCredits, referralCredits } = useMemo(
-    () => getGenerationCreditRewardAmounts(configs),
-    [configs]
-  );
+  const { checkinCredits, referralCredits, referralSubscriptionBonusPercent } =
+    useMemo(() => getGenerationCreditRewardAmounts(configs), [configs]);
   const creditEarnCopy = useMemo(
     () => ({
       checkInTitle: t.has('credit_fallback.checkin_title')
@@ -1971,8 +1969,9 @@ export function VideoGenerator({
       inviteDescription: t.has('credit_fallback.invite_description')
         ? t('credit_fallback.invite_description', {
             credits: referralCredits,
+            percent: referralSubscriptionBonusPercent,
           })
-        : `Earn ${referralCredits} credits for each friend who signs up.`,
+        : `Earn ${referralCredits} credits when a friend signs up. When they first buy a subscription, both of you get ${referralSubscriptionBonusPercent}% extra subscription credits.`,
       copyInviteAction: t.has('credit_fallback.copy_invite')
         ? t('credit_fallback.copy_invite')
         : 'Copy invite link',
@@ -1986,7 +1985,7 @@ export function VideoGenerator({
         ? t('credit_fallback.copy_failed')
         : 'Copy failed',
     }),
-    [checkinCredits, referralCredits, t]
+    [checkinCredits, referralCredits, referralSubscriptionBonusPercent, t]
   );
   const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
     setCreditFallback((prev) =>
@@ -2170,10 +2169,60 @@ export function VideoGenerator({
       return;
     }
 
-    const promptParam = searchParams?.get('prompt')?.trim();
-    let prefillDetail: SeedanceGeneratorPrefillDetail | null = promptParam
-      ? { prompt: promptParam }
+    const getParam = (keys: string[]) => {
+      for (const key of keys) {
+        const value = searchParams?.get(key)?.trim();
+        if (value) {
+          return value;
+        }
+      }
+
+      return '';
+    };
+
+    const promptParam = getParam(['prompt']);
+    const firstFrameUrlParam = getParam([
+      'first_frame_url',
+      'firstFrameUrl',
+      'image_url',
+      'imageUrl',
+    ]);
+    const modeParam = getParam(['mode', 'seedance_mode']);
+    const prefillPrompt =
+      promptParam ||
+      (firstFrameUrlParam
+        ? 'Animate this image with natural motion, cinematic camera movement, and consistent subject details.'
+        : '');
+    const prefillMode: SeedanceGeneratorPrefillDetail['mode'] | undefined =
+      firstFrameUrlParam ||
+      modeParam === 'image-to-video' ||
+      modeParam === 'first-frame'
+        ? 'first-frame'
+        : modeParam === 'text-to-video' || modeParam === 'text'
+          ? 'text'
+          : modeParam === 'advanced-reference' ||
+              modeParam === 'multimodal-reference'
+            ? 'multimodal-reference'
+            : undefined;
+    let prefillDetail: SeedanceGeneratorPrefillDetail | null = prefillPrompt
+      ? {
+          prompt: prefillPrompt,
+          ...(prefillMode ? { mode: prefillMode } : {}),
+        }
       : null;
+
+    if (firstFrameUrlParam) {
+      const firstFrameItem: ImageUploaderValue = {
+        id: `prefill-first-frame-${firstFrameUrlParam}`,
+        preview: firstFrameUrlParam,
+        url: firstFrameUrlParam,
+        status: 'uploaded',
+      };
+      setFirstFrameItems([firstFrameItem]);
+      setFirstFrameUrls([firstFrameUrlParam]);
+      setLegacyImageItems([firstFrameItem]);
+      setLegacyImageUrls([firstFrameUrlParam]);
+    }
 
     if (!prefillDetail && typeof window !== 'undefined') {
       prefillDetail = parseSeedanceGeneratorPrefill(

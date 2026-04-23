@@ -31,8 +31,8 @@
     },
     "referral": {
       "title": "邀请好友",
-      "description": "邀请好友注册成功，你将获得 {credits} 积分。",
-      "label": "每人 {credits}",
+      "description": "好友注册成功后，你获得 {credits} 积分；好友首次购买订阅时，你和好友都额外获得订阅积分的 {percent}%。仅订阅首购参与加赠。",
+      "label": "注册 {credits} + 订阅首购 {percent}%",
       "invited": "已邀请",
       "earned": "已获得"
     },

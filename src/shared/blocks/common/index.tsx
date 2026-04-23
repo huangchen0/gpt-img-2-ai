@@ -18,6 +18,7 @@ export * from './section-header';
 
 export * from './empty';
 export * from './lazy-image';
+export * from './image-watermark-overlay';
 export * from './image-uploader';
 export * from './markdown-preview';
 export * from './markdown-content';

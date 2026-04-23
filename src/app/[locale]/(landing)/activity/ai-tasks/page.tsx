@@ -1,9 +1,16 @@
 import { getTranslations } from 'next-intl/server';
 
 import { AITaskStatus } from '@/extensions/ai';
-import { AudioPlayer, Empty, LazyImage } from '@/shared/blocks/common';
+import {
+  AudioPlayer,
+  Empty,
+  ImageWatermarkOverlay,
+  LazyImage,
+} from '@/shared/blocks/common';
 import { TableCard } from '@/shared/blocks/table';
+import { isAnyGptImageModel } from '@/shared/lib/gpt-image';
 import { AITask, getAITasks, getAITasksCount } from '@/shared/models/ai_task';
+import { getPaidEntitlement } from '@/shared/models/paid-entitlement';
 import { getUserInfo } from '@/shared/models/user';
 import { Button, Tab } from '@/shared/types/blocks/common';
 import { type Table } from '@/shared/types/blocks/table';
@@ -25,7 +32,7 @@ function extractUrlsFromResultJson(taskInfo: any): string[] {
     ? taskInfo.resultUrls
     : Array.isArray(taskInfo?.data?.resultUrls)
       ? taskInfo.data.resultUrls
-    : undefined;
+      : undefined;
   if (resultUrls) {
     return resultUrls.filter((url: any) => typeof url === 'string');
   }
@@ -84,7 +91,9 @@ function extractVideoUrls(taskInfo: any): string[] {
           if (typeof video === 'string') {
             return video;
           }
-          return video.videoUrl || video.url || video.src || video.video || null;
+          return (
+            video.videoUrl || video.url || video.src || video.video || null
+          );
         })
         .filter((url: any) => typeof url === 'string')
     : [];
@@ -110,19 +119,20 @@ export default async function AiTasksPage({
     return <Empty message="no auth" />;
   }
 
-  const t = await getTranslations('activity.ai-tasks');
-
-  const aiTasks = await getAITasks({
-    userId: user.id,
-    mediaType: type,
-    page,
-    limit,
-  });
-
-  const total = await getAITasksCount({
-    userId: user.id,
-    mediaType: type,
-  });
+  const [t, aiTasks, total, paidEntitlement] = await Promise.all([
+    getTranslations('activity.ai-tasks'),
+    getAITasks({
+      userId: user.id,
+      mediaType: type,
+      page,
+      limit,
+    }),
+    getAITasksCount({
+      userId: user.id,
+      mediaType: type,
+    }),
+    getPaidEntitlement(user.id),
+  ]);
 
   const table: Table = {
     title: t('list.title'),
@@ -136,16 +146,35 @@ export default async function AiTasksPage({
         name: 'result',
         title: t('fields.result'),
         callback: (item: AITask) => {
+          const shouldWatermarkImages =
+            !paidEntitlement.hasPaidEntitlement &&
+            item.mediaType === 'image' &&
+            isAnyGptImageModel(item.model);
+
           const renderImages = (imageUrls: string[]) => (
             <div className="flex flex-col gap-2">
-              {imageUrls.map((imageUrl, index) => (
-                <LazyImage
-                  key={index}
-                  src={imageUrl}
-                  alt="Generated image"
-                  className="h-32 w-auto"
-                />
-              ))}
+              {imageUrls.map((imageUrl, index) =>
+                shouldWatermarkImages ? (
+                  <div
+                    key={index}
+                    className="relative h-32 w-fit overflow-hidden rounded-md border"
+                  >
+                    <LazyImage
+                      src={imageUrl}
+                      alt="Generated image"
+                      className="h-full w-auto"
+                    />
+                    <ImageWatermarkOverlay />
+                  </div>
+                ) : (
+                  <LazyImage
+                    key={index}
+                    src={imageUrl}
+                    alt="Generated image"
+                    className="h-32 w-auto"
+                  />
+                )
+              )}
             </div>
           );
 
@@ -169,11 +198,17 @@ export default async function AiTasksPage({
           }
 
           if (taskInfo.errorMessage) {
-            return <div className="text-red-500">Failed: {taskInfo.errorMessage}</div>;
+            return (
+              <div className="text-red-500">
+                Failed: {taskInfo.errorMessage}
+              </div>
+            );
           }
 
           if (taskInfo.songs && taskInfo.songs.length > 0) {
-            const songs: any[] = taskInfo.songs.filter((song: any) => song.audioUrl);
+            const songs: any[] = taskInfo.songs.filter(
+              (song: any) => song.audioUrl
+            );
             if (songs.length > 0) {
               return (
                 <div className="flex flex-col gap-2">

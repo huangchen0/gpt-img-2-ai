@@ -1,4 +1,4 @@
-import { and, count, desc, eq, lte, or } from 'drizzle-orm';
+import { and, count, desc, eq, like, lte, or } from 'drizzle-orm';
 
 import { db } from '@/core/db';
 import { credit, order, subscription } from '@/config/db/schema';
@@ -218,18 +218,20 @@ export async function updateOrderInTransaction({
   updateOrder,
   newSubscription,
   newCredit,
+  newCredits,
 }: {
   orderNo: string;
   updateOrder: UpdateOrder;
   newSubscription?: NewSubscription;
   newCredit?: NewCredit;
+  newCredits?: NewCredit[] | ((tx: any) => Promise<NewCredit[]>);
 }) {
   if (!orderNo || !updateOrder) {
     throw new Error('orderNo and updateOrder are required');
   }
 
   // only update order, no need transaction
-  if (!newSubscription && !newCredit) {
+  if (!newSubscription && !newCredit && !newCredits) {
     return updateOrderByOrderNo(orderNo, updateOrder);
   }
 
@@ -240,6 +242,30 @@ export async function updateOrderInTransaction({
       subscription: null,
       credit: null,
     };
+
+    if (updateOrder.status === OrderStatus.PAID) {
+      const [lockedOrder] = await tx
+        .select()
+        .from(order)
+        .where(eq(order.orderNo, orderNo))
+        .limit(1)
+        .for('update');
+
+      if (!lockedOrder) {
+        throw new Error(`Order ${orderNo} not found`);
+      }
+
+      if (
+        lockedOrder.status !== OrderStatus.CREATED &&
+        lockedOrder.status !== OrderStatus.PENDING
+      ) {
+        console.log(
+          `Order ${orderNo} already paid or not in CREATED status, skipping update`
+        );
+        result.order = lockedOrder;
+        return result;
+      }
+    }
 
     // deal with subscription
     if (newSubscription) {
@@ -272,25 +298,52 @@ export async function updateOrderInTransaction({
       result.subscription = existingSubscription;
     }
 
-    // deal with credit
+    // deal with credits
+    const creditsToCreate: NewCredit[] = [];
     if (newCredit) {
-      // not create credit with same order no
-      let [existingCredit] = await tx
-        .select()
-        .from(credit)
-        .where(eq(credit.orderNo, orderNo));
+      creditsToCreate.push(newCredit);
+    }
+    if (typeof newCredits === 'function') {
+      creditsToCreate.push(...(await newCredits(tx)));
+    } else if (newCredits?.length) {
+      creditsToCreate.push(...newCredits);
+    }
 
-      if (!existingCredit) {
-        // create credit
-        const [creditResult] = await tx
-          .insert(credit)
-          .values(newCredit)
-          .returning();
+    if (creditsToCreate.length > 0) {
+      const creditResults = [];
 
-        existingCredit = creditResult;
+      for (const item of creditsToCreate) {
+        const dedupeKey = getCreditDedupeKey(item.metadata);
+        const where = dedupeKey
+          ? and(
+              eq(credit.userId, item.userId),
+              eq(credit.transactionType, item.transactionType),
+              eq(credit.transactionScene, item.transactionScene || ''),
+              like(credit.metadata, `%"dedupeKey":"${dedupeKey}"%`)
+            )
+          : and(
+              eq(credit.userId, item.userId),
+              eq(credit.orderNo, item.orderNo || ''),
+              eq(credit.transactionType, item.transactionType),
+              eq(credit.transactionScene, item.transactionScene || '')
+            );
+
+        let [existingCredit] = await tx.select().from(credit).where(where);
+
+        if (!existingCredit) {
+          const [creditResult] = await tx
+            .insert(credit)
+            .values(item)
+            .returning();
+
+          existingCredit = creditResult;
+        }
+
+        creditResults.push(existingCredit);
       }
 
-      result.credit = existingCredit;
+      result.credit = creditResults[0] || null;
+      result.credits = creditResults;
     }
 
     // update order with optimistic lock
@@ -326,6 +379,19 @@ export async function updateOrderInTransaction({
   });
 
   return result;
+}
+
+function getCreditDedupeKey(metadata?: string | null) {
+  if (!metadata) {
+    return '';
+  }
+
+  try {
+    const parsed = JSON.parse(metadata);
+    return typeof parsed?.dedupeKey === 'string' ? parsed.dedupeKey : '';
+  } catch {
+    return '';
+  }
 }
 
 export async function updateSubscriptionInTransaction({

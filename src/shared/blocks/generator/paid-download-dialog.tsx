@@ -47,7 +47,7 @@ function getCopy(locale: string) {
 }
 
 export function usePaidDownloadGate() {
-  const { user, currentSubscription, fetchCurrentSubscription } =
+  const { user, hasPaidEntitlement, fetchCurrentSubscription } =
     useAppContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [assetType, setAssetType] = useState<PaidDownloadAssetType>('image');
@@ -56,13 +56,13 @@ export function usePaidDownloadGate() {
     async (nextAssetType: PaidDownloadAssetType) => {
       setAssetType(nextAssetType);
 
-      if (currentSubscription) {
+      if (hasPaidEntitlement) {
         return true;
       }
 
       if (user?.id) {
         const result = await fetchCurrentSubscription({ force: true });
-        if (result.subscription) {
+        if (result.hasPaidEntitlement) {
           return true;
         }
       }
@@ -70,7 +70,7 @@ export function usePaidDownloadGate() {
       setIsDialogOpen(true);
       return false;
     },
-    [currentSubscription, fetchCurrentSubscription, user?.id]
+    [fetchCurrentSubscription, hasPaidEntitlement, user?.id]
   );
 
   const dialogProps = useMemo(

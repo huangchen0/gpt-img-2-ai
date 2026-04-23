@@ -2,10 +2,15 @@ import { envConfigs } from '@/config';
 import { AIMediaType, AITaskStatus, KieProvider } from '@/extensions/ai';
 import { buildGenerationCreditFallbackPayload } from '@/shared/lib/generation-credit-fallback';
 import {
+  getGptImageMaxReferenceImages,
+  getGptImageModelForScene,
   getKieGptImageModelForScene,
-  GPT_IMAGE_MAX_REFERENCE_IMAGES,
-  GPT_IMAGE_PROVIDER,
+  GPT_IMAGE_PROVIDER_APIMART,
+  GPT_IMAGE_PROVIDER_KIE,
+  isAnyGptImageModel,
+  isApimartGptImageModel,
   isKieGptImageModel,
+  resolveGptImageProvider,
 } from '@/shared/lib/gpt-image';
 import { getUuid } from '@/shared/lib/hash';
 import {
@@ -272,6 +277,32 @@ function isPublicHttpUrl(value?: string | null) {
   }
 }
 
+function isApimartImageReference(value?: string | null) {
+  const normalized = value?.trim();
+  if (!normalized) {
+    return false;
+  }
+
+  return (
+    isPublicHttpUrl(normalized) ||
+    /^data:image\/[a-z0-9.+-]+;base64,/i.test(normalized)
+  );
+}
+
+function collectGptImageReferences(options?: Record<string, unknown> | null) {
+  const rawImageInput = Array.isArray(options?.image_input)
+    ? options.image_input
+    : [];
+  const rawImageUrls = Array.isArray(options?.image_urls)
+    ? options.image_urls
+    : [];
+
+  return [...rawImageInput, ...rawImageUrls]
+    .map((url) => (typeof url === 'string' ? url.trim() : ''))
+    .filter(Boolean)
+    .filter((item, index, array) => array.indexOf(item) === index);
+}
+
 function validateApimartPublicReferenceUrls(options: Seedance2VideoOptions) {
   const firstFrameUrl = options.first_frame_url?.trim();
   if (firstFrameUrl && !isPublicHttpUrl(firstFrameUrl)) {
@@ -306,6 +337,22 @@ function validateApimartPublicReferenceUrls(options: Seedance2VideoOptions) {
 
   return null;
 }
+
+const APIMART_GPT_IMAGE_ASPECT_RATIOS = new Set([
+  '1:1',
+  '16:9',
+  '9:16',
+  '4:3',
+  '3:4',
+  '3:2',
+  '2:3',
+  '5:4',
+  '4:5',
+  '2:1',
+  '1:2',
+  '21:9',
+  '9:21',
+]);
 
 function validateKieGptImageOptions({
   model,
@@ -344,9 +391,7 @@ function validateKieGptImageOptions({
     return 'google_search not supported for GPT Image';
   }
 
-  const imageInput = Array.isArray(options?.image_input)
-    ? options.image_input.filter((url) => typeof url === 'string' && url.trim())
-    : [];
+  const imageInput = collectGptImageReferences(options);
 
   if (scene === 'image-to-image' && imageInput.length === 0) {
     return 'reference image is required';
@@ -356,8 +401,78 @@ function validateKieGptImageOptions({
     return 'text-to-image does not support reference images';
   }
 
-  if (imageInput.length > GPT_IMAGE_MAX_REFERENCE_IMAGES) {
+  if (
+    imageInput.length > getGptImageMaxReferenceImages(GPT_IMAGE_PROVIDER_KIE)
+  ) {
     return 'too many reference images';
+  }
+
+  return null;
+}
+
+function validateApimartGptImageOptions({
+  model,
+  scene,
+  options,
+}: {
+  model?: string | null;
+  scene?: string | null;
+  options?: Record<string, unknown> | null;
+}) {
+  if (scene !== 'text-to-image' && scene !== 'image-to-image') {
+    return 'invalid scene';
+  }
+
+  if (!isApimartGptImageModel(model)) {
+    return 'invalid model for GPT Image scene';
+  }
+
+  if (
+    options?.aspect_ratio !== undefined &&
+    (typeof options.aspect_ratio !== 'string' ||
+      !APIMART_GPT_IMAGE_ASPECT_RATIOS.has(options.aspect_ratio))
+  ) {
+    return 'invalid aspect_ratio';
+  }
+
+  if (options?.resolution !== undefined) {
+    return 'resolution not supported for APIMart GPT Image 2';
+  }
+
+  if (options?.quality !== undefined) {
+    return 'quality not supported for APIMart GPT Image 2';
+  }
+
+  if (options?.output_format !== undefined) {
+    return 'output_format not supported for APIMart GPT Image 2';
+  }
+
+  if (options?.google_search !== undefined) {
+    return 'google_search not supported for GPT Image';
+  }
+
+  const imageInput = collectGptImageReferences(options);
+
+  if (scene === 'image-to-image' && imageInput.length === 0) {
+    return 'reference image is required';
+  }
+
+  if (scene === 'text-to-image' && imageInput.length > 0) {
+    return 'text-to-image does not support reference images';
+  }
+
+  if (
+    imageInput.length >
+    getGptImageMaxReferenceImages(GPT_IMAGE_PROVIDER_APIMART)
+  ) {
+    return 'too many reference images';
+  }
+
+  const invalidReferenceImage = imageInput.find(
+    (item) => !isApimartImageReference(item)
+  );
+  if (invalidReferenceImage) {
+    return 'reference images must use public http(s) URLs or image data URIs.';
   }
 
   return null;
@@ -930,6 +1045,21 @@ export async function POST(request: Request) {
       configs,
     });
 
+    if (mediaType === AIMediaType.IMAGE && isAnyGptImageModel(model)) {
+      const gptImageProvider = resolveGptImageProvider({
+        requestedProvider: provider,
+        configs,
+      });
+      provider = gptImageProvider;
+
+      if (scene === 'text-to-image' || scene === 'image-to-image') {
+        model = getGptImageModelForScene({
+          provider: gptImageProvider,
+          scene,
+        });
+      }
+    }
+
     if (
       isSeedance2GenerationModel(model) &&
       provider === SEEDANCE_PROVIDER_APIMART
@@ -937,6 +1067,15 @@ export async function POST(request: Request) {
       if (!configs.apimart_api_key) {
         throw new Error('The current Seedance 2.x provider is not configured.');
       }
+    }
+
+    if (
+      mediaType === AIMediaType.IMAGE &&
+      provider === GPT_IMAGE_PROVIDER_APIMART &&
+      isApimartGptImageModel(model) &&
+      !configs.apimart_api_key
+    ) {
+      throw new Error('The current GPT Image 2 provider is not configured.');
     }
 
     const aiService = await getAIService(configs);
@@ -981,15 +1120,30 @@ export async function POST(request: Request) {
         options?.resolution
       );
       const advancedImageModel = getAdvancedImageModel(provider, model);
-      const isGptImageModel =
-        provider === GPT_IMAGE_PROVIDER && isKieGptImageModel(model);
+      const isKieGptImage =
+        provider === GPT_IMAGE_PROVIDER_KIE && isKieGptImageModel(model);
+      const isApimartGptImage =
+        provider === GPT_IMAGE_PROVIDER_APIMART &&
+        isApimartGptImageModel(model);
+      const isGptImageModel = isKieGptImage || isApimartGptImage;
       const maxPromptLength = 20000;
       if (prompt && prompt.length > maxPromptLength) {
         throw new Error('prompt too long');
       }
 
-      if (isGptImageModel) {
+      if (isKieGptImage) {
         const gptImageError = validateKieGptImageOptions({
+          model,
+          scene,
+          options,
+        });
+        if (gptImageError) {
+          throw new Error(gptImageError);
+        }
+      }
+
+      if (isApimartGptImage) {
+        const gptImageError = validateApimartGptImageOptions({
           model,
           scene,
           options,

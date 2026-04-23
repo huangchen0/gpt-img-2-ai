@@ -51,6 +51,10 @@ export function getGenerationCreditRewardAmounts(
       configs.referral_reward_credits,
       60
     ),
+    referralSubscriptionBonusPercent: parsePositiveCreditConfig(
+      configs.referral_subscription_bonus_percent,
+      20
+    ),
   };
 }
 

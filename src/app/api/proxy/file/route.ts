@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getCurrentSubscription } from '@/shared/models/subscription';
+import { hasPaidEntitlement } from '@/shared/models/paid-entitlement';
 import { getUserInfo } from '@/shared/models/user';
 
 function isDownloadRestrictedMedia({
@@ -38,8 +38,7 @@ async function canDownloadRestrictedMedia() {
     return false;
   }
 
-  const subscription = await getCurrentSubscription(user.id);
-  return Boolean(subscription);
+  return hasPaidEntitlement(user.id);
 }
 
 export async function GET(req: NextRequest) {
@@ -63,9 +62,12 @@ export async function GET(req: NextRequest) {
       isDownloadRestrictedMedia({ url, contentType: '' }) &&
       !(await ensureCanDownloadMedia())
     ) {
-      return new NextResponse('Paid subscription required to download media', {
-        status: 402,
-      });
+      return new NextResponse(
+        'Paid plan or credit pack required to download media',
+        {
+          status: 402,
+        }
+      );
     }
 
     const response = await fetch(url);
@@ -83,9 +85,12 @@ export async function GET(req: NextRequest) {
       isDownloadRestrictedMedia({ url, contentType }) &&
       !(await ensureCanDownloadMedia())
     ) {
-      return new NextResponse('Paid subscription required to download media', {
-        status: 402,
-      });
+      return new NextResponse(
+        'Paid plan or credit pack required to download media',
+        {
+          status: 402,
+        }
+      );
     }
 
     return new NextResponse(response.body, {

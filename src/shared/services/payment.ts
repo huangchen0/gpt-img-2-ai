@@ -30,6 +30,7 @@ import {
   updateOrderInTransaction,
   updateSubscriptionInTransaction,
 } from '../models/order';
+import { buildReferralSubscriptionBonusCredits } from '../models/referral';
 import {
   NewSubscription,
   Subscription,
@@ -253,11 +254,31 @@ export async function handleCheckoutSuccess({
       };
     }
 
+    const configs = await getAllConfigs();
+    const newCredits =
+      order.paymentType === PaymentType.SUBSCRIPTION &&
+      order.creditsAmount &&
+      order.creditsAmount > 0
+        ? (tx: any) =>
+            buildReferralSubscriptionBonusCredits({
+              tx,
+              referredUserId: order.userId,
+              referredUserEmail: order.userEmail,
+              orderNo,
+              subscriptionNo: newSubscription?.subscriptionNo,
+              baseCredits: order.creditsAmount || 0,
+              creditsValidDays: order.creditsValidDays || 0,
+              currentPeriodEnd: subscriptionInfo?.currentPeriodEnd,
+              configs,
+            })
+        : undefined;
+
     await updateOrderInTransaction({
       orderNo,
       updateOrder,
       newSubscription,
       newCredit,
+      newCredits,
     });
 
     await trackServerEvent({

@@ -727,7 +727,7 @@ export function Pricing({
         const { code, data } = await resp.json();
         if (code !== 0 || !data) return;
         if (!cancelled) {
-          setResolvedSubscription(data);
+          setResolvedSubscription(data.subscription ?? data);
         }
       } catch {
         // silent

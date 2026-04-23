@@ -71,15 +71,15 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "limited-time-offer-2026-04-15",
+      "id": "referral-subscription-bonus-2026-04-23",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
-        "alt": "限时优惠"
+        "alt": "邀请订阅奖励"
       },
-      "text": "限时优惠 <strong>50%</strong> OFF!",
+      "text": "限时邀请奖励：邀请好友首次订阅，你和好友都额外获得 <strong>20%</strong> 订阅积分。",
       "closeLabel": "关闭横幅",
-      "buttonText": "查看定价",
-      "href": "/pricing",
+      "buttonText": "邀请好友",
+      "href": "/settings/credits",
       "target": "_self",
       "dismissedExpiryDays": 7
     }

@@ -71,15 +71,15 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "limited-time-offer-2026-04-15",
+      "id": "referral-subscription-bonus-2026-04-23",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
-        "alt": "Limited-time sale"
+        "alt": "Referral subscription bonus"
       },
-      "text": "Enjoy Limited-Time <strong>50%</strong> OFF!",
+      "text": "Limited-time referral offer: invite friends and you both get <strong>20%</strong> extra subscription credits on their first subscription.",
       "closeLabel": "Close banner",
-      "buttonText": "View Pricing",
-      "href": "/pricing",
+      "buttonText": "Invite Friends",
+      "href": "/settings/credits",
       "target": "_self",
       "dismissedExpiryDays": 7
     }

@@ -23,6 +23,7 @@ interface FetchCurrentSubscriptionOptions {
 interface FetchCurrentSubscriptionResult {
   ok: boolean;
   subscription: Subscription | null;
+  hasPaidEntitlement: boolean;
 }
 
 export interface ContextValue {
@@ -40,6 +41,7 @@ export interface ContextValue {
   fetchUserCredits: () => Promise<void>;
   fetchUserInfo: () => Promise<void>;
   currentSubscription: Subscription | null;
+  hasPaidEntitlement: boolean;
   hasFetchedCurrentSubscription: boolean;
   isFetchingCurrentSubscription: boolean;
   fetchCurrentSubscription: (
@@ -55,6 +57,34 @@ export const useAppContext = () => useContext(AppContext);
 const CONFIG_FETCH_TTL_MS = 5 * 60 * 1000;
 const EMPTY_CONFIGS: Record<string, string> = {};
 
+function normalizeCurrentSubscriptionPayload(data: any): {
+  subscription: Subscription | null;
+  hasPaidEntitlement: boolean;
+} {
+  if (
+    data &&
+    typeof data === 'object' &&
+    !Array.isArray(data) &&
+    ('subscription' in data || 'hasPaidEntitlement' in data)
+  ) {
+    const subscription = (data.subscription || null) as Subscription | null;
+
+    return {
+      subscription,
+      hasPaidEntitlement: Boolean(data.hasPaidEntitlement || subscription),
+    };
+  }
+
+  const subscription = Array.isArray(data)
+    ? null
+    : ((data || null) as Subscription | null);
+
+  return {
+    subscription,
+    hasPaidEntitlement: Boolean(subscription),
+  };
+}
+
 export const AppContextProvider = ({
   children,
   initialConfigs = EMPTY_CONFIGS,
@@ -63,7 +93,8 @@ export const AppContextProvider = ({
   initialConfigs?: Record<string, string>;
 }) => {
   const hasInitialConfigs = Object.keys(initialConfigs).length > 0;
-  const [configs, setConfigs] = useState<Record<string, string>>(initialConfigs);
+  const [configs, setConfigs] =
+    useState<Record<string, string>>(initialConfigs);
   const [hasFetchedConfigs, setHasFetchedConfigs] = useState(hasInitialConfigs);
   const configFetchPromiseRef = useRef<Promise<void> | null>(null);
   const lastConfigFetchAtRef = useRef(hasInitialConfigs ? Date.now() : 0);
@@ -79,6 +110,7 @@ export const AppContextProvider = ({
   const userRef = useRef<User | null>(null);
   const [currentSubscription, setCurrentSubscription] =
     useState<Subscription | null>(null);
+  const [hasPaidEntitlement, setHasPaidEntitlement] = useState(false);
   const [hasFetchedCurrentSubscription, setHasFetchedCurrentSubscription] =
     useState(false);
   const [isFetchingCurrentSubscription, setIsFetchingCurrentSubscription] =
@@ -88,6 +120,7 @@ export const AppContextProvider = ({
     setHasCurrentSubscriptionFetchError,
   ] = useState(false);
   const currentSubscriptionRef = useRef<Subscription | null>(null);
+  const hasPaidEntitlementRef = useRef(false);
   const subscriptionFetchPromiseRef =
     useRef<Promise<FetchCurrentSubscriptionResult> | null>(null);
   const subscriptionUserIdRef = useRef<string | null>(null);
@@ -194,6 +227,10 @@ export const AppContextProvider = ({
     currentSubscriptionRef.current = currentSubscription;
   }, [currentSubscription]);
 
+  useEffect(() => {
+    hasPaidEntitlementRef.current = hasPaidEntitlement;
+  }, [hasPaidEntitlement]);
+
   const fetchCurrentSubscription = useCallback(
     async (options?: FetchCurrentSubscriptionOptions) => {
       const force = options?.force ?? false;
@@ -201,6 +238,7 @@ export const AppContextProvider = ({
 
       if (!currentUserId) {
         setCurrentSubscription(null);
+        setHasPaidEntitlement(false);
         setHasFetchedCurrentSubscription(true);
         setHasCurrentSubscriptionFetchError(false);
         setIsFetchingCurrentSubscription(false);
@@ -208,6 +246,7 @@ export const AppContextProvider = ({
         return {
           ok: true,
           subscription: null,
+          hasPaidEntitlement: false,
         } satisfies FetchCurrentSubscriptionResult;
       }
 
@@ -219,6 +258,7 @@ export const AppContextProvider = ({
         return {
           ok: true,
           subscription: currentSubscriptionRef.current,
+          hasPaidEntitlement: hasPaidEntitlementRef.current,
         } satisfies FetchCurrentSubscriptionResult;
       }
 
@@ -243,15 +283,18 @@ export const AppContextProvider = ({
             throw new Error(message);
           }
 
-          const nextSubscription = Array.isArray(data)
-            ? null
-            : ((data || null) as Subscription | null);
+          const {
+            subscription: nextSubscription,
+            hasPaidEntitlement: nextHasPaidEntitlement,
+          } = normalizeCurrentSubscriptionPayload(data);
           setCurrentSubscription(nextSubscription);
+          setHasPaidEntitlement(nextHasPaidEntitlement);
           setHasFetchedCurrentSubscription(true);
 
           return {
             ok: true,
             subscription: nextSubscription,
+            hasPaidEntitlement: nextHasPaidEntitlement,
           } satisfies FetchCurrentSubscriptionResult;
         } catch (e) {
           if (process.env.NODE_ENV !== 'production') {
@@ -259,12 +302,15 @@ export const AppContextProvider = ({
           }
 
           const fallbackSubscription = currentSubscriptionRef.current;
-          setHasFetchedCurrentSubscription(Boolean(fallbackSubscription));
+          const fallbackHasPaidEntitlement =
+            hasPaidEntitlementRef.current || Boolean(fallbackSubscription);
+          setHasFetchedCurrentSubscription(fallbackHasPaidEntitlement);
           setHasCurrentSubscriptionFetchError(true);
 
           return {
-            ok: Boolean(fallbackSubscription),
+            ok: fallbackHasPaidEntitlement,
             subscription: fallbackSubscription,
+            hasPaidEntitlement: fallbackHasPaidEntitlement,
           } satisfies FetchCurrentSubscriptionResult;
         } finally {
           setIsFetchingCurrentSubscription(false);
@@ -322,6 +368,7 @@ export const AppContextProvider = ({
 
     subscriptionUserIdRef.current = currentUserId;
     setCurrentSubscription(null);
+    setHasPaidEntitlement(false);
     setHasFetchedCurrentSubscription(!currentUserId);
     setIsFetchingCurrentSubscription(false);
     setHasCurrentSubscriptionFetchError(false);
@@ -363,6 +410,7 @@ export const AppContextProvider = ({
       fetchUserCredits,
       fetchUserInfo,
       currentSubscription,
+      hasPaidEntitlement,
       hasFetchedCurrentSubscription,
       isFetchingCurrentSubscription,
       fetchCurrentSubscription,
@@ -379,6 +427,7 @@ export const AppContextProvider = ({
       fetchUserCredits,
       fetchUserInfo,
       currentSubscription,
+      hasPaidEntitlement,
       hasFetchedCurrentSubscription,
       isFetchingCurrentSubscription,
       fetchCurrentSubscription,

@@ -31,8 +31,8 @@
     },
     "referral": {
       "title": "Invite friends",
-      "description": "Invite a friend to sign up and earn {credits} credits.",
-      "label": "{credits} each",
+      "description": "Earn {credits} credits when a friend signs up. When that friend buys their first subscription, both of you get {percent}% extra subscription credits. The extra bonus applies only to the first subscription purchase.",
+      "label": "{credits} signup + {percent}% first subscription",
       "invited": "Invited",
       "earned": "Earned"
     },

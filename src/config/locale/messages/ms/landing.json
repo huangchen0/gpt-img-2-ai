@@ -71,15 +71,15 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "limited-time-offer-2026-04-15",
+      "id": "referral-subscription-bonus-2026-04-23",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
-        "alt": "Promosi masa terhad"
+        "alt": "Bonus langganan jemputan"
       },
-      "text": "Promosi terhad: <strong>50%</strong> OFF!",
+      "text": "Tawaran jemputan masa terhad: jemput rakan dan anda berdua dapat tambahan <strong>20%</strong> kredit langganan pada langganan pertama mereka.",
       "closeLabel": "Tutup banner",
-      "buttonText": "Lihat harga",
-      "href": "/pricing",
+      "buttonText": "Jemput rakan",
+      "href": "/settings/credits",
       "target": "_self",
       "dismissedExpiryDays": 7
     }

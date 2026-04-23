@@ -2,12 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
+  BookOpen,
   CreditCard,
   Download,
   ImageIcon,
   Loader2,
   Sparkles,
   User,
+  Video,
   Wand,
 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -18,6 +20,7 @@ import { AIMediaType, AITaskStatus } from '@/extensions/ai/types';
 import {
   ImageUploader,
   ImageUploaderValue,
+  ImageWatermarkOverlay,
   LazyImage,
 } from '@/shared/blocks/common';
 import {
@@ -49,9 +52,10 @@ import {
   isGenerationCreditFallbackPayload,
 } from '@/shared/lib/generation-credit-fallback';
 import {
-  getKieGptImageModelForScene,
-  GPT_IMAGE_MAX_REFERENCE_IMAGES,
-  GPT_IMAGE_PROVIDER,
+  getGptImageMaxReferenceImages,
+  getGptImageModelForScene,
+  GptImageRuntimeProvider,
+  resolveGptImageProvider,
 } from '@/shared/lib/gpt-image';
 import {
   trackGtmActivation,
@@ -99,7 +103,7 @@ interface GenerateAnalyticsSnapshot {
 interface PendingGptImageRequest {
   clientRequestId: string;
   scene: GptImageScene;
-  provider: typeof GPT_IMAGE_PROVIDER;
+  provider: GptImageRuntimeProvider;
   model: string;
   prompt: string;
   options: Record<string, unknown>;
@@ -111,6 +115,7 @@ type GptImageScene = 'text-to-image' | 'image-to-image';
 const POLL_INTERVAL = 5000;
 const GENERATION_TIMEOUT = 10 * 60 * 1000;
 const MAX_PROMPT_LENGTH = 20000;
+const VIDEO_PROMPT_PREFILL_MAX_LENGTH = 2500;
 const IMAGE_CREDITS_MULTIPLIER = 10;
 const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
   (1 * 60 + 45) * 1000,
@@ -198,7 +203,8 @@ function isTransientPollError(error: unknown) {
 function normalizeGptImageRequestOptions(
   scene: GptImageScene,
   options?: Record<string, unknown> | null,
-  clientRequestId?: string
+  clientRequestId?: string,
+  maxReferenceImages = getGptImageMaxReferenceImages()
 ) {
   const normalized: Record<string, unknown> = {};
 
@@ -210,7 +216,7 @@ function normalizeGptImageRequestOptions(
     normalized.image_input = options.image_input
       .map((url) => (typeof url === 'string' ? url.trim() : ''))
       .filter(Boolean)
-      .slice(0, GPT_IMAGE_MAX_REFERENCE_IMAGES);
+      .slice(0, maxReferenceImages);
   }
 
   return normalized;
@@ -262,6 +268,7 @@ export function GptImage2Generator({
     setIsShowSignModal,
     fetchUserCredits,
     currentSubscription,
+    hasPaidEntitlement,
     hasFetchedCurrentSubscription,
     isFetchingCurrentSubscription,
     fetchCurrentSubscription,
@@ -269,6 +276,20 @@ export function GptImage2Generator({
     fetchConfigs,
     hasFetchedConfigs,
   } = useAppContext();
+
+  const provider = useMemo(
+    () =>
+      resolveGptImageProvider({
+        configs,
+        availableProviders,
+      }),
+    [availableProviders, configs]
+  );
+  const maxReferenceImages = getGptImageMaxReferenceImages(provider);
+  const model = getGptImageModelForScene({
+    provider,
+    scene: activeTab,
+  });
 
   useEffect(() => {
     if (!hasFetchedConfigs) {
@@ -309,35 +330,37 @@ export function GptImage2Generator({
     const uploadedUrls = referenceImageItems
       .filter((item) => item.status === 'uploaded' && item.url)
       .map((item) => item.url as string)
-      .slice(0, GPT_IMAGE_MAX_REFERENCE_IMAGES);
+      .slice(0, maxReferenceImages);
     setReferenceImageUrls(uploadedUrls);
-  }, [referenceImageItems]);
+  }, [maxReferenceImages, referenceImageItems]);
 
   const isTextToImageMode = activeTab === 'text-to-image';
   const promptLength = prompt.trim().length;
   const isPromptTooLong = promptLength > MAX_PROMPT_LENGTH;
   const remainingCredits = user?.credits?.remainingCredits ?? 0;
-  const model = getKieGptImageModelForScene(activeTab);
   const costCredits = useMemo(
     () =>
       calculateImageCredits({
         scene: activeTab,
-        provider: GPT_IMAGE_PROVIDER,
+        provider,
         model,
         multiplier: IMAGE_CREDITS_MULTIPLIER,
         gptImageCredits: parseInt(configs.gpt_image_2_credits || '40', 10),
       }),
-    [activeTab, configs.gpt_image_2_credits, model]
+    [activeTab, configs.gpt_image_2_credits, model, provider]
   );
   const isCurrentMember = Boolean(currentSubscription);
   const showCreditsCost = hasFetchedCurrentSubscription && isCurrentMember;
+  const shouldWatermarkGeneratedImages = Boolean(
+    user && hasFetchedCurrentSubscription && !hasPaidEntitlement
+  );
   const hasReferenceUploadError = referenceImageItems.some(
     (item) => item.status === 'error'
   );
   const isReferenceUploading = referenceImageItems.some(
     (item) => item.status === 'uploading'
   );
-  const isProviderConfigured = availableProviders.includes(GPT_IMAGE_PROVIDER);
+  const isProviderConfigured = availableProviders.includes(provider);
   const taskStatusLabel =
     taskStatus === AITaskStatus.PENDING
       ? 'Waiting for GPT Image 2'
@@ -350,8 +373,8 @@ export function GptImage2Generator({
         ? t('gpt_image_2.title')
         : 'GPT Image 2 Generator',
       gptDescription: t.has('gpt_image_2.description')
-        ? t('gpt_image_2.description')
-        : 'Create images from text prompts or up to four reference images.',
+        ? t('gpt_image_2.description', { max: maxReferenceImages })
+        : `Create images from text prompts or up to ${maxReferenceImages} reference images.`,
       generateTitle: t.has('gpt_image_2.generate_title')
         ? t('gpt_image_2.generate_title')
         : 'Generate',
@@ -365,11 +388,15 @@ export function GptImage2Generator({
         ? t('gpt_image_2.generate_button')
         : 'Generate with GPT Image 2',
       referenceImageHint: t.has('gpt_image_2.reference_image_hint')
-        ? t('gpt_image_2.reference_image_hint')
-        : 'Upload up to 4 reference images',
+        ? t('gpt_image_2.reference_image_hint', { max: maxReferenceImages })
+        : `Upload up to ${maxReferenceImages} reference images`,
       providerNotConfigured: t.has('gpt_image_2.provider_not_configured')
-        ? t('gpt_image_2.provider_not_configured')
-        : 'Please contact the administrator to configure KIE.',
+        ? t('gpt_image_2.provider_not_configured', {
+            provider: provider === 'apimart' ? 'APIMart' : 'KIE',
+          })
+        : `Please contact the administrator to configure ${
+            provider === 'apimart' ? 'APIMart' : 'KIE'
+          }.`,
       creditFallback: t.has('gpt_image_2.credit_fallback')
         ? t('gpt_image_2.credit_fallback', {
             credits: creditFallback?.requestedCostCredits ?? costCredits,
@@ -386,6 +413,30 @@ export function GptImage2Generator({
       readyDescription: t.has('gpt_image_2.ready_description')
         ? t('gpt_image_2.ready_description')
         : 'Describe a scene, then generate.',
+      promptLibraryTitle: t.has('gpt_image_2.prompt_library_title')
+        ? t('gpt_image_2.prompt_library_title')
+        : 'Need prompt ideas?',
+      promptLibraryDescription: t.has('gpt_image_2.prompt_library_description')
+        ? t('gpt_image_2.prompt_library_description')
+        : 'Browse copyable GPT Image 2 prompts before writing your own.',
+      promptLibraryButton: t.has('gpt_image_2.prompt_library_button')
+        ? t('gpt_image_2.prompt_library_button')
+        : 'Open prompt gallery',
+      videoCtaTitle: t.has('gpt_image_2.video_cta_title')
+        ? t('gpt_image_2.video_cta_title')
+        : 'Turn this image into a video',
+      videoCtaDescription: t.has('gpt_image_2.video_cta_description')
+        ? t('gpt_image_2.video_cta_description')
+        : 'Use this result as the first frame and continue the same prompt in the video generator.',
+      videoCtaButton: t.has('gpt_image_2.video_cta_button')
+        ? t('gpt_image_2.video_cta_button')
+        : 'Create video',
+      watermarkHint: t.has('gpt_image_2.watermark_hint')
+        ? t('gpt_image_2.watermark_hint')
+        : 'This preview includes a watermark. Paid plans and credit packs unlock no-watermark results.',
+      watermarkUpgradeLabel: t.has('gpt_image_2.watermark_upgrade_label')
+        ? t('gpt_image_2.watermark_upgrade_label')
+        : 'View pricing',
       queueTitle: t.has('queue.title') ? t('queue.title') : 'Standard Queue',
       queueDescription: t.has('queue.description')
         ? t('queue.description')
@@ -414,7 +465,13 @@ export function GptImage2Generator({
         ? t('queue.membership_checking')
         : 'Checking membership status. Please try again in a moment.',
     }),
-    [costCredits, creditFallback?.requestedCostCredits, t]
+    [
+      costCredits,
+      creditFallback?.requestedCostCredits,
+      maxReferenceImages,
+      provider,
+      t,
+    ]
   );
   const creditFallbackCopy = useMemo(
     () => ({
@@ -449,10 +506,8 @@ export function GptImage2Generator({
     }),
     [creditFallback, costCredits, remainingCredits, t]
   );
-  const { checkinCredits, referralCredits } = useMemo(
-    () => getGenerationCreditRewardAmounts(configs),
-    [configs]
-  );
+  const { checkinCredits, referralCredits, referralSubscriptionBonusPercent } =
+    useMemo(() => getGenerationCreditRewardAmounts(configs), [configs]);
   const creditEarnCopy = useMemo(
     () => ({
       checkInTitle: t.has('credit_fallback.checkin_title')
@@ -484,8 +539,9 @@ export function GptImage2Generator({
       inviteDescription: t.has('credit_fallback.invite_description')
         ? t('credit_fallback.invite_description', {
             credits: referralCredits,
+            percent: referralSubscriptionBonusPercent,
           })
-        : `Earn ${referralCredits} credits for each friend who signs up.`,
+        : `Earn ${referralCredits} credits when a friend signs up. When they first buy a subscription, both of you get ${referralSubscriptionBonusPercent}% extra subscription credits.`,
       copyInviteAction: t.has('credit_fallback.copy_invite')
         ? t('credit_fallback.copy_invite')
         : 'Copy invite link',
@@ -499,7 +555,7 @@ export function GptImage2Generator({
         ? t('credit_fallback.copy_failed')
         : 'Copy failed',
     }),
-    [checkinCredits, referralCredits, t]
+    [checkinCredits, referralCredits, referralSubscriptionBonusPercent, t]
   );
   const handleCreditBalanceChanged = useCallback((nextRemaining: number) => {
     setCreditFallback((prev) =>
@@ -515,22 +571,19 @@ export function GptImage2Generator({
       JSON.stringify({
         clientRequestId,
         scene: activeTab,
-        provider: GPT_IMAGE_PROVIDER,
+        provider,
         model,
         prompt: prompt.trim(),
         options: {
           clientRequestId,
           ...(!isTextToImageMode
             ? {
-                image_input: referenceImageUrls.slice(
-                  0,
-                  GPT_IMAGE_MAX_REFERENCE_IMAGES
-                ),
+                image_input: referenceImageUrls.slice(0, maxReferenceImages),
               }
             : {}),
         },
         analyticsSnapshot: {
-          provider: GPT_IMAGE_PROVIDER,
+          provider,
           model,
           mode: activeTab,
           costCredits,
@@ -542,8 +595,10 @@ export function GptImage2Generator({
       clientRequestId,
       costCredits,
       isTextToImageMode,
+      maxReferenceImages,
       model,
       prompt,
+      provider,
       referenceImageUrls,
     ]
   );
@@ -551,21 +606,18 @@ export function GptImage2Generator({
     () =>
       JSON.stringify({
         scene: activeTab,
-        provider: GPT_IMAGE_PROVIDER,
+        provider,
         model,
         prompt: prompt.trim(),
         options: {
           ...(!isTextToImageMode
             ? {
-                image_input: referenceImageUrls.slice(
-                  0,
-                  GPT_IMAGE_MAX_REFERENCE_IMAGES
-                ),
+                image_input: referenceImageUrls.slice(0, maxReferenceImages),
               }
             : {}),
         },
         analyticsSnapshot: {
-          provider: GPT_IMAGE_PROVIDER,
+          provider,
           model,
           mode: activeTab,
           costCredits,
@@ -576,8 +628,10 @@ export function GptImage2Generator({
       activeTab,
       costCredits,
       isTextToImageMode,
+      maxReferenceImages,
       model,
       prompt,
+      provider,
       referenceImageUrls,
     ]
   );
@@ -918,7 +972,8 @@ export function GptImage2Generator({
         options: normalizeGptImageRequestOptions(
           parsedRequest.scene,
           parsedRequest.options,
-          recoveredClientRequestId
+          recoveredClientRequestId,
+          maxReferenceImages
         ),
       };
       return submitImageGeneration();
@@ -937,7 +992,7 @@ export function GptImage2Generator({
     queueState.snapshotDigest === queueSnapshotDigest;
 
   const handleGenerate = async () => {
-    if (!availableProviders.includes(GPT_IMAGE_PROVIDER)) {
+    if (!availableProviders.includes(provider)) {
       toast.error(queueCopy.providerNotConfigured);
       return;
     }
@@ -988,22 +1043,19 @@ export function GptImage2Generator({
       clientRequestId,
       ...(!isTextToImageMode
         ? {
-            image_input: referenceImageUrls.slice(
-              0,
-              GPT_IMAGE_MAX_REFERENCE_IMAGES
-            ),
+            image_input: referenceImageUrls.slice(0, maxReferenceImages),
           }
         : {}),
     };
     const request: PendingGptImageRequest = {
       clientRequestId,
       scene: activeTab,
-      provider: GPT_IMAGE_PROVIDER,
+      provider,
       model,
       prompt: trimmedPrompt,
       options: requestOptions,
       analyticsSnapshot: {
-        provider: GPT_IMAGE_PROVIDER,
+        provider,
         model,
         mode: activeTab,
         costCredits,
@@ -1061,6 +1113,26 @@ export function GptImage2Generator({
       setDownloadingImageId(null);
     }
   };
+
+  const buildImageToVideoHref = useCallback(
+    (image: GeneratedImage) => {
+      const params = new URLSearchParams();
+      const sourcePrompt = image.prompt?.trim() || prompt.trim();
+
+      if (sourcePrompt) {
+        params.set(
+          'prompt',
+          sourcePrompt.slice(0, VIDEO_PROMPT_PREFILL_MAX_LENGTH)
+        );
+      }
+
+      params.set('mode', 'image-to-video');
+      params.set('first_frame_url', image.url);
+
+      return `/ai-video?${params.toString()}`;
+    },
+    [prompt]
+  );
 
   const content = (
     <div className="container">
@@ -1122,7 +1194,7 @@ export function GptImage2Generator({
                   <ImageUploader
                     title={t('form.reference_image')}
                     allowMultiple
-                    maxImages={GPT_IMAGE_MAX_REFERENCE_IMAGES}
+                    maxImages={maxReferenceImages}
                     maxSizeMB={5}
                     onChange={setReferenceImageItems}
                     emptyHint={queueCopy.referenceImageHint}
@@ -1157,6 +1229,29 @@ export function GptImage2Generator({
                       {t('form.prompt_too_long')}
                     </span>
                   )}
+                </div>
+                <div className="bg-muted/25 rounded-md border p-3">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium">
+                        {queueCopy.promptLibraryTitle}
+                      </p>
+                      <p className="text-muted-foreground mt-1 text-xs leading-5">
+                        {queueCopy.promptLibraryDescription}
+                      </p>
+                    </div>
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
+                      className="w-full sm:w-auto"
+                    >
+                      <Link href="/prompts/gpt-image-2">
+                        <BookOpen className="h-4 w-4" />
+                        <span>{queueCopy.promptLibraryButton}</span>
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
 
@@ -1316,7 +1411,10 @@ export function GptImage2Generator({
                           alt={image.prompt || 'Generated image'}
                           className="h-auto w-full"
                         />
-                        <div className="absolute right-3 bottom-3">
+                        {shouldWatermarkGeneratedImages && (
+                          <ImageWatermarkOverlay />
+                        )}
+                        <div className="absolute right-3 bottom-3 z-20">
                           <Button
                             size="sm"
                             variant="ghost"
@@ -1335,6 +1433,40 @@ export function GptImage2Generator({
                                 <span>Download</span>
                               </>
                             )}
+                          </Button>
+                        </div>
+                      </div>
+                      {shouldWatermarkGeneratedImages && (
+                        <p className="text-muted-foreground text-xs leading-5">
+                          {queueCopy.watermarkHint}{' '}
+                          <Link
+                            href="/pricing"
+                            className="text-primary font-medium hover:underline"
+                          >
+                            {queueCopy.watermarkUpgradeLabel}
+                          </Link>
+                        </p>
+                      )}
+                      <div className="bg-muted/25 rounded-md border p-4">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium">
+                              {queueCopy.videoCtaTitle}
+                            </p>
+                            <p className="text-muted-foreground mt-1 text-xs leading-5">
+                              {queueCopy.videoCtaDescription}
+                            </p>
+                          </div>
+                          <Button
+                            asChild
+                            variant="outline"
+                            size="sm"
+                            className="w-full sm:w-auto"
+                          >
+                            <Link href={buildImageToVideoHref(image)}>
+                              <Video className="h-4 w-4" />
+                              <span>{queueCopy.videoCtaButton}</span>
+                            </Link>
                           </Button>
                         </div>
                       </div>

@@ -1,3 +1,8 @@
+import {
+  GPT_IMAGE_APIMART_MAX_REFERENCE_IMAGES,
+  GPT_IMAGE_APIMART_MODEL,
+  isApimartGptImageModel,
+} from '@/shared/lib/gpt-image';
 import { getUuid } from '@/shared/lib/hash';
 import {
   isSeedance2GenerationModel,
@@ -244,6 +249,23 @@ function getObjectKeys(value: unknown) {
   return Object.keys(record).slice(0, 20);
 }
 
+function getResultRecord(value: unknown) {
+  const record = getRecord(value);
+  if (record) {
+    return record;
+  }
+
+  if (typeof value === 'string') {
+    return parseEmbeddedJsonRecord(value) || { output: value };
+  }
+
+  if (Array.isArray(value)) {
+    return { output: value };
+  }
+
+  return {};
+}
+
 /**
  * APIMart provider
  * @docs https://docs.apimart.ai/
@@ -274,6 +296,10 @@ export class ApimartProvider implements AIProvider {
   }: {
     params: AIGenerateParams;
   }): Promise<AITaskResult> {
+    if (params.mediaType === AIMediaType.IMAGE) {
+      return this.generateImage({ params });
+    }
+
     if (params.mediaType !== AIMediaType.VIDEO) {
       throw new Error(`mediaType not supported: ${params.mediaType}`);
     }
@@ -337,8 +363,78 @@ export class ApimartProvider implements AIProvider {
     };
   }
 
+  async generateImage({
+    params,
+  }: {
+    params: AIGenerateParams;
+  }): Promise<AITaskResult> {
+    if (!params.model || !isApimartGptImageModel(params.model)) {
+      throw new Error('APIMart only supports GPT Image 2 image generation');
+    }
+
+    const normalizedPrompt = params.prompt?.trim();
+    if (!normalizedPrompt) {
+      throw new Error('prompt is required');
+    }
+
+    const apiUrl = `${this.baseUrl}/v1/images/generations`;
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.configs.apiKey}`,
+    };
+    const payload = this.buildGptImage2Payload({
+      prompt: normalizedPrompt,
+      options: (params.options || {}) as Record<string, unknown>,
+    });
+
+    const resp = await fetch(apiUrl, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+    });
+
+    let data: any = null;
+    try {
+      data = await resp.json();
+    } catch {
+      data = null;
+    }
+
+    if (!resp.ok) {
+      throw new Error(
+        getApimartErrorMessage(data) ||
+          `APIMart image request failed with status: ${resp.status}`
+      );
+    }
+
+    if (data?.code !== 200) {
+      throw new Error(
+        getApimartErrorMessage(data) || 'APIMart image generation failed'
+      );
+    }
+
+    const taskInfo = Array.isArray(data.data) ? data.data[0] : data.data;
+    const taskId = taskInfo?.task_id || taskInfo?.taskId;
+
+    if (!taskId) {
+      throw new Error('APIMart image generation failed: no task_id');
+    }
+
+    return {
+      taskStatus: this.mapSubmissionStatus(taskInfo?.status),
+      taskId,
+      taskInfo: {
+        status:
+          typeof taskInfo?.status === 'string' ? taskInfo.status : 'submitted',
+      },
+      taskResult: data,
+    };
+  }
+
   async query({
     taskId,
+    mediaType,
+    model,
   }: {
     taskId: string;
     mediaType?: string;
@@ -378,7 +474,7 @@ export class ApimartProvider implements AIProvider {
     const providerStatus =
       typeof data.status === 'string' ? data.status : undefined;
     const taskStatus = this.mapTaskStatus(data.status);
-    const taskResult = getRecord(data.result) || {};
+    const taskResult = getResultRecord(data.result);
     const fallbackThumbnailUrl =
       typeof taskResult.thumbnail_url === 'string'
         ? taskResult.thumbnail_url
@@ -387,10 +483,13 @@ export class ApimartProvider implements AIProvider {
           : undefined;
 
     let videos = this.extractVideos(taskResult, fallbackThumbnailUrl);
-    let images = this.extractImages(taskResult);
+    let images = this.extractImages(taskResult, {
+      includeGenericOutput:
+        mediaType === AIMediaType.IMAGE || isApimartGptImageModel(model),
+    });
     const errorDetails = getApimartErrorDetails(data.error);
 
-    console.info('[seedance.apimart.query] response', {
+    console.info('[apimart.query] response', {
       taskId,
       providerStatus,
       finalTaskStatus: taskStatus,
@@ -431,7 +530,7 @@ export class ApimartProvider implements AIProvider {
       });
 
       if (filesToSave.length > 0) {
-        console.info('[seedance.apimart.storage] start', {
+        console.info('[apimart.storage] start', {
           taskId,
           fileCount: filesToSave.length,
           fileTypes: filesToSave.map((file) => file.type || 'unknown'),
@@ -458,14 +557,14 @@ export class ApimartProvider implements AIProvider {
             }
           });
 
-          console.info('[seedance.apimart.storage] completed', {
+          console.info('[apimart.storage] completed', {
             taskId,
             uploadedCount: uploadedFiles.length,
             videoCount: videos.length,
             imageCount: images.length,
           });
         } else {
-          console.warn('[seedance.apimart.storage] no-uploaded-files', {
+          console.warn('[apimart.storage] no-uploaded-files', {
             taskId,
             requestedCount: filesToSave.length,
           });
@@ -573,6 +672,49 @@ export class ApimartProvider implements AIProvider {
     return payload;
   }
 
+  private buildGptImage2Payload({
+    prompt,
+    options,
+  }: {
+    prompt: string;
+    options: Record<string, unknown>;
+  }) {
+    const payload: Record<string, unknown> = {
+      model: GPT_IMAGE_APIMART_MODEL,
+      prompt: prompt.trim(),
+      n: 1,
+      size:
+        typeof options.aspect_ratio === 'string' && options.aspect_ratio.trim()
+          ? options.aspect_ratio.trim()
+          : '1:1',
+    };
+
+    const rawImageUrls = Array.isArray(options.image_urls)
+      ? options.image_urls
+      : Array.isArray(options.image_input)
+        ? options.image_input
+        : [];
+    const imageUrls = rawImageUrls
+      .map((item) => (typeof item === 'string' ? item.trim() : ''))
+      .filter(Boolean)
+      .filter((item, index, array) => array.indexOf(item) === index)
+      .slice(0, GPT_IMAGE_APIMART_MAX_REFERENCE_IMAGES);
+
+    if (imageUrls.length > 0) {
+      payload.image_urls = imageUrls;
+    }
+
+    if (typeof options.mask_url === 'string' && options.mask_url.trim()) {
+      payload.mask_url = options.mask_url.trim();
+    }
+
+    if (typeof options.official_fallback === 'boolean') {
+      payload.official_fallback = options.official_fallback;
+    }
+
+    return payload;
+  }
+
   private extractVideos(
     result: Record<string, unknown>,
     fallbackThumbnailUrl?: string
@@ -620,7 +762,14 @@ export class ApimartProvider implements AIProvider {
     }));
   }
 
-  private extractImages(result: Record<string, unknown>) {
+  private extractImages(
+    result: Record<string, unknown>,
+    {
+      includeGenericOutput = false,
+    }: {
+      includeGenericOutput?: boolean;
+    } = {}
+  ) {
     const images: AIImage[] = [];
     const rawImages = Array.isArray(result.images)
       ? result.images
@@ -642,6 +791,23 @@ export class ApimartProvider implements AIProvider {
         id: '',
         createTime: new Date(),
         imageUrl: url,
+      });
+    });
+
+    [
+      result.image_urls,
+      result.imageUrls,
+      includeGenericOutput ? result.output : undefined,
+      includeGenericOutput ? result.data : undefined,
+    ].forEach((value) => {
+      collectUrls(value).forEach((url) => {
+        if (!images.some((item) => item.imageUrl === url)) {
+          images.push({
+            id: '',
+            createTime: new Date(),
+            imageUrl: url,
+          });
+        }
       });
     });
 
@@ -671,14 +837,21 @@ export class ApimartProvider implements AIProvider {
   private mapSubmissionStatus(status?: string): AITaskStatus {
     switch (status) {
       case 'submitted':
+      case 'queued':
       case 'pending':
         return AITaskStatus.PENDING;
+      case 'in_progress':
+      case 'running':
       case 'processing':
         return AITaskStatus.PROCESSING;
+      case 'success':
+      case 'succeeded':
+      case 'complete':
       case 'completed':
         return AITaskStatus.SUCCESS;
       case 'failed':
       case 'cancelled':
+      case 'canceled':
         return AITaskStatus.FAILED;
       default:
         return AITaskStatus.PENDING;
@@ -687,14 +860,22 @@ export class ApimartProvider implements AIProvider {
 
   private mapTaskStatus(status: string): AITaskStatus {
     switch (status) {
+      case 'submitted':
+      case 'queued':
       case 'pending':
         return AITaskStatus.PENDING;
+      case 'in_progress':
+      case 'running':
       case 'processing':
         return AITaskStatus.PROCESSING;
+      case 'success':
+      case 'succeeded':
+      case 'complete':
       case 'completed':
         return AITaskStatus.SUCCESS;
       case 'failed':
       case 'cancelled':
+      case 'canceled':
         return AITaskStatus.FAILED;
       default:
         throw new Error(`unknown APIMart status: ${status}`);
