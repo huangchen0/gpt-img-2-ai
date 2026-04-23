@@ -1,13 +1,9 @@
 import { cn } from '@/shared/lib/utils';
 
-const WATERMARK_MARKS = [
-  'top-[28%] left-[14%]',
-  'top-[50%] left-[42%]',
-  'top-[72%] left-[18%]',
-];
+const WATERMARK_MARKS = ['top-[52%] left-[28%]'];
 
 export function ImageWatermarkOverlay({
-  label = 'gpt-image-2-ai.org',
+  label = 'https://gpt-image-2-ai.org',
   className,
 }: {
   label?: string;
@@ -25,14 +21,14 @@ export function ImageWatermarkOverlay({
         <span
           key={positionClass}
           className={cn(
-            'absolute rotate-[-24deg] text-xs font-semibold whitespace-nowrap text-white/38 [text-shadow:0_1px_3px_rgba(0,0,0,0.45)] sm:text-sm',
+            'absolute rotate-[-24deg] text-[11px] font-semibold whitespace-nowrap text-white/28 [text-shadow:0_1px_2px_rgba(0,0,0,0.34)] sm:text-xs',
             positionClass
           )}
         >
           {label}
         </span>
       ))}
-      <div className="absolute top-3 left-3 rounded bg-black/32 px-2 py-1 text-[10px] font-semibold text-white/78 shadow-sm backdrop-blur-sm">
+      <div className="absolute top-3 left-3 rounded bg-black/24 px-2 py-1 text-[10px] font-semibold text-white/68 shadow-sm backdrop-blur-sm">
         {label}
       </div>
     </div>
