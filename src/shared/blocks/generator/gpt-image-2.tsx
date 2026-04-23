@@ -1162,10 +1162,10 @@ export function GptImage2Generator({
       link.click();
       document.body.removeChild(link);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 200);
-      toast.success('Image downloaded');
+      toast.success(t('download_success'));
     } catch (error) {
       console.error('Failed to download image:', error);
-      toast.error('Failed to download image');
+      toast.error(t('download_failed'));
     } finally {
       setDownloadingImageId(null);
     }
@@ -1532,7 +1532,7 @@ export function GptImage2Generator({
                       <div className="relative overflow-hidden rounded-md border">
                         <LazyImage
                           src={image.url}
-                          alt={image.prompt || 'Generated image'}
+                          alt={image.prompt || t('generated_image')}
                           className="h-auto w-full"
                         />
                         {shouldWatermarkGeneratedImages && (
@@ -1568,12 +1568,12 @@ export function GptImage2Generator({
                             {downloadingImageId === image.id ? (
                               <>
                                 <Loader2 className="h-4 w-4 animate-spin" />
-                                <span>Downloading</span>
+                                <span>{t('downloading')}</span>
                               </>
                             ) : (
                               <>
                                 <Download className="h-4 w-4" />
-                                <span>Download</span>
+                                <span>{t('download')}</span>
                               </>
                             )}
                           </Button>
@@ -1682,8 +1682,14 @@ export function GptImage2Generator({
       isSharing={Boolean(sharingImageId)}
       title={t('share_showcase.title')}
       description={t('share_showcase.description')}
+      rewardHint={t('share_showcase.reward_hint', {
+        credits: referralCredits,
+      })}
       resultTitle={t('share_showcase.result_title')}
       resultDescription={t('share_showcase.result_description')}
+      resultRewardHint={t('share_showcase.result_reward_hint', {
+        credits: referralCredits,
+      })}
       confirmLabel={t('share_showcase.confirm')}
       cancelLabel={t('share_showcase.cancel')}
       sharingLabel={t('share_showcase.sharing')}

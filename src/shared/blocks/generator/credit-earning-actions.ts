@@ -49,7 +49,7 @@ export function getGenerationCreditRewardAmounts(
     checkinCredits: parsePositiveCreditConfig(configs.daily_checkin_credits, 3),
     referralCredits: parsePositiveCreditConfig(
       configs.referral_reward_credits,
-      60
+      10
     ),
     referralSubscriptionBonusPercent: parsePositiveCreditConfig(
       configs.referral_subscription_bonus_percent,

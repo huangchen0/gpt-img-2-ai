@@ -1,6 +1,14 @@
 'use client';
 
-import { Code2, Copy, FileText, Loader2, Send, Share2 } from 'lucide-react';
+import {
+  Code2,
+  Copy,
+  FileText,
+  Gift,
+  Loader2,
+  Send,
+  Share2,
+} from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/shared/components/ui/button';
@@ -19,8 +27,10 @@ interface ShareShowcaseDialogProps {
   isSharing: boolean;
   title: string;
   description: string;
+  rewardHint?: string;
   resultTitle: string;
   resultDescription: string;
+  resultRewardHint?: string;
   confirmLabel: string;
   cancelLabel: string;
   sharingLabel: string;
@@ -68,8 +78,10 @@ export function ShareShowcaseDialog({
   isSharing,
   title,
   description,
+  rewardHint,
   resultTitle,
   resultDescription,
+  resultRewardHint,
   confirmLabel,
   cancelLabel,
   sharingLabel,
@@ -98,6 +110,7 @@ export function ShareShowcaseDialog({
   const xUrl = result
     ? `https://twitter.com/intent/tweet?url=${encodeURIComponent(result.shareUrl)}&text=${encodeURIComponent(shareText)}`
     : '';
+  const activeRewardHint = result ? resultRewardHint : rewardHint;
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -108,6 +121,13 @@ export function ShareShowcaseDialog({
             {result ? resultDescription : description}
           </DialogDescription>
         </DialogHeader>
+
+        {activeRewardHint && (
+          <div className="border-primary/20 bg-primary/5 text-muted-foreground flex items-start gap-2 rounded-md border p-3 text-sm leading-5">
+            <Gift className="text-primary mt-0.5 h-4 w-4 shrink-0" />
+            <p>{activeRewardHint}</p>
+          </div>
+        )}
 
         {result ? (
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
