@@ -9,6 +9,27 @@
     "no_showcases": "아직 쇼케이스가 없습니다",
     "load_more": "더 보기"
   },
+  "detail": {
+    "fallback_title": "공유된 AI 이미지",
+    "fallback_description": "공유된 AI 생성 이미지",
+    "generated_with": "{appName}로 생성됨",
+    "prompt": "프롬프트",
+    "create_similar": "비슷하게 만들기",
+    "view_showcases": "쇼케이스 보기",
+    "published": "게시일",
+    "asset_type": "콘텐츠 유형",
+    "image": "이미지",
+    "related_title": "더 살펴볼 이미지",
+    "share": {
+      "copy_link": "링크 복사",
+      "copy_markdown": "Markdown 복사",
+      "copy_embed": "임베드 코드 복사",
+      "pinterest": "Pinterest에 공유",
+      "x": "X에 공유",
+      "copied": "복사됨",
+      "copy_failed": "복사 실패"
+    }
+  },
   "showcases-flow": {
     "id": "showcases",
     "sr_only_title": "쇼케이스",

@@ -9,6 +9,27 @@
     "no_showcases": "暂无案例",
     "load_more": "加载更多"
   },
+  "detail": {
+    "fallback_title": "分享的 AI 图片",
+    "fallback_description": "用户分享的 AI 生成图片",
+    "generated_with": "使用 {appName} 生成",
+    "prompt": "提示词",
+    "create_similar": "创建相似图片",
+    "view_showcases": "查看作品展示",
+    "published": "发布时间",
+    "asset_type": "内容类型",
+    "image": "图片",
+    "related_title": "更多可参考作品",
+    "share": {
+      "copy_link": "复制链接",
+      "copy_markdown": "复制 Markdown",
+      "copy_embed": "复制嵌入代码",
+      "pinterest": "分享到 Pinterest",
+      "x": "分享到 X",
+      "copied": "已复制",
+      "copy_failed": "复制失败"
+    }
+  },
   "showcases-flow": {
     "id": "showcases",
     "sr_only_title": "案例展示",

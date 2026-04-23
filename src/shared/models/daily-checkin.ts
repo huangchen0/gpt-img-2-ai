@@ -71,7 +71,7 @@ export async function claimDailyCheckinCredits({
     throw new Error('daily check-in is disabled');
   }
 
-  const credits = parsePositiveInt(configs.daily_checkin_credits, 10);
+  const credits = parsePositiveInt(configs.daily_checkin_credits, 3);
   const timezoneOffsetMinutes = parseInt(
     configs.daily_checkin_timezone_offset_minutes || '0',
     10

@@ -18,6 +18,7 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { Link, useRouter } from '@/core/i18n/navigation';
+import { envConfigs } from '@/config';
 import { AIMediaType, AITaskStatus } from '@/extensions/ai/types';
 import {
   ImageUploader,
@@ -35,6 +36,7 @@ import {
   PaidDownloadDialog,
   usePaidDownloadGate,
 } from '@/shared/blocks/generator/paid-download-dialog';
+import { ShareShowcaseDialog } from '@/shared/blocks/generator/share-showcase-dialog';
 import { Button } from '@/shared/components/ui/button';
 import {
   Card,
@@ -79,9 +81,18 @@ interface GptImage2GeneratorProps {
 interface GeneratedImage {
   id: string;
   url: string;
+  taskId: string;
+  imageIndex: number;
   provider?: string;
   model?: string;
   prompt?: string;
+}
+
+interface ShareShowcaseResult {
+  shareUrl: string;
+  imageUrl: string;
+  title: string;
+  description: string;
 }
 
 interface BackendTask {
@@ -254,6 +265,11 @@ export function GptImage2Generator({
     null
   );
   const [sharingImageId, setSharingImageId] = useState<string | null>(null);
+  const [shareTargetImage, setShareTargetImage] =
+    useState<GeneratedImage | null>(null);
+  const [shareResult, setShareResult] = useState<ShareShowcaseResult | null>(
+    null
+  );
   const [availableProviders, setAvailableProviders] = useState<string[]>([]);
   const [isLoadingProviders, setIsLoadingProviders] = useState(true);
   const [clientRequestId, setClientRequestId] = useState(() => getUuid());
@@ -266,8 +282,7 @@ export function GptImage2Generator({
   const userIdRef = useRef<string | null>(null);
   const promptTextareaRef = useRef<HTMLTextAreaElement | null>(null);
   const lastAppliedPromptRef = useRef<string | null>(null);
-  const { canDownload, canAccessPaidAction, paidDownloadDialogProps } =
-    usePaidDownloadGate();
+  const { canDownload, paidDownloadDialogProps } = usePaidDownloadGate();
 
   const {
     user,
@@ -754,6 +769,8 @@ export function GptImage2Generator({
             const images = imageUrls.map((url, index) => ({
               id: `${task.id}-${index}`,
               url,
+              taskId: task.id,
+              imageIndex: index,
               provider: task.provider,
               model: task.model,
               prompt: task.prompt ?? undefined,
@@ -1154,43 +1171,67 @@ export function GptImage2Generator({
     }
   };
 
-  const handleShareImage = async (image: GeneratedImage) => {
+  const openShareConfirm = (image: GeneratedImage) => {
     if (!image.url) {
       return;
     }
 
-    if (!(await canAccessPaidAction('share', 'image'))) {
+    if (!user) {
+      setIsShowSignModal(true);
+      return;
+    }
+
+    setShareTargetImage(image);
+    setShareResult(null);
+  };
+
+  const handleConfirmShareImage = async () => {
+    const image = shareTargetImage;
+    if (!image?.url) {
       return;
     }
 
     try {
       setSharingImageId(image.id);
-      const shareData = {
-        title: 'GPT Image 2 image',
-        text: image.prompt?.trim()
-          ? image.prompt.trim().slice(0, 180)
-          : 'Generated with GPT Image 2',
-        url: image.url,
-      };
+      const resp = await fetch('/api/showcases/share', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          taskId: image.taskId,
+          imageIndex: image.imageIndex,
+        }),
+      });
 
-      if (navigator.share) {
-        try {
-          await navigator.share(shareData);
-          return;
-        } catch (error: any) {
-          if (error?.name === 'AbortError') {
-            return;
-          }
-
-          console.warn('Native image share failed, falling back:', error);
-        }
+      if (!resp.ok) {
+        throw new Error(`request failed with status: ${resp.status}`);
       }
 
-      await navigator.clipboard.writeText(image.url);
-      toast.success('Share link copied');
+      const { code, message, data } = await resp.json();
+      if (code !== 0 || !data?.shareUrl) {
+        throw new Error(message || 'Failed to publish image');
+      }
+
+      const shareUrl = data.shareUrl as string;
+      setShareResult({
+        shareUrl,
+        imageUrl: image.url,
+        title: image.prompt?.trim()
+          ? image.prompt.trim().slice(0, 90)
+          : 'GPT Image 2 image',
+        description: image.prompt?.trim()
+          ? image.prompt.trim().slice(0, 180)
+          : 'Generated with GPT Image 2',
+      });
+      toast.success(
+        data.alreadyShared
+          ? t('share_showcase.ready')
+          : t('share_showcase.published')
+      );
     } catch (error) {
       console.error('Failed to share image:', error);
-      toast.error('Failed to share image');
+      toast.error(t('share_showcase.failed'));
     } finally {
       setSharingImageId(null);
     }
@@ -1502,18 +1543,18 @@ export function GptImage2Generator({
                             size="sm"
                             variant="ghost"
                             className="gap-2 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60"
-                            onClick={() => handleShareImage(image)}
+                            onClick={() => openShareConfirm(image)}
                             disabled={sharingImageId === image.id}
                           >
                             {sharingImageId === image.id ? (
                               <>
                                 <Loader2 className="h-4 w-4 animate-spin" />
-                                <span>Sharing</span>
+                                <span>{t('share_showcase.sharing')}</span>
                               </>
                             ) : (
                               <>
                                 <Share2 className="h-4 w-4" />
-                                <span>Share</span>
+                                <span>{t('share_showcase.button')}</span>
                               </>
                             )}
                           </Button>
@@ -1629,6 +1670,35 @@ export function GptImage2Generator({
       </div>
     </div>
   );
+  const shareDialog = (
+    <ShareShowcaseDialog
+      open={Boolean(shareTargetImage)}
+      onOpenChange={(open) => {
+        if (!open) {
+          setShareTargetImage(null);
+          setShareResult(null);
+        }
+      }}
+      isSharing={Boolean(sharingImageId)}
+      title={t('share_showcase.title')}
+      description={t('share_showcase.description')}
+      resultTitle={t('share_showcase.result_title')}
+      resultDescription={t('share_showcase.result_description')}
+      confirmLabel={t('share_showcase.confirm')}
+      cancelLabel={t('share_showcase.cancel')}
+      sharingLabel={t('share_showcase.sharing')}
+      copyLinkLabel={t('share_showcase.copy_link')}
+      copyMarkdownLabel={t('share_showcase.copy_markdown')}
+      copyEmbedLabel={t('share_showcase.copy_embed')}
+      pinterestLabel={t('share_showcase.pinterest')}
+      xLabel={t('share_showcase.x')}
+      copiedLabel={t('share_showcase.copied')}
+      copyFailedLabel={t('share_showcase.copy_failed')}
+      appName={envConfigs.app_name}
+      result={shareResult}
+      onConfirm={handleConfirmShareImage}
+    />
+  );
   const fallbackDialog = (
     <GenerationCreditFallbackDialog
       open={Boolean(creditFallback)}
@@ -1665,6 +1735,7 @@ export function GptImage2Generator({
     return (
       <div id={id} className={className}>
         {content}
+        {shareDialog}
         {fallbackDialog}
         <PaidDownloadDialog {...paidDownloadDialogProps} />
       </div>
@@ -1674,6 +1745,7 @@ export function GptImage2Generator({
   return (
     <section className={cn('py-16 md:py-24', className)} id={id}>
       {content}
+      {shareDialog}
       {fallbackDialog}
       <PaidDownloadDialog {...paidDownloadDialogProps} />
     </section>

@@ -105,16 +105,16 @@ export default async function CreditsPage({
   const checkinStatus = await getDailyCheckinStatus(user.id);
   const referralCode = (await ensureUserReferralCode(user.id)) || '';
   const inviteUrl = `${envConfigs.app_url || ''}?ref=${encodeURIComponent(referralCode)}`;
-  const signupCredits = parseInt(configs.initial_credits_amount || '100', 10);
-  const checkinCredits = parseInt(configs.daily_checkin_credits || '10', 10);
-  const referralCredits = parseInt(configs.referral_reward_credits || '50', 10);
+  const signupCredits = parseInt(configs.initial_credits_amount || '60', 10);
+  const checkinCredits = parseInt(configs.daily_checkin_credits || '3', 10);
+  const referralCredits = parseInt(configs.referral_reward_credits || '60', 10);
   const referralSubscriptionBonusPercent = parseInt(
     configs.referral_subscription_bonus_percent || '20',
     10
   );
   const displaySignupCredits = Number.isFinite(signupCredits)
     ? signupCredits
-    : 100;
+    : 60;
   const displayReferralCredits = Number.isFinite(referralCredits)
     ? referralCredits
     : 50;
@@ -125,7 +125,7 @@ export default async function CreditsPage({
     : 20;
   const displayCheckinCredits = Number.isFinite(checkinCredits)
     ? checkinCredits
-    : 10;
+    : 3;
 
   const tabs: Tab[] = [
     {

@@ -13,3 +13,4 @@ Disallow: /hairstyles
 
 Sitemap: https://gpt-image-2-ai.org/sitemap.xml
 Sitemap: https://gpt-image-2-ai.org/prompt-sitemap.xml
+Sitemap: https://gpt-image-2-ai.org/showcase-sitemap.xml

@@ -94,9 +94,9 @@ export async function grantReferralRewardForNewUser({
   }
 
   const rewardCredits = signupRewardEnabled
-    ? parsePositiveInt(configs.referral_reward_credits, 50)
+    ? parsePositiveInt(configs.referral_reward_credits, 60)
     : 0;
-  const dailyLimit = parsePositiveInt(configs.referral_daily_limit, 5);
+  const dailyLimit = parsePositiveInt(configs.referral_daily_limit, 3);
   const timezoneOffsetMinutes = parseInt(
     configs.referral_reward_timezone_offset_minutes ||
       configs.daily_checkin_timezone_offset_minutes ||

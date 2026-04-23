@@ -14,7 +14,7 @@ export async function grantCreditsForNewUser(
     return;
   }
 
-  const credits = parseInt(configs.initial_credits_amount as string) || 100;
+  const credits = parseInt(configs.initial_credits_amount as string) || 60;
   if (credits <= 0) {
     return;
   }

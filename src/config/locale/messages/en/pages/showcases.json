@@ -9,6 +9,27 @@
     "no_showcases": "No showcases yet",
     "load_more": "Load More"
   },
+  "detail": {
+    "fallback_title": "Shared AI image",
+    "fallback_description": "Shared AI generated image",
+    "generated_with": "Generated with {appName}",
+    "prompt": "Prompt",
+    "create_similar": "Create similar",
+    "view_showcases": "View showcases",
+    "published": "Published",
+    "asset_type": "Asset type",
+    "image": "Image",
+    "related_title": "More images to explore",
+    "share": {
+      "copy_link": "Copy link",
+      "copy_markdown": "Copy Markdown",
+      "copy_embed": "Copy embed",
+      "pinterest": "Share to Pinterest",
+      "x": "Share to X",
+      "copied": "Copied",
+      "copy_failed": "Copy failed"
+    }
+  },
   "showcases-flow": {
     "id": "showcases",
     "sr_only_title": "Showcases",
