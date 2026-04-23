@@ -17,8 +17,29 @@ const datasetFiles: Record<PromptLibraryModel, string> = {
   'gpt-image-2': 'gpt-image-2',
 };
 
-const indexCache = new Map<string, PromptLibraryIndexDataset>();
-const itemCache = new Map<string, PromptLibraryItem>();
+function parsePositiveInteger(value: string | undefined, fallback: number) {
+  const parsed = Number.parseInt(value || '', 10);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+const cacheTtlMs = parsePositiveInteger(
+  process.env.PROMPT_LIBRARY_CACHE_TTL_MS,
+  3600000
+);
+const fetchTimeoutMs = parsePositiveInteger(
+  process.env.PROMPT_LIBRARY_FETCH_TIMEOUT_MS,
+  10000
+);
+
+type CacheEntry<T> = {
+  value: T;
+  expiresAt: number;
+};
+
+const indexCache = new Map<string, CacheEntry<PromptLibraryIndexDataset>>();
+const itemCache = new Map<string, CacheEntry<PromptLibraryItem>>();
+const indexRequests = new Map<string, Promise<PromptLibraryIndexDataset>>();
+const itemRequests = new Map<string, Promise<PromptLibraryItem | undefined>>();
 
 class PromptLibraryAssetError extends Error {
   constructor(
@@ -34,7 +55,12 @@ function trimTrailingSlash(value: string) {
 }
 
 function getPromptLibraryDir(model: PromptLibraryModel) {
-  return path.join(process.cwd(), 'public', 'prompt-library', datasetFiles[model]);
+  return path.join(
+    process.cwd(),
+    'public',
+    'prompt-library',
+    datasetFiles[model]
+  );
 }
 
 function getRemoteBaseUrl() {
@@ -56,10 +82,39 @@ function getPublicAssetUrl(model: PromptLibraryModel, pathname: string) {
   return `${appUrl}/prompt-library/${datasetFiles[model]}/${pathname.replace(/^\/+/, '')}`;
 }
 
+function getCachedValue<T>(
+  cache: Map<string, CacheEntry<T>>,
+  key: string,
+  options: { allowStale?: boolean } = {}
+) {
+  const cached = cache.get(key);
+  if (!cached) return undefined;
+
+  if (options.allowStale || cached.expiresAt > Date.now()) {
+    return cached.value;
+  }
+
+  return undefined;
+}
+
+function setCachedValue<T>(
+  cache: Map<string, CacheEntry<T>>,
+  key: string,
+  value: T
+) {
+  cache.set(key, {
+    value,
+    expiresAt: Date.now() + Math.max(cacheTtlMs, 0),
+  });
+
+  return value;
+}
+
 async function fetchPromptLibraryJson<T>(url: string): Promise<T> {
   const response = await fetch(url, {
-    next: { revalidate: 3600 },
+    next: { revalidate: Math.max(Math.floor(cacheTtlMs / 1000), 60) },
     headers: { accept: 'application/json' },
+    signal: AbortSignal.timeout(fetchTimeoutMs),
   });
 
   if (!response.ok) {
@@ -84,11 +139,17 @@ function normalizeIndexDataset(dataset: PromptLibraryIndexDataset) {
 
 function readLocalPromptLibraryDataset(model: PromptLibraryModel) {
   const filePath = path.join(getPromptLibraryDir(model), 'index.json');
-  return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromptLibraryIndexDataset;
+  return JSON.parse(
+    fs.readFileSync(filePath, 'utf8')
+  ) as PromptLibraryIndexDataset;
 }
 
 function readLocalPromptLibraryItem(model: PromptLibraryModel, slug: string) {
-  const filePath = path.join(getPromptLibraryDir(model), 'items', `${slug}.json`);
+  const filePath = path.join(
+    getPromptLibraryDir(model),
+    'items',
+    `${slug}.json`
+  );
   if (!fs.existsSync(filePath)) return undefined;
 
   return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromptLibraryItem;
@@ -97,14 +158,38 @@ function readLocalPromptLibraryItem(model: PromptLibraryModel, slug: string) {
 export async function getPromptLibraryDataset(model: PromptLibraryModel) {
   const remoteUrl = getRemoteAssetUrl(model, 'index.json');
   if (remoteUrl) {
-    const dataset = normalizeIndexDataset(
-      await fetchPromptLibraryJson<PromptLibraryIndexDataset>(remoteUrl)
-    );
-    dataset.assetBaseUrl = getRemoteBaseUrl();
-    return dataset;
+    const cacheKey = `${model}:${remoteUrl}`;
+    const cached = getCachedValue(indexCache, cacheKey);
+    if (cached) return cached;
+
+    const pendingRequest = indexRequests.get(cacheKey);
+    if (pendingRequest) return pendingRequest;
+
+    const request = (async () => {
+      try {
+        const dataset = normalizeIndexDataset(
+          await fetchPromptLibraryJson<PromptLibraryIndexDataset>(remoteUrl)
+        );
+        dataset.assetBaseUrl = getRemoteBaseUrl();
+        return setCachedValue(indexCache, cacheKey, dataset);
+      } catch (error) {
+        const staleDataset = getCachedValue(indexCache, cacheKey, {
+          allowStale: true,
+        });
+        if (staleDataset) return staleDataset;
+
+        throw error;
+      } finally {
+        indexRequests.delete(cacheKey);
+      }
+    })();
+
+    indexRequests.set(cacheKey, request);
+    return request;
   }
 
-  const cached = indexCache.get(model);
+  const cacheKey = `${model}:local`;
+  const cached = getCachedValue(indexCache, cacheKey);
   if (cached) return cached;
 
   let dataset: PromptLibraryIndexDataset;
@@ -120,9 +205,7 @@ export async function getPromptLibraryDataset(model: PromptLibraryModel) {
   }
 
   dataset.assetBaseUrl = getRemoteBaseUrl();
-  indexCache.set(model, dataset);
-
-  return dataset;
+  return setCachedValue(indexCache, cacheKey, dataset);
 }
 
 export async function getPromptLibraryItems(model: PromptLibraryModel) {
@@ -142,27 +225,53 @@ export async function getRelatedPromptLibraryItems(
     .sort((a, b) => {
       const aMatch = a.categories.includes(category) ? 1 : 0;
       const bMatch = b.categories.includes(category) ? 1 : 0;
-      return bMatch - aMatch || Number(Boolean(b.featured)) - Number(Boolean(a.featured));
+      return (
+        bMatch - aMatch ||
+        Number(Boolean(b.featured)) - Number(Boolean(a.featured))
+      );
     })
     .slice(0, limit);
 }
 
-export async function getPromptLibraryItem(model: PromptLibraryModel, slug: string) {
+export async function getPromptLibraryItem(
+  model: PromptLibraryModel,
+  slug: string
+) {
   const remoteUrl = getRemoteAssetUrl(model, `items/${slug}.json`);
-  if (remoteUrl) {
-    try {
-      return await fetchPromptLibraryJson<PromptLibraryItem>(remoteUrl);
-    } catch (error) {
-      if (error instanceof PromptLibraryAssetError && error.status === 404) {
-        return undefined;
-      }
+  const cacheKey = `${model}:${slug}:${remoteUrl || 'local'}`;
 
-      throw error;
-    }
+  if (remoteUrl) {
+    const cached = getCachedValue(itemCache, cacheKey);
+    if (cached) return cached;
+
+    const pendingRequest = itemRequests.get(cacheKey);
+    if (pendingRequest) return pendingRequest;
+
+    const request = (async () => {
+      try {
+        const item = await fetchPromptLibraryJson<PromptLibraryItem>(remoteUrl);
+        return setCachedValue(itemCache, cacheKey, item);
+      } catch (error) {
+        if (error instanceof PromptLibraryAssetError && error.status === 404) {
+          return undefined;
+        }
+
+        const staleItem = getCachedValue(itemCache, cacheKey, {
+          allowStale: true,
+        });
+        if (staleItem) return staleItem;
+
+        throw error;
+      } finally {
+        itemRequests.delete(cacheKey);
+      }
+    })();
+
+    itemRequests.set(cacheKey, request);
+    return request;
   }
 
-  const cacheKey = `${model}:${slug}`;
-  const cached = itemCache.get(cacheKey);
+  const cached = getCachedValue(itemCache, cacheKey);
   if (cached) return cached;
 
   let item = readLocalPromptLibraryItem(model, slug);
@@ -177,7 +286,7 @@ export async function getPromptLibraryItem(model: PromptLibraryModel, slug: stri
     }
   }
 
-  if (item) itemCache.set(cacheKey, item);
+  if (item) setCachedValue(itemCache, cacheKey, item);
 
   return item;
 }

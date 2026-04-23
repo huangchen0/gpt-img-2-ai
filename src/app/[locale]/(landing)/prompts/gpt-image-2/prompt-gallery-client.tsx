@@ -43,6 +43,41 @@ function getPromptItemUrl(dataset: PromptLibraryListDataset, slug: string) {
   return baseUrl ? `${baseUrl}/${path}` : `/prompt-library/${path}`;
 }
 
+function getDatasetBaseUrl(datasetUrl: string) {
+  try {
+    const url = new URL(datasetUrl, window.location.origin);
+    return url.href.replace(/\/gpt-image-2\/index\.json$/, '');
+  } catch {
+    return datasetUrl.replace(/\/gpt-image-2\/index\.json$/, '');
+  }
+}
+
+async function fetchPromptDataset(datasetUrls: string[]) {
+  let lastError: unknown;
+
+  for (const datasetUrl of datasetUrls) {
+    try {
+      const response = await fetch(datasetUrl);
+      if (!response.ok) {
+        throw new Error(`Failed to load prompt index: ${response.status}`);
+      }
+
+      const dataset = (await response.json()) as PromptLibraryListDataset;
+      if (!Array.isArray(dataset.items) || dataset.items.length === 0) {
+        throw new Error('Prompt index is empty.');
+      }
+
+      return { dataset, sourceUrl: datasetUrl };
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError instanceof Error
+    ? lastError
+    : new Error('Failed to load prompt index.');
+}
+
 async function fetchPromptItem(
   dataset: PromptLibraryListDataset,
   slug: string
@@ -66,7 +101,7 @@ function normalizeDataset(dataset: PromptLibraryListDataset) {
 }
 
 function getBestMediaUrl(media: PromptLibraryListItem['media'][number]) {
-  return media.r2Url || media.url || media.r2Thumbnail || media.thumbnail || '';
+  return media.r2Thumbnail || media.thumbnail || media.r2Url || media.url || '';
 }
 
 function PromptLoadingCard({ index }: { index: number }) {
@@ -259,13 +294,22 @@ function PromptCard({
 
 export function GptImage2PromptGalleryClient({
   datasetUrl,
+  fallbackDatasetUrl,
   initialTotal,
 }: {
   datasetUrl: string;
+  fallbackDatasetUrl?: string;
   initialTotal: number;
 }) {
   const [dataset, setDataset] = useState<PromptLibraryListDataset | null>(null);
   const [loadError, setLoadError] = useState(false);
+  const datasetUrls = useMemo(
+    () =>
+      Array.from(
+        new Set([datasetUrl, fallbackDatasetUrl].filter(Boolean) as string[])
+      ),
+    [datasetUrl, fallbackDatasetUrl]
+  );
   const categories = useMemo(() => {
     if (!dataset) return ['All'];
     const values = new Set<string>();
@@ -278,28 +322,21 @@ export function GptImage2PromptGalleryClient({
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
-  const datasetBaseUrl = useMemo(() => {
-    try {
-      const url = new URL(datasetUrl, window.location.origin);
-      return url.href.replace(/\/gpt-image-2\/index\.json$/, '');
-    } catch {
-      return datasetUrl.replace(/\/gpt-image-2\/index\.json$/, '');
-    }
-  }, [datasetUrl]);
+  const [randomLoading, setRandomLoading] = useState(false);
+  const [randomFailed, setRandomFailed] = useState(false);
 
   useEffect(() => {
     let mounted = true;
 
-    fetch(datasetUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error('Failed to load prompt index.');
-        return response.json() as Promise<PromptLibraryListDataset>;
-      })
-      .then((nextDataset) => {
+    setLoadError(false);
+
+    fetchPromptDataset(datasetUrls)
+      .then(({ dataset: nextDataset, sourceUrl }) => {
         if (mounted) {
           setDataset({
             ...normalizeDataset(nextDataset),
-            assetBaseUrl: nextDataset.assetBaseUrl || datasetBaseUrl,
+            assetBaseUrl:
+              nextDataset.assetBaseUrl || getDatasetBaseUrl(sourceUrl),
           });
         }
       })
@@ -310,7 +347,7 @@ export function GptImage2PromptGalleryClient({
     return () => {
       mounted = false;
     };
-  }, [datasetBaseUrl, datasetUrl]);
+  }, [datasetUrls]);
 
   const filteredItems = useMemo(() => {
     if (!dataset) return [];
@@ -351,8 +388,18 @@ export function GptImage2PromptGalleryClient({
 
   async function useRandomPrompt() {
     if (!dataset || !randomPrompt) return;
-    const fullItem = await fetchPromptItem(dataset, randomPrompt.slug);
-    window.location.href = getImageGeneratorUrl(fullItem.prompt);
+
+    try {
+      setRandomFailed(false);
+      setRandomLoading(true);
+      const fullItem = await fetchPromptItem(dataset, randomPrompt.slug);
+      window.location.href = getImageGeneratorUrl(fullItem.prompt);
+    } catch {
+      setRandomFailed(true);
+      window.setTimeout(() => setRandomFailed(false), 1800);
+    } finally {
+      setRandomLoading(false);
+    }
   }
 
   return (
@@ -385,9 +432,14 @@ export function GptImage2PromptGalleryClient({
                 variant="outline"
                 size="lg"
                 onClick={useRandomPrompt}
+                disabled={!dataset || !randomPrompt || randomLoading}
               >
                 <Shuffle className="size-4" />
-                Try random prompt
+                {randomFailed
+                  ? 'Failed'
+                  : randomLoading
+                    ? 'Loading'
+                    : 'Try random prompt'}
               </Button>
             </div>
           </div>
@@ -457,6 +509,15 @@ export function GptImage2PromptGalleryClient({
             {visibleItems.map((item) => (
               <PromptCard key={item.id} dataset={dataset} item={item} />
             ))}
+          </div>
+        ) : loadError ? (
+          <div className="bg-card rounded-lg border p-10 text-center shadow-sm">
+            <p className="text-lg font-semibold">
+              Prompt library is temporarily unavailable
+            </p>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Please refresh the page in a moment.
+            </p>
           </div>
         ) : (
           <div className="bg-card rounded-lg border p-10 text-center shadow-sm">

@@ -16,6 +16,10 @@ const promptLibraryBaseUrl = (
   process.env.PROMPT_LIBRARY_BASE_URL ||
   'https://img.cdance.ai/uploads/prompt-library'
 ).replace(/\/+$/, '');
+const promptLibraryAssetBaseUrl = (
+  process.env.NEXT_PUBLIC_PROMPT_LIBRARY_ASSET_BASE_URL ||
+  (generateLocalAssets ? '/prompt-library' : '/api/prompt-library')
+).replace(/\/+$/, '');
 const siteUrl = (
   process.env.NEXT_PUBLIC_APP_URL ||
   process.env.APP_URL ||
@@ -32,6 +36,10 @@ const fetchTimeoutMs = Number.parseInt(
 
 function getPromptPreview(prompt: string) {
   return prompt.replace(/\s+/g, ' ').trim().slice(0, 360);
+}
+
+function writeJsonFile(filePath: string, value: unknown) {
+  fs.writeFileSync(filePath, `${JSON.stringify(value)}\n`);
 }
 
 type PromptLibrarySourceDataset =
@@ -88,8 +96,25 @@ async function getPromptLibraryDataset(): Promise<PromptLibrarySourceDataset> {
   );
 }
 
+function readExistingPromptLibraryDataset(
+  filePath: string
+): PromptLibrarySourceDataset | undefined {
+  if (!fs.existsSync(filePath)) return undefined;
+
+  const dataset = JSON.parse(
+    fs.readFileSync(filePath, 'utf8')
+  ) as PromptLibrarySourceDataset;
+
+  return dataset.items.length > 0 ? dataset : undefined;
+}
+
 async function main() {
   let dataset: PromptLibrarySourceDataset;
+  const outputDir = path.join(
+    process.cwd(),
+    'public/prompt-library/gpt-image-2'
+  );
+  const itemsDir = path.join(outputDir, 'items');
 
   try {
     dataset = await getPromptLibraryDataset();
@@ -98,30 +123,18 @@ async function main() {
       throw error;
     }
 
-    fs.rmSync(path.join(process.cwd(), 'public/prompt-library'), {
-      recursive: true,
-      force: true,
-    });
-
-    const existingSitemap = path.join(
-      process.cwd(),
-      'public/prompt-sitemap.xml'
-    );
-    if (fs.existsSync(existingSitemap)) {
+    const existingIndex = path.join(outputDir, 'index.json');
+    const existingDataset = readExistingPromptLibraryDataset(existingIndex);
+    if (existingDataset) {
       console.warn(
-        `Skipping prompt sitemap refresh because CDN data could not be fetched: ${error instanceof Error ? error.message : String(error)}`
+        `Keeping existing prompt library assets because CDN data could not be fetched: ${error instanceof Error ? error.message : String(error)}`
       );
-      return;
+      dataset = existingDataset;
+    } else {
+      throw new Error(
+        `Prompt library CDN data could not be fetched and no existing non-empty index is available: ${error instanceof Error ? error.message : String(error)}`
+      );
     }
-
-    dataset = {
-      model: 'gpt-image-2',
-      source: 'cdn',
-      sourceUrl: promptLibraryBaseUrl,
-      total: 0,
-      syncedAt: new Date().toISOString(),
-      items: [],
-    };
   }
 
   const indexDataset: PromptLibraryIndexDataset = {
@@ -131,35 +144,24 @@ async function main() {
     total: dataset.total,
     syncedAt: dataset.syncedAt,
     items: dataset.items.map(toIndexItem),
+    assetBaseUrl: promptLibraryAssetBaseUrl,
   };
 
+  fs.rmSync(outputDir, { recursive: true, force: true });
+  fs.mkdirSync(outputDir, { recursive: true });
+  writeJsonFile(path.join(outputDir, 'index.json'), indexDataset);
+
   if (generateLocalAssets) {
-    const outputDir = path.join(
-      process.cwd(),
-      'public/prompt-library/gpt-image-2'
-    );
-    const itemsDir = path.join(outputDir, 'items');
-    fs.rmSync(outputDir, { recursive: true, force: true });
     fs.mkdirSync(itemsDir, { recursive: true });
-    fs.writeFileSync(
-      path.join(outputDir, 'index.json'),
-      `${JSON.stringify(indexDataset, null, 2)}\n`
-    );
 
     for (const item of dataset.items) {
       const fullItem = await fetchJson<PromptLibraryDataset['items'][number]>(
         `${promptLibraryBaseUrl}/gpt-image-2/items/${item.slug}.json`
       );
-      fs.writeFileSync(
-        path.join(itemsDir, `${item.slug}.json`),
-        `${JSON.stringify(fullItem, null, 2)}\n`
-      );
+      writeJsonFile(path.join(itemsDir, `${item.slug}.json`), fullItem);
     }
   } else {
-    fs.rmSync(path.join(process.cwd(), 'public/prompt-library'), {
-      recursive: true,
-      force: true,
-    });
+    fs.rmSync(itemsDir, { recursive: true, force: true });
   }
 
   const sitemapItems = dataset.items
@@ -214,7 +216,7 @@ ${sitemapUrls
   console.log(
     generateLocalAssets
       ? `Generated ${dataset.items.length} local GPT Image 2 prompt assets and ${sitemapUrls.length} sitemap URLs.`
-      : `Generated ${sitemapUrls.length} sitemap URLs. Prompt JSON is expected from CDN.`
+      : `Generated GPT Image 2 prompt index and ${sitemapUrls.length} sitemap URLs. Full prompt JSON is expected from the API.`
   );
 }
 

@@ -8,6 +8,7 @@ import {
   Download,
   ImageIcon,
   Loader2,
+  Share2,
   Sparkles,
   User,
   Video,
@@ -252,6 +253,7 @@ export function GptImage2Generator({
   const [downloadingImageId, setDownloadingImageId] = useState<string | null>(
     null
   );
+  const [sharingImageId, setSharingImageId] = useState<string | null>(null);
   const [availableProviders, setAvailableProviders] = useState<string[]>([]);
   const [isLoadingProviders, setIsLoadingProviders] = useState(true);
   const [clientRequestId, setClientRequestId] = useState(() => getUuid());
@@ -264,7 +266,8 @@ export function GptImage2Generator({
   const userIdRef = useRef<string | null>(null);
   const promptTextareaRef = useRef<HTMLTextAreaElement | null>(null);
   const lastAppliedPromptRef = useRef<string | null>(null);
-  const { canDownload, paidDownloadDialogProps } = usePaidDownloadGate();
+  const { canDownload, canAccessPaidAction, paidDownloadDialogProps } =
+    usePaidDownloadGate();
 
   const {
     user,
@@ -674,6 +677,7 @@ export function GptImage2Generator({
     setReferenceImageUrls([]);
     setGeneratedImages([]);
     setDownloadingImageId(null);
+    setSharingImageId(null);
     setCreditFallback(null);
     setPrompt(promptParam.slice(0, MAX_PROMPT_LENGTH));
     setActiveTab('text-to-image');
@@ -867,6 +871,7 @@ export function GptImage2Generator({
     setProgress(15);
     setTaskStatus(AITaskStatus.PENDING);
     setGeneratedImages([]);
+    setSharingImageId(null);
     setGenerationStartTime(Date.now());
     analyticsSnapshotRef.current = analyticsSnapshot;
     trackGtmGenerateContentStarted({
@@ -1146,6 +1151,48 @@ export function GptImage2Generator({
       toast.error('Failed to download image');
     } finally {
       setDownloadingImageId(null);
+    }
+  };
+
+  const handleShareImage = async (image: GeneratedImage) => {
+    if (!image.url) {
+      return;
+    }
+
+    if (!(await canAccessPaidAction('share', 'image'))) {
+      return;
+    }
+
+    try {
+      setSharingImageId(image.id);
+      const shareData = {
+        title: 'GPT Image 2 image',
+        text: image.prompt?.trim()
+          ? image.prompt.trim().slice(0, 180)
+          : 'Generated with GPT Image 2',
+        url: image.url,
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          return;
+        } catch (error: any) {
+          if (error?.name === 'AbortError') {
+            return;
+          }
+
+          console.warn('Native image share failed, falling back:', error);
+        }
+      }
+
+      await navigator.clipboard.writeText(image.url);
+      toast.success('Share link copied');
+    } catch (error) {
+      console.error('Failed to share image:', error);
+      toast.error('Failed to share image');
+    } finally {
+      setSharingImageId(null);
     }
   };
 
@@ -1450,7 +1497,26 @@ export function GptImage2Generator({
                         {shouldWatermarkGeneratedImages && (
                           <ImageWatermarkOverlay />
                         )}
-                        <div className="absolute right-3 bottom-3 z-20">
+                        <div className="absolute right-3 bottom-3 left-3 z-20 flex flex-wrap justify-end gap-2">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="gap-2 bg-black/40 text-white backdrop-blur-sm hover:bg-black/60"
+                            onClick={() => handleShareImage(image)}
+                            disabled={sharingImageId === image.id}
+                          >
+                            {sharingImageId === image.id ? (
+                              <>
+                                <Loader2 className="h-4 w-4 animate-spin" />
+                                <span>Sharing</span>
+                              </>
+                            ) : (
+                              <>
+                                <Share2 className="h-4 w-4" />
+                                <span>Share</span>
+                              </>
+                            )}
+                          </Button>
                           <Button
                             size="sm"
                             variant="ghost"

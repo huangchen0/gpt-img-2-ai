@@ -7,6 +7,8 @@ import { getCanonicalAppUrl } from '@/shared/prompt-library/seo';
 
 import { GptImage2PromptGalleryClient } from './prompt-gallery-client';
 
+export const revalidate = 3600;
+
 const promptLibrarySeoConfig = {
   path: '/prompts/gpt-image-2',
   collectionTitle: 'GPT Image 2 Prompt Gallery: 725 Copyable Image Prompts',
@@ -27,6 +29,10 @@ function getCanonicalUrl(path: string) {
 }
 
 function getPromptLibraryDatasetUrl() {
+  return '/prompt-library/gpt-image-2/index.json';
+}
+
+function getPromptLibraryFallbackDatasetUrl() {
   return '/api/prompt-library/gpt-image-2/index.json';
 }
 
@@ -88,6 +94,7 @@ export default async function GptImage2PromptsPage({
       />
       <GptImage2PromptGalleryClient
         datasetUrl={getPromptLibraryDatasetUrl()}
+        fallbackDatasetUrl={getPromptLibraryFallbackDatasetUrl()}
         initialTotal={725}
       />
     </>
