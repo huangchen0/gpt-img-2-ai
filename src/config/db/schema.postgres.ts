@@ -72,6 +72,7 @@ export const session = table(
       .notNull(),
     ipAddress: text('ip_address'),
     userAgent: text('user_agent'),
+    loginMethod: text('login_method').notNull().default(''),
     userId: text('user_id')
       .notNull()
       .references(() => user.id, { onDelete: 'cascade' }),
@@ -80,6 +81,31 @@ export const session = table(
     // Composite: Query user sessions and filter by expiration
     // Can also be used for: WHERE userId = ? (left-prefix)
     index('idx_session_user_expires').on(table.userId, table.expiresAt),
+    index('idx_session_ip_expires').on(table.ipAddress, table.expiresAt),
+  ]
+);
+
+export const ipLoginSlot = table(
+  'ip_login_slot',
+  {
+    id: text('id').primaryKey(),
+    ipAddress: text('ip_address').notNull(),
+    slot: integer('slot').notNull(),
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    expiresAt: timestamp('expires_at').notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at')
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex('uq_ip_login_slot_ip_slot').on(table.ipAddress, table.slot),
+    uniqueIndex('uq_ip_login_slot_ip_user').on(table.ipAddress, table.userId),
+    index('idx_ip_login_slot_ip_expires').on(table.ipAddress, table.expiresAt),
+    index('idx_ip_login_slot_user_id').on(table.userId),
   ]
 );
 

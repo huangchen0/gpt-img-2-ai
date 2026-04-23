@@ -522,6 +522,16 @@ export async function getSettings() {
       tip: 'Require users to verify their email before they can sign in. Requires a configured email provider (e.g. Resend).',
     },
     {
+      name: 'auth_max_accounts_per_ip',
+      title: 'Max Accounts Per IP',
+      type: 'number',
+      value: 5,
+      placeholder: '5',
+      group: 'email_auth',
+      tab: 'auth',
+      tip: 'Maximum number of different accounts that can sign in with email and password from the same IP address. Set to 0 to disable.',
+    },
+    {
       name: 'google_auth_enabled',
       title: 'Auth Enabled',
       type: 'switch',

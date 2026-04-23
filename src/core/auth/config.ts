@@ -1,6 +1,8 @@
+import { APIError } from 'better-auth';
+import { createAuthMiddleware, getSessionFromCtx } from 'better-auth/api';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { oneTap } from 'better-auth/plugins';
-import { eq } from 'drizzle-orm';
+import { and, eq, gt, inArray, lte, not } from 'drizzle-orm';
 import { getLocale } from 'next-intl/server';
 
 import { db } from '@/core/db';
@@ -21,6 +23,403 @@ import { getCurrentSiteCode } from '@/shared/lib/site';
 // and to add a server-side throttle beyond any client-side cooldown.
 const recentVerificationEmailSentAt = new Map<string, number>();
 const VERIFICATION_EMAIL_MIN_INTERVAL_MS = 60_000;
+const DEFAULT_MAX_ACCOUNTS_PER_IP = 5;
+const EMAIL_PASSWORD_SIGN_IN_PATH = '/sign-in/email';
+const EMAIL_LOGIN_METHOD = 'email';
+const SIGN_OUT_PATH = '/sign-out';
+const REVOKE_SESSION_PATH = '/revoke-session';
+const REVOKE_SESSIONS_PATH = '/revoke-sessions';
+const REVOKE_OTHER_SESSIONS_PATH = '/revoke-other-sessions';
+const CHANGE_PASSWORD_PATH = '/change-password';
+const PENDING_IP_LOGIN_SLOT_TTL_MS = 5 * 60 * 1000;
+const IP_LOGIN_SLOT_CLEANUP_TARGETS_KEY = '__ipLoginSlotCleanupTargets';
+
+type IpLoginCleanupTarget = {
+  ipAddress: string;
+  userId: string;
+};
+
+function isLoopbackIp(ip: string) {
+  return (
+    ip === '127.0.0.1' ||
+    ip === '::1' ||
+    ip === '::ffff:127.0.0.1' ||
+    ip === 'localhost'
+  );
+}
+
+function getMaxAccountsPerIp(configs: Record<string, string>) {
+  const rawValue =
+    configs.auth_max_accounts_per_ip ?? process.env.AUTH_MAX_ACCOUNTS_PER_IP;
+  if (rawValue == null || String(rawValue).trim() === '') {
+    return DEFAULT_MAX_ACCOUNTS_PER_IP;
+  }
+
+  const parsedValue = Number(rawValue);
+
+  if (Number.isFinite(parsedValue) && parsedValue >= 0) {
+    return Math.floor(parsedValue);
+  }
+
+  return DEFAULT_MAX_ACCOUNTS_PER_IP;
+}
+
+function shouldEnforceEmailPasswordIpLimit(ctx: any) {
+  return ctx?.path === EMAIL_PASSWORD_SIGN_IN_PATH;
+}
+
+function isEmailLoginSession(sessionData: {
+  loginMethod?: string | null;
+  ipAddress?: string | null;
+  userId?: string | null;
+}) {
+  return String(sessionData?.loginMethod || '').trim() === EMAIL_LOGIN_METHOD;
+}
+
+function isSessionCleanupPath(path: string) {
+  return [
+    SIGN_OUT_PATH,
+    REVOKE_SESSION_PATH,
+    REVOKE_SESSIONS_PATH,
+    REVOKE_OTHER_SESSIONS_PATH,
+    CHANGE_PASSWORD_PATH,
+  ].includes(path);
+}
+
+function getIpFromAuthContext(ctx: any) {
+  const headers: Headers | undefined = ctx?.request?.headers || ctx?.headers;
+  if (!headers) {
+    return '';
+  }
+
+  const forwardedFor = headers.get('x-forwarded-for');
+  if (forwardedFor) {
+    const forwardedIp = forwardedFor.split(',')[0]?.trim();
+    if (forwardedIp) {
+      return forwardedIp;
+    }
+  }
+
+  return (
+    headers.get('cf-connecting-ip')?.trim() ||
+    headers.get('x-real-ip')?.trim() ||
+    ''
+  );
+}
+
+function getPendingIpLoginSlotExpiry() {
+  return new Date(Date.now() + PENDING_IP_LOGIN_SLOT_TTL_MS);
+}
+
+function toIpLoginCleanupTarget(sessionData: {
+  ipAddress?: string | null;
+  userId?: string | null;
+  loginMethod?: string | null;
+}): IpLoginCleanupTarget | null {
+  const ipAddress = String(sessionData?.ipAddress || '').trim();
+  const userId = String(sessionData?.userId || '').trim();
+
+  if (
+    !ipAddress ||
+    !userId ||
+    isLoopbackIp(ipAddress) ||
+    !isEmailLoginSession(sessionData)
+  ) {
+    return null;
+  }
+
+  return {
+    ipAddress,
+    userId,
+  };
+}
+
+function dedupeIpLoginCleanupTargets(targets: IpLoginCleanupTarget[]) {
+  return Array.from(
+    new Map(
+      targets.map((target) => [`${target.ipAddress}:${target.userId}`, target])
+    ).values()
+  );
+}
+
+async function getSafeSessionFromContext(ctx: any) {
+  try {
+    return await getSessionFromCtx(ctx);
+  } catch {
+    return null;
+  }
+}
+
+async function reconcileIpLoginSlots(ipAddress: string) {
+  const now = new Date();
+
+  await db()
+    .delete(schema.ipLoginSlot)
+    .where(
+      and(
+        eq(schema.ipLoginSlot.ipAddress, ipAddress),
+        lte(schema.ipLoginSlot.expiresAt, now)
+      )
+    );
+
+  const activeSessions = await db()
+    .selectDistinct({
+      userId: schema.session.userId,
+    })
+    .from(schema.session)
+    .where(
+      and(
+        eq(schema.session.ipAddress, ipAddress),
+        eq(schema.session.loginMethod, EMAIL_LOGIN_METHOD),
+        gt(schema.session.expiresAt, now)
+      )
+    );
+
+  const activeUserIds = activeSessions
+    .map((session: { userId: string }) => session.userId)
+    .filter(Boolean);
+
+  if (activeUserIds.length === 0) {
+    await db()
+      .delete(schema.ipLoginSlot)
+      .where(eq(schema.ipLoginSlot.ipAddress, ipAddress));
+    return;
+  }
+
+  await db()
+    .delete(schema.ipLoginSlot)
+    .where(
+      and(
+        eq(schema.ipLoginSlot.ipAddress, ipAddress),
+        not(inArray(schema.ipLoginSlot.userId, activeUserIds))
+      )
+    );
+}
+
+async function claimIpLoginSlot({
+  ipAddress,
+  userId,
+  maxAccountsPerIp,
+}: {
+  ipAddress: string;
+  userId: string;
+  maxAccountsPerIp: number;
+}) {
+  await reconcileIpLoginSlots(ipAddress);
+
+  const provisionalExpiresAt = getPendingIpLoginSlotExpiry();
+  const [existingSlot] = await db()
+    .select({
+      id: schema.ipLoginSlot.id,
+    })
+    .from(schema.ipLoginSlot)
+    .where(
+      and(
+        eq(schema.ipLoginSlot.ipAddress, ipAddress),
+        eq(schema.ipLoginSlot.userId, userId)
+      )
+    )
+    .limit(1);
+
+  if (existingSlot) {
+    await db()
+      .update(schema.ipLoginSlot)
+      .set({
+        expiresAt: provisionalExpiresAt,
+        updatedAt: new Date(),
+      })
+      .where(eq(schema.ipLoginSlot.id, existingSlot.id));
+    return;
+  }
+
+  for (let slot = 1; slot <= maxAccountsPerIp; slot += 1) {
+    const inserted = await db()
+      .insert(schema.ipLoginSlot)
+      .values({
+        id: getUuid(),
+        ipAddress,
+        slot,
+        userId,
+        expiresAt: provisionalExpiresAt,
+      })
+      .onConflictDoNothing()
+      .returning({
+        id: schema.ipLoginSlot.id,
+      });
+
+    if (inserted.length > 0) {
+      return;
+    }
+  }
+
+  const [concurrentSlot] = await db()
+    .select({
+      id: schema.ipLoginSlot.id,
+    })
+    .from(schema.ipLoginSlot)
+    .where(
+      and(
+        eq(schema.ipLoginSlot.ipAddress, ipAddress),
+        eq(schema.ipLoginSlot.userId, userId)
+      )
+    )
+    .limit(1);
+
+  if (concurrentSlot) {
+    await db()
+      .update(schema.ipLoginSlot)
+      .set({
+        expiresAt: provisionalExpiresAt,
+        updatedAt: new Date(),
+      })
+      .where(eq(schema.ipLoginSlot.id, concurrentSlot.id));
+    return;
+  }
+
+  throw new APIError('FORBIDDEN', {
+    message: `This IP address has already reached the login limit of ${maxAccountsPerIp} accounts.`,
+  });
+}
+
+async function syncIpLoginSlotExpiry(sessionData: {
+  ipAddress?: string | null;
+  userId?: string | null;
+  expiresAt?: Date | null;
+  loginMethod?: string | null;
+}) {
+  const ipAddress = String(sessionData?.ipAddress || '').trim();
+  const userId = String(sessionData?.userId || '').trim();
+  const expiresAt = sessionData?.expiresAt;
+
+  if (
+    !ipAddress ||
+    !userId ||
+    !expiresAt ||
+    isLoopbackIp(ipAddress) ||
+    !isEmailLoginSession(sessionData)
+  ) {
+    return;
+  }
+
+  await db()
+    .update(schema.ipLoginSlot)
+    .set({
+      expiresAt,
+      updatedAt: new Date(),
+    })
+    .where(
+      and(
+        eq(schema.ipLoginSlot.ipAddress, ipAddress),
+        eq(schema.ipLoginSlot.userId, userId)
+      )
+    );
+}
+
+async function releaseIpLoginSlotIfUnused(target: IpLoginCleanupTarget) {
+  if (!target?.ipAddress || !target?.userId) {
+    return;
+  }
+
+  const [activeSession] = await db()
+    .select({
+      id: schema.session.id,
+    })
+    .from(schema.session)
+    .where(
+      and(
+        eq(schema.session.ipAddress, target.ipAddress),
+        eq(schema.session.userId, target.userId),
+        eq(schema.session.loginMethod, EMAIL_LOGIN_METHOD),
+        gt(schema.session.expiresAt, new Date())
+      )
+    )
+    .limit(1);
+
+  if (activeSession) {
+    return;
+  }
+
+  await db()
+    .delete(schema.ipLoginSlot)
+    .where(
+      and(
+        eq(schema.ipLoginSlot.ipAddress, target.ipAddress),
+        eq(schema.ipLoginSlot.userId, target.userId)
+      )
+    );
+}
+
+async function collectIpLoginCleanupTargets(ctx: any) {
+  switch (ctx.path) {
+    case SIGN_OUT_PATH: {
+      const session = await getSafeSessionFromContext(ctx);
+      return dedupeIpLoginCleanupTargets(
+        [
+          toIpLoginCleanupTarget({
+            ipAddress: session?.session?.ipAddress,
+            userId: session?.session?.userId,
+            loginMethod: session?.session?.loginMethod,
+          }),
+        ].filter(Boolean) as IpLoginCleanupTarget[]
+      );
+    }
+    case REVOKE_SESSION_PATH: {
+      const token = String(ctx?.body?.token || '').trim();
+      if (!token) {
+        return [];
+      }
+
+      const session = await ctx.context.internalAdapter.findSession(token);
+      return dedupeIpLoginCleanupTargets(
+        [
+          toIpLoginCleanupTarget({
+            ipAddress: session?.session?.ipAddress,
+            userId: session?.session?.userId,
+            loginMethod: session?.session?.loginMethod,
+          }),
+        ].filter(Boolean) as IpLoginCleanupTarget[]
+      );
+    }
+    case REVOKE_SESSIONS_PATH:
+    case REVOKE_OTHER_SESSIONS_PATH:
+    case CHANGE_PASSWORD_PATH: {
+      const currentSession = await getSafeSessionFromContext(ctx);
+      const userId = String(currentSession?.user?.id || '').trim();
+      if (!userId) {
+        return [];
+      }
+
+      const sessions = await ctx.context.internalAdapter.listSessions(userId);
+      const activeSessions = sessions.filter(
+        (session: any) => session.expiresAt > new Date()
+      );
+
+      const filteredSessions =
+        ctx.path === REVOKE_OTHER_SESSIONS_PATH ||
+        (ctx.path === CHANGE_PASSWORD_PATH &&
+          ctx?.body?.revokeOtherSessions === true)
+          ? activeSessions.filter(
+              (session: any) =>
+                session.token !== currentSession?.session?.token
+            )
+          : activeSessions;
+
+      return dedupeIpLoginCleanupTargets(
+        filteredSessions
+          .map((session: any) =>
+            toIpLoginCleanupTarget({
+              ipAddress: session.ipAddress,
+              userId: session.userId,
+              loginMethod: session.loginMethod,
+            })
+          )
+          .filter(Boolean) as IpLoginCleanupTarget[]
+      );
+    }
+    default:
+      return [];
+  }
+}
 
 // Static auth options - NO database connection
 // This ensures zero database calls during build time
@@ -67,9 +466,22 @@ const authOptions = {
       },
     },
   },
+  session: {
+    additionalFields: {
+      loginMethod: {
+        type: 'string',
+        input: false,
+        required: false,
+        defaultValue: '',
+      },
+    },
+  },
   advanced: {
     database: {
       generateId: () => getUuid(),
+    },
+    ipAddress: {
+      ipAddressHeaders: ['cf-connecting-ip', 'x-real-ip', 'x-forwarded-for'],
     },
   },
   emailAndPassword: {
@@ -226,6 +638,91 @@ export async function getAuthOptions(configs: Record<string, string>) {
           },
         },
       },
+      session: {
+        create: {
+          before: async (sessionData: any, ctx: any) => {
+            const shouldMarkEmailLoginMethod =
+              shouldEnforceEmailPasswordIpLimit(ctx) ||
+              (ctx?.path === CHANGE_PASSWORD_PATH &&
+                isEmailLoginSession(ctx?.context?.session?.session));
+
+            if (shouldMarkEmailLoginMethod) {
+              sessionData.loginMethod = EMAIL_LOGIN_METHOD;
+            }
+
+            if (!shouldEnforceEmailPasswordIpLimit(ctx)) {
+              return sessionData;
+            }
+
+            const maxAccountsPerIp = getMaxAccountsPerIp(configs);
+            if (maxAccountsPerIp <= 0) {
+              return sessionData;
+            }
+
+            const ipAddress = String(
+              sessionData?.ipAddress || getIpFromAuthContext(ctx) || ''
+            ).trim();
+            const userId = String(sessionData?.userId || '').trim();
+            if (!ipAddress || !userId || isLoopbackIp(ipAddress)) {
+              return sessionData;
+            }
+
+            sessionData.ipAddress = ipAddress;
+            await claimIpLoginSlot({
+              ipAddress,
+              userId,
+              maxAccountsPerIp,
+            });
+
+            return sessionData;
+          },
+          after: async (sessionData: any) => {
+            await syncIpLoginSlotExpiry(sessionData);
+          },
+        },
+        update: {
+          after: async (sessionData: any) => {
+            await syncIpLoginSlotExpiry(sessionData);
+          },
+        },
+      },
+    },
+    hooks: {
+      before: createAuthMiddleware(async (ctx) => {
+        if (!isSessionCleanupPath(ctx.path)) {
+          return;
+        }
+
+        if (
+          ctx.path === CHANGE_PASSWORD_PATH &&
+          ctx?.body?.revokeOtherSessions !== true
+        ) {
+          return;
+        }
+
+        (ctx.context as any)[IP_LOGIN_SLOT_CLEANUP_TARGETS_KEY] =
+          await collectIpLoginCleanupTargets(ctx);
+      }),
+      after: createAuthMiddleware(async (ctx) => {
+        if (!isSessionCleanupPath(ctx.path)) {
+          return;
+        }
+
+        if (
+          ctx.path === CHANGE_PASSWORD_PATH &&
+          ctx?.body?.revokeOtherSessions !== true
+        ) {
+          return;
+        }
+
+        const cleanupTargets = (((ctx.context as any) || {})[
+          IP_LOGIN_SLOT_CLEANUP_TARGETS_KEY
+        ] || []) as IpLoginCleanupTarget[];
+
+        for (const cleanupTarget of cleanupTargets) {
+          await releaseIpLoginSlotIfUnused(cleanupTarget);
+        }
+      }),
     },
     emailAndPassword: {
       enabled: configs.email_auth_enabled !== 'false',

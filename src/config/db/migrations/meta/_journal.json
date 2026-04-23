@@ -36,6 +36,20 @@
       "when": 1776836517153,
       "tag": "0004_lean_diamondback",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1776934639105,
+      "tag": "0005_flaky_chamber",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1776934778387,
+      "tag": "0006_tricky_king_cobra",
+      "breakpoints": true
     }
   ]
 }
