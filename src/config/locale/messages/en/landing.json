@@ -71,12 +71,12 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "referral-subscription-bonus-2026-04-23",
+      "id": "referral-subscription-bonus-2026-04-23-v2",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
         "alt": "Referral subscription bonus"
       },
-      "text": "Limited-time referral offer: invite friends and you both get <strong>20%</strong> extra subscription credits on their first subscription.",
+      "text": "🔥 Invite a friend's first subscription: you both get <strong>20%</strong> more credits",
       "closeLabel": "Close banner",
       "buttonText": "Invite Friends",
       "href": "/settings/credits",

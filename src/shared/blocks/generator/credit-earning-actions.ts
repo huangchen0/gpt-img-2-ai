@@ -46,10 +46,13 @@ export function getGenerationCreditRewardAmounts(
   configs: Record<string, string>
 ) {
   return {
-    checkinCredits: parsePositiveCreditConfig(configs.daily_checkin_credits, 3),
+    checkinCredits: parsePositiveCreditConfig(
+      configs.daily_checkin_credits,
+      10
+    ),
     referralCredits: parsePositiveCreditConfig(
       configs.referral_reward_credits,
-      60
+      50
     ),
     referralSubscriptionBonusPercent: parsePositiveCreditConfig(
       configs.referral_subscription_bonus_percent,

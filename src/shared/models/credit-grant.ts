@@ -9,7 +9,7 @@ export async function grantCreditsForNewUser(user: User) {
     return;
   }
 
-  const credits = parseInt(configs.initial_credits_amount as string) || 60;
+  const credits = parseInt(configs.initial_credits_amount as string) || 100;
   if (credits <= 0) {
     return;
   }

@@ -71,12 +71,12 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "referral-subscription-bonus-2026-04-23",
+      "id": "referral-subscription-bonus-2026-04-23-v2",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
         "alt": "紹介サブスクリプション特典"
       },
-      "text": "期間限定の紹介特典：友達の初回サブスク購入で、双方にサブスククレジットを<strong>20%</strong>追加。",
+      "text": "🔥 友達の初回サブスクで、双方に<strong>20%</strong>追加クレジット",
       "closeLabel": "バナーを閉じる",
       "buttonText": "友達を招待",
       "href": "/settings/credits",

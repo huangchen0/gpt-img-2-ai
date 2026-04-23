@@ -71,12 +71,12 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "referral-subscription-bonus-2026-04-23",
+      "id": "referral-subscription-bonus-2026-04-23-v2",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
         "alt": "Bono de suscripción por invitación"
       },
-      "text": "Oferta de invitación por tiempo limitado: invita amigos y ambos reciben un <strong>20%</strong> extra de créditos de suscripción en su primera suscripción.",
+      "text": "🔥 Invita el primer plan de un amigo: ambos ganan un <strong>20%</strong> más de créditos",
       "closeLabel": "Cerrar aviso",
       "buttonText": "Invitar amigos",
       "href": "/settings/credits",

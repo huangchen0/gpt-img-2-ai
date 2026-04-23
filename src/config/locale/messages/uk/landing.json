@@ -71,12 +71,12 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "referral-subscription-bonus-2026-04-23",
+      "id": "referral-subscription-bonus-2026-04-23-v2",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
         "alt": "Бонус за першу підписку друга"
       },
-      "text": "Обмежена реферальна пропозиція: запросіть друга, і ви обоє отримаєте на <strong>20%</strong> більше кредитів підписки під час його першої підписки.",
+      "text": "🔥 Запросіть друга на першу підписку: ви обоє отримаєте на <strong>20%</strong> більше кредитів",
       "closeLabel": "Закрити банер",
       "buttonText": "Запросити друга",
       "href": "/settings/credits",
