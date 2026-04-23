@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   BookOpen,
   CreditCard,
@@ -230,6 +231,7 @@ export function GptImage2Generator({
   hideHeader = false,
 }: GptImage2GeneratorProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const t = useTranslations('ai.image.generator');
   const [activeTab, setActiveTab] = useState<GptImageScene>('text-to-image');
   const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
@@ -260,6 +262,8 @@ export function GptImage2Generator({
   const transientPollErrorCountRef = useRef(0);
   const hasLoadedCreditsRef = useRef(false);
   const userIdRef = useRef<string | null>(null);
+  const promptTextareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const lastAppliedPromptRef = useRef<string | null>(null);
   const { canDownload, paidDownloadDialogProps } = usePaidDownloadGate();
 
   const {
@@ -652,6 +656,37 @@ export function GptImage2Generator({
     setTaskStatus(null);
     transientPollErrorCountRef.current = 0;
   }, []);
+
+  useEffect(() => {
+    const promptParam = searchParams?.get('prompt')?.trim();
+
+    if (!promptParam) {
+      lastAppliedPromptRef.current = null;
+      return;
+    }
+
+    if (promptParam === lastAppliedPromptRef.current) {
+      return;
+    }
+
+    resetTaskState();
+    setReferenceImageItems([]);
+    setReferenceImageUrls([]);
+    setGeneratedImages([]);
+    setDownloadingImageId(null);
+    setCreditFallback(null);
+    setPrompt(promptParam.slice(0, MAX_PROMPT_LENGTH));
+    setActiveTab('text-to-image');
+    lastAppliedPromptRef.current = promptParam;
+
+    window.requestAnimationFrame(() => {
+      const textarea = promptTextareaRef.current;
+      if (!textarea) return;
+
+      textarea.focus();
+      textarea.setSelectionRange(textarea.value.length, textarea.value.length);
+    });
+  }, [resetTaskState, searchParams]);
 
   const pollTaskStatus = useCallback(
     async (id: string, providerTaskIdForQuery?: string | null) => {
@@ -1215,6 +1250,7 @@ export function GptImage2Generator({
                 <Label htmlFor="gpt-image-prompt">{t('form.prompt')}</Label>
                 <Textarea
                   id="gpt-image-prompt"
+                  ref={promptTextareaRef}
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder={t('form.prompt_placeholder')}
