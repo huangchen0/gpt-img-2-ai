@@ -6,6 +6,8 @@ import { trackGtmQueueEvent } from '@/shared/lib/gtm';
 import { getUuid } from '@/shared/lib/hash';
 
 const PRIORITY_QUEUE_STORAGE_KEY = 'membership_priority_queue_v1';
+const PRIORITY_QUEUE_STORAGE_VERSION: 3 = 3;
+const PRIORITY_QUEUE_WAIT_EXTENSION_MS = 29 * 1000;
 const QUEUE_TICK_INTERVAL_MS = 1000;
 
 export type MembershipPriorityQueueMediaType = 'image' | 'video';
@@ -16,7 +18,7 @@ export type MembershipPriorityQueueStatus =
   | 'submit_failed';
 
 interface PersistedMembershipPriorityQueue {
-  version: 2;
+  version: 2 | 3;
   queueId: string;
   userId: string;
   mediaType: MembershipPriorityQueueMediaType;
@@ -90,36 +92,44 @@ function readStoredQueue() {
     }
 
     const parsed = JSON.parse(raw) as PersistedMembershipPriorityQueue | null;
+    const migratedQueue: PersistedMembershipPriorityQueue | null =
+      parsed?.version === 2
+        ? {
+            ...parsed,
+            version: PRIORITY_QUEUE_STORAGE_VERSION,
+            waitMs: parsed.waitMs + PRIORITY_QUEUE_WAIT_EXTENSION_MS,
+          }
+        : parsed;
     const scope =
-      typeof parsed?.scope === 'string' && parsed.scope.trim()
-        ? parsed.scope
-        : parsed?.mediaType;
+      typeof migratedQueue?.scope === 'string' && migratedQueue.scope.trim()
+        ? migratedQueue.scope
+        : migratedQueue?.mediaType;
     if (
-      !parsed ||
-      parsed.version !== 2 ||
-      !parsed.queueId ||
-      !parsed.userId ||
-      !parsed.mediaType ||
+      !migratedQueue ||
+      migratedQueue.version !== PRIORITY_QUEUE_STORAGE_VERSION ||
+      !migratedQueue.queueId ||
+      !migratedQueue.userId ||
+      !migratedQueue.mediaType ||
       !scope ||
-      typeof parsed.startedAt !== 'number' ||
-      typeof parsed.waitMs !== 'number' ||
-      typeof parsed.snapshotDigest !== 'string' ||
-      typeof parsed.payload !== 'string' ||
-      typeof parsed.submitted !== 'boolean' ||
-      typeof parsed.submitFailed !== 'boolean'
+      typeof migratedQueue.startedAt !== 'number' ||
+      typeof migratedQueue.waitMs !== 'number' ||
+      typeof migratedQueue.snapshotDigest !== 'string' ||
+      typeof migratedQueue.payload !== 'string' ||
+      typeof migratedQueue.submitted !== 'boolean' ||
+      typeof migratedQueue.submitFailed !== 'boolean'
     ) {
       clearMembershipPriorityQueueStorage();
       return null;
     }
 
     const normalizedQueue =
-      parsed.submitted && !parsed.submitFailed
+      migratedQueue.submitted && !migratedQueue.submitFailed
         ? {
-            ...parsed,
+            ...migratedQueue,
             submitted: false,
             submitFailed: true,
           }
-        : parsed;
+        : migratedQueue;
 
     if (normalizedQueue !== parsed) {
       writeStoredQueue(normalizedQueue);
@@ -196,7 +206,7 @@ function createQueueEntry({
   serializedPayload: string;
 }) {
   return {
-    version: 2,
+    version: PRIORITY_QUEUE_STORAGE_VERSION,
     queueId: getUuid(),
     userId,
     mediaType,

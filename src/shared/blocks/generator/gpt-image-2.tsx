@@ -132,8 +132,8 @@ const MAX_PROMPT_LENGTH = 20000;
 const VIDEO_PROMPT_PREFILL_MAX_LENGTH = 2500;
 const IMAGE_CREDITS_MULTIPLIER = 10;
 const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  (1 * 60 + 45) * 1000,
-  (3 * 60 + 45) * 1000,
+  (2 * 60 + 14) * 1000,
+  (4 * 60 + 14) * 1000,
 ];
 const DEFAULT_PROMPT =
   'Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat, calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.';

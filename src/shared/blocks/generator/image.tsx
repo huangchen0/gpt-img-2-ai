@@ -134,8 +134,8 @@ const GENERATION_TIMEOUT = 180000;
 const MAX_PROMPT_LENGTH = 20000;
 const IMAGE_CREDITS_MULTIPLIER = 10;
 const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  (1 * 60 + 45) * 1000,
-  (3 * 60 + 45) * 1000,
+  (2 * 60 + 14) * 1000,
+  (4 * 60 + 14) * 1000,
 ];
 const IMAGE_QUEUE_RETURN_HREF = '/models/gpt-image-2#nano-banana-generator';
 const VIDEO_QUEUE_RETURN_HREF =
