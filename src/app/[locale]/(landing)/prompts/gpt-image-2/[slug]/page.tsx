@@ -32,6 +32,10 @@ import {
   getPromptMediaImage,
   getPromptVisualAltText,
 } from '@/shared/prompt-library/seo';
+import {
+  getPreferredPrompt,
+  getPromptVariants,
+} from '@/shared/prompt-library/prompts';
 
 import { CopyPromptButton } from '../copy-prompt-button';
 import { SharePromptButton } from '../share-prompt-button';
@@ -133,10 +137,8 @@ export default async function GptImage2PromptDetailPage({
   });
   const settings = getLocalizedSuggestedSettings(item, promptLocale);
   const tips = getLocalizedCustomizationTips(item, promptLocale);
-  const promptVariants =
-    item.promptVariants && item.promptVariants.length > 0
-      ? item.promptVariants
-      : [{ text: item.prompt, type: item.language, label: null }];
+  const promptVariants = getPromptVariants(item);
+  const preferredPrompt = getPreferredPrompt(item, promptLocale);
 
   return (
     <main className="bg-background text-foreground">
@@ -203,12 +205,15 @@ export default async function GptImage2PromptDetailPage({
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild>
-                  <a href={getImageGeneratorUrl(item.prompt, promptLocale)}>
+                  <a href={getImageGeneratorUrl(preferredPrompt, promptLocale)}>
                     <ImageIcon className="size-4" />
                     {messages.buttons.useInGenerator}
                   </a>
                 </Button>
-                <CopyPromptButton prompt={item.prompt} locale={promptLocale} />
+                <CopyPromptButton
+                  prompt={preferredPrompt}
+                  locale={promptLocale}
+                />
                 <SharePromptButton locale={promptLocale} />
               </div>
 
@@ -260,7 +265,10 @@ export default async function GptImage2PromptDetailPage({
               <h2 className="text-2xl font-semibold">
                 {messages.detail.fullPromptHeading}
               </h2>
-              <CopyPromptButton prompt={item.prompt} locale={promptLocale} />
+              <CopyPromptButton
+                prompt={preferredPrompt}
+                locale={promptLocale}
+              />
             </div>
             <div className="space-y-4">
               {promptVariants.map((variant, index) => {

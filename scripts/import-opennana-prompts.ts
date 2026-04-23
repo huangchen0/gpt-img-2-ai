@@ -55,6 +55,11 @@ type OpenNanaPromptListResponse = {
   };
 };
 
+type ExistingImportedPromptLookup = {
+  itemByExternalId: Map<string, PromptLibraryImportedItem>;
+  slugs: Set<string>;
+};
+
 function trimTrailingSlash(value: string) {
   return value.replace(/\/+$/, '');
 }
@@ -313,13 +318,49 @@ function getBasePromptLibraryUrl() {
   );
 }
 
-async function getExistingBaseSlugs() {
+function readExistingImportDataset() {
+  if (!fs.existsSync(OUTPUT_FILE)) {
+    return undefined;
+  }
+
+  return JSON.parse(
+    fs.readFileSync(OUTPUT_FILE, 'utf8')
+  ) as PromptLibraryImportDataset;
+}
+
+function getExistingImportedPromptLookup(): ExistingImportedPromptLookup {
+  const dataset = readExistingImportDataset();
+  const itemByExternalId = new Map<string, PromptLibraryImportedItem>();
+  const slugs = new Set<string>();
+
+  for (const item of dataset?.items || []) {
+    if (item.slug) {
+      slugs.add(item.slug);
+    }
+
+    const externalId = item.importMetadata?.externalId?.trim();
+    if (externalId) {
+      itemByExternalId.set(externalId, item);
+    }
+  }
+
+  return {
+    itemByExternalId,
+    slugs,
+  };
+}
+
+async function getExistingBaseSlugsExcluding(excludedSlugs: Set<string>) {
   try {
     const dataset = await fetchJson<{
       items: Array<{ slug: string }>;
     }>(`${getBasePromptLibraryUrl()}/gpt-image-2/index.json`);
 
-    return new Set(dataset.items.map((item) => item.slug));
+    return new Set(
+      dataset.items
+        .map((item) => item.slug)
+        .filter((slug) => !excludedSlugs.has(slug))
+    );
   } catch {
     try {
       const localDataset = JSON.parse(
@@ -335,7 +376,11 @@ async function getExistingBaseSlugs() {
         )
       ) as { items: Array<{ slug: string }> };
 
-      return new Set(localDataset.items.map((item) => item.slug));
+      return new Set(
+        localDataset.items
+          .map((item) => item.slug)
+          .filter((slug) => !excludedSlugs.has(slug))
+      );
     } catch {
       return new Set<string>();
     }
@@ -497,7 +542,15 @@ function writeJson(filePath: string, value: unknown) {
 async function main() {
   const { concurrency, limit } = parseArgs();
   const importedAt = new Date().toISOString();
-  const usedSlugs = await getExistingBaseSlugs();
+  const existingImportedPrompts = getExistingImportedPromptLookup();
+  // Keep previously assigned import slugs stable across reruns.
+  const baseSlugs = await getExistingBaseSlugsExcluding(
+    existingImportedPrompts.slugs
+  );
+  const usedSlugs = new Set([
+    ...baseSlugs,
+    ...existingImportedPrompts.slugs,
+  ]);
   const listings = await getPromptListings(limit);
 
   console.log(
@@ -508,11 +561,12 @@ async function main() {
     listings,
     concurrency,
     async (listing, index) => {
-      const finalSlug = ensureUniqueSlug(
-        listing.slug,
-        usedSlugs,
+      const existingItem = existingImportedPrompts.itemByExternalId.get(
         String(listing.id)
       );
+      const finalSlug =
+        existingItem?.slug ||
+        ensureUniqueSlug(listing.slug, usedSlugs, String(listing.id));
       const detailHtml = await fetchText(
         `${OPENNANA_DETAIL_BASE_URL}/${listing.slug}`
       );

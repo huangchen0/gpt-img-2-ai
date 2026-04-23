@@ -198,7 +198,7 @@ async function main() {
   const sitemapUrls = promptLibraryLocales.flatMap((locale) => [
     {
       loc: `${siteUrl}${getLocalizedPath('/prompts/gpt-image-2', locale)}`,
-      lastmod: dataset.syncedAt,
+      lastmod: mergedSyncedAt,
       changefreq: 'daily',
       priority: '0.92',
     },

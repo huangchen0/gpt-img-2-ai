@@ -7,6 +7,7 @@ import {
   getLocalizedSuggestedSettings,
   getPromptLibraryLocale,
 } from './localization';
+import { getPreferredPrompt } from './prompts';
 import type {
   PromptLibraryItem,
   PromptLibraryListDataset,
@@ -280,6 +281,6 @@ export function buildPromptDetailJsonLd({
         }
       : undefined,
     keywords: getPromptKeywords(item, locale).join(', '),
-    text: item.prompt,
+    text: getPreferredPrompt(item, locale),
   };
 }

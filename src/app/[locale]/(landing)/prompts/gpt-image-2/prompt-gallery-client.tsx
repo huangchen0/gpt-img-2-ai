@@ -23,6 +23,7 @@ import {
   getPromptLibraryLocale,
   getPromptLibraryMessages,
 } from '@/shared/prompt-library/localization';
+import { getPreferredPrompt } from '@/shared/prompt-library/prompts';
 import type {
   PromptLibraryItem,
   PromptLibraryListDataset,
@@ -230,7 +231,7 @@ function PromptCard({
   async function copyPrompt() {
     try {
       const fullItem = await fetchPromptItem(dataset, item.slug);
-      await navigator.clipboard.writeText(fullItem.prompt);
+      await navigator.clipboard.writeText(getPreferredPrompt(fullItem, locale));
       setFailed(false);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1400);
@@ -244,7 +245,10 @@ function PromptCard({
   async function usePrompt() {
     try {
       const fullItem = await fetchPromptItem(dataset, item.slug);
-      window.location.href = getImageGeneratorUrl(fullItem.prompt, locale);
+      window.location.href = getImageGeneratorUrl(
+        getPreferredPrompt(fullItem, locale),
+        locale
+      );
     } catch {
       setFailed(true);
       window.setTimeout(() => setFailed(false), 1800);
@@ -437,7 +441,7 @@ export function GptImage2PromptGalleryClient({
       setRandomLoading(true);
       const fullItem = await fetchPromptItem(dataset, randomPrompt.slug);
       window.location.href = getImageGeneratorUrl(
-        fullItem.prompt,
+        getPreferredPrompt(fullItem, promptLocale),
         promptLocale
       );
     } catch {
