@@ -46,6 +46,11 @@ yarn-error.log*
 next-env.d.ts
 
 data*
+!data/
+!data/prompt-library/
+!data/prompt-library/imports/
+!data/prompt-library/imports/gpt-image-2/
+!data/prompt-library/imports/gpt-image-2/opennana-chatgpt.json
 !src/shared/prompt-library/data.ts
 *debug*
 

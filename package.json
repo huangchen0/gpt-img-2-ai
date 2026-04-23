@@ -25,6 +25,7 @@
   "scripts": {
     "clean:next": "rm -rf .next",
     "generate:prompt-library": "tsx scripts/generate-prompt-library-assets.ts",
+    "import:opennana-prompts": "tsx scripts/import-opennana-prompts.ts",
     "dev": "pnpm generate:prompt-library && next dev",
     "dev:turbo": "pnpm generate:prompt-library && next dev --turbopack",
     "build": "pnpm clean:next && pnpm generate:prompt-library && NODE_OPTIONS='--max-old-space-size=4096' next build",

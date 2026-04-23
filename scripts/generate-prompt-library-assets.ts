@@ -1,6 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
+import {
+  getLatestPromptLibrarySyncTime,
+  getPromptLibraryImportIndexItems,
+  getPromptLibraryImportItems,
+  mergePromptLibraryIndexItems,
+} from '@/shared/prompt-library/imports';
 import { getPromptCategories } from '@/shared/prompt-library/insights';
 import type {
   PromptLibraryDataset,
@@ -143,13 +149,24 @@ async function main() {
     }
   }
 
+  const importedItems = getPromptLibraryImportItems('gpt-image-2');
+  const importedIndexItems = getPromptLibraryImportIndexItems('gpt-image-2');
+  const mergedIndexItems = mergePromptLibraryIndexItems(
+    dataset.items.map(toIndexItem),
+    importedIndexItems
+  );
+  const mergedSyncedAt = getLatestPromptLibrarySyncTime([
+    dataset.syncedAt,
+    ...importedIndexItems.map((item) => item.syncedAt),
+  ]);
+
   const indexDataset: PromptLibraryIndexDataset = {
     model: dataset.model,
     source: dataset.source,
     sourceUrl: dataset.sourceUrl,
-    total: dataset.total,
-    syncedAt: dataset.syncedAt,
-    items: dataset.items.map(toIndexItem),
+    total: mergedIndexItems.length,
+    syncedAt: mergedSyncedAt,
+    items: mergedIndexItems,
     assetBaseUrl: promptLibraryAssetBaseUrl,
   };
 
@@ -166,22 +183,16 @@ async function main() {
       );
       writeJsonFile(path.join(itemsDir, `${item.slug}.json`), fullItem);
     }
+
+    for (const item of importedItems) {
+      writeJsonFile(path.join(itemsDir, `${item.slug}.json`), item);
+    }
   } else {
     fs.rmSync(itemsDir, { recursive: true, force: true });
   }
 
-  const sitemapItems = dataset.items
+  const sitemapItems = mergedIndexItems
     .slice()
-    .sort((a, b) => {
-      const featuredDelta =
-        Number(Boolean(b.featured)) - Number(Boolean(a.featured));
-      if (featuredDelta !== 0) return featuredDelta;
-
-      return (
-        new Date(b.publishedAt || b.syncedAt).getTime() -
-        new Date(a.publishedAt || a.syncedAt).getTime()
-      );
-    })
     .slice(0, Math.max(0, promptSitemapLimit));
 
   const sitemapUrls = promptLibraryLocales.flatMap((locale) => [
@@ -224,8 +235,8 @@ ${sitemapUrls
 
   console.log(
     generateLocalAssets
-      ? `Generated ${dataset.items.length} local GPT Image 2 prompt assets and ${sitemapUrls.length} sitemap URLs.`
-      : `Generated GPT Image 2 prompt index and ${sitemapUrls.length} sitemap URLs. Full prompt JSON is expected from the API.`
+      ? `Generated ${dataset.items.length + importedItems.length} local GPT Image 2 prompt assets and ${sitemapUrls.length} sitemap URLs.`
+      : `Generated merged GPT Image 2 prompt index with ${mergedIndexItems.length} items and ${sitemapUrls.length} sitemap URLs. Full prompt JSON is expected from the API or local imports.`
   );
 }
 

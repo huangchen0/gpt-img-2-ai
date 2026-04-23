@@ -6,6 +6,12 @@ import path from 'path';
 import { envConfigs } from '@/config';
 import { getPromptCategories } from '@/shared/prompt-library/insights';
 
+import {
+  getLatestPromptLibrarySyncTime,
+  getPromptLibraryImportIndexItems,
+  getPromptLibraryImportItem,
+  mergePromptLibraryIndexItems,
+} from './imports';
 import type {
   PromptLibraryIndexDataset,
   PromptLibraryIndexItem,
@@ -55,7 +61,12 @@ function trimTrailingSlash(value: string) {
 }
 
 function getPromptLibraryDir(model: PromptLibraryModel) {
-  return path.join(process.cwd(), 'public', 'prompt-library', datasetFiles[model]);
+  return path.join(
+    process.cwd(),
+    'public',
+    'prompt-library',
+    datasetFiles[model]
+  );
 }
 
 function getRemoteBaseUrl() {
@@ -132,13 +143,41 @@ function normalizeIndexDataset(dataset: PromptLibraryIndexDataset) {
   } satisfies PromptLibraryIndexDataset;
 }
 
+function mergeImportedDatasetItems(
+  model: PromptLibraryModel,
+  dataset: PromptLibraryIndexDataset
+) {
+  const importedItems = getPromptLibraryImportIndexItems(model);
+  if (importedItems.length === 0) {
+    return dataset;
+  }
+
+  const items = mergePromptLibraryIndexItems(dataset.items, importedItems);
+
+  return normalizeIndexDataset({
+    ...dataset,
+    total: items.length,
+    syncedAt: getLatestPromptLibrarySyncTime([
+      dataset.syncedAt,
+      ...importedItems.map((item) => item.syncedAt),
+    ]),
+    items,
+  });
+}
+
 function readLocalPromptLibraryDataset(model: PromptLibraryModel) {
   const filePath = path.join(getPromptLibraryDir(model), 'index.json');
-  return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromptLibraryIndexDataset;
+  return JSON.parse(
+    fs.readFileSync(filePath, 'utf8')
+  ) as PromptLibraryIndexDataset;
 }
 
 function readLocalPromptLibraryItem(model: PromptLibraryModel, slug: string) {
-  const filePath = path.join(getPromptLibraryDir(model), 'items', `${slug}.json`);
+  const filePath = path.join(
+    getPromptLibraryDir(model),
+    'items',
+    `${slug}.json`
+  );
   if (!fs.existsSync(filePath)) return undefined;
 
   return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromptLibraryItem;
@@ -156,8 +195,11 @@ export async function getPromptLibraryDataset(model: PromptLibraryModel) {
 
     const request = (async () => {
       try {
-        const dataset = normalizeIndexDataset(
-          await fetchPromptLibraryJson<PromptLibraryIndexDataset>(remoteUrl)
+        const dataset = mergeImportedDatasetItems(
+          model,
+          normalizeIndexDataset(
+            await fetchPromptLibraryJson<PromptLibraryIndexDataset>(remoteUrl)
+          )
         );
         dataset.assetBaseUrl = getRemoteBaseUrl();
         return setCachedValue(indexCache, cacheKey, dataset);
@@ -184,11 +226,17 @@ export async function getPromptLibraryDataset(model: PromptLibraryModel) {
   let dataset: PromptLibraryIndexDataset;
 
   try {
-    dataset = normalizeIndexDataset(readLocalPromptLibraryDataset(model));
+    dataset = mergeImportedDatasetItems(
+      model,
+      normalizeIndexDataset(readLocalPromptLibraryDataset(model))
+    );
   } catch {
-    dataset = normalizeIndexDataset(
-      await fetchPromptLibraryJson<PromptLibraryIndexDataset>(
-        getPublicAssetUrl(model, 'index.json')
+    dataset = mergeImportedDatasetItems(
+      model,
+      normalizeIndexDataset(
+        await fetchPromptLibraryJson<PromptLibraryIndexDataset>(
+          getPublicAssetUrl(model, 'index.json')
+        )
       )
     );
   }
@@ -214,7 +262,10 @@ export async function getRelatedPromptLibraryItems(
     .sort((a, b) => {
       const aMatch = a.categories.includes(category) ? 1 : 0;
       const bMatch = b.categories.includes(category) ? 1 : 0;
-      return bMatch - aMatch || Number(Boolean(b.featured)) - Number(Boolean(a.featured));
+      return (
+        bMatch - aMatch ||
+        Number(Boolean(b.featured)) - Number(Boolean(a.featured))
+      );
     })
     .slice(0, limit);
 }
@@ -225,6 +276,11 @@ export async function getPromptLibraryItem(
 ) {
   const remoteUrl = getRemoteAssetUrl(model, `items/${slug}.json`);
   const cacheKey = `${model}:${slug}:${remoteUrl || 'local'}`;
+  const importedItem = getPromptLibraryImportItem(model, slug);
+
+  if (importedItem) {
+    return setCachedValue(itemCache, cacheKey, importedItem);
+  }
 
   if (remoteUrl) {
     const cached = getCachedValue(itemCache, cacheKey);

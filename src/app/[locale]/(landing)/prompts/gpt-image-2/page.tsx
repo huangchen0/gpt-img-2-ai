@@ -3,12 +3,14 @@ import Script from 'next/script';
 import { setRequestLocale } from 'next-intl/server';
 
 import { getAlternateLanguageUrlsByLocales } from '@/shared/lib/seo';
+import { getPromptLibraryDataset } from '@/shared/prompt-library/data';
 import {
   getPromptLibraryLocale,
   promptLibraryLocales,
 } from '@/shared/prompt-library/localization';
 import {
   getCanonicalUrl,
+  getPromptLibraryCollectionTitle,
   getPromptLibrarySeoConfig,
 } from '@/shared/prompt-library/seo';
 
@@ -32,15 +34,18 @@ export async function generateMetadata({
   const { locale } = await params;
   setRequestLocale(locale);
   const promptLocale = getPromptLibraryLocale(locale);
+  const dataset = await getPromptLibraryDataset('gpt-image-2');
+  const total = dataset.total || dataset.items.length;
   const seoConfig = getPromptLibrarySeoConfig(promptLocale);
   const canonicalUrl = getCanonicalUrl(seoConfig.path, promptLocale);
+  const collectionTitle = getPromptLibraryCollectionTitle(total, promptLocale);
 
   return {
-    title: seoConfig.collectionTitle,
+    title: collectionTitle,
     description:
       promptLocale === 'zh'
-        ? `${seoConfig.collectionDescription} 当前收录 725 条精选示例。`
-        : `${seoConfig.collectionDescription} Includes 725 curated examples.`,
+        ? `${seoConfig.collectionDescription} 当前收录 ${total} 条精选示例。`
+        : `${seoConfig.collectionDescription} Includes ${total} curated examples.`,
     keywords: [...seoConfig.collectionKeywords],
     alternates: {
       canonical: canonicalUrl,
@@ -52,12 +57,12 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       url: canonicalUrl,
-      title: seoConfig.collectionTitle,
+      title: collectionTitle,
       description: seoConfig.collectionDescription,
     },
     twitter: {
       card: 'summary_large_image',
-      title: seoConfig.collectionTitle,
+      title: collectionTitle,
       description: seoConfig.collectionDescription,
     },
   };
@@ -72,10 +77,12 @@ export default async function GptImage2PromptsPage({
   setRequestLocale(locale);
   const promptLocale = getPromptLibraryLocale(locale);
   const seoConfig = getPromptLibrarySeoConfig(promptLocale);
+  const dataset = await getPromptLibraryDataset('gpt-image-2');
+  const total = dataset.total || dataset.items.length;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: seoConfig.collectionTitle,
+    name: getPromptLibraryCollectionTitle(total, promptLocale),
     description: seoConfig.collectionDescription,
     url: getCanonicalUrl(seoConfig.path, promptLocale),
     inLanguage: promptLocale === 'zh' ? 'zh-CN' : 'en',
@@ -91,7 +98,7 @@ export default async function GptImage2PromptsPage({
       <GptImage2PromptGalleryClient
         datasetUrl={getPromptLibraryDatasetUrl()}
         fallbackDatasetUrl={getPromptLibraryFallbackDatasetUrl()}
-        initialTotal={725}
+        initialTotal={total}
         locale={promptLocale}
       />
     </>

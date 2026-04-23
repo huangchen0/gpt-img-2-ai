@@ -362,6 +362,7 @@ export function GptImage2PromptGalleryClient({
   const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
   const [randomLoading, setRandomLoading] = useState(false);
   const [randomFailed, setRandomFailed] = useState(false);
+  const totalCount = dataset?.total || initialTotal;
 
   useEffect(() => {
     let mounted = true;
@@ -460,7 +461,7 @@ export function GptImage2PromptGalleryClient({
               {messages.gallery.title}
             </h1>
             <p className="text-muted-foreground mt-5 max-w-2xl text-base leading-7 md:text-lg">
-              {messages.gallery.description(initialTotal)}
+              {messages.gallery.description(totalCount)}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button asChild size="lg">
@@ -492,7 +493,7 @@ export function GptImage2PromptGalleryClient({
             </p>
             <div className="mt-4 grid grid-cols-2 gap-3">
               <div className="bg-background rounded-md border p-4">
-                <p className="text-3xl font-semibold">{initialTotal}</p>
+                <p className="text-3xl font-semibold">{totalCount}</p>
                 <p className="text-muted-foreground mt-1 text-xs">
                   {messages.gallery.promptsLabel}
                 </p>

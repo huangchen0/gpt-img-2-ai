@@ -45,6 +45,21 @@ function getImageGeneratorUrl(prompt: string, locale?: string) {
   return getPromptLibraryLocale(locale) === 'zh' ? `/zh${path}` : path;
 }
 
+function getPromptVariantLabel(
+  variant: { label?: string | null; type?: string | null },
+  locale?: string
+) {
+  if (variant.label?.trim()) {
+    return variant.label.trim();
+  }
+
+  if (variant.type?.trim()) {
+    return getLocalizedPromptLanguageLabel(variant.type.trim(), locale);
+  }
+
+  return null;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -118,6 +133,10 @@ export default async function GptImage2PromptDetailPage({
   });
   const settings = getLocalizedSuggestedSettings(item, promptLocale);
   const tips = getLocalizedCustomizationTips(item, promptLocale);
+  const promptVariants =
+    item.promptVariants && item.promptVariants.length > 0
+      ? item.promptVariants
+      : [{ text: item.prompt, type: item.language, label: null }];
 
   return (
     <main className="bg-background text-foreground">
@@ -243,9 +262,34 @@ export default async function GptImage2PromptDetailPage({
               </h2>
               <CopyPromptButton prompt={item.prompt} locale={promptLocale} />
             </div>
-            <pre className="bg-background overflow-x-auto rounded-md border p-4 font-mono text-sm leading-7 whitespace-pre-wrap">
-              {item.prompt}
-            </pre>
+            <div className="space-y-4">
+              {promptVariants.map((variant, index) => {
+                const label = getPromptVariantLabel(variant, promptLocale);
+
+                return (
+                  <div
+                    key={`${variant.type || 'prompt'}-${index}`}
+                    className="bg-background rounded-md border"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b px-4 py-3">
+                      <p className="text-sm font-medium">
+                        {label ||
+                          (promptVariants.length > 1
+                            ? `${messages.detail.fullPromptHeading} ${index + 1}`
+                            : messages.detail.fullPromptHeading)}
+                      </p>
+                      <CopyPromptButton
+                        prompt={variant.text}
+                        locale={promptLocale}
+                      />
+                    </div>
+                    <pre className="overflow-x-auto p-4 font-mono text-sm leading-7 whitespace-pre-wrap">
+                      {variant.text}
+                    </pre>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <aside className="space-y-4">

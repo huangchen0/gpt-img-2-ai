@@ -3,41 +3,149 @@ import type { PromptLibraryItem, PromptLibraryListItem } from './types';
 type PromptLike = Pick<PromptLibraryItem, 'title' | 'description'> & {
   prompt?: string;
   promptPreview?: string;
+  tags?: string[];
 };
 
 const categoryRules = [
   {
     label: 'Product',
-    terms: ['product', 'ecommerce', 'e-commerce', 'packaging', 'poster', 'ad ', 'advertising', 'brand'],
+    terms: [
+      'product',
+      'ecommerce',
+      'e-commerce',
+      'packaging',
+      'poster',
+      'ad ',
+      'advertising',
+      'brand',
+      '产品',
+      '商品',
+      '电商',
+      '包装',
+      '广告',
+      '营销',
+      '品牌',
+      '香水',
+      '手机壳',
+    ],
   },
   {
     label: 'Infographic',
-    terms: ['infographic', 'diagram', 'chart', 'map', 'timeline', 'explainer', 'slide'],
+    terms: [
+      'infographic',
+      'diagram',
+      'chart',
+      'map',
+      'timeline',
+      'explainer',
+      'slide',
+      '信息图',
+      '图解',
+      '图鉴',
+      '流程',
+      '百科',
+      '路线图',
+      '示意图',
+    ],
   },
   {
     label: 'UI Mockup',
-    terms: ['ui', 'interface', 'app', 'dashboard', 'website', 'mockup', 'landing page'],
+    terms: [
+      'ui',
+      'interface',
+      'app',
+      'dashboard',
+      'website',
+      'mockup',
+      'landing page',
+      '界面',
+      '截图',
+      '网页',
+      '网站',
+      '应用',
+      '后台',
+      '仪表盘',
+      '落地页',
+    ],
   },
   {
     label: 'Character',
-    terms: ['character', 'avatar', 'mascot', 'anime', 'portrait', 'profile'],
+    terms: [
+      'character',
+      'avatar',
+      'mascot',
+      'anime',
+      'portrait',
+      'profile',
+      '角色',
+      '立绘',
+      '人物',
+      '美女',
+      '少女',
+      '肖像',
+      '头像',
+      '吉祥物',
+    ],
   },
   {
     label: 'Story',
-    terms: ['storyboard', 'comic', 'manga', 'panel', 'scene', 'cinematic'],
+    terms: [
+      'storyboard',
+      'comic',
+      'manga',
+      'panel',
+      'scene',
+      'cinematic',
+      '电影感',
+      '场景',
+      '群聊',
+      '朋友圈',
+      '分镜',
+      '漫画',
+      '直播',
+    ],
   },
   {
     label: 'Education',
-    terms: ['study', 'lesson', 'school', 'learning', 'educational', 'exam'],
+    terms: [
+      'study',
+      'lesson',
+      'school',
+      'learning',
+      'educational',
+      'exam',
+      '教学',
+      '课程',
+      '学习',
+      '笔记',
+      '课件',
+      '科普',
+      '知识',
+    ],
   },
   {
     label: 'Social',
-    terms: ['social', 'post', 'newsletter', 'thumbnail', 'livestream', 'live stream'],
+    terms: [
+      'social',
+      'post',
+      'newsletter',
+      'thumbnail',
+      'livestream',
+      'live stream',
+      '社媒',
+      '小红书',
+      '抖音',
+      '直播间',
+      '帖子',
+      '封面',
+      '群聊',
+      '朋友圈',
+    ],
   },
 ];
 
 function sourceText(item: PromptLike) {
-  return `${item.title} ${item.description} ${item.prompt || item.promptPreview || ''}`.toLowerCase();
+  return `${item.title} ${item.description} ${item.prompt || item.promptPreview || ''} ${(item.tags || []).join(' ')}`.toLowerCase();
 }
 
 export function getPromptCategories(item: PromptLike) {
@@ -46,7 +154,9 @@ export function getPromptCategories(item: PromptLike) {
     .filter((rule) => rule.terms.some((term) => text.includes(term)))
     .map((rule) => rule.label);
 
-  return matches.length > 0 ? Array.from(new Set(matches)).slice(0, 3) : ['Creative'];
+  return matches.length > 0
+    ? Array.from(new Set(matches)).slice(0, 3)
+    : ['Creative'];
 }
 
 export function getPrimaryCategory(item: PromptLike) {
@@ -57,11 +167,21 @@ export function getSuggestedSettings(item: PromptLike) {
   const category = getPrimaryCategory(item);
   const text = sourceText(item);
   const isWide = ['UI Mockup', 'Infographic', 'Story'].includes(category);
-  const isPortrait = text.includes('portrait') || text.includes('profile') || text.includes('poster');
+  const isPortrait =
+    text.includes('portrait') ||
+    text.includes('profile') ||
+    text.includes('poster');
 
   return {
-    aspectRatio: isWide ? '16:9 or 4:3' : isPortrait ? '4:5 or 3:4' : '1:1 or 4:5',
-    quality: text.includes('detailed') || text.includes('photorealistic') ? 'High detail' : 'Standard first, then high detail',
+    aspectRatio: isWide
+      ? '16:9 or 4:3'
+      : isPortrait
+        ? '4:5 or 3:4'
+        : '1:1 or 4:5',
+    quality:
+      text.includes('detailed') || text.includes('photorealistic')
+        ? 'High detail'
+        : 'Standard first, then high detail',
     workflow:
       text.includes('reference') || text.includes('using reference')
         ? 'Use image-to-image when matching an existing layout or subject matters.'
@@ -115,7 +235,9 @@ export function getCustomizationTips(item: PromptLike) {
   ];
 }
 
-export function getPromptUseCaseSentence(item: PromptLibraryItem | PromptLibraryListItem) {
+export function getPromptUseCaseSentence(
+  item: PromptLibraryItem | PromptLibraryListItem
+) {
   const category = getPrimaryCategory(item);
   const lowerCategory = category.toLowerCase();
 

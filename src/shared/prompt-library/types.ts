@@ -1,5 +1,11 @@
 export type PromptLibraryModel = 'gpt-image-2';
 
+export type PromptLibraryPromptVariant = {
+  text: string;
+  type?: string | null;
+  label?: string | null;
+};
+
 export type PromptLibraryMedia = {
   type: 'image' | 'video';
   url: string;
@@ -16,6 +22,7 @@ export type PromptLibraryItem = {
   title: string;
   description: string;
   prompt: string;
+  promptVariants?: PromptLibraryPromptVariant[];
   language?: string | null;
   featured?: boolean;
   authorName?: string | null;
@@ -36,7 +43,10 @@ export type PromptLibraryDataset = {
   items: PromptLibraryItem[];
 };
 
-export type PromptLibraryIndexItem = Omit<PromptLibraryItem, 'prompt' | 'tags'> & {
+export type PromptLibraryIndexItem = Omit<
+  PromptLibraryItem,
+  'prompt' | 'tags'
+> & {
   promptPreview: string;
   categories: string[];
 };

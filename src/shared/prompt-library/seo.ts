@@ -18,7 +18,7 @@ export const promptLibrarySeoConfig = {
   path: '/prompts/gpt-image-2',
   label: 'GPT Image 2',
   generatorPath: '/models/gpt-image-2#generator',
-  collectionTitle: 'GPT Image 2 Prompt Gallery: 725 Copyable Image Prompts',
+  collectionTitle: 'GPT Image 2 Prompt Gallery',
   collectionDescription:
     'Browse copyable GPT Image 2 prompts for product photos, posters, UI mockups, characters, infographics, social images, and reference-based image editing.',
   collectionKeywords: [
@@ -33,7 +33,7 @@ export const promptLibrarySeoConfig = {
 
 const promptLibraryZhSeoConfig = {
   ...promptLibrarySeoConfig,
-  collectionTitle: 'GPT Image 2 提示词库：725 个可直接改写的图片 Prompt',
+  collectionTitle: 'GPT Image 2 提示词库',
   collectionDescription:
     '浏览适合产品图、海报、界面稿、角色设定、信息图、社媒配图和参考图改图的 GPT Image 2 提示词。保留可复制原文，并补充适合中文创作者的改写思路。',
   collectionKeywords: [
@@ -52,6 +52,15 @@ export function getPromptLibrarySeoConfig(locale?: string) {
   return getPromptLibraryLocale(locale) === 'zh'
     ? promptLibraryZhSeoConfig
     : promptLibrarySeoConfig;
+}
+
+export function getPromptLibraryCollectionTitle(
+  total: number,
+  locale?: string
+) {
+  return getPromptLibraryLocale(locale) === 'zh'
+    ? `GPT Image 2 提示词库：${total} 个可直接改写的图片 Prompt`
+    : `GPT Image 2 Prompt Gallery: ${total} Copyable Image Prompts`;
 }
 
 function trimTrailingSlash(value: string) {
@@ -211,7 +220,10 @@ export function buildPromptLibraryJsonLd({
   return {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: seoConfig.collectionTitle,
+    name: getPromptLibraryCollectionTitle(
+      dataset.total || dataset.items.length,
+      locale
+    ),
     description: seoConfig.collectionDescription,
     url,
     isPartOf: {
