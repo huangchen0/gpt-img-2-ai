@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import {
   getHomeShowcaseFallbackItems,
   isImageUrl,
+  mapShowcasesToFlowItems,
 } from '@/shared/lib/showcase-feed';
 import { getIsoTimestr, toISOStringSafe } from '@/shared/lib/time';
 import { getPrompts, PromptStatus } from '@/shared/models/prompt';
@@ -83,9 +84,10 @@ export async function GET(request: NextRequest) {
         searchTerm,
         sortOrder,
       });
+      const showcaseItems = mapShowcasesToFlowItems(showcases, locale);
       const transformedShowcases = imagesOnly
-        ? showcases.filter((item) => isImageUrl(item.image))
-        : showcases;
+        ? showcaseItems.filter((item) => isImageUrl(item.image))
+        : showcaseItems;
       const data =
         imagesOnly && transformedShowcases.length === 0
           ? getHomeShowcaseFallbackItems(locale).slice(0, limit)

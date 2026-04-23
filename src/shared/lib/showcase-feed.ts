@@ -1,3 +1,8 @@
+import {
+  getShowcasePublicPath,
+  getVisibleShowcaseTags,
+} from '@/shared/lib/showcase-seo';
+import { buildShowcasePromptPreview } from '@/shared/lib/showcase-template';
 import { getIsoTimestr, toISOStringSafe } from '@/shared/lib/time';
 import type { Showcase } from '@/shared/models/showcase';
 
@@ -6,10 +11,12 @@ export type ShowcaseFlowItem = {
   title: string;
   description?: string | null;
   prompt?: string | null;
+  promptPreview?: string | null;
   image: string;
   video?: string | null;
   poster?: string | null;
   tags?: string[];
+  detailUrl?: string | null;
   createdAt: string;
 };
 
@@ -45,7 +52,9 @@ export function getHomeShowcaseFallbackItems(
     },
     {
       id: 'fallback-pro-ai-img',
-      title: isZh ? '写实人物与产品合成' : 'Photoreal Character and Product Composite',
+      title: isZh
+        ? '写实人物与产品合成'
+        : 'Photoreal Character and Product Composite',
       description: isZh ? '首页展示兜底图片' : 'Homepage image fallback item',
       image:
         'https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/pro-ai-img.webp',
@@ -119,16 +128,19 @@ export function getHomeShowcaseFallbackItems(
 }
 
 export function mapShowcasesToFlowItems(
-  showcases: Showcase[]
+  showcases: Showcase[],
+  locale?: string
 ): ShowcaseFlowItem[] {
   return showcases.map((item) => ({
     ...item,
-    tags: item.tags
-      ? item.tags
-          .split(',')
-          .map((tag) => tag.trim())
-          .filter(Boolean)
-      : undefined,
+    tags: getVisibleShowcaseTags(item.tags),
+    promptPreview: buildShowcasePromptPreview({
+      title: item.title,
+      description: item.description,
+      prompt: item.prompt,
+      tags: getVisibleShowcaseTags(item.tags),
+    }),
+    detailUrl: getShowcasePublicPath(item, locale),
     createdAt: toISOStringSafe(item.createdAt) ?? getIsoTimestr(),
   }));
 }
@@ -142,7 +154,7 @@ export function buildCombinedShowcaseItems({
   showcases: Showcase[];
   limit?: number;
 }): ShowcaseFlowItem[] {
-  const mappedItems = mapShowcasesToFlowItems(showcases);
+  const mappedItems = mapShowcasesToFlowItems(showcases, locale);
   const items =
     mappedItems.length > 0 ? mappedItems : getHomeShowcaseFallbackItems(locale);
 
@@ -158,8 +170,8 @@ export function buildHomeImageShowcaseItems({
   showcases: Showcase[];
   limit?: number;
 }): ShowcaseFlowItem[] {
-  const mappedItems = mapShowcasesToFlowItems(showcases).filter((item) =>
-    isImageUrl(item.image)
+  const mappedItems = mapShowcasesToFlowItems(showcases, locale).filter(
+    (item) => isImageUrl(item.image)
   );
   const items =
     mappedItems.length > 0 ? mappedItems : getHomeShowcaseFallbackItems(locale);

@@ -14,7 +14,7 @@ import {
   Video,
   Wand,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { Link, useRouter } from '@/core/i18n/navigation';
@@ -68,6 +68,7 @@ import {
 } from '@/shared/lib/gtm';
 import { getUuid, md5 } from '@/shared/lib/hash';
 import { calculateImageCredits } from '@/shared/lib/image-pricing';
+import { buildShareActionLabels } from '@/shared/lib/share-action-labels';
 import { cn } from '@/shared/lib/utils';
 
 interface GptImage2GeneratorProps {
@@ -244,6 +245,7 @@ export function GptImage2Generator({
 }: GptImage2GeneratorProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locale = useLocale();
   const t = useTranslations('ai.image.generator');
   const [activeTab, setActiveTab] = useState<GptImageScene>('text-to-image');
   const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
@@ -1201,6 +1203,7 @@ export function GptImage2Generator({
         body: JSON.stringify({
           taskId: image.taskId,
           imageIndex: image.imageIndex,
+          locale,
         }),
       });
 
@@ -1693,13 +1696,10 @@ export function GptImage2Generator({
       confirmLabel={t('share_showcase.confirm')}
       cancelLabel={t('share_showcase.cancel')}
       sharingLabel={t('share_showcase.sharing')}
-      copyLinkLabel={t('share_showcase.copy_link')}
-      copyMarkdownLabel={t('share_showcase.copy_markdown')}
-      copyEmbedLabel={t('share_showcase.copy_embed')}
-      pinterestLabel={t('share_showcase.pinterest')}
-      xLabel={t('share_showcase.x')}
-      copiedLabel={t('share_showcase.copied')}
-      copyFailedLabel={t('share_showcase.copy_failed')}
+      actionLabels={buildShareActionLabels({
+        t,
+        namespace: 'share_showcase',
+      })}
       appName={envConfigs.app_name}
       result={shareResult}
       onConfirm={handleConfirmShareImage}

@@ -6,7 +6,18 @@ import type { Showcase } from '@/shared/models/showcase';
 const SHOWCASE_SLUG_SEPARATOR = '--';
 const MIN_INDEXABLE_TEXT_LENGTH = 40;
 const NOINDEX_TAGS = new Set(['noindex', 'private', 'hidden', 'blocked']);
-const HIDDEN_SHOWCASE_TAGS = new Set(['shared', ...NOINDEX_TAGS]);
+const INTERNAL_PROVIDER_TAGS = new Set([
+  'apimart',
+  'fal',
+  'gemini',
+  'kie',
+  'replicate',
+]);
+const HIDDEN_SHOWCASE_TAGS = new Set([
+  'shared',
+  ...NOINDEX_TAGS,
+  ...INTERNAL_PROVIDER_TAGS,
+]);
 const GENERIC_DESCRIPTIONS = new Set(['shared from image generation']);
 
 type ShowcaseLike = Pick<

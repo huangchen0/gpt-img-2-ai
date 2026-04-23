@@ -12,7 +12,7 @@ import {
   User,
   Wand,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { Link, useRouter } from '@/core/i18n/navigation';
@@ -68,6 +68,7 @@ import {
 } from '@/shared/lib/gtm';
 import { md5 } from '@/shared/lib/hash';
 import { calculateImageCredits } from '@/shared/lib/image-pricing';
+import { buildShareActionLabels } from '@/shared/lib/share-action-labels';
 import { cn } from '@/shared/lib/utils';
 
 interface ImageGeneratorProps {
@@ -299,6 +300,7 @@ export function ImageGenerator({
 }: ImageGeneratorProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const locale = useLocale();
   const t = useTranslations('ai.image.generator');
 
   const [activeTab, setActiveTab] =
@@ -1428,6 +1430,7 @@ export function ImageGenerator({
         body: JSON.stringify({
           taskId: image.taskId,
           imageIndex: image.imageIndex,
+          locale,
         }),
       });
 
@@ -1932,13 +1935,10 @@ export function ImageGenerator({
         confirmLabel={t('share_showcase.confirm')}
         cancelLabel={t('share_showcase.cancel')}
         sharingLabel={t('share_showcase.sharing')}
-        copyLinkLabel={t('share_showcase.copy_link')}
-        copyMarkdownLabel={t('share_showcase.copy_markdown')}
-        copyEmbedLabel={t('share_showcase.copy_embed')}
-        pinterestLabel={t('share_showcase.pinterest')}
-        xLabel={t('share_showcase.x')}
-        copiedLabel={t('share_showcase.copied')}
-        copyFailedLabel={t('share_showcase.copy_failed')}
+        actionLabels={buildShareActionLabels({
+          t,
+          namespace: 'share_showcase',
+        })}
         appName={envConfigs.app_name}
         result={shareResult}
         onConfirm={handleConfirmShareImage}

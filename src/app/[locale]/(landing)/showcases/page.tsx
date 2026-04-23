@@ -50,7 +50,8 @@ export default async function ShowcasesPage({
       containerClassName="py-14"
       excludeTags="hairstyles"
       sortOrder="desc"
-      hideCreateButton={true}
+      hideCreateButton={false}
+      showPreview={true}
       imagesOnly={true}
       initialItems={initialShowcases}
       disableFetch={true}

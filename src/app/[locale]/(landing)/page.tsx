@@ -2,8 +2,8 @@ import { unstable_cache } from 'next/cache';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getThemePage } from '@/core/theme';
-import { SiteSchema } from '@/shared/components/seo';
 import { HomeGeneratorSwitcher } from '@/shared/components/home-generator-switcher';
+import { SiteSchema } from '@/shared/components/seo';
 import { getMetadata } from '@/shared/lib/seo';
 import {
   buildHomeImageShowcaseItems,
@@ -85,7 +85,7 @@ export default async function LandingPage({
               description={sectionData.description}
               excludeTags="hairstyles"
               sortOrder="desc"
-              hideCreateButton={true}
+              hideCreateButton={false}
               imagesOnly={true}
               initialItems={initialShowcases}
             />
@@ -119,10 +119,7 @@ export default async function LandingPage({
 
   return (
     <>
-      <SiteSchema
-        locale={locale}
-        description={t('metadata.description')}
-      />
+      <SiteSchema locale={locale} description={t('metadata.description')} />
       <Page locale={locale} page={page} />
     </>
   );

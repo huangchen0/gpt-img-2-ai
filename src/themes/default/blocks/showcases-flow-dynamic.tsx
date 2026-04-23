@@ -1,20 +1,22 @@
 'use client';
 
 import {
-  type ReactNode,
   useCallback,
   useEffect,
   useRef,
   useState,
+  type ReactNode,
 } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Wand, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Copy, Share2, Wand, X } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 
 import { usePathname, useRouter } from '@/core/i18n/navigation';
 import { defaultLocale, locales } from '@/config/locale';
 import { LazyImage } from '@/shared/blocks/common';
 import { Button } from '@/shared/components/ui/button';
+import { buildShowcaseTemplatePrompt } from '@/shared/lib/showcase-template';
 import { cn } from '@/shared/lib/utils';
 
 function LazyVideo({
@@ -85,6 +87,7 @@ export type ShowcaseItem = {
   video?: string | null;
   poster?: string | null;
   createUrl?: string | null;
+  detailUrl?: string | null;
   image: string;
   createdAt: string | Date;
 };
@@ -101,6 +104,35 @@ const getLocaleFromPathname = (pathname?: string | null): string => {
     ? firstSegment
     : defaultLocale;
 };
+
+function getAbsoluteShareUrl(pathOrUrl: string) {
+  if (typeof window === 'undefined') {
+    return pathOrUrl;
+  }
+
+  try {
+    return new URL(pathOrUrl, window.location.origin).toString();
+  } catch {
+    return pathOrUrl;
+  }
+}
+
+async function copyText(
+  value: string,
+  successMessage: string,
+  errorMessage: string
+) {
+  try {
+    await navigator.clipboard.writeText(value);
+    toast.success(successMessage);
+  } catch {
+    toast.error(errorMessage);
+  }
+}
+
+function isShareAbort(error: unknown) {
+  return error instanceof DOMException && error.name === 'AbortError';
+}
 
 export function ShowcasesFlowDynamic({
   id,
@@ -236,7 +268,11 @@ export function ShowcasesFlowDynamic({
 
   const handlePrevious = useCallback(() => {
     setSelectedIndex((previous) =>
-      previous !== null ? (previous === 0 ? items.length - 1 : previous - 1) : null
+      previous !== null
+        ? previous === 0
+          ? items.length - 1
+          : previous - 1
+        : null
     );
   }, [items.length]);
 
@@ -263,14 +299,14 @@ export function ShowcasesFlowDynamic({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, handlePrevious, handleNext]);
 
-  const createLabel = createButtonLabel || t('create_similar');
+  const createLabel = createButtonLabel || t('use_template');
   const prefillPayloadKey = 'seedance_prefill_payload';
 
   const handleCreateClick = useCallback(
     (item: ShowcaseItem) => {
-      if (createBehavior === 'prefill-generator') {
-        const promptValue = item.prompt || item.title;
+      const promptValue = buildShowcaseTemplatePrompt(item);
 
+      if (createBehavior === 'prefill-generator') {
         if (typeof window !== 'undefined') {
           window.sessionStorage.setItem('seedance_prefill_prompt', promptValue);
           window.sessionStorage.setItem(
@@ -314,10 +350,62 @@ export function ShowcasesFlowDynamic({
         return;
       }
 
-      const createValue = item.prompt || item.title;
+      const createValue = promptValue;
       router.push(`/ai-image?prompt=${encodeURIComponent(createValue)}`);
     },
     [createBehavior, pathname, router]
+  );
+
+  const handleCopyPromptClick = useCallback(
+    (item: ShowcaseItem) => {
+      const promptValue = buildShowcaseTemplatePrompt(item);
+
+      if (!promptValue) {
+        toast.error(t('copy_failed'));
+        return;
+      }
+
+      copyText(promptValue, t('prompt_copied'), t('copy_failed'));
+    },
+    [t]
+  );
+
+  const handleShareClick = useCallback(
+    async (item: ShowcaseItem) => {
+      if (!item.detailUrl) {
+        toast.error(t('copy_failed'));
+        return;
+      }
+
+      const shareUrl = getAbsoluteShareUrl(item.detailUrl);
+      const shareText = item.description || item.prompt || item.title;
+
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: item.title,
+            text: shareText || item.title,
+            url: shareUrl,
+          });
+          return;
+        }
+
+        await navigator.clipboard.writeText(shareUrl);
+        toast.success(t('share_link_copied'));
+      } catch (error) {
+        if (isShareAbort(error)) {
+          return;
+        }
+
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          toast.success(t('share_link_copied'));
+        } catch {
+          toast.error(t('copy_failed'));
+        }
+      }
+    },
+    [t]
   );
 
   return (
@@ -351,12 +439,19 @@ export function ShowcasesFlowDynamic({
       )}
       {loading || showLoading ? (
         showLoading && (
-          <div className={cn('container my-30 text-center', containerClassName)}>
+          <div
+            className={cn('container my-30 text-center', containerClassName)}
+          >
             <p className="text-muted-foreground">{t('loading')}</p>
           </div>
         )
       ) : error ? (
-        <div className={cn('container text-center text-red-500', containerClassName)}>
+        <div
+          className={cn(
+            'container text-center text-red-500',
+            containerClassName
+          )}
+        >
           <p>Error loading: {error}</p>
         </div>
       ) : items.length > 0 ? (
@@ -367,80 +462,134 @@ export function ShowcasesFlowDynamic({
             containerClassName
           )}
         >
-          {items.map((item, index) => (
-            <div
-              key={item.id}
-              className={cn(
-                'group relative cursor-zoom-in break-inside-avoid overflow-hidden rounded-xl',
-                cardClassName
-              )}
-              onClick={() => setSelectedIndex(index)}
-            >
-              {showTags && item.tags && item.tags.length > 0 && (
-                <div className="absolute left-3 top-3 z-10 flex flex-wrap gap-1.5">
-                  {item.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-white/20 bg-black/60 px-2 py-0.5 text-[11px] font-medium text-white/90 backdrop-blur"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
+          {items.map((item, index) => {
+            const templatePrompt = buildShowcaseTemplatePrompt(item);
+            const canCopyPrompt = Boolean(templatePrompt);
+            const canShare = Boolean(item.detailUrl);
+            const hasSecondaryActions = canCopyPrompt || canShare;
+            const hasActions = !hideCreateButton || hasSecondaryActions;
 
-              <div className={cn('relative overflow-hidden', mediaWrapperClassName)}>
-                {!imagesOnly && isVideoUrl(item.image) ? (
-                  <LazyVideo
-                    src={item.image}
-                    poster={item.poster || undefined}
-                    className={cn('h-auto w-full', mediaClassName)}
-                  />
-                ) : (
-                  <LazyImage
-                    src={item.image}
-                    alt={item.title}
-                    className={cn(
-                      'h-auto w-full transition-transform duration-300 group-hover:scale-105',
-                      mediaClassName
-                    )}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  />
+            return (
+              <div
+                key={item.id}
+                className={cn(
+                  'group relative cursor-zoom-in break-inside-avoid overflow-hidden rounded-xl',
+                  cardClassName
                 )}
-              </div>
-
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <h3 className="mb-3 translate-y-4 text-base font-semibold text-white transition-transform duration-300 group-hover:translate-y-0">
-                  {item.title}
-                </h3>
-                {showPreview && item.promptPreview && (
-                  <p className="mb-3 line-clamp-2 translate-y-4 text-sm text-white/80 transition-transform duration-300 group-hover:translate-y-0">
-                    {item.promptPreview}
-                  </p>
-                )}
-                {!hideCreateButton && (
-                  <div
-                    className="translate-y-4 transition-transform delay-75 duration-300 group-hover:translate-y-0"
-                    onClick={(event) => event.stopPropagation()}
-                  >
-                    <Button
-                      variant="default"
-                      size="sm"
-                      className="inline-flex h-8 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-md border-0 bg-primary px-1 py-1.5 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 has-[>svg]:px-2.5 [&_svg:not([class*='size-'])]:size-4"
-                      onClick={() => handleCreateClick(item)}
-                    >
-                      <Wand className="mr-2 size-4" />
-                      {createLabel}
-                    </Button>
+                onClick={() => setSelectedIndex(index)}
+              >
+                {showTags && item.tags && item.tags.length > 0 && (
+                  <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">
+                    {item.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-white/20 bg-black/60 px-2 py-0.5 text-[11px] font-medium text-white/90 backdrop-blur"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 )}
+
+                <div
+                  className={cn(
+                    'relative overflow-hidden',
+                    mediaWrapperClassName
+                  )}
+                >
+                  {!imagesOnly && isVideoUrl(item.image) ? (
+                    <LazyVideo
+                      src={item.image}
+                      poster={item.poster || undefined}
+                      className={cn('h-auto w-full', mediaClassName)}
+                    />
+                  ) : (
+                    <LazyImage
+                      src={item.image}
+                      alt={item.title}
+                      className={cn(
+                        'h-auto w-full transition-transform duration-300 group-hover:scale-105',
+                        mediaClassName
+                      )}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    />
+                  )}
+                </div>
+
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/45 to-transparent p-4 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
+                  <h3 className="mb-3 translate-y-0 text-base font-semibold text-white transition-transform duration-300 md:translate-y-4 md:group-hover:translate-y-0">
+                    {item.title}
+                  </h3>
+                  {showPreview && item.promptPreview && (
+                    <p className="mb-3 line-clamp-2 translate-y-0 text-sm text-white/80 transition-transform duration-300 md:translate-y-4 md:group-hover:translate-y-0">
+                      {item.promptPreview}
+                    </p>
+                  )}
+                  {hasActions && (
+                    <div
+                      className="translate-y-0 transition-transform delay-75 duration-300 md:translate-y-4 md:group-hover:translate-y-0"
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      {!hideCreateButton && (
+                        <Button
+                          variant="default"
+                          size="sm"
+                          className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 w-full justify-center gap-1.5 rounded-md border-0 px-2 text-sm font-medium"
+                          onClick={() => handleCreateClick(item)}
+                        >
+                          <Wand className="size-4" />
+                          {createLabel}
+                        </Button>
+                      )}
+                      {hasSecondaryActions && (
+                        <div
+                          className={cn(
+                            'grid gap-2',
+                            !hideCreateButton && 'mt-2',
+                            canCopyPrompt && canShare
+                              ? 'grid-cols-2'
+                              : 'grid-cols-1'
+                          )}
+                        >
+                          {canCopyPrompt && (
+                            <Button
+                              type="button"
+                              variant="secondary"
+                              size="sm"
+                              className="h-8 justify-center gap-1.5 bg-white/90 px-2 text-xs text-black hover:bg-white"
+                              onClick={() => handleCopyPromptClick(item)}
+                            >
+                              <Copy className="size-3.5" />
+                              {t('copy_prompt')}
+                            </Button>
+                          )}
+                          {canShare && (
+                            <Button
+                              type="button"
+                              variant="secondary"
+                              size="sm"
+                              className="h-8 justify-center gap-1.5 bg-white/90 px-2 text-xs text-black hover:bg-white"
+                              onClick={() => handleShareClick(item)}
+                            >
+                              <Share2 className="size-3.5" />
+                              {t('share')}
+                            </Button>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         <motion.div
-          className={cn('text-muted-foreground container mt-20 text-center', containerClassName)}
+          className={cn(
+            'text-muted-foreground container mt-20 text-center',
+            containerClassName
+          )}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -456,18 +605,18 @@ export function ShowcasesFlowDynamic({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-8"
+            className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-8"
             onClick={() => setSelectedIndex(null)}
           >
             <button
-              className="absolute right-4 top-4 z-50 text-white/70 transition-colors hover:text-white"
+              className="absolute top-4 right-4 z-50 text-white/70 transition-colors hover:text-white"
               onClick={() => setSelectedIndex(null)}
             >
               <X className="size-8" />
             </button>
 
             <button
-              className="absolute left-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-black/20 p-2 text-white/70 transition-colors hover:bg-black/40 hover:text-white"
+              className="absolute top-1/2 left-4 z-50 -translate-y-1/2 rounded-full bg-black/20 p-2 text-white/70 transition-colors hover:bg-black/40 hover:text-white"
               onClick={(event) => {
                 event.stopPropagation();
                 handlePrevious();
@@ -477,7 +626,7 @@ export function ShowcasesFlowDynamic({
             </button>
 
             <button
-              className="absolute right-4 top-1/2 z-50 -translate-y-1/2 rounded-full bg-black/20 p-2 text-white/70 transition-colors hover:bg-black/40 hover:text-white"
+              className="absolute top-1/2 right-4 z-50 -translate-y-1/2 rounded-full bg-black/20 p-2 text-white/70 transition-colors hover:bg-black/40 hover:text-white"
               onClick={(event) => {
                 event.stopPropagation();
                 handleNext();
@@ -501,7 +650,9 @@ export function ShowcasesFlowDynamic({
                   items[selectedIndex].video || items[selectedIndex].image
                 ) ? (
                   <video
-                    src={items[selectedIndex].video || items[selectedIndex].image}
+                    src={
+                      items[selectedIndex].video || items[selectedIndex].image
+                    }
                     className="h-auto max-h-[90vh] w-auto max-w-full object-contain"
                     controls
                     autoPlay
@@ -530,6 +681,45 @@ export function ShowcasesFlowDynamic({
                       {items[selectedIndex].prompt}
                     </p>
                   )}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {!hideCreateButton && (
+                      <Button
+                        type="button"
+                        size="sm"
+                        className="gap-1.5 bg-white text-black hover:bg-white/90"
+                        onClick={() => handleCreateClick(items[selectedIndex])}
+                      >
+                        <Wand className="size-4" />
+                        {createLabel}
+                      </Button>
+                    )}
+                    {buildShowcaseTemplatePrompt(items[selectedIndex]) && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-1.5 border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white"
+                        onClick={() =>
+                          handleCopyPromptClick(items[selectedIndex])
+                        }
+                      >
+                        <Copy className="size-4" />
+                        {t('copy_prompt')}
+                      </Button>
+                    )}
+                    {items[selectedIndex].detailUrl && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-1.5 border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white"
+                        onClick={() => handleShareClick(items[selectedIndex])}
+                      >
+                        <Share2 className="size-4" />
+                        {t('share')}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -537,7 +727,12 @@ export function ShowcasesFlowDynamic({
         )}
       </AnimatePresence>
       {footer && (
-        <div className={cn('container mx-auto mt-10 flex justify-center', containerClassName)}>
+        <div
+          className={cn(
+            'container mx-auto mt-10 flex justify-center',
+            containerClassName
+          )}
+        >
           {footer}
         </div>
       )}

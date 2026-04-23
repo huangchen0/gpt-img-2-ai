@@ -3,18 +3,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { ShowcasesFlowDynamic } from '@/themes/default/blocks/showcases-flow-dynamic';
-import { SmartIcon } from '@/shared/blocks/common/smart-icon';
 import { Link } from '@/core/i18n/navigation';
+import { SmartIcon } from '@/shared/blocks/common/smart-icon';
+import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
 import { Section } from '@/shared/types/blocks/landing';
-import { Button } from '@/shared/components/ui/button';
+import { ShowcasesFlowDynamic } from '@/themes/default/blocks/showcases-flow-dynamic';
 
-export function HairstylesContent({
-  sectionData,
-}: {
-  sectionData: Section;
-}) {
+export function HairstylesContent({ sectionData }: { sectionData: Section }) {
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   const categories = [
@@ -122,7 +118,7 @@ export function HairstylesContent({
       {/* Dynamic Showcases */}
       <ShowcasesFlowDynamic
         tags={activeTags}
-        hideCreateButton={true}
+        hideCreateButton={false}
         showDescription={true}
         enableLimit={true}
       />

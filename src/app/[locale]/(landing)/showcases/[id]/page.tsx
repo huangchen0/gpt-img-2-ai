@@ -9,6 +9,7 @@ import { defaultLocale } from '@/config/locale';
 import { LazyImage } from '@/shared/blocks/common';
 import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
+import { buildShareActionLabels } from '@/shared/lib/share-action-labels';
 import {
   buildShowcaseImageObjectJsonLd,
   getShowcaseAlternateUrls,
@@ -20,6 +21,7 @@ import {
   shouldIndexShowcase,
   toAbsoluteShowcaseAssetUrl,
 } from '@/shared/lib/showcase-seo';
+import { buildShowcaseTemplatePrompt } from '@/shared/lib/showcase-template';
 import { parseDateValue, type DateValue } from '@/shared/lib/time';
 import { getLatestShowcases, getShowcase } from '@/shared/models/showcase';
 
@@ -126,8 +128,10 @@ export default async function ShowcaseDetailPage({
     notFound();
   }
 
-  const prompt = showcase.prompt?.trim() || showcase.title;
-  const createHref = `/ai-image${prompt ? `?prompt=${encodeURIComponent(prompt)}` : ''}`;
+  const templatePrompt = buildShowcaseTemplatePrompt(showcase);
+  const createHref = `/ai-image${
+    templatePrompt ? `?prompt=${encodeURIComponent(templatePrompt)}` : ''
+  }`;
   const description = getShowcaseDescription(
     showcase,
     t('fallback_description')
@@ -146,6 +150,11 @@ export default async function ShowcaseDetailPage({
         item.id !== showcase.id && item.image && shouldIndexShowcase(item)
     )
     .slice(0, 4);
+  const shareLabels = buildShareActionLabels({
+    t,
+    namespace: 'share',
+    includeCopyPrompt: true,
+  });
 
   return (
     <main className="container py-12 md:py-20">
@@ -186,11 +195,11 @@ export default async function ShowcaseDetailPage({
             </div>
           )}
 
-          {showcase.prompt && (
+          {templatePrompt && (
             <div className="bg-muted/25 rounded-lg border p-4">
               <p className="text-sm font-medium">{t('prompt')}</p>
               <p className="text-muted-foreground mt-2 text-sm leading-6">
-                {showcase.prompt}
+                {templatePrompt}
               </p>
             </div>
           )}
@@ -213,21 +222,14 @@ export default async function ShowcaseDetailPage({
             imageUrl={imageUrl}
             title={showcase.title}
             description={description}
+            prompt={templatePrompt}
             appName={envConfigs.app_name}
-            copy={{
-              copyLink: t('share.copy_link'),
-              copyMarkdown: t('share.copy_markdown'),
-              copyEmbed: t('share.copy_embed'),
-              shareToPinterest: t('share.pinterest'),
-              shareToX: t('share.x'),
-              copied: t('share.copied'),
-              copyFailed: t('share.copy_failed'),
-            }}
+            labels={shareLabels}
           />
 
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <Button asChild>
-              <Link href={createHref}>{t('create_similar')}</Link>
+              <Link href={createHref}>{t('use_template')}</Link>
             </Button>
             <Button asChild variant="outline">
               <Link href="/showcases">{t('view_showcases')}</Link>
