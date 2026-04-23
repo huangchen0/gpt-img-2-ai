@@ -100,8 +100,22 @@ function normalizeDataset(dataset: PromptLibraryListDataset) {
   } satisfies PromptLibraryListDataset;
 }
 
-function getBestMediaUrl(media: PromptLibraryListItem['media'][number]) {
-  return media.r2Thumbnail || media.thumbnail || media.r2Url || media.url || '';
+function getMediaImageAttributes(
+  media: PromptLibraryListItem['media'][number]
+) {
+  const thumbnail = media.r2Thumbnail || media.thumbnail || '';
+  const fullSize = media.r2Url || media.url || '';
+  const src = fullSize || thumbnail;
+  const srcSet =
+    thumbnail && fullSize && thumbnail !== fullSize
+      ? `${thumbnail} 300w, ${fullSize} 900w`
+      : undefined;
+
+  return {
+    src,
+    srcSet,
+    sizes: '(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw',
+  };
 }
 
 function PromptLoadingCard({ index }: { index: number }) {
@@ -198,6 +212,7 @@ function PromptCard({
   item: PromptLibraryListItem;
 }) {
   const media = item.media[0];
+  const image = media ? getMediaImageAttributes(media) : undefined;
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -227,7 +242,7 @@ function PromptCard({
 
   return (
     <article className="bg-card overflow-hidden rounded-lg border shadow-sm transition-shadow hover:shadow-md">
-      {media && (
+      {image?.src && (
         <Link
           href={`/prompts/gpt-image-2/${item.slug}`}
           className="bg-muted block"
@@ -235,7 +250,9 @@ function PromptCard({
         >
           <div className="bg-muted aspect-square overflow-hidden">
             <img
-              src={getBestMediaUrl(media)}
+              src={image.src}
+              srcSet={image.srcSet}
+              sizes={image.sizes}
               alt={`${item.title} GPT Image 2 prompt example`}
               className="h-full w-full object-contain"
               loading="lazy"
