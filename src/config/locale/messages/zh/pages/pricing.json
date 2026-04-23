@@ -399,18 +399,18 @@
     ],
     "sections": [
       {
-        "id": "membership",
-        "title": "Pro 计划",
-        "description": "释放更多图片创作能力，锁定更低的长期生成成本。",
-        "group_names": ["monthly", "yearly"],
-        "default_group": "yearly"
-      },
-      {
         "id": "credits",
         "title": "按需购买，灵活创作",
         "description": "即买即用，立即开启创作。按需补充，无需订阅。",
         "group_names": ["packs"],
         "default_group": "packs"
+      },
+      {
+        "id": "membership",
+        "title": "Pro 计划",
+        "description": "释放更多图片创作能力，锁定更低的长期生成成本。",
+        "group_names": ["monthly", "yearly"],
+        "default_group": "yearly"
       }
     ],
     "usage_examples_title": "图片积分如何消耗",
