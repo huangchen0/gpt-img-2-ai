@@ -182,7 +182,7 @@ export async function getAuthOptions(configs: Record<string, string>) {
               const { grantCreditsForNewUser } = await import(
                 '@/shared/models/credit-grant'
               );
-              await grantCreditsForNewUser(user);
+              await grantCreditsForNewUser(user, configs);
 
               const { grantReferralRewardForNewUser } = await import(
                 '@/shared/models/referral'

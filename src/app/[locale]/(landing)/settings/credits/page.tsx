@@ -5,7 +5,7 @@ import { Empty } from '@/shared/blocks/common';
 import { RewardsPanel } from '@/shared/blocks/credits/rewards-panel';
 import { PanelCard } from '@/shared/blocks/panel';
 import { TableCard } from '@/shared/blocks/table';
-import { getAllConfigs } from '@/shared/models/config';
+import { getAllConfigsUncached } from '@/shared/models/config';
 import {
   Credit,
   CreditStatus,
@@ -100,7 +100,7 @@ export default async function CreditsPage({
   };
 
   const remainingCredits = await getRemainingCredits(user.id);
-  const configs = await getAllConfigs();
+  const configs = await getAllConfigsUncached();
   const referralSummary = await getReferralSummary(user.id);
   const checkinStatus = await getDailyCheckinStatus(user.id);
   const referralCode = (await ensureUserReferralCode(user.id)) || '';

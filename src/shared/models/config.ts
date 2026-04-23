@@ -81,37 +81,7 @@ export const getConfigs = unstable_cache(
 );
 
 const getAllConfigsCached = unstable_cache(
-  async (): Promise<Configs> => {
-    let dbConfigs: Configs = {};
-
-    if (envConfigs.database_url) {
-      try {
-        dbConfigs = await getConfigs();
-      } catch (e) {
-        console.log(`get configs from db failed:`, e);
-        dbConfigs = {};
-      }
-    }
-
-    const settingNames = await getAllSettingNames();
-    settingNames.forEach((key) => {
-      if (DB_PREFERRED_SETTING_NAMES.has(key) && key in dbConfigs) {
-        return;
-      }
-
-      const upperKey = key.toUpperCase();
-      if (process.env[upperKey]) {
-        dbConfigs[key] = process.env[upperKey] ?? '';
-      } else if (process.env[key]) {
-        dbConfigs[key] = process.env[key] ?? '';
-      }
-    });
-
-    return {
-      ...envConfigs,
-      ...dbConfigs,
-    };
-  },
+  async (): Promise<Configs> => getAllConfigsUncached(),
   ['all-configs'],
   {
     revalidate: 3600,
@@ -147,6 +117,41 @@ export async function getAllConfigs(): Promise<Configs> {
   }
 
   return getAllConfigsCached();
+}
+
+export async function getAllConfigsUncached(): Promise<Configs> {
+  let dbConfigs: Configs = {};
+
+  if (envConfigs.database_url) {
+    try {
+      const result = await db().select().from(config);
+      dbConfigs = Object.fromEntries(
+        result.map((item) => [item.name, item.value ?? ''])
+      );
+    } catch (e) {
+      console.log(`get configs from db failed:`, e);
+      dbConfigs = {};
+    }
+  }
+
+  const settingNames = await getAllSettingNames();
+  settingNames.forEach((key) => {
+    if (DB_PREFERRED_SETTING_NAMES.has(key) && key in dbConfigs) {
+      return;
+    }
+
+    const upperKey = key.toUpperCase();
+    if (process.env[upperKey]) {
+      dbConfigs[key] = process.env[upperKey] ?? '';
+    } else if (process.env[key]) {
+      dbConfigs[key] = process.env[key] ?? '';
+    }
+  });
+
+  return {
+    ...envConfigs,
+    ...dbConfigs,
+  };
 }
 
 export async function getPublicConfigs(): Promise<Configs> {

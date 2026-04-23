@@ -1,9 +1,14 @@
 import { grantCreditsForUser } from './credit';
 import type { User } from './user';
 
-export async function grantCreditsForNewUser(user: User) {
-  const { getAllConfigs } = await import('./config');
-  const configs = await getAllConfigs();
+export async function grantCreditsForNewUser(
+  user: User,
+  configs?: Record<string, string>
+) {
+  if (!configs) {
+    const { getAllConfigsUncached } = await import('./config');
+    configs = await getAllConfigsUncached();
+  }
 
   if (configs.initial_credits_enabled === 'false') {
     return;

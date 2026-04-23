@@ -1,5 +1,5 @@
 import { respData, respErr } from '@/shared/lib/resp';
-import { getAllConfigs } from '@/shared/models/config';
+import { getAllConfigsUncached } from '@/shared/models/config';
 import { getRemainingCredits } from '@/shared/models/credit';
 import { claimDailyCheckinCredits } from '@/shared/models/daily-checkin';
 import { getUserInfo } from '@/shared/models/user';
@@ -11,7 +11,7 @@ export async function POST() {
       return respErr('no auth');
     }
 
-    const configs = await getAllConfigs();
+    const configs = await getAllConfigsUncached();
     const result = await claimDailyCheckinCredits({ user, configs });
     const remainingCredits = await getRemainingCredits(user.id);
 
