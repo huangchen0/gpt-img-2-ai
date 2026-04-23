@@ -34,7 +34,7 @@ export const envConfigs: ConfigMap = {
     process.env.PROMPT_LIBRARY_BASE_URL ??
     'https://img.cdance.ai/uploads/prompt-library',
   theme: process.env.NEXT_PUBLIC_THEME ?? 'default',
-  appearance: process.env.NEXT_PUBLIC_APPEARANCE ?? 'dark',
+  appearance: process.env.NEXT_PUBLIC_APPEARANCE ?? 'system',
   locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE ?? 'en',
   database_url: process.env.DATABASE_URL ?? '',
   database_auth_token: process.env.DATABASE_AUTH_TOKEN ?? '',

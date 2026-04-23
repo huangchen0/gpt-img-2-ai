@@ -15,10 +15,14 @@ import { Badge } from '@/shared/components/ui/badge';
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { Skeleton } from '@/shared/components/ui/skeleton';
+import { getPromptCategories } from '@/shared/prompt-library/insights';
 import {
-  getPromptCategories,
-  getPromptUseCaseSentence,
-} from '@/shared/prompt-library/insights';
+  getLocalizedPromptCategory,
+  getLocalizedPromptUseCaseSentence,
+  getPromptCategorySearchText,
+  getPromptLibraryLocale,
+  getPromptLibraryMessages,
+} from '@/shared/prompt-library/localization';
 import type {
   PromptLibraryItem,
   PromptLibraryListDataset,
@@ -29,11 +33,13 @@ const initialVisibleCount = 24;
 const visibleCountStep = 24;
 const loadingCardIndexes = Array.from({ length: 6 }, (_, index) => index);
 
-function getImageGeneratorUrl(prompt: string) {
+function getImageGeneratorUrl(prompt: string, locale?: string) {
   const trimmedPrompt = prompt.trim();
-  if (!trimmedPrompt) return '/models/gpt-image-2#generator';
+  const path = trimmedPrompt
+    ? `/models/gpt-image-2?prompt=${encodeURIComponent(trimmedPrompt)}#generator`
+    : '/models/gpt-image-2#generator';
 
-  return `/models/gpt-image-2?prompt=${encodeURIComponent(trimmedPrompt)}#generator`;
+  return getPromptLibraryLocale(locale) === 'zh' ? `/zh${path}` : path;
 }
 
 function getPromptItemUrl(dataset: PromptLibraryListDataset, slug: string) {
@@ -165,9 +171,11 @@ function PromptLoadingCard({ index }: { index: number }) {
   );
 }
 
-function PromptGalleryLoading() {
+function PromptGalleryLoading({ locale }: { locale?: string }) {
+  const messages = getPromptLibraryMessages(locale);
+
   return (
-    <div role="status" aria-label="Loading prompt gallery">
+    <div role="status" aria-label={messages.aria.loadingGallery}>
       <style>{`
         @keyframes prompt-loading-sheen {
           0% {
@@ -194,7 +202,7 @@ function PromptGalleryLoading() {
           }
         }
       `}</style>
-      <span className="sr-only">Loading prompt gallery</span>
+      <span className="sr-only">{messages.aria.loadingGallery}</span>
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
         {loadingCardIndexes.map((index) => (
           <PromptLoadingCard key={index} index={index} />
@@ -207,10 +215,13 @@ function PromptGalleryLoading() {
 function PromptCard({
   dataset,
   item,
+  locale,
 }: {
   dataset: PromptLibraryListDataset;
   item: PromptLibraryListItem;
+  locale?: string;
 }) {
+  const messages = getPromptLibraryMessages(locale);
   const media = item.media[0];
   const image = media ? getMediaImageAttributes(media) : undefined;
   const [copied, setCopied] = useState(false);
@@ -233,7 +244,7 @@ function PromptCard({
   async function usePrompt() {
     try {
       const fullItem = await fetchPromptItem(dataset, item.slug);
-      window.location.href = getImageGeneratorUrl(fullItem.prompt);
+      window.location.href = getImageGeneratorUrl(fullItem.prompt, locale);
     } catch {
       setFailed(true);
       window.setTimeout(() => setFailed(false), 1800);
@@ -246,14 +257,14 @@ function PromptCard({
         <Link
           href={`/prompts/gpt-image-2/${item.slug}`}
           className="bg-muted block"
-          aria-label={`Open ${item.title}`}
+          aria-label={messages.aria.openPrompt(item.title)}
         >
           <div className="bg-muted aspect-square overflow-hidden">
             <img
               src={image.src}
               srcSet={image.srcSet}
               sizes={image.sizes}
-              alt={`${item.title} GPT Image 2 prompt example`}
+              alt={messages.aria.promptImageAlt(item.title)}
               className="h-full w-full object-contain"
               loading="lazy"
               decoding="async"
@@ -266,10 +277,12 @@ function PromptCard({
         <div className="flex flex-wrap gap-2">
           {item.categories.slice(0, 2).map((category) => (
             <Badge key={category} variant="secondary">
-              {category}
+              {getLocalizedPromptCategory(category, locale)}
             </Badge>
           ))}
-          {item.featured && <Badge variant="outline">Featured</Badge>}
+          {item.featured && (
+            <Badge variant="outline">{messages.badges.featured}</Badge>
+          )}
         </div>
 
         <div>
@@ -287,7 +300,7 @@ function PromptCard({
         </div>
 
         <p className="bg-muted/45 text-muted-foreground line-clamp-2 rounded-md border p-3 text-xs leading-relaxed">
-          {getPromptUseCaseSentence(item)}
+          {getLocalizedPromptUseCaseSentence(item, locale)}
         </p>
 
         <pre className="bg-background text-muted-foreground line-clamp-4 overflow-hidden rounded-md border p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap">
@@ -297,11 +310,15 @@ function PromptCard({
         <div className="grid grid-cols-2 gap-2">
           <Button type="button" variant="outline" onClick={copyPrompt}>
             <Copy className="size-4" />
-            {failed ? 'Failed' : copied ? 'Copied' : 'Copy'}
+            {failed
+              ? messages.buttons.copyFailed
+              : copied
+                ? messages.buttons.copied
+                : messages.buttons.copy}
           </Button>
           <Button type="button" onClick={usePrompt}>
             <ImageIcon className="size-4" />
-            Use
+            {messages.buttons.use}
           </Button>
         </div>
       </div>
@@ -313,11 +330,15 @@ export function GptImage2PromptGalleryClient({
   datasetUrl,
   fallbackDatasetUrl,
   initialTotal,
+  locale,
 }: {
   datasetUrl: string;
   fallbackDatasetUrl?: string;
   initialTotal: number;
+  locale?: string;
 }) {
+  const promptLocale = getPromptLibraryLocale(locale);
+  const messages = getPromptLibraryMessages(promptLocale);
   const [dataset, setDataset] = useState<PromptLibraryListDataset | null>(null);
   const [loadError, setLoadError] = useState(false);
   const datasetUrls = useMemo(
@@ -385,12 +406,16 @@ export function GptImage2PromptGalleryClient({
         item.description,
         item.promptPreview,
         item.authorName,
-        item.categories.join(' '),
+        item.categories
+          .map((category) =>
+            getPromptCategorySearchText(category, promptLocale)
+          )
+          .join(' '),
       ]
         .filter(Boolean)
         .some((value) => value!.toLowerCase().includes(normalizedQuery));
     });
-  }, [activeCategory, dataset, query]);
+  }, [activeCategory, dataset, promptLocale, query]);
 
   useEffect(() => {
     setVisibleCount(initialVisibleCount);
@@ -410,7 +435,10 @@ export function GptImage2PromptGalleryClient({
       setRandomFailed(false);
       setRandomLoading(true);
       const fullItem = await fetchPromptItem(dataset, randomPrompt.slug);
-      window.location.href = getImageGeneratorUrl(fullItem.prompt);
+      window.location.href = getImageGeneratorUrl(
+        fullItem.prompt,
+        promptLocale
+      );
     } catch {
       setRandomFailed(true);
       window.setTimeout(() => setRandomFailed(false), 1800);
@@ -426,21 +454,18 @@ export function GptImage2PromptGalleryClient({
           <div className="max-w-3xl md:col-span-2">
             <Badge variant="outline" className="bg-background mb-5">
               <Sparkles className="size-3" />
-              GPT Image 2 prompt gallery
+              {messages.gallery.eyebrow}
             </Badge>
             <h1 className="font-display text-4xl leading-tight font-semibold tracking-normal md:text-6xl">
-              Copyable GPT Image 2 prompts for real image workflows
+              {messages.gallery.title}
             </h1>
             <p className="text-muted-foreground mt-5 max-w-2xl text-base leading-7 md:text-lg">
-              Explore {initialTotal} practical prompts for product visuals,
-              posters, UI mockups, characters, infographics, and social images.
-              Each detail page adds usage notes and GPT Image 2 rewrite guidance
-              so this is more than a mirrored prompt dump.
+              {messages.gallery.description(initialTotal)}
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button asChild size="lg">
                 <Link href="/models/gpt-image-2#generator">
-                  Open generator
+                  {messages.buttons.openGenerator}
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -453,33 +478,36 @@ export function GptImage2PromptGalleryClient({
               >
                 <Shuffle className="size-4" />
                 {randomFailed
-                  ? 'Failed'
+                  ? messages.buttons.failed
                   : randomLoading
-                    ? 'Loading'
-                    : 'Try random prompt'}
+                    ? messages.buttons.loading
+                    : messages.buttons.tryRandomPrompt}
               </Button>
             </div>
           </div>
 
           <div className="bg-card rounded-lg border p-5 shadow-sm">
             <p className="text-muted-foreground text-sm font-medium">
-              Library snapshot
+              {messages.gallery.snapshotTitle}
             </p>
             <div className="mt-4 grid grid-cols-2 gap-3">
               <div className="bg-background rounded-md border p-4">
                 <p className="text-3xl font-semibold">{initialTotal}</p>
-                <p className="text-muted-foreground mt-1 text-xs">Prompts</p>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  {messages.gallery.promptsLabel}
+                </p>
               </div>
               <div className="bg-background rounded-md border p-4">
                 <p className="text-3xl font-semibold">
                   {categories.length - 1}
                 </p>
-                <p className="text-muted-foreground mt-1 text-xs">Use cases</p>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  {messages.gallery.useCasesLabel}
+                </p>
               </div>
             </div>
             <p className="text-muted-foreground mt-4 text-sm leading-6">
-              Built for GPT Image 2 specifically: search by intent, inspect
-              examples, then send the full prompt into the generator.
+              {messages.gallery.snapshotDescription}
             </p>
           </div>
         </div>
@@ -493,12 +521,14 @@ export function GptImage2PromptGalleryClient({
               <Input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search prompts, categories, styles, authors..."
+                placeholder={messages.gallery.searchPlaceholder}
                 className="h-11 pl-10"
               />
             </label>
             <p className="text-muted-foreground text-sm">
-              {dataset ? `${filteredItems.length} shown` : 'Loading prompts'}
+              {dataset
+                ? messages.gallery.shownCount(filteredItems.length)
+                : messages.gallery.loadingPrompts}
             </p>
           </div>
           <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
@@ -511,7 +541,7 @@ export function GptImage2PromptGalleryClient({
                 onClick={() => setActiveCategory(category)}
                 className="shrink-0"
               >
-                {category}
+                {getLocalizedPromptCategory(category, promptLocale)}
               </Button>
             ))}
           </div>
@@ -520,27 +550,34 @@ export function GptImage2PromptGalleryClient({
 
       <section className="container py-8 md:py-12">
         {!dataset && !loadError ? (
-          <PromptGalleryLoading />
+          <PromptGalleryLoading locale={promptLocale} />
         ) : visibleItems.length > 0 && dataset ? (
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {visibleItems.map((item) => (
-              <PromptCard key={item.id} dataset={dataset} item={item} />
+              <PromptCard
+                key={item.id}
+                dataset={dataset}
+                item={item}
+                locale={promptLocale}
+              />
             ))}
           </div>
         ) : loadError ? (
           <div className="bg-card rounded-lg border p-10 text-center shadow-sm">
             <p className="text-lg font-semibold">
-              Prompt library is temporarily unavailable
+              {messages.gallery.unavailableTitle}
             </p>
             <p className="text-muted-foreground mt-2 text-sm">
-              Please refresh the page in a moment.
+              {messages.gallery.unavailableDescription}
             </p>
           </div>
         ) : (
           <div className="bg-card rounded-lg border p-10 text-center shadow-sm">
-            <p className="text-lg font-semibold">No prompts found</p>
+            <p className="text-lg font-semibold">
+              {messages.gallery.emptyTitle}
+            </p>
             <p className="text-muted-foreground mt-2 text-sm">
-              Try a broader use case or clear the search box.
+              {messages.gallery.emptyDescription}
             </p>
           </div>
         )}
@@ -555,7 +592,7 @@ export function GptImage2PromptGalleryClient({
                 setVisibleCount((count) => count + visibleCountStep)
               }
             >
-              Load more prompts
+              {messages.buttons.loadMore}
             </Button>
           </div>
         )}

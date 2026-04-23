@@ -5,9 +5,25 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { trackGtmQueueEvent } from '@/shared/lib/gtm';
 import { getUuid } from '@/shared/lib/hash';
 
+type LegacyPriorityQueueStorageVersion = 2 | 3 | 4 | 5 | 6;
+type PriorityQueueStorageVersion = LegacyPriorityQueueStorageVersion | 7;
+
 const PRIORITY_QUEUE_STORAGE_KEY = 'membership_priority_queue_v1';
-const PRIORITY_QUEUE_STORAGE_VERSION: 3 = 3;
-const PRIORITY_QUEUE_WAIT_EXTENSION_MS = 29 * 1000;
+const PRIORITY_QUEUE_STORAGE_VERSION: 7 = 7;
+const PRIORITY_QUEUE_WAIT_RANGE_MS: [number, number] = [
+  5 * 60 * 1000,
+  10 * 60 * 1000,
+];
+const LEGACY_PRIORITY_QUEUE_WAIT_RANGES_MS: Record<
+  LegacyPriorityQueueStorageVersion,
+  [number, number]
+> = {
+  2: [(1 * 60 + 45) * 1000, (3 * 60 + 45) * 1000],
+  3: [(2 * 60 + 14) * 1000, (4 * 60 + 14) * 1000],
+  4: [(2 * 60 + 34) * 1000, (4 * 60 + 34) * 1000],
+  5: [(2 * 60 + 54) * 1000, (4 * 60 + 54) * 1000],
+  6: [4 * 60 * 1000, 8 * 60 * 1000],
+};
 const QUEUE_TICK_INTERVAL_MS = 1000;
 
 export type MembershipPriorityQueueMediaType = 'image' | 'video';
@@ -18,7 +34,7 @@ export type MembershipPriorityQueueStatus =
   | 'submit_failed';
 
 interface PersistedMembershipPriorityQueue {
-  version: 2 | 3;
+  version: PriorityQueueStorageVersion;
   queueId: string;
   userId: string;
   mediaType: MembershipPriorityQueueMediaType;
@@ -80,6 +96,48 @@ export function clearMembershipPriorityQueueStorage() {
   window.sessionStorage.removeItem(PRIORITY_QUEUE_STORAGE_KEY);
 }
 
+function remapPriorityQueueWaitMs(
+  waitMs: number,
+  fromRange: [number, number],
+  toRange: [number, number]
+) {
+  const [fromMin, fromMax] = fromRange;
+  const [toMin, toMax] = toRange;
+
+  if (fromMax <= fromMin) {
+    return toMin;
+  }
+
+  const progress = (waitMs - fromMin) / (fromMax - fromMin);
+  const normalizedProgress = Math.min(1, Math.max(0, progress));
+
+  return Math.round(toMin + (toMax - toMin) * normalizedProgress);
+}
+
+function migrateStoredQueue(
+  queue: PersistedMembershipPriorityQueue | null
+): PersistedMembershipPriorityQueue | null {
+  if (!queue) {
+    return null;
+  }
+
+  if (queue.version === PRIORITY_QUEUE_STORAGE_VERSION) {
+    return queue;
+  }
+
+  const fromRange = LEGACY_PRIORITY_QUEUE_WAIT_RANGES_MS[queue.version];
+
+  return {
+    ...queue,
+    version: PRIORITY_QUEUE_STORAGE_VERSION,
+    waitMs: remapPriorityQueueWaitMs(
+      queue.waitMs,
+      fromRange,
+      PRIORITY_QUEUE_WAIT_RANGE_MS
+    ),
+  };
+}
+
 function readStoredQueue() {
   if (!hasWindow()) {
     return null;
@@ -92,14 +150,7 @@ function readStoredQueue() {
     }
 
     const parsed = JSON.parse(raw) as PersistedMembershipPriorityQueue | null;
-    const migratedQueue: PersistedMembershipPriorityQueue | null =
-      parsed?.version === 2
-        ? {
-            ...parsed,
-            version: PRIORITY_QUEUE_STORAGE_VERSION,
-            waitMs: parsed.waitMs + PRIORITY_QUEUE_WAIT_EXTENSION_MS,
-          }
-        : parsed;
+    const migratedQueue = migrateStoredQueue(parsed);
     const scope =
       typeof migratedQueue?.scope === 'string' && migratedQueue.scope.trim()
         ? migratedQueue.scope

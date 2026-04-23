@@ -33,6 +33,7 @@ import {
   PaidDownloadDialog,
   usePaidDownloadGate,
 } from '@/shared/blocks/generator/paid-download-dialog';
+import { GeneratorResultOverlay } from '@/shared/blocks/generator/result-status-overlay';
 import { ShareShowcaseDialog } from '@/shared/blocks/generator/share-showcase-dialog';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -134,8 +135,8 @@ const GENERATION_TIMEOUT = 180000;
 const MAX_PROMPT_LENGTH = 20000;
 const IMAGE_CREDITS_MULTIPLIER = 10;
 const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  (2 * 60 + 14) * 1000,
-  (4 * 60 + 14) * 1000,
+  5 * 60 * 1000,
+  10 * 60 * 1000,
 ];
 const IMAGE_QUEUE_RETURN_HREF = '/models/gpt-image-2#nano-banana-generator';
 const VIDEO_QUEUE_RETURN_HREF =
@@ -1143,6 +1144,8 @@ export function ImageGenerator({
   const isCurrentRequestRetryable =
     queueState?.status === 'submit_failed' &&
     queueState.snapshotDigest === queueSnapshotDigest;
+  const showGeneratingResultOverlay =
+    isGenerating && generatedImages.length === 0 && !isQueueActive;
 
   const handleCancelQueue = useCallback(() => {
     pendingGenerateRequestRef.current = null;
@@ -1755,26 +1758,7 @@ export function ImageGenerator({
                 </div>
               )}
 
-              {isQueueActive && queueState ? (
-                <MembershipPriorityQueueCard
-                  title={queueCopy.title}
-                  description={queueCopy.description}
-                  taskLabel={queueCopy.taskLabel}
-                  remainingLabel={queueCopy.remainingLabel}
-                  remainingMs={queueState.remainingMs}
-                  upgradeLabel={queueCopy.upgradeLabel}
-                  cancelLabel={queueCopy.cancelLabel}
-                  submittingLabel={queueCopy.submittingLabel}
-                  onCancel={handleCancelQueue}
-                  onUpgradeClick={trackUpgradeClick}
-                  onRetry={isCurrentRequestRetryable ? retryQueue : undefined}
-                  upgradeHref="/pricing"
-                  isSubmitting={isQueueSubmitting}
-                  isSubmitFailed={isCurrentRequestRetryable}
-                  retryLabel={queueCopy.retryLabel}
-                  submitFailedLabel={queueCopy.submitFailedLabel}
-                />
-              ) : isGenerating ? (
+              {isGenerating ? (
                 <div className="space-y-2 rounded-lg border p-4">
                   <div className="flex items-center justify-between text-sm">
                     <span>{t('progress')}</span>
@@ -1871,7 +1855,7 @@ export function ImageGenerator({
                   ))}
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center py-4 text-center">
+                <div className="relative flex min-h-[360px] flex-col items-center justify-center overflow-hidden rounded-xl py-4 text-center">
                   {previewImage && (
                     <div className="mb-6 overflow-hidden rounded-lg border">
                       <LazyImage
@@ -1897,11 +1881,45 @@ export function ImageGenerator({
                       ))}
                     </div>
                   )}
-                  <p className="text-muted-foreground">
-                    {isGenerating
-                      ? t('ready_to_generate')
-                      : t('no_images_generated')}
-                  </p>
+                  {isQueueActive && queueState ? (
+                    <div className="w-full max-w-md text-left">
+                      <MembershipPriorityQueueCard
+                        title={queueCopy.title}
+                        description={queueCopy.description}
+                        taskLabel={queueCopy.taskLabel}
+                        remainingLabel={queueCopy.remainingLabel}
+                        remainingMs={queueState.remainingMs}
+                        upgradeLabel={queueCopy.upgradeLabel}
+                        cancelLabel={queueCopy.cancelLabel}
+                        submittingLabel={queueCopy.submittingLabel}
+                        onCancel={handleCancelQueue}
+                        onUpgradeClick={trackUpgradeClick}
+                        onRetry={
+                          isCurrentRequestRetryable ? retryQueue : undefined
+                        }
+                        upgradeHref="/pricing"
+                        isSubmitting={isQueueSubmitting}
+                        isSubmitFailed={isCurrentRequestRetryable}
+                        retryLabel={queueCopy.retryLabel}
+                        submitFailedLabel={queueCopy.submitFailedLabel}
+                        className="bg-background/80 shadow-sm backdrop-blur-sm"
+                      />
+                    </div>
+                  ) : (
+                    <p className="text-muted-foreground">
+                      {isGenerating
+                        ? t('ready_to_generate')
+                        : t('no_images_generated')}
+                    </p>
+                  )}
+                  {showGeneratingResultOverlay ? (
+                    <GeneratorResultOverlay
+                      title={t('generating')}
+                      progressLabel={t('progress')}
+                      progress={progress}
+                      status={taskStatusLabel}
+                    />
+                  ) : null}
                 </div>
               )}
             </CardContent>

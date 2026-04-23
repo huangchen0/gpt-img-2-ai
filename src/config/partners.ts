@@ -8,10 +8,12 @@ export interface PartnerListing {
   relationship?: PartnerLinkRelationship;
   linkRel?: string;
   openInNewTab?: boolean;
+  disableFooterBadgeScaling?: boolean;
   exactBadgeEmbed?: boolean;
   rawBadgeEmbed?: boolean;
   showInPartners?: boolean;
   badgeStyle?: {
+    border?: string;
     borderRadius?: string;
     height?: string;
     width?: string;

@@ -6,8 +6,37 @@ import { routing } from '@/core/i18n/config';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
+function normalizeDuplicatedLocalePath(pathname: string) {
+  const segments = pathname.split('/');
+  const firstLocale = segments[1];
+  const secondLocale = segments[2];
+
+  if (
+    firstLocale &&
+    secondLocale &&
+    firstLocale === secondLocale &&
+    routing.locales.includes(firstLocale as any)
+  ) {
+    return `/${[firstLocale, ...segments.slice(3)].filter(Boolean).join('/')}`;
+  }
+
+  return null;
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  const normalizedDuplicatedLocalePath =
+    normalizeDuplicatedLocalePath(pathname);
+
+  if (
+    normalizedDuplicatedLocalePath &&
+    normalizedDuplicatedLocalePath !== pathname
+  ) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = normalizedDuplicatedLocalePath;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
 
   // Handle internationalization first
   const intlResponse = intlMiddleware(request);

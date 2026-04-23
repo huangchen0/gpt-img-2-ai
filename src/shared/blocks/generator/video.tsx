@@ -258,8 +258,8 @@ const ASSET_TIMEOUT = 300000;
 const MAX_PROMPT_LENGTH = 2500;
 const PROVIDER = 'kie';
 const VIDEO_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  (2 * 60 + 14) * 1000,
-  (4 * 60 + 14) * 1000,
+  5 * 60 * 1000,
+  10 * 60 * 1000,
 ];
 const IMAGE_QUEUE_RETURN_HREF = '/models/gpt-image-2#nano-banana-generator';
 const VIDEO_QUEUE_RETURN_HREF =

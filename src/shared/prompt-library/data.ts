@@ -55,12 +55,7 @@ function trimTrailingSlash(value: string) {
 }
 
 function getPromptLibraryDir(model: PromptLibraryModel) {
-  return path.join(
-    process.cwd(),
-    'public',
-    'prompt-library',
-    datasetFiles[model]
-  );
+  return path.join(process.cwd(), 'public', 'prompt-library', datasetFiles[model]);
 }
 
 function getRemoteBaseUrl() {
@@ -139,17 +134,11 @@ function normalizeIndexDataset(dataset: PromptLibraryIndexDataset) {
 
 function readLocalPromptLibraryDataset(model: PromptLibraryModel) {
   const filePath = path.join(getPromptLibraryDir(model), 'index.json');
-  return JSON.parse(
-    fs.readFileSync(filePath, 'utf8')
-  ) as PromptLibraryIndexDataset;
+  return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromptLibraryIndexDataset;
 }
 
 function readLocalPromptLibraryItem(model: PromptLibraryModel, slug: string) {
-  const filePath = path.join(
-    getPromptLibraryDir(model),
-    'items',
-    `${slug}.json`
-  );
+  const filePath = path.join(getPromptLibraryDir(model), 'items', `${slug}.json`);
   if (!fs.existsSync(filePath)) return undefined;
 
   return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromptLibraryItem;
@@ -225,10 +214,7 @@ export async function getRelatedPromptLibraryItems(
     .sort((a, b) => {
       const aMatch = a.categories.includes(category) ? 1 : 0;
       const bMatch = b.categories.includes(category) ? 1 : 0;
-      return (
-        bMatch - aMatch ||
-        Number(Boolean(b.featured)) - Number(Boolean(a.featured))
-      );
+      return bMatch - aMatch || Number(Boolean(b.featured)) - Number(Boolean(a.featured));
     })
     .slice(0, limit);
 }

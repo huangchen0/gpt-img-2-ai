@@ -43,7 +43,7 @@
     "NEXT_PUBLIC_PROMPT_LIBRARY_BASE_URL": "https://img.cdance.ai/uploads/prompt-library",
     "PROMPT_LIBRARY_BASE_URL": "https://img.cdance.ai/uploads/prompt-library",
     "NEXT_PUBLIC_THEME": "default",
-    "NEXT_PUBLIC_APPEARANCE": "dark",
+    "NEXT_PUBLIC_APPEARANCE": "system",
     "DATABASE_URL": "postgresql://postgres:gptimg2123q@db.exjwvyppcvbvwnnkjgea.supabase.co:5432/postgres",
     "DATABASE_PROVIDER": "postgresql",
     "DB_SINGLETON_ENABLED": "false",

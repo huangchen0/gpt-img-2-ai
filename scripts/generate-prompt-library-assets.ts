@@ -25,6 +25,8 @@ const siteUrl = (
   process.env.APP_URL ||
   'https://gpt-image-2-ai.org'
 ).replace(/\/+$/, '');
+const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'en';
+const promptLibraryLocales = ['en', 'zh'];
 const promptSitemapLimit = Number.parseInt(
   process.env.PROMPT_SITEMAP_LIMIT || '5',
   10
@@ -40,6 +42,10 @@ function getPromptPreview(prompt: string) {
 
 function writeJsonFile(filePath: string, value: unknown) {
   fs.writeFileSync(filePath, `${JSON.stringify(value)}\n`);
+}
+
+function getLocalizedPath(pathname: string, locale: string) {
+  return locale === defaultLocale ? pathname : `/${locale}${pathname}`;
 }
 
 type PromptLibrarySourceDataset =
@@ -178,20 +184,23 @@ async function main() {
     })
     .slice(0, Math.max(0, promptSitemapLimit));
 
-  const sitemapUrls = [
+  const sitemapUrls = promptLibraryLocales.flatMap((locale) => [
     {
-      loc: `${siteUrl}/prompts/gpt-image-2`,
+      loc: `${siteUrl}${getLocalizedPath('/prompts/gpt-image-2', locale)}`,
       lastmod: dataset.syncedAt,
       changefreq: 'daily',
       priority: '0.92',
     },
     ...sitemapItems.map((item) => ({
-      loc: `${siteUrl}/prompts/gpt-image-2/${item.slug}`,
+      loc: `${siteUrl}${getLocalizedPath(
+        `/prompts/gpt-image-2/${item.slug}`,
+        locale
+      )}`,
       lastmod: item.syncedAt || dataset.syncedAt,
       changefreq: 'monthly',
       priority: item.featured ? '0.78' : '0.70',
     })),
-  ];
+  ]);
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

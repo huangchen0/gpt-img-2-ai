@@ -5,15 +5,16 @@ import {
   useEffect,
   useRef,
   useState,
+  type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
 } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Copy, Share2, Wand, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 
 import { usePathname, useRouter } from '@/core/i18n/navigation';
-import { defaultLocale, locales } from '@/config/locale';
+import { locales } from '@/config/locale';
 import { LazyImage } from '@/shared/blocks/common';
 import { Button } from '@/shared/components/ui/button';
 import { buildShowcaseTemplatePrompt } from '@/shared/lib/showcase-template';
@@ -98,13 +99,6 @@ const isVideoUrl = (url: string): boolean => {
   return videoExtensions.some((extension) => lowerUrl.includes(extension));
 };
 
-const getLocaleFromPathname = (pathname?: string | null): string => {
-  const firstSegment = pathname?.split('/').filter(Boolean)[0];
-  return firstSegment && locales.includes(firstSegment)
-    ? firstSegment
-    : defaultLocale;
-};
-
 function getAbsoluteShareUrl(pathOrUrl: string) {
   if (typeof window === 'undefined') {
     return pathOrUrl;
@@ -115,6 +109,36 @@ function getAbsoluteShareUrl(pathOrUrl: string) {
   } catch {
     return pathOrUrl;
   }
+}
+
+function getLocalizedPathname(pathOrUrl: string) {
+  try {
+    const url =
+      typeof window === 'undefined'
+        ? new URL(pathOrUrl, 'https://example.com')
+        : new URL(pathOrUrl, window.location.origin);
+
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return pathOrUrl;
+  }
+}
+
+function getNavigationPath(pathOrUrl: string) {
+  const localizedPathname = getLocalizedPathname(pathOrUrl);
+  const segments = localizedPathname.split('/');
+  const firstSegment = segments[1];
+
+  if (!firstSegment || !locales.includes(firstSegment)) {
+    return localizedPathname;
+  }
+
+  const strippedPathname = localizedPathname.replace(
+    new RegExp(`^/${firstSegment}(?=/|$)`),
+    ''
+  );
+
+  return strippedPathname || '/';
 }
 
 async function copyText(
@@ -193,7 +217,7 @@ export function ShowcasesFlowDynamic({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const locale = getLocaleFromPathname(pathname);
+  const locale = useLocale();
   const [items, setItems] = useState<ShowcaseItem[]>(initialItems || []);
   const t = useTranslations('pages.showcases.ui');
   const [loading, setLoading] = useState(!initialItems && !disableFetch);
@@ -408,6 +432,34 @@ export function ShowcasesFlowDynamic({
     [t]
   );
 
+  const handleItemClick = useCallback(
+    (item: ShowcaseItem, index: number) => {
+      if (item.detailUrl) {
+        router.push(getNavigationPath(item.detailUrl));
+        return;
+      }
+
+      setSelectedIndex(index);
+    },
+    [router]
+  );
+
+  const handleItemKeyDown = useCallback(
+    (
+      event: ReactKeyboardEvent<HTMLDivElement>,
+      item: ShowcaseItem,
+      index: number
+    ) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+
+      event.preventDefault();
+      handleItemClick(item, index);
+    },
+    [handleItemClick]
+  );
+
   return (
     <section id={id} className={cn('pb-24 md:pb-36', className)}>
       {srOnlyTitle && <h1 className="sr-only">{srOnlyTitle}</h1>}
@@ -473,10 +525,14 @@ export function ShowcasesFlowDynamic({
               <div
                 key={item.id}
                 className={cn(
-                  'group relative cursor-zoom-in break-inside-avoid overflow-hidden rounded-xl',
+                  'group relative break-inside-avoid overflow-hidden rounded-xl',
+                  item.detailUrl ? 'cursor-pointer' : 'cursor-zoom-in',
                   cardClassName
                 )}
-                onClick={() => setSelectedIndex(index)}
+                onClick={() => handleItemClick(item, index)}
+                onKeyDown={(event) => handleItemKeyDown(event, item, index)}
+                role={item.detailUrl ? 'link' : 'button'}
+                tabIndex={0}
               >
                 {showTags && item.tags && item.tags.length > 0 && (
                   <div className="absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">

@@ -36,6 +36,7 @@ import {
   PaidDownloadDialog,
   usePaidDownloadGate,
 } from '@/shared/blocks/generator/paid-download-dialog';
+import { GeneratorResultOverlay } from '@/shared/blocks/generator/result-status-overlay';
 import { ShareShowcaseDialog } from '@/shared/blocks/generator/share-showcase-dialog';
 import { Button } from '@/shared/components/ui/button';
 import {
@@ -132,19 +133,15 @@ const MAX_PROMPT_LENGTH = 20000;
 const VIDEO_PROMPT_PREFILL_MAX_LENGTH = 2500;
 const IMAGE_CREDITS_MULTIPLIER = 10;
 const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  (2 * 60 + 14) * 1000,
-  (4 * 60 + 14) * 1000,
+  5 * 60 * 1000,
+  10 * 60 * 1000,
 ];
 const DEFAULT_PROMPT =
   'Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat, calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.';
 const GPT_IMAGE_2_DEMO_EXAMPLES = [
   {
-    src: 'https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/3d-case-presentation.webp',
-    alt: 'GPT Image 2 3D case presentation demo',
-  },
-  {
-    src: 'https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/showcase/ecommerce-product-model.webp',
-    alt: 'GPT Image 2 ecommerce product model demo',
+    src: 'https://cdn.nano-banana-2-ai.com/uploads/landing/gpt-image-2-demo-zeroz.webp',
+    alt: 'GPT Image 2 yoga pants action reference demo',
   },
 ] as const;
 
@@ -247,8 +244,13 @@ export function GptImage2Generator({
   const searchParams = useSearchParams();
   const locale = useLocale();
   const t = useTranslations('ai.image.generator');
+  const defaultPrompt = useMemo(
+    () =>
+      t.has('form.default_prompt') ? t('form.default_prompt') : DEFAULT_PROMPT,
+    [t]
+  );
   const [activeTab, setActiveTab] = useState<GptImageScene>('text-to-image');
-  const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
+  const [prompt, setPrompt] = useState(defaultPrompt);
   const [referenceImageItems, setReferenceImageItems] = useState<
     ImageUploaderValue[]
   >([]);
@@ -1049,6 +1051,8 @@ export function GptImage2Generator({
   const isCurrentRequestRetryable =
     queueState?.status === 'submit_failed' &&
     queueState.snapshotDigest === queueSnapshotDigest;
+  const showGeneratingResultOverlay =
+    isGenerating && generatedImages.length === 0 && !isQueueActive;
 
   const handleGenerate = async () => {
     if (!availableProviders.includes(provider)) {
@@ -1492,25 +1496,6 @@ export function GptImage2Generator({
                     </p>
                   )}
                 </div>
-              ) : isQueueActive && queueState ? (
-                <MembershipPriorityQueueCard
-                  title={queueCopy.queueTitle}
-                  description={queueCopy.queueDescription}
-                  taskLabel={queueCopy.taskLabel}
-                  remainingLabel={queueCopy.remainingLabel}
-                  remainingMs={queueState.remainingMs}
-                  upgradeLabel={queueCopy.upgradeLabel}
-                  cancelLabel={queueCopy.cancelLabel}
-                  submittingLabel={queueCopy.submittingLabel}
-                  onCancel={cancelQueue}
-                  onUpgradeClick={trackUpgradeClick}
-                  onRetry={isCurrentRequestRetryable ? retryQueue : undefined}
-                  upgradeHref="/pricing"
-                  isSubmitting={isQueueSubmitting}
-                  isSubmitFailed={isCurrentRequestRetryable}
-                  retryLabel={queueCopy.retryLabel}
-                  submitFailedLabel={queueCopy.submitFailedLabel}
-                />
               ) : null}
             </CardContent>
           </Card>
@@ -1620,7 +1605,7 @@ export function GptImage2Generator({
                   ))}
                 </div>
               ) : (
-                <div className="bg-muted/20 flex min-h-[360px] flex-col justify-between rounded-md border border-dashed px-6 py-6 md:min-h-[560px] xl:min-h-[640px]">
+                <div className="bg-muted/20 relative flex min-h-[360px] flex-col justify-between overflow-hidden rounded-md border border-dashed px-6 py-6 md:min-h-[560px] xl:min-h-[640px]">
                   <div className="flex justify-end">
                     <div className="text-muted-foreground rounded-full border px-3 py-1 text-xs">
                       {isTextToImageMode
@@ -1629,11 +1614,11 @@ export function GptImage2Generator({
                     </div>
                   </div>
                   <div className="flex flex-1 flex-col items-center justify-center gap-5 py-6 text-center">
-                    <div className="grid w-full max-w-2xl gap-3 md:grid-cols-2">
+                    <div className="grid w-full max-w-sm gap-3">
                       {GPT_IMAGE_2_DEMO_EXAMPLES.map((item) => (
                         <div
                           key={item.src}
-                          className="bg-background aspect-[4/3] overflow-hidden rounded-md border shadow-sm"
+                          className="bg-background aspect-[2/3] overflow-hidden rounded-md border shadow-sm"
                         >
                           <LazyImage
                             src={item.src}
@@ -1643,19 +1628,45 @@ export function GptImage2Generator({
                         </div>
                       ))}
                     </div>
-                    <div>
-                      <ImageIcon className="text-muted-foreground mx-auto mb-4 h-10 w-10" />
-                      <p className="text-lg font-semibold">
-                        {isGenerating
-                          ? t('ready_to_generate')
-                          : queueCopy.readyTitle}
-                      </p>
-                      <p className="text-muted-foreground mt-2 max-w-sm text-sm">
-                        {isGenerating
-                          ? queueCopy.resultHint
-                          : queueCopy.readyDescription}
-                      </p>
-                    </div>
+                    {isQueueActive && queueState ? (
+                      <div className="w-full max-w-md text-left">
+                        <MembershipPriorityQueueCard
+                          title={queueCopy.queueTitle}
+                          description={queueCopy.queueDescription}
+                          taskLabel={queueCopy.taskLabel}
+                          remainingLabel={queueCopy.remainingLabel}
+                          remainingMs={queueState.remainingMs}
+                          upgradeLabel={queueCopy.upgradeLabel}
+                          cancelLabel={queueCopy.cancelLabel}
+                          submittingLabel={queueCopy.submittingLabel}
+                          onCancel={cancelQueue}
+                          onUpgradeClick={trackUpgradeClick}
+                          onRetry={
+                            isCurrentRequestRetryable ? retryQueue : undefined
+                          }
+                          upgradeHref="/pricing"
+                          isSubmitting={isQueueSubmitting}
+                          isSubmitFailed={isCurrentRequestRetryable}
+                          retryLabel={queueCopy.retryLabel}
+                          submitFailedLabel={queueCopy.submitFailedLabel}
+                          className="bg-background/80 shadow-sm backdrop-blur-sm"
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <ImageIcon className="text-muted-foreground mx-auto mb-4 h-10 w-10" />
+                        <p className="text-lg font-semibold">
+                          {isGenerating
+                            ? t('ready_to_generate')
+                            : queueCopy.readyTitle}
+                        </p>
+                        <p className="text-muted-foreground mt-2 max-w-sm text-sm">
+                          {isGenerating
+                            ? queueCopy.resultHint
+                            : queueCopy.readyDescription}
+                        </p>
+                      </div>
+                    )}
                   </div>
                   <div className="text-muted-foreground flex items-center justify-between border-t pt-4 text-xs">
                     <span>GPT Image 2</span>
@@ -1665,6 +1676,14 @@ export function GptImage2Generator({
                         : t('tabs.image-to-image')}
                     </span>
                   </div>
+                  {showGeneratingResultOverlay ? (
+                    <GeneratorResultOverlay
+                      title={t('generating')}
+                      progressLabel={t('progress')}
+                      progress={progress}
+                      status={taskStatusLabel}
+                    />
+                  ) : null}
                 </div>
               )}
             </CardContent>

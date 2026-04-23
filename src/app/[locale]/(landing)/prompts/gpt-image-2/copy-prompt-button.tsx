@@ -5,14 +5,18 @@ import { Check, Copy, X } from 'lucide-react';
 
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
+import { getPromptLibraryMessages } from '@/shared/prompt-library/localization';
 
 export function CopyPromptButton({
   prompt,
   className,
+  locale,
 }: {
   prompt: string;
   className?: string;
+  locale?: string;
 }) {
+  const messages = getPromptLibraryMessages(locale);
   const [copied, setCopied] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -43,7 +47,11 @@ export function CopyPromptButton({
       ) : (
         <Copy className="size-4" />
       )}
-      {failed ? 'Copy failed' : copied ? 'Copied' : 'Copy prompt'}
+      {failed
+        ? messages.buttons.copyPromptFailed
+        : copied
+          ? messages.buttons.copied
+          : messages.buttons.copyPrompt}
     </Button>
   );
 }

@@ -198,8 +198,8 @@ const GENERATION_TIMEOUT = 900000;
 const MAX_PROMPT_LENGTH = 2500;
 const KLING_QUEUE_SCOPE = 'kling-video';
 const KLING_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  (2 * 60 + 14) * 1000,
-  (4 * 60 + 14) * 1000,
+  5 * 60 * 1000,
+  10 * 60 * 1000,
 ];
 const IMAGE_QUEUE_RETURN_HREF = '/ai-image';
 const VIDEO_QUEUE_RETURN_HREF = '/ai-video';

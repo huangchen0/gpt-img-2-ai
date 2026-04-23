@@ -5,8 +5,16 @@ import { Check, Share2, X } from 'lucide-react';
 
 import { Button } from '@/shared/components/ui/button';
 import { cn } from '@/shared/lib/utils';
+import { getPromptLibraryMessages } from '@/shared/prompt-library/localization';
 
-export function SharePromptButton({ className }: { className?: string }) {
+export function SharePromptButton({
+  className,
+  locale,
+}: {
+  className?: string;
+  locale?: string;
+}) {
+  const messages = getPromptLibraryMessages(locale);
   const [shared, setShared] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -37,7 +45,11 @@ export function SharePromptButton({ className }: { className?: string }) {
       ) : (
         <Share2 className="size-4" />
       )}
-      {failed ? 'Copy failed' : shared ? 'Link copied' : 'Copy link'}
+      {failed
+        ? messages.buttons.copyPromptFailed
+        : shared
+          ? messages.buttons.linkCopied
+          : messages.buttons.copyLink}
     </Button>
   );
 }

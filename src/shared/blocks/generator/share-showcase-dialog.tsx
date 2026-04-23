@@ -86,6 +86,7 @@ export function ShareShowcaseDialog({
             description={result.description}
             appName={appName}
             labels={actionLabels}
+            layout="compact"
           />
         ) : (
           <DialogFooter>

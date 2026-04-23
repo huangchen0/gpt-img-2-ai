@@ -12,12 +12,17 @@ import {
   getPromptLibraryItem,
   getRelatedPromptLibraryItems,
 } from '@/shared/prompt-library/data';
+import { getPrimaryCategory } from '@/shared/prompt-library/insights';
 import {
-  getCustomizationTips,
-  getPrimaryCategory,
-  getPromptUseCaseSentence,
-  getSuggestedSettings,
-} from '@/shared/prompt-library/insights';
+  getLocalizedCustomizationTips,
+  getLocalizedPromptCategory,
+  getLocalizedPromptLanguageLabel,
+  getLocalizedPromptUseCaseSentence,
+  getLocalizedSuggestedSettings,
+  getPromptLibraryLocale,
+  getPromptLibraryMessages,
+  promptLibraryLocales,
+} from '@/shared/prompt-library/localization';
 import {
   buildPromptDetailJsonLd,
   getCanonicalUrl,
@@ -31,11 +36,13 @@ import {
 import { CopyPromptButton } from '../copy-prompt-button';
 import { SharePromptButton } from '../share-prompt-button';
 
-function getImageGeneratorUrl(prompt: string) {
+function getImageGeneratorUrl(prompt: string, locale?: string) {
   const trimmedPrompt = prompt.trim();
-  if (!trimmedPrompt) return '/models/gpt-image-2#generator';
+  const path = trimmedPrompt
+    ? `/models/gpt-image-2?prompt=${encodeURIComponent(trimmedPrompt)}#generator`
+    : '/models/gpt-image-2#generator';
 
-  return `/models/gpt-image-2?prompt=${encodeURIComponent(trimmedPrompt)}#generator`;
+  return getPromptLibraryLocale(locale) === 'zh' ? `/zh${path}` : path;
 }
 
 export async function generateMetadata({
@@ -48,19 +55,20 @@ export async function generateMetadata({
   const item = await getPromptLibraryItem('gpt-image-2', slug);
   if (!item) return {};
 
+  const promptLocale = getPromptLibraryLocale(locale);
   const path = `/prompts/gpt-image-2/${item.slug}`;
-  const canonicalUrl = getCanonicalUrl(path, 'en');
+  const canonicalUrl = getCanonicalUrl(path, promptLocale);
   const image = getPromptMediaImage(item.media[0]);
-  const title = getPromptDetailTitle(item);
-  const description = getPromptDetailDescription(item);
+  const title = getPromptDetailTitle(item, promptLocale);
+  const description = getPromptDetailDescription(item, promptLocale);
 
   return {
     title,
     description,
-    keywords: getPromptKeywords(item),
+    keywords: getPromptKeywords(item, promptLocale),
     alternates: {
       canonical: canonicalUrl,
-      languages: getAlternateLanguageUrlsByLocales(path, ['en']),
+      languages: getAlternateLanguageUrlsByLocales(path, promptLibraryLocales),
     },
     openGraph: {
       type: 'article',
@@ -91,6 +99,8 @@ export default async function GptImage2PromptDetailPage({
   const item = await getPromptLibraryItem('gpt-image-2', slug);
   if (!item) notFound();
 
+  const promptLocale = getPromptLibraryLocale(locale);
+  const messages = getPromptLibraryMessages(promptLocale);
   const category = getPrimaryCategory(item);
   const relatedItems = await getRelatedPromptLibraryItems(
     'gpt-image-2',
@@ -99,11 +109,15 @@ export default async function GptImage2PromptDetailPage({
   );
   const canonicalUrl = getCanonicalUrl(
     `/prompts/gpt-image-2/${item.slug}`,
-    'en'
+    promptLocale
   );
-  const jsonLd = buildPromptDetailJsonLd({ item, url: canonicalUrl });
-  const settings = getSuggestedSettings(item);
-  const tips = getCustomizationTips(item);
+  const jsonLd = buildPromptDetailJsonLd({
+    item,
+    url: canonicalUrl,
+    locale: promptLocale,
+  });
+  const settings = getLocalizedSuggestedSettings(item, promptLocale);
+  const tips = getLocalizedCustomizationTips(item, promptLocale);
 
   return (
     <main className="bg-background text-foreground">
@@ -117,7 +131,7 @@ export default async function GptImage2PromptDetailPage({
         <Button asChild variant="ghost" className="mb-6 px-0">
           <Link href="/prompts/gpt-image-2">
             <ArrowLeft className="size-4" />
-            Prompt gallery
+            {messages.detail.backToGallery}
           </Link>
         </Button>
 
@@ -128,13 +142,13 @@ export default async function GptImage2PromptDetailPage({
                 <img
                   key={`${mediaItem.url}-${index}`}
                   src={mediaItem.url}
-                  alt={getPromptVisualAltText(item, index)}
+                  alt={getPromptVisualAltText(item, index, promptLocale)}
                   className="bg-muted w-full rounded-lg border object-cover shadow-sm"
                 />
               ))
             ) : (
               <div className="bg-muted text-muted-foreground flex aspect-[4/3] items-center justify-center rounded-lg border">
-                No preview image
+                {messages.detail.noPreviewImage}
               </div>
             )}
           </section>
@@ -142,10 +156,19 @@ export default async function GptImage2PromptDetailPage({
           <section className="space-y-6">
             <div className="bg-card rounded-lg border p-5 shadow-sm">
               <div className="mb-4 flex flex-wrap gap-2">
-                <Badge>{category}</Badge>
-                {item.featured && <Badge variant="secondary">Featured</Badge>}
+                <Badge>
+                  {getLocalizedPromptCategory(category, promptLocale)}
+                </Badge>
+                {item.featured && (
+                  <Badge variant="secondary">{messages.badges.featured}</Badge>
+                )}
                 {item.language && (
-                  <Badge variant="outline">{item.language}</Badge>
+                  <Badge variant="outline">
+                    {getLocalizedPromptLanguageLabel(
+                      item.language,
+                      promptLocale
+                    )}
+                  </Badge>
                 )}
               </div>
 
@@ -156,23 +179,23 @@ export default async function GptImage2PromptDetailPage({
                 {item.description}
               </p>
               <p className="bg-muted/45 text-muted-foreground mt-4 rounded-md border p-4 text-sm leading-6">
-                {getPromptUseCaseSentence(item)}
+                {getLocalizedPromptUseCaseSentence(item, promptLocale)}
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button asChild>
-                  <a href={getImageGeneratorUrl(item.prompt)}>
+                  <a href={getImageGeneratorUrl(item.prompt, promptLocale)}>
                     <ImageIcon className="size-4" />
-                    Use in generator
+                    {messages.buttons.useInGenerator}
                   </a>
                 </Button>
-                <CopyPromptButton prompt={item.prompt} />
-                <SharePromptButton />
+                <CopyPromptButton prompt={item.prompt} locale={promptLocale} />
+                <SharePromptButton locale={promptLocale} />
               </div>
 
               {item.authorName && (
                 <p className="text-muted-foreground mt-5 text-sm">
-                  Source creator:{' '}
+                  {messages.detail.sourceCreator}{' '}
                   <a
                     className="font-medium underline underline-offset-4"
                     href={item.authorUrl || item.sourceUrl || '#'}
@@ -188,7 +211,7 @@ export default async function GptImage2PromptDetailPage({
             <div className="grid gap-3 sm:grid-cols-3">
               <div className="bg-card rounded-lg border p-4">
                 <p className="text-muted-foreground text-xs font-medium">
-                  Aspect ratio
+                  {messages.detail.settingLabels.aspectRatio}
                 </p>
                 <p className="mt-2 text-sm font-semibold">
                   {settings.aspectRatio}
@@ -196,13 +219,13 @@ export default async function GptImage2PromptDetailPage({
               </div>
               <div className="bg-card rounded-lg border p-4">
                 <p className="text-muted-foreground text-xs font-medium">
-                  Quality pass
+                  {messages.detail.settingLabels.quality}
                 </p>
                 <p className="mt-2 text-sm font-semibold">{settings.quality}</p>
               </div>
               <div className="bg-card rounded-lg border p-4">
                 <p className="text-muted-foreground text-xs font-medium">
-                  Workflow
+                  {messages.detail.settingLabels.workflow}
                 </p>
                 <p className="mt-2 text-sm font-semibold">
                   {settings.workflow}
@@ -216,9 +239,9 @@ export default async function GptImage2PromptDetailPage({
           <div className="bg-card rounded-lg border p-5 shadow-sm lg:col-span-2">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-2xl font-semibold">
-                Full GPT Image 2 prompt
+                {messages.detail.fullPromptHeading}
               </h2>
-              <CopyPromptButton prompt={item.prompt} />
+              <CopyPromptButton prompt={item.prompt} locale={promptLocale} />
             </div>
             <pre className="bg-background overflow-x-auto rounded-md border p-4 font-mono text-sm leading-7 whitespace-pre-wrap">
               {item.prompt}
@@ -227,7 +250,9 @@ export default async function GptImage2PromptDetailPage({
 
           <aside className="space-y-4">
             <div className="bg-card rounded-lg border p-5 shadow-sm">
-              <h2 className="text-xl font-semibold">How to customize it</h2>
+              <h2 className="text-xl font-semibold">
+                {messages.detail.customizationHeading}
+              </h2>
               <ul className="text-muted-foreground mt-4 space-y-3 text-sm leading-6">
                 {tips.map((tip) => (
                   <li key={tip} className="bg-background rounded-md border p-3">
@@ -240,7 +265,7 @@ export default async function GptImage2PromptDetailPage({
             {item.sourceUrl && (
               <Button asChild variant="outline" className="w-full">
                 <a href={item.sourceUrl} target="_blank" rel="noreferrer">
-                  Original source
+                  {messages.buttons.originalSource}
                   <ExternalLink className="size-4" />
                 </a>
               </Button>
@@ -251,7 +276,7 @@ export default async function GptImage2PromptDetailPage({
         {relatedItems.length > 0 && (
           <section className="bg-card mt-8 rounded-lg border p-5 shadow-sm">
             <h2 className="text-2xl font-semibold">
-              Related GPT Image 2 prompts
+              {messages.detail.relatedHeading}
             </h2>
             <div className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
               {relatedItems.map((relatedItem) => (
@@ -265,7 +290,10 @@ export default async function GptImage2PromptDetailPage({
                       .slice(0, 1)
                       .map((relatedCategory) => (
                         <Badge key={relatedCategory} variant="secondary">
-                          {relatedCategory}
+                          {getLocalizedPromptCategory(
+                            relatedCategory,
+                            promptLocale
+                          )}
                         </Badge>
                       ))}
                   </div>

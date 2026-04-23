@@ -1,23 +1,15 @@
 'use client';
 
 import type { ComponentType } from 'react';
-import { Clipboard, Code2, Copy, Ellipsis, FileText } from 'lucide-react';
-import { RiWechatFill, RiWeiboFill } from 'react-icons/ri';
-import {
-  SiInstagram,
-  SiPinterest,
-  SiReddit,
-  SiTiktok,
-  SiX,
-  SiXiaohongshu,
-} from 'react-icons/si';
+import { Clipboard, Code2, Copy, FileText } from 'lucide-react';
+import { RiWeiboFill } from 'react-icons/ri';
+import { SiPinterest, SiReddit, SiX } from 'react-icons/si';
 import { toast } from 'sonner';
 
 import { Button } from '@/shared/components/ui/button';
 import {
   buildShareArtifacts,
   buildSharePlatformUrls,
-  isShareAbort,
   type ShareContent,
 } from '@/shared/lib/share-utils';
 import { cn } from '@/shared/lib/utils';
@@ -28,13 +20,7 @@ export interface ShareActionLabels {
   copyLink: string;
   copyMarkdown: string;
   copyEmbed: string;
-  more: string;
-  wechat: string;
   weibo: string;
-  xiaohongshu: string;
-  douyin: string;
-  instagram: string;
-  tiktok: string;
   reddit: string;
   pinterest: string;
   x: string;
@@ -46,6 +32,7 @@ interface ShareActionGridProps extends ShareContent {
   labels: ShareActionLabels;
   prompt?: string | null;
   className?: string;
+  layout?: 'list' | 'compact';
 }
 
 interface ExternalShareAction {
@@ -54,16 +41,6 @@ interface ExternalShareAction {
   url: string;
   icon: ComponentType<{ className?: string }>;
 }
-
-interface AssistedShareAction {
-  id: string;
-  label: string;
-  icon: ComponentType<{ className?: string }>;
-  fallbackValue: string;
-}
-
-const actionButtonClassName =
-  'h-auto min-h-10 justify-start gap-2 py-2 text-left whitespace-normal';
 
 async function copyText(
   value: string,
@@ -87,6 +64,7 @@ export function ShareActionGrid({
   labels,
   prompt,
   className,
+  layout = 'list',
 }: ShareActionGridProps) {
   const promptText = prompt?.trim();
   const { shareText, markdown, embedHtml } = buildShareArtifacts({
@@ -102,7 +80,6 @@ export function ShareActionGrid({
     title,
     description,
   });
-  const captionWithUrl = shareText ? `${shareText}\n${shareUrl}` : shareUrl;
 
   const externalShareActions: ExternalShareAction[] = [
     {
@@ -131,66 +108,18 @@ export function ShareActionGrid({
     },
   ];
 
-  const assistedShareActions: AssistedShareAction[] = [
-    {
-      id: 'more',
-      label: labels.more,
-      icon: Ellipsis,
-      fallbackValue: captionWithUrl,
-    },
-    {
-      id: 'wechat',
-      label: labels.wechat,
-      icon: RiWechatFill,
-      fallbackValue: shareUrl,
-    },
-    {
-      id: 'xiaohongshu',
-      label: labels.xiaohongshu,
-      icon: SiXiaohongshu,
-      fallbackValue: captionWithUrl,
-    },
-    {
-      id: 'douyin',
-      label: labels.douyin,
-      icon: SiTiktok,
-      fallbackValue: captionWithUrl,
-    },
-    {
-      id: 'instagram',
-      label: labels.instagram,
-      icon: SiInstagram,
-      fallbackValue: captionWithUrl,
-    },
-    {
-      id: 'tiktok',
-      label: labels.tiktok,
-      icon: SiTiktok,
-      fallbackValue: captionWithUrl,
-    },
-  ];
+  const actionButtonClassName =
+    layout === 'compact'
+      ? 'h-auto min-h-12 justify-start gap-2 px-3 py-2.5 text-left whitespace-normal text-sm leading-5'
+      : 'h-auto min-h-10 justify-start gap-2 py-2 text-left whitespace-normal';
 
-  const handleAssistedShare = async (fallbackValue: string) => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title,
-          text: shareText || title,
-          url: shareUrl,
-        });
-        return;
-      } catch (error) {
-        if (isShareAbort(error)) {
-          return;
-        }
-      }
-    }
-
-    await copyText(fallbackValue, labels.copied, labels.copyFailed);
-  };
+  const gridClassName =
+    layout === 'compact'
+      ? 'grid grid-cols-2 gap-2 sm:grid-cols-3'
+      : 'grid grid-cols-1 gap-2 sm:grid-cols-2';
 
   return (
-    <div className={cn('grid grid-cols-1 gap-2 sm:grid-cols-2', className)}>
+    <div className={cn(gridClassName, className)}>
       {promptText && labels.copyPrompt && (
         <Button
           type="button"
@@ -240,23 +169,6 @@ export function ShareActionGrid({
         <Code2 className="h-4 w-4 shrink-0" />
         <span>{labels.copyEmbed}</span>
       </Button>
-
-      {assistedShareActions.map((action) => {
-        const Icon = action.icon;
-
-        return (
-          <Button
-            key={action.id}
-            type="button"
-            variant="outline"
-            className={actionButtonClassName}
-            onClick={() => handleAssistedShare(action.fallbackValue)}
-          >
-            <Icon className="h-4 w-4 shrink-0" />
-            <span>{action.label}</span>
-          </Button>
-        );
-      })}
 
       {externalShareActions.map((action) => {
         const Icon = action.icon;

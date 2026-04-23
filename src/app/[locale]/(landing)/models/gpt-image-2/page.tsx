@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 
-import { loadMessages } from '@/core/i18n/request';
 import { getThemePage } from '@/core/theme';
 import { envConfigs } from '@/config';
 import { defaultLocale } from '@/config/locale';
@@ -9,12 +8,40 @@ import { ImageGeneratorSwitcher } from '@/shared/components/image-generator-swit
 import { FAQSchema } from '@/shared/components/seo';
 import { getAlternateLanguageUrls } from '@/shared/lib/seo';
 
-async function getGptImage2Messages(locale: string) {
+async function loadExactMessages(path: string, locale: string) {
   try {
-    return await loadMessages('pages/models/gpt-image-2', locale);
+    const messages = await import(
+      `@/config/locale/messages/${locale}/${path}.json`
+    );
+    return messages.default;
   } catch {
-    return loadMessages('pages/models/nano-banana', locale);
+    return null;
   }
+}
+
+async function getGptImage2Messages(locale: string) {
+  const candidates = [
+    ['pages/models/gpt-image-2', locale],
+    ['pages/models/nano-banana', locale],
+    ['pages/models/gpt-image-2', defaultLocale],
+    ['pages/models/nano-banana', defaultLocale],
+  ] as const;
+  const checkedCandidates = new Set<string>();
+
+  for (const [path, candidateLocale] of candidates) {
+    const key = `${candidateLocale}:${path}`;
+    if (checkedCandidates.has(key)) {
+      continue;
+    }
+
+    checkedCandidates.add(key);
+    const messages = await loadExactMessages(path, candidateLocale);
+    if (messages?.page) {
+      return messages;
+    }
+  }
+
+  return {};
 }
 
 export async function generateMetadata({
@@ -81,6 +108,7 @@ export default async function GptImage2Page({
     description: messages.page.description,
     sections: {
       hero: {
+        id: 'hero',
         title: messages.page.heroTitle ?? messages.page.title,
         description: messages.page.heroDescription ?? messages.page.description,
         background_image: {

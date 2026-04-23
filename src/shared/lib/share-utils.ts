@@ -53,7 +53,3 @@ export function buildSharePlatformUrls({
     reddit: `https://www.reddit.com/submit?url=${encodedShareUrl}&title=${encodedTitle}`,
   };
 }
-
-export function isShareAbort(error: unknown) {
-  return error instanceof DOMException && error.name === 'AbortError';
-}
