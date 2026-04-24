@@ -7,6 +7,7 @@ import { ThemeProvider } from '@/core/theme/provider';
 import { Toaster } from '@/shared/components/ui/sonner';
 import { AppContextProvider } from '@/shared/contexts/app';
 import { getMetadata } from '@/shared/lib/seo';
+import { getPublicConfigs } from '@/shared/models/config';
 
 export const generateMetadata = getMetadata();
 
@@ -23,6 +24,7 @@ export default async function LocaleLayout({
   }
 
   setRequestLocale(locale);
+  const publicConfigs = await getPublicConfigs();
 
   return (
     <NextIntlClientProvider>
@@ -33,7 +35,7 @@ export default async function LocaleLayout({
         }}
       />
       <ThemeProvider>
-        <AppContextProvider>
+        <AppContextProvider initialConfigs={publicConfigs}>
           {children}
           <Toaster position="top-center" richColors />
         </AppContextProvider>

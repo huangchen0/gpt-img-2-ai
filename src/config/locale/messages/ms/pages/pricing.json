@@ -136,13 +136,17 @@
       },
       {
         "title": "Pelan Tahunan Pro",
-        "description": "Kunci diskaun ciptaan 50% dan kekalkan produktiviti yang stabil.",
+        "description": "Kunci GPT Image 2 pada diskaun 50% dan kekalkan produktiviti yang stabil.",
         "label": "Paling laris tahunan",
         "features_title": "Manfaat tahunan Pro",
         "features": [
           {
             "text": "48,000 kredit imej setahun",
-            "note": "Anggaran ini berdasarkan penjanaan teks-ke-imej standard 1K pada 40 kredit setiap hasil. Penggunaan sebenar boleh berubah mengikut model, resolusi, mod, dan ciri carian."
+            "note": "Jika anda menggunakan GPT Image 2 pada kadar ahli tahunan 20 kredit setiap permintaan, itu bersamaan kira-kira ~2,400 imej. Penggunaan sebenar model lain masih berubah mengikut model, resolusi, mod, dan ciri carian."
+          },
+          {
+            "text": "Diskaun 50% untuk penjanaan dan penyuntingan GPT Image 2",
+            "note": "Tersedia hanya untuk keahlian Pro Tahunan dan Studio Tahunan, dan buat masa ini hanya untuk GPT Image 2. Harga standard ialah 40 kredit setiap permintaan, manakala ahli tahunan membayar 20. Nano Banana, penjanaan video, dan model lain tidak termasuk."
           },
           {
             "text": "Render lebih pantas tanpa menunggu giliran",
@@ -165,6 +169,14 @@
             "text": "Akses awal ke ciri baharu",
             "note": "Membolehkan anda mencuba fungsi baharu terpilih sebelum pelancaran awam penuh. Ketersediaan boleh berubah mengikut jadual pelancaran."
           },
+          {
+            "text": "Sokongan penjanaan berkelompok (akan datang)",
+            "note": "Ahli tahunan akan mendapat akses keutamaan apabila ia dilancarkan, sesuai untuk aliran kerja berulang seperti set profil, imej produk, dan aset pemasaran."
+          },
+          {
+            "text": "Aliran kerja dioptimumkan untuk ecommerce, aset permainan, dan iklan (akan datang)",
+            "note": "Kami merancang untuk menyediakan aliran kerja, pratetap, atau talaan yang lebih khusus untuk kes penggunaan berkekerapan tinggi ini. Buat masa ini, aliran penjanaan umum masih menjadi lalai."
+          },
           "Pustaka aset awan (simpanan 6 bulan)",
           "Sokongan premium berkeutamaan"
         ],
@@ -175,7 +187,7 @@
         "original_price": "$29.9",
         "unit": "/ bulan",
         "is_featured": true,
-        "tip": "Jimat $200+ setahun • Pilihan utama pencipta",
+        "tip": "Ahli tahunan mendapat GPT Image 2 pada harga separuh",
         "button": {
           "title": "Mulakan pelan Pro",
           "url": "/#pricing",
@@ -191,13 +203,17 @@
       },
       {
         "title": "Pelan Flagship Studio",
-        "description": "Pelan flagship untuk pasukan yang berkarya pada kadar tinggi.",
+        "description": "Pelan flagship untuk pasukan berkekerapan tinggi, dengan GPT Image 2 pada harga separuh.",
         "label": "Kos seunit terbaik",
         "features_title": "Manfaat Studio",
         "features": [
           {
             "text": "96,000 kredit imej setahun",
-            "note": "Anggaran ini berdasarkan penjanaan teks-ke-imej standard 1K pada 40 kredit setiap hasil. Penggunaan sebenar boleh berubah mengikut model, resolusi, mod, dan ciri carian."
+            "note": "Jika anda menggunakan GPT Image 2 pada kadar ahli tahunan 20 kredit setiap permintaan, itu bersamaan kira-kira ~4,800 imej. Penggunaan sebenar model lain masih berubah mengikut model, resolusi, mod, dan ciri carian."
+          },
+          {
+            "text": "Diskaun 50% untuk penjanaan dan penyuntingan GPT Image 2",
+            "note": "Tersedia hanya untuk keahlian Pro Tahunan dan Studio Tahunan, dan buat masa ini hanya untuk GPT Image 2. Harga standard ialah 40 kredit setiap permintaan, manakala ahli tahunan membayar 20. Nano Banana, penjanaan video, dan model lain tidak termasuk."
           },
           {
             "text": "Render lebih pantas tanpa menunggu giliran",
@@ -220,6 +236,14 @@
             "text": "Akses awal ke ciri baharu",
             "note": "Membolehkan anda mencuba fungsi baharu terpilih sebelum pelancaran awam penuh. Ketersediaan boleh berubah mengikut jadual pelancaran."
           },
+          {
+            "text": "Sokongan penjanaan berkelompok (akan datang)",
+            "note": "Ahli tahunan akan mendapat akses keutamaan apabila ia dilancarkan, sesuai untuk aliran kerja berulang seperti set profil, imej produk, dan aset pemasaran."
+          },
+          {
+            "text": "Aliran kerja dioptimumkan untuk ecommerce, aset permainan, dan iklan (akan datang)",
+            "note": "Kami merancang untuk menyediakan aliran kerja, pratetap, atau talaan yang lebih khusus untuk kes penggunaan berkekerapan tinggi ini. Buat masa ini, aliran penjanaan umum masih menjadi lalai."
+          },
           "Sejarah hasil siap tanpa had",
           "Sokongan premium berkeutamaan",
           "Had muat naik lebih tinggi untuk projek besar"
@@ -230,7 +254,7 @@
         "price": "$19.9",
         "original_price": "$49.9",
         "unit": "/ bulan",
-        "tip": "Jimat $400+ setahun • Nilai terbaik setiap output",
+        "tip": "Ahli tahunan mendapat GPT Image 2 pada harga separuh",
         "button": {
           "title": "Mulakan pelan flagship",
           "url": "/#pricing",
@@ -377,6 +401,10 @@
         "description": "40 kredit"
       },
       {
+        "title": "GPT Image 2 / ahli tahunan",
+        "description": "20 kredit"
+      },
+      {
         "title": "1K / imej-ke-imej / standard",
         "description": "60 kredit"
       },
@@ -408,7 +436,7 @@
       },
       {
         "question": "Berapa banyak kredit diperlukan untuk menjana satu imej?",
-        "answer": "Penjanaan standard 1K teks-ke-imej bermula dari 40 kredit, dan penjanaan standard 1K imej-ke-imej bermula dari 60 kredit. Resolusi yang lebih tinggi dan mod pro memerlukan lebih banyak kredit. Contoh pada halaman harga hanyalah rujukan biasa; nilai yang dipaparkan di dalam pencipta ialah rujukan akhir."
+        "answer": "Penjanaan dan penyuntingan GPT Image 2 kini berharga 40 kredit setiap permintaan secara lalai, manakala ahli Pro Tahunan dan Studio Tahunan membayar 20. Nano Banana dan model lain dicaj secara berasingan berdasarkan peraturan mod, resolusi, dan ciri masing-masing. Nilai yang dipaparkan di dalam pencipta ialah rujukan akhir."
       },
       {
         "question": "Bolehkah pelan semasa digunakan secara komersial?",
@@ -434,7 +462,7 @@
       "pricing": {
         "id": "pricing",
         "title": "Pelan ChatGPT Image 2 Generator",
-        "description": "Mulakan untuk menjana dan mengedit imej dengan ChatGPT Image 2 Generator. Penjanaan standard 1K teks-ke-imej bermula dari 40 kredit, dan standard 1K imej-ke-imej bermula dari 60 kredit."
+        "description": "Mulakan untuk menjana dan mengedit imej dengan ChatGPT Image 2 Generator. GPT Image 2 berharga 40 kredit setiap permintaan secara lalai, manakala ahli Pro Tahunan dan Studio Tahunan membayar 20."
       }
     }
   },

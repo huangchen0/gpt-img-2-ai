@@ -96,6 +96,7 @@ import {
   normalizeKlingElementToken,
   validateKlingVideoOptions,
 } from '@/shared/lib/kling-video';
+import { resolvePriorityQueueWaitRangeMs } from '@/shared/lib/membership-priority-queue-config';
 import {
   dispatchSeedanceGeneratorPrefill,
   SEEDANCE_15_MODEL,
@@ -197,10 +198,6 @@ const POLL_INTERVAL = 15000;
 const GENERATION_TIMEOUT = 900000;
 const MAX_PROMPT_LENGTH = 2500;
 const KLING_QUEUE_SCOPE = 'kling-video';
-const KLING_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  5 * 60 * 1000,
-  10 * 60 * 1000,
-];
 const IMAGE_QUEUE_RETURN_HREF = '/ai-image';
 const VIDEO_QUEUE_RETURN_HREF = '/ai-video';
 const KLING_QUEUE_RETURN_HREF = '/ai-video?model=kling';
@@ -1037,6 +1034,17 @@ export function KlingVideoGenerator({
   const remainingCredits = user?.credits?.remainingCredits ?? 0;
   const isCurrentMember = Boolean(currentSubscription);
   const showCreditsCost = hasFetchedCurrentSubscription && isCurrentMember;
+  const videoQueueWaitRangeMs = useMemo(
+    () =>
+      resolvePriorityQueueWaitRangeMs({
+        configs,
+        mediaType: 'video',
+      }),
+    [
+      configs.video_generation_queue_wait_max_minutes,
+      configs.video_generation_queue_wait_min_minutes,
+    ]
+  );
   const isUploading = useMemo(() => {
     const referenceUploading = referenceImages.some(
       (item) => item.status === 'uploading'
@@ -2126,7 +2134,7 @@ export function KlingVideoGenerator({
     scope: KLING_QUEUE_SCOPE,
     userId: user?.id ?? null,
     enabled: hasFetchedCurrentSubscription && !isCurrentMember,
-    waitRangeMs: KLING_QUEUE_WAIT_RANGE_MS,
+    waitRangeMs: videoQueueWaitRangeMs,
     snapshotDigest: queueSnapshotDigest,
     serializedPayload: queuePayload,
     onSubmit: async (serializedPayload) => {

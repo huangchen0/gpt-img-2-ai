@@ -69,6 +69,7 @@ import {
 } from '@/shared/lib/gtm';
 import { md5 } from '@/shared/lib/hash';
 import { calculateImageCredits } from '@/shared/lib/image-pricing';
+import { resolvePriorityQueueWaitRangeMs } from '@/shared/lib/membership-priority-queue-config';
 import { buildShareActionLabels } from '@/shared/lib/share-action-labels';
 import { cn } from '@/shared/lib/utils';
 
@@ -134,10 +135,6 @@ const POLL_INTERVAL = 5000;
 const GENERATION_TIMEOUT = 180000;
 const MAX_PROMPT_LENGTH = 20000;
 const IMAGE_CREDITS_MULTIPLIER = 10;
-const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  5 * 60 * 1000,
-  10 * 60 * 1000,
-];
 const IMAGE_QUEUE_RETURN_HREF = '/models/gpt-image-2#nano-banana-generator';
 const VIDEO_QUEUE_RETURN_HREF =
   '/seedance-2-0-video-generator#seedance-generator';
@@ -549,6 +546,17 @@ export function ImageGenerator({
   );
   const isCurrentMember = Boolean(currentSubscription);
   const showCreditsCost = hasFetchedCurrentSubscription && isCurrentMember;
+  const imageQueueWaitRangeMs = useMemo(
+    () =>
+      resolvePriorityQueueWaitRangeMs({
+        configs,
+        mediaType: 'image',
+      }),
+    [
+      configs.image_generation_queue_wait_max_minutes,
+      configs.image_generation_queue_wait_min_minutes,
+    ]
+  );
   const queueCopy = useMemo(
     () => ({
       title: t.has('queue.title') ? t('queue.title') : 'Standard Queue',
@@ -1129,7 +1137,7 @@ export function ImageGenerator({
     mediaType: 'image',
     userId: user?.id ?? null,
     enabled: hasFetchedCurrentSubscription && !isCurrentMember,
-    waitRangeMs: IMAGE_QUEUE_WAIT_RANGE_MS,
+    waitRangeMs: imageQueueWaitRangeMs,
     snapshotDigest: queueSnapshotDigest,
     serializedPayload: queuePayload,
     onSubmit: async (serializedPayload) => {

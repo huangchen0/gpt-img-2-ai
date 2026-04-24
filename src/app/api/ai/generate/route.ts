@@ -12,10 +12,12 @@ import {
   isKieGptImageModel,
   resolveGptImageProvider,
 } from '@/shared/lib/gpt-image';
+import { getGptImageCreditsForSubscription } from '@/shared/lib/gpt-image-membership';
 import { getUuid } from '@/shared/lib/hash';
 import {
   calculateImageCredits,
   getAdvancedImageModel,
+  GPT_IMAGE_2_CREDITS,
   normalizeImageResolution,
 } from '@/shared/lib/image-pricing';
 import {
@@ -78,6 +80,7 @@ import {
 } from '@/shared/models/ai_task';
 import { getAllConfigs } from '@/shared/models/config';
 import { getRemainingCredits } from '@/shared/models/credit';
+import { getCurrentSubscription } from '@/shared/models/subscription';
 import { getUserInfo } from '@/shared/models/user';
 import { getAIService } from '@/shared/services/ai';
 
@@ -1226,6 +1229,14 @@ export async function POST(request: Request) {
         throw new Error('google_search not supported for this model');
       }
 
+      const currentSubscription = isGptImageModel
+        ? await getCurrentSubscription(user.id)
+        : null;
+      const configuredGptImageCredits = parseInt(
+        configs.gpt_image_2_credits || '',
+        10
+      );
+
       costCredits = calculateImageCredits({
         scene,
         provider,
@@ -1233,7 +1244,13 @@ export async function POST(request: Request) {
         resolution: normalizedResolution,
         googleSearch: Boolean(options?.google_search),
         multiplier: 10,
-        gptImageCredits: parseInt(configs.gpt_image_2_credits || '40', 10),
+        gptImageCredits: getGptImageCreditsForSubscription({
+          baseCredits:
+            configuredGptImageCredits > 0
+              ? configuredGptImageCredits
+              : GPT_IMAGE_2_CREDITS,
+          subscription: currentSubscription,
+        }),
       });
     } else if (mediaType === AIMediaType.VIDEO) {
       if (

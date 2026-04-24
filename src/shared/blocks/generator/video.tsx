@@ -70,6 +70,7 @@ import {
   VIDEO_CLASSIC_FALLBACK_CREDITS,
 } from '@/shared/lib/generation-credit-fallback';
 import { md5 } from '@/shared/lib/hash';
+import { resolvePriorityQueueWaitRangeMs } from '@/shared/lib/membership-priority-queue-config';
 import { calculateSeedanceCredits } from '@/shared/lib/seedance-pricing';
 import {
   createSeedancePromptReferenceToken,
@@ -257,10 +258,6 @@ const ASSET_POLL_INTERVAL = 5000;
 const ASSET_TIMEOUT = 300000;
 const MAX_PROMPT_LENGTH = 2500;
 const PROVIDER = 'kie';
-const VIDEO_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  5 * 60 * 1000,
-  10 * 60 * 1000,
-];
 const IMAGE_QUEUE_RETURN_HREF = '/models/gpt-image-2#nano-banana-generator';
 const VIDEO_QUEUE_RETURN_HREF =
   '/seedance-2-0-video-generator#seedance-generator';
@@ -1218,6 +1215,17 @@ export function VideoGenerator({
   const promptLength = prompt.trim().length;
   const remainingCredits = user?.credits?.remainingCredits ?? 0;
   const isPromptTooLong = promptLength > MAX_PROMPT_LENGTH;
+  const videoQueueWaitRangeMs = useMemo(
+    () =>
+      resolvePriorityQueueWaitRangeMs({
+        configs,
+        mediaType: 'video',
+      }),
+    [
+      configs.video_generation_queue_wait_max_minutes,
+      configs.video_generation_queue_wait_min_minutes,
+    ]
+  );
   const firstFrameUrl = firstFrameUrls[0] || '';
   const lastFrameUrl = lastFrameUrls[0] || '';
   const currentCreatorMode = useMemo<SeedanceCreatorMode>(() => {
@@ -3810,7 +3818,7 @@ export function VideoGenerator({
     mediaType: 'video',
     userId: user?.id ?? null,
     enabled: hasFetchedCurrentSubscription && !isCurrentMember,
-    waitRangeMs: VIDEO_QUEUE_WAIT_RANGE_MS,
+    waitRangeMs: videoQueueWaitRangeMs,
     snapshotDigest: queueSnapshotDigest,
     serializedPayload: queuePayload,
     onSubmit: async (serializedPayload) => {

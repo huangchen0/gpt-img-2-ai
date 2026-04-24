@@ -62,13 +62,18 @@ import {
   GptImageRuntimeProvider,
   resolveGptImageProvider,
 } from '@/shared/lib/gpt-image';
+import { getGptImageCreditsForSubscription } from '@/shared/lib/gpt-image-membership';
 import {
   trackGtmActivation,
   trackGtmGenerateContentCompleted,
   trackGtmGenerateContentStarted,
 } from '@/shared/lib/gtm';
 import { getUuid, md5 } from '@/shared/lib/hash';
-import { calculateImageCredits } from '@/shared/lib/image-pricing';
+import {
+  calculateImageCredits,
+  GPT_IMAGE_2_CREDITS,
+} from '@/shared/lib/image-pricing';
+import { resolvePriorityQueueWaitRangeMs } from '@/shared/lib/membership-priority-queue-config';
 import { buildShareActionLabels } from '@/shared/lib/share-action-labels';
 import { cn } from '@/shared/lib/utils';
 
@@ -132,10 +137,6 @@ const GENERATION_TIMEOUT = 10 * 60 * 1000;
 const MAX_PROMPT_LENGTH = 20000;
 const VIDEO_PROMPT_PREFILL_MAX_LENGTH = 2500;
 const IMAGE_CREDITS_MULTIPLIER = 10;
-const IMAGE_QUEUE_WAIT_RANGE_MS: [number, number] = [
-  5 * 60 * 1000,
-  10 * 60 * 1000,
-];
 const DEFAULT_PROMPT =
   'Create a photorealistic candid photograph of an elderly sailor standing on a small fishing boat, calmly adjusting a net while his dog sits nearby on the deck. Shot like a 35mm film photograph, medium close-up at eye level, using a 50mm lens.';
 const GPT_IMAGE_2_DEMO_EXAMPLES = [
@@ -364,19 +365,41 @@ export function GptImage2Generator({
   const promptLength = prompt.trim().length;
   const isPromptTooLong = promptLength > MAX_PROMPT_LENGTH;
   const remainingCredits = user?.credits?.remainingCredits ?? 0;
-  const costCredits = useMemo(
-    () =>
+  const configuredGptImageCredits = useMemo(() => {
+    const parsedCredits = parseInt(configs.gpt_image_2_credits || '', 10);
+    return parsedCredits > 0 ? parsedCredits : GPT_IMAGE_2_CREDITS;
+  }, [configs.gpt_image_2_credits]);
+  const resolveCostCredits = useCallback(
+    (subscription = currentSubscription) =>
       calculateImageCredits({
         scene: activeTab,
         provider,
         model,
         multiplier: IMAGE_CREDITS_MULTIPLIER,
-        gptImageCredits: parseInt(configs.gpt_image_2_credits || '40', 10),
+        gptImageCredits: getGptImageCreditsForSubscription({
+          baseCredits: configuredGptImageCredits,
+          subscription,
+        }),
       }),
-    [activeTab, configs.gpt_image_2_credits, model, provider]
+    [activeTab, configuredGptImageCredits, currentSubscription, model, provider]
+  );
+  const costCredits = useMemo(
+    () => resolveCostCredits(currentSubscription),
+    [currentSubscription, resolveCostCredits]
   );
   const isCurrentMember = Boolean(currentSubscription);
   const showCreditsCost = hasFetchedCurrentSubscription && isCurrentMember;
+  const imageQueueWaitRangeMs = useMemo(
+    () =>
+      resolvePriorityQueueWaitRangeMs({
+        configs,
+        mediaType: 'image',
+      }),
+    [
+      configs.image_generation_queue_wait_max_minutes,
+      configs.image_generation_queue_wait_min_minutes,
+    ]
+  );
   const shouldWatermarkGeneratedImages = Boolean(
     user && hasFetchedCurrentSubscription && !hasPaidEntitlement
   );
@@ -1018,7 +1041,7 @@ export function GptImage2Generator({
     scope: 'gpt-image-2',
     userId: user?.id ?? null,
     enabled: hasFetchedCurrentSubscription && !isCurrentMember,
-    waitRangeMs: IMAGE_QUEUE_WAIT_RANGE_MS,
+    waitRangeMs: imageQueueWaitRangeMs,
     snapshotDigest: queueSnapshotDigest,
     serializedPayload: queuePayload,
     onSubmit: async (serializedPayload) => {
@@ -1080,11 +1103,16 @@ export function GptImage2Generator({
       return;
     }
 
-    if (currentSubscriptionForAttempt && remainingCredits < costCredits) {
+    const attemptCostCredits = resolveCostCredits(currentSubscriptionForAttempt);
+
+    if (
+      currentSubscriptionForAttempt &&
+      remainingCredits < attemptCostCredits
+    ) {
       setCreditFallback(
         createGenerationCreditFallbackPayload({
           mediaType: 'image',
-          requestedCostCredits: costCredits,
+          requestedCostCredits: attemptCostCredits,
           remainingCredits,
         })
       );
@@ -1121,7 +1149,7 @@ export function GptImage2Generator({
         provider,
         model,
         mode: activeTab,
-        costCredits,
+        costCredits: attemptCostCredits,
         promptLength: trimmedPrompt.length,
       },
     };

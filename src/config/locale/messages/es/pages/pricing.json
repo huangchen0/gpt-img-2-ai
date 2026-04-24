@@ -136,13 +136,17 @@
       },
       {
         "title": "Plan Pro Anual",
-        "description": "Asegura un 50% de ahorro en creación y mantén una producción constante.",
+        "description": "Asegura un 50% menos en GPT Image 2 y mantén una producción constante.",
         "label": "Más vendido del año",
         "features_title": "Beneficios Pro anuales",
         "features": [
           {
-            "text": "1,200+ créditos de render al año",
-            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. El consumo real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+            "text": "48,000 créditos de imagen al año",
+            "note": "Si usas GPT Image 2 con la tarifa anual de 20 créditos por solicitud, eso equivale a unas ~2,400 imágenes. El consumo real de otros modelos sigue variando según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          {
+            "text": "50% de descuento en generación y edición con GPT Image 2",
+            "note": "Disponible solo para las membresías Pro Anual y Studio Anual, y actualmente solo para GPT Image 2. El precio estándar es de 40 créditos por solicitud y los miembros anuales pagan 20. Nano Banana, la generación de video y otros modelos no están incluidos."
           },
           {
             "text": "Render más rápido, sin hacer fila",
@@ -165,6 +169,14 @@
             "text": "Acceso anticipado a nuevas funciones",
             "note": "Permite probar ciertas funciones nuevas antes de su lanzamiento público. La disponibilidad puede cambiar según el calendario de despliegue."
           },
+          {
+            "text": "Soporte para generación por lotes (próximamente)",
+            "note": "Los miembros anuales tendrán acceso prioritario cuando se lance, pensado para flujos repetibles como lotes de perfiles, imágenes de producto y recursos de marketing."
+          },
+          {
+            "text": "Flujos optimizados para ecommerce, assets de juegos y anuncios (próximamente)",
+            "note": "Planeamos ofrecer flujos, presets o ajustes más especializados para estos casos de uso de alta frecuencia. Por ahora, el flujo general de generación sigue siendo el predeterminado."
+          },
           "Biblioteca en la nube (6 meses)",
           "Soporte premium prioritario"
         ],
@@ -175,7 +187,7 @@
         "original_price": "$29.9",
         "unit": "/ mes",
         "is_featured": true,
-        "tip": "Ahorra más de $200 al año • Favorito de los creadores",
+        "tip": "Los miembros anuales obtienen GPT Image 2 a mitad de precio",
         "button": {
           "title": "Iniciar plan Pro",
           "url": "/#pricing",
@@ -191,13 +203,17 @@
       },
       {
         "title": "Plan Studio Insignia",
-        "description": "Un plan insignia creado para equipos creativos de alta frecuencia.",
+        "description": "Un plan insignia para equipos de alta frecuencia, con GPT Image 2 a mitad de precio.",
         "label": "Mejor costo unitario",
         "features_title": "Beneficios Studio",
         "features": [
           {
-            "text": "2,400+ créditos de render al año",
-            "note": "Estimado usando generación estándar de texto a imagen 1K a 40 créditos por resultado. El consumo real puede variar según el modelo, la resolución, el modo y las funciones de búsqueda."
+            "text": "96,000 créditos de imagen al año",
+            "note": "Si usas GPT Image 2 con la tarifa anual de 20 créditos por solicitud, eso equivale a unas ~4,800 imágenes. El consumo real de otros modelos sigue variando según el modelo, la resolución, el modo y las funciones de búsqueda."
+          },
+          {
+            "text": "50% de descuento en generación y edición con GPT Image 2",
+            "note": "Disponible solo para las membresías Pro Anual y Studio Anual, y actualmente solo para GPT Image 2. El precio estándar es de 40 créditos por solicitud y los miembros anuales pagan 20. Nano Banana, la generación de video y otros modelos no están incluidos."
           },
           {
             "text": "Render más rápido, sin hacer fila",
@@ -220,6 +236,14 @@
             "text": "Acceso anticipado a nuevas funciones",
             "note": "Permite probar ciertas funciones nuevas antes de su lanzamiento público. La disponibilidad puede cambiar según el calendario de despliegue."
           },
+          {
+            "text": "Soporte para generación por lotes (próximamente)",
+            "note": "Los miembros anuales tendrán acceso prioritario cuando se lance, pensado para flujos repetibles como lotes de perfiles, imágenes de producto y recursos de marketing."
+          },
+          {
+            "text": "Flujos optimizados para ecommerce, assets de juegos y anuncios (próximamente)",
+            "note": "Planeamos ofrecer flujos, presets o ajustes más especializados para estos casos de uso de alta frecuencia. Por ahora, el flujo general de generación sigue siendo el predeterminado."
+          },
           "Historial ilimitado de trabajos finalizados",
           "Soporte premium prioritario",
           "Límites de subida más altos para proyectos grandes"
@@ -230,7 +254,7 @@
         "price": "$19.9",
         "original_price": "$49.9",
         "unit": "/ mes",
-        "tip": "Ahorra más de $400 al año • Máximo ahorro por pieza",
+        "tip": "Los miembros anuales obtienen GPT Image 2 a mitad de precio",
         "button": {
           "title": "Iniciar plan insignia",
           "url": "/#pricing",
@@ -377,6 +401,10 @@
         "description": "40 créditos"
       },
       {
+        "title": "GPT Image 2 / miembro anual",
+        "description": "20 créditos"
+      },
+      {
         "title": "1K / imagen a imagen / estándar",
         "description": "60 créditos"
       },
@@ -408,7 +436,7 @@
       },
       {
         "question": "¿Cuántos créditos cuesta generar una imagen?",
-        "answer": "La generación estándar 1K de texto a imagen comienza en 40 créditos, y la generación estándar 1K de imagen a imagen comienza en 60 créditos. Las resoluciones más altas y los modos pro consumen más. Los ejemplos de la página de precios sirven como referencia útil, pero el valor mostrado dentro del creador es el que debe tomarse como definitivo."
+        "answer": "La generación y edición con GPT Image 2 cuestan actualmente 40 créditos por solicitud de forma predeterminada, mientras que los miembros Pro Anual y Studio Anual pagan 20. Nano Banana y otros modelos se cobran por separado según sus propias reglas de modo, resolución y funciones. El valor mostrado dentro del creador debe tomarse como definitivo."
       },
       {
         "question": "¿Los planes actuales se pueden usar comercialmente?",
@@ -434,7 +462,7 @@
       "pricing": {
         "id": "pricing",
         "title": "Planes de ChatGPT Image 2 Generator",
-        "description": "Comienza a generar y editar imágenes con ChatGPT Image 2 Generator. La generación estándar 1K de texto a imagen comienza en 40 créditos, y la generación estándar 1K de imagen a imagen comienza en 60 créditos."
+        "description": "Comienza a generar y editar imágenes con ChatGPT Image 2 Generator. GPT Image 2 cuesta 40 créditos por solicitud de forma predeterminada, mientras que los miembros Pro Anual y Studio Anual pagan 20."
       }
     }
   },
