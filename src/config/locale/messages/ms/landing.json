@@ -1,16 +1,16 @@
 {
   "metadata": {
-    "title": "GPT Image 2 Penjana Imej AI ChatGPT Percuma Online",
-    "description": "GPT Image 2 ialah penjana imej AI untuk imej realistik, teks yang jelas, skrin UI, mockup dan suntingan imej pantas.",
-    "keywords": "GPT Image 2, gpt image 2, gpt-image-2, chatgpt image 2, gpt image 2 api, gpt image generator"
+    "title": "GPT Image 2 AI | GPT Image 2 AI untuk jana imej, edit visual dan buat mockup",
+    "description": "GPT Image 2 AI ialah alat penjanaan dan penyuntingan visual untuk imej fotorealistik, grafik berteks, paparan UI, mockup produk dan suntingan berasaskan rujukan. Dengan GPT Image 2 AI, anda boleh siapkan aset visual yang lebih berguna dengan lebih cepat.",
+    "keywords": "GPT Image 2 AI, jana imej, edit imej, mockup, ChatGPT image 2"
   },
   "header": {
     "id": "header",
     "brand": {
-      "title": "GPT Image 2",
+      "title": "GPT Image 2 AI",
       "logo": {
         "src": "/logo.png",
-        "alt": "GPT Image 2"
+        "alt": "GPT Image 2 AI"
       },
       "url": "/"
     },
@@ -20,12 +20,6 @@
           "title": "Imej AI",
           "url": "/ai-image",
           "icon": "Image"
-        },
-        {
-          "title": "Prompt",
-          "url": "/prompts/gpt-image-2",
-          "icon": "Sparkles",
-          "badge": "NEW"
         },
         {
           "title": "Video AI",
@@ -71,23 +65,23 @@
     "show_theme": true,
     "show_locale": true,
     "topbanner": {
-      "id": "referral-subscription-bonus-2026-04-23-v2",
+      "id": "limited-time-offer-2026-04-15",
       "image": {
         "src": "https://cdn.pollo.ai/prod/public/images/index/sales.png",
-        "alt": "Bonus langganan jemputan"
+        "alt": "Promosi masa terhad"
       },
-      "text": "🔥 Jemput rakan langgan pertama: anda berdua dapat <strong>20%</strong> kredit tambahan",
+      "text": "Promosi terhad: <strong>50%</strong> OFF!",
       "closeLabel": "Tutup banner",
-      "buttonText": "Jemput rakan",
-      "href": "/settings/credits",
+      "buttonText": "Lihat harga",
+      "href": "/pricing",
       "target": "_self",
       "dismissedExpiryDays": 7
     }
   },
   "hero": {
     "id": "hero",
-    "title": "GPT Image 2 - Penjana imej AI untuk ChatGPT",
-    "description": "Dengan GPT Image 2, anda boleh menghasilkan imej realistik, skrin antaramuka, mockup produk dan bahan visual pemasaran dengan lebih pantas. Ia dibina di atas ChatGPT Image dan lebih baik dalam memahami arahan, memaparkan teks dalam imej, serta memudahkan proses suntingan selepas penjanaan.",
+    "title": "GPT Image 2 AI untuk imej realistik, suntingan tepat dan mockup UI",
+    "description": "GPT Image 2 AI membantu anda menghasilkan imej realistik, skrin antaramuka, visual produk dan bahan iklan dalam satu aliran kerja. Ia dibina untuk keperluan yang biasa dicari melalui GPT Image 2 AI: edit yang lebih tepat, arahan yang lebih difahami dan hasil visual yang benar-benar boleh digunakan.",
     "buttons": [
       {
         "title": "Cuba Imej AI",
@@ -108,13 +102,13 @@
     "avatars_tip": "Sesuai untuk pengguna yang mahukan hasil GPT Image 2 yang benar-benar boleh digunakan",
     "show_award": false,
     "background_image": {
-      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/friend/nano-banana/hero/imgtoimg1.webp",
-      "alt": "Penjana Imej AI ChatGPT GPT Image 2"
+      "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/hero/photogpt-case-e-commerce-hero-1920-q72.webp",
+      "alt": "Penjana Imej AI ChatGPT GPT Image 2 AI"
     }
   },
   "showcases-flow": {
     "id": "showcases",
-    "title": "Contoh GPT Image 2",
+    "title": "Contoh GPT Image 2 AI",
     "description": "Lihat contoh imej realistik, reka bentuk dengan teks, mockup produk dan konsep UI yang dihasilkan menggunakan GPT Image 2.",
     "items": [
       {
@@ -204,8 +198,8 @@
   },
   "introduce": {
     "id": "introduce",
-    "title": "Apa itu GPT Image 2",
-    "description": "GPT Image 2 ialah penjana imej berasaskan ChatGPT Image yang lebih sesuai untuk kerja sebenar. Ia membantu menghasilkan visual fotorealistik, imej dengan teks yang lebih kemas, paparan UI, idea berpandukan rujukan dan suntingan imej melalui arahan biasa.",
+    "title": "Apa itu GPT Image 2 AI",
+    "description": "GPT Image 2 AI lebih sesuai untuk kerja pemasaran, produk dan reka bentuk sebenar berbanding sekadar visual inspirasi. GPT Image 2 AI sangat berguna untuk imej fotorealistik, grafik berteks, paparan UI, mockup produk dan suntingan halus berpandukan rujukan.",
     "items": [
       {
         "title": "Lebih sesuai untuk imej yang mengandungi teks",
@@ -231,8 +225,8 @@
   },
   "benefits": {
     "id": "benefits",
-    "title": "Mengapa pilih GPT Image 2",
-    "description": "GPT Image 2 bukan sekadar menghasilkan imej yang cantik, tetapi juga membantu anda sampai kepada hasil yang benar-benar boleh digunakan dengan lebih cepat.",
+    "title": "Mengapa pasukan memilih GPT Image 2 AI",
+    "description": "GPT Image 2 AI membantu pasukan bergerak lebih cepat daripada prompt ke aset visual yang boleh diterbitkan dengan pematuhan arahan yang lebih baik, teks yang lebih praktikal dan kurang ulang alik semakan.",
     "items": [
       {
         "title": "Ulang kaji lebih cepat",
@@ -372,61 +366,67 @@
   },
   "testimonials": {
     "id": "testimonials",
-    "title": "Maklum balas pengguna",
-    "description": "Lihat bagaimana pengguna lain memanfaatkan GPT Image 2 dalam kerja sebenar.",
+    "title": "Digunakan oleh pencipta, pasukan pemasaran dan pasukan produk",
+    "description": "Lihat bagaimana GPT Image 2 AI digunakan untuk menghasilkan headshot profesional, visual produk, kandungan gaya hidup, kreatif media sosial dan imej pemasaran yang lebih kemas.",
     "items": [
       {
-        "name": "Sarah Chen",
-        "role": "Pereka Media Sosial",
-        "quote": "GPT Image 2 memudahkan penghasilan visual kempen dengan teks yang boleh digunakan. Saya boleh bergerak dari idea ke grafik akhir dalam beberapa minit.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=sarahchen",
-          "alt": "Sarah Chen"
+        "name": "J.K.",
+        "role": "Pencipta Kandungan",
+        "rating": 5,
+        "quote": "Saya menggunakan GPT Image 2 AI untuk menghasilkan headshot yang lebih kemas dan visual gaya hidup untuk blog serta saluran sosial saya. Imej nampak realistik, pencahayaan terasa semula jadi, dan proses kemasan jauh lebih cepat berbanding buat semuanya secara manual.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-1-optimized.webp",
+          "alt": "Latar testimoni untuk pencipta kandungan"
         }
       },
       {
-        "name": "Michael Rodriguez",
-        "role": "Pemasar Growth",
-        "quote": "Kami menggunakannya untuk mockup landing page, konsep iklan dan aset pemasaran produk. Kualiti tangkapan skrinnya sangat membantu.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=michaelrodriguez",
-          "alt": "Michael Rodriguez"
+        "name": "M.L.",
+        "role": "Pengurus E-dagang",
+        "rating": 5,
+        "quote": "GPT Image 2 AI menjadikan penghasilan visual produk jauh lebih mudah. Tanpa studio penuh, saya masih boleh mendapatkan imej produk yang bersih dan realistik untuk halaman produk serta kempen pemasaran.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-2-optimized.webp",
+          "alt": "Latar testimoni untuk pengurus e-dagang"
         }
       },
       {
-        "name": "David Kim",
+        "name": "A.R.",
+        "role": "Jurugambar Bebas",
+        "rating": 5,
+        "quote": "Sebagai jurugambar bebas, saya mahukan aliran kerja yang pantas tanpa menjadikan hasil kelihatan palsu. GPT Image 2 AI sangat membantu untuk membina konsep potret dan headshot gaya studio yang masih terasa meyakinkan.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-3-optimized.webp",
+          "alt": "Latar testimoni untuk jurugambar bebas"
+        }
+      },
+      {
+        "name": "S.T.",
+        "role": "Blogger Fesyen",
+        "rating": 5,
+        "quote": "Saya menggunakan GPT Image 2 AI untuk menguji gaya pakaian dan arah visual sebelum sesi penggambaran sebenar. Ia membantu saya mencuba idea dengan cepat sambil mengekalkan hasil akhir yang nampak kemas dan profesional.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-4-optimized.webp",
+          "alt": "Latar testimoni untuk blogger fesyen"
+        }
+      },
+      {
+        "name": "R.K.",
+        "role": "Pemasar Digital",
+        "rating": 5,
+        "quote": "GPT Image 2 AI sangat berguna untuk visual sosial, imej kempen dan suntingan realistik yang perlu disiapkan segera. Bila saya perlukan banyak variasi dalam masa singkat, ia benar-benar mempercepat kerja.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-5-optimized.webp",
+          "alt": "Latar testimoni untuk pemasar digital"
+        }
+      },
+      {
+        "name": "L.N.",
         "role": "Pereka Produk",
-        "quote": "Hasil UI cukup baik untuk membincangkan aliran sebelum kami membuka Figma. Ia mempercepat eksplorasi idea produk.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=davidkim",
-          "alt": "David Kim"
-        }
-      },
-      {
-        "name": "Emma Thompson",
-        "role": "Pengarah Kreatif",
-        "quote": "Output fotorealistik terasa lebih kemas dari segi pencahayaan, bahan dan komposisi. Sangat sesuai untuk arah visual awal.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=emmathompson",
-          "alt": "Emma Thompson"
-        }
-      },
-      {
-        "name": "James Wilson",
-        "role": "Pengasas E-dagang",
-        "quote": "Mockup produk dan idea pembungkusan kini jauh lebih cepat. Ia membantu kami menguji sudut kreatif sebelum produksi sebenar.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=jameswilson",
-          "alt": "James Wilson"
-        }
-      },
-      {
-        "name": "Lisa Anderson",
-        "role": "Pereka Jenama",
-        "quote": "Suntingan bahasa semula jadi menjimatkan banyak masa. Perubahan kecil pada salinan atau gaya tidak lagi memerlukan imej dibuat semula.",
-        "avatar": {
-          "src": "https://api.dicebear.com/7.x/avataaars/svg?seed=lisaanderson",
-          "alt": "Lisa Anderson"
+        "rating": 5,
+        "quote": "Apabila saya perlukan imej konsep yang realistik untuk pembentangan dan cadangan, GPT Image 2 AI membantu saya bergerak lebih pantas. Perinciannya cukup jelas untuk semakan dalaman, deck pembentangan dan penceritaan produk awal.",
+        "image": {
+          "src": "https://cdn.nano-banana-2-ai.com/uploads/landing/testimonials/photogpt-user-6-optimized.webp",
+          "alt": "Latar testimoni untuk pereka produk"
         }
       }
     ]
@@ -491,11 +491,11 @@
   "footer": {
     "id": "footer",
     "brand": {
-      "title": "GPT Image 2",
-      "description": "GPT Image 2 ialah alat berasaskan ChatGPT Image untuk menjana, menyunting dan memperhalusi imej dalam satu aliran kerja yang lancar.",
+      "title": "GPT Image 2 AI",
+      "description": "GPT Image 2 AI ialah alat berasaskan ChatGPT untuk menjana, menyunting dengan tepat dan memperhalusi imej dalam satu aliran kerja yang lancar.",
       "logo": {
         "src": "/logo.png",
-        "alt": "Penjana Imej AI ChatGPT GPT Image 2"
+        "alt": "Penjana Imej AI ChatGPT GPT Image 2 AI"
       },
       "url": "/"
     },

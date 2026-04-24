@@ -43,6 +43,10 @@ export function Hero({
 }) {
   const highlightText = section.highlight_text ?? '';
   const backgroundVideo = section.background_video;
+  const galleryImages = Array.isArray(section.gallery_images)
+    ? section.gallery_images.filter((image) => image?.src)
+    : [];
+  const hasGallery = galleryImages.length > 0;
   const [shouldLoadBackgroundVideo, setShouldLoadBackgroundVideo] =
     useState(false);
   let texts = null;
@@ -70,13 +74,13 @@ export function Hero({
     backgroundVideo || section.background_image
   );
   const titleClasses = hasMediaBackground
-    ? 'font-display text-foreground dark:text-white mx-auto max-w-4xl text-5xl font-semibold leading-[0.94] tracking-[-0.04em] text-balance sm:text-6xl lg:text-[5.25rem]'
+    ? 'font-display mx-auto max-w-4xl text-5xl font-semibold leading-[0.94] tracking-[-0.04em] text-white text-balance sm:text-6xl lg:text-[5.25rem]'
     : 'font-display text-foreground text-5xl font-semibold text-balance sm:mt-12 sm:text-6xl';
   const bodyClasses = hasMediaBackground
-    ? 'text-muted-foreground dark:text-white/80 mx-auto mt-8 mb-8 max-w-2xl text-base leading-8 text-balance md:text-xl'
+    ? 'mx-auto mt-8 mb-8 max-w-2xl text-base leading-8 text-white/80 text-balance md:text-xl'
     : 'text-muted-foreground mt-8 mb-8 text-lg text-balance';
   const tipClasses = hasMediaBackground
-    ? 'text-foreground/75 dark:text-white/80 border-foreground/10 bg-background/65 dark:border-white/15 dark:bg-white/8 mx-auto mt-8 flex w-fit items-center rounded-full border px-4 py-2 text-xs font-medium tracking-[0.02em] backdrop-blur-md'
+    ? 'mx-auto mt-8 flex w-fit items-center rounded-full border border-white/15 bg-white/8 px-4 py-2 text-xs font-medium tracking-[0.02em] text-white/80 backdrop-blur-md'
     : 'text-muted-foreground mt-6 block text-center text-sm';
 
   useEffect(() => {
@@ -147,7 +151,9 @@ export function Hero({
         className={cn(
           hasMediaBackground
             ? 'relative flex min-h-[78svh] items-center pt-28 pb-20 md:min-h-[88svh] md:pt-32 md:pb-28'
-            : 'pt-24 pb-8 md:pt-36 md:pb-8',
+            : hasGallery
+              ? 'pt-24 pb-16 md:pt-32 md:pb-20'
+              : 'pt-24 pb-8 md:pt-36 md:pb-8',
           section.className,
           className
         )}
@@ -158,7 +164,8 @@ export function Hero({
               href={section.announcement.url || ''}
               target={section.announcement.target || '_self'}
               className={cn(
-                'group mx-auto mb-8 flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md transition-colors duration-300',
+                'group mb-8 flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md transition-colors duration-300',
+                hasGallery ? 'mx-auto lg:mx-0' : 'mx-auto',
                 hasMediaBackground
                   ? 'border-white/15 bg-white/10 text-white backdrop-blur-md hover:bg-white/14'
                   : 'hover:bg-background dark:hover:border-t-border bg-muted shadow-zinc-950/5 dark:border-t-white/5 dark:shadow-zinc-950'
@@ -204,84 +211,162 @@ export function Hero({
 
         <div
           className={cn(
-            'relative mx-auto w-full px-4 text-center',
-            hasMediaBackground ? 'max-w-6xl' : 'max-w-5xl'
+            'relative mx-auto w-full px-4',
+            hasMediaBackground
+              ? 'max-w-6xl text-center'
+              : hasGallery
+                ? 'max-w-7xl'
+                : 'max-w-5xl text-center'
           )}
         >
-          <motion.div {...createFadeInVariant(0.15)}>
-            {texts && texts.length > 0 ? (
-              <h1 className={titleClasses}>
-                {texts[0]}
-                <Highlighter action="underline" color="#FF9800">
-                  {highlightText}
-                </Highlighter>
-                {texts[1]}
-              </h1>
-            ) : (
-              <h1 className={titleClasses}>{section.title}</h1>
+          <div
+            className={cn(
+              hasGallery
+                ? 'grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(360px,520px)]'
+                : 'block'
             )}
-          </motion.div>
-
-          <motion.p
-            {...createFadeInVariant(0.3)}
-            className={bodyClasses}
-            dangerouslySetInnerHTML={{ __html: section.description ?? '' }}
-          />
-
-          {section.buttons && (
-            <motion.div
-              {...createFadeInVariant(0.45)}
-              className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
-            >
-              {section.buttons.map((button, idx) => (
-                <Button
-                  asChild
-                  size={button.size || 'default'}
-                  variant={button.variant || 'default'}
-                  className={cn(
-                    'rounded-full px-5 text-sm md:h-12 md:px-7 md:text-base',
-                    hasMediaBackground &&
-                      (button.variant === 'outline'
-                        ? 'border-foreground/15 bg-background/65 text-foreground hover:bg-background/85 hover:text-foreground shadow-lg shadow-black/10 backdrop-blur-md dark:border-white/15 dark:bg-white/8 dark:text-white dark:shadow-black/15 dark:hover:bg-white/14 dark:hover:text-white'
-                        : 'bg-foreground text-background hover:bg-foreground/90 shadow-2xl shadow-black/15 dark:bg-white dark:text-slate-950 dark:shadow-black/30 dark:hover:bg-white/90')
-                  )}
-                  key={idx}
-                >
-                  <Link
-                    href={button.url ?? ''}
-                    target={button.target ?? '_self'}
-                    onClick={() =>
-                      trackGtmCtaClick({
-                        location: section.id || 'hero',
-                        label: button.title ? String(button.title) : undefined,
-                        destination: button.url,
-                      })
-                    }
+          >
+            <div className={cn(hasGallery ? 'text-center lg:text-left' : '')}>
+              <motion.div {...createFadeInVariant(0.15)}>
+                {texts && texts.length > 0 ? (
+                  <h1
+                    className={cn(
+                      titleClasses,
+                      hasGallery &&
+                        'mx-auto max-w-3xl text-slate-950 lg:mx-0 lg:text-left'
+                    )}
                   >
-                    {button.icon && <SmartIcon name={button.icon as string} />}
-                    <span>{button.title}</span>
-                  </Link>
-                </Button>
-              ))}
-            </motion.div>
-          )}
+                    {texts[0]}
+                    <Highlighter action="underline" color="#FF9800">
+                      {highlightText}
+                    </Highlighter>
+                    {texts[1]}
+                  </h1>
+                ) : (
+                  <h1
+                    className={cn(
+                      titleClasses,
+                      hasGallery &&
+                        'mx-auto max-w-3xl text-slate-950 lg:mx-0 lg:text-left'
+                    )}
+                  >
+                    {section.title}
+                  </h1>
+                )}
+              </motion.div>
 
-          {section.tip && (
-            <motion.p
-              {...createFadeInVariant(0.6)}
-              className={tipClasses}
-              dangerouslySetInnerHTML={{ __html: section.tip ?? '' }}
-            />
-          )}
+              <motion.p
+                {...createFadeInVariant(0.3)}
+                className={cn(
+                  bodyClasses,
+                  hasGallery &&
+                    'mx-auto max-w-2xl text-slate-600 lg:mx-0 lg:text-left'
+                )}
+                dangerouslySetInnerHTML={{ __html: section.description ?? '' }}
+              />
 
-          {section.show_avatars && (
-            <motion.div {...createFadeInVariant(0.75)}>
-              <SocialAvatars tip={section.avatars_tip || ''} />
-            </motion.div>
-          )}
+              {section.buttons && (
+                <motion.div
+                  {...createFadeInVariant(0.45)}
+                  className={cn(
+                    'flex flex-col gap-3 sm:flex-row sm:gap-4',
+                    hasGallery
+                      ? 'items-center justify-center lg:items-center lg:justify-start'
+                      : 'items-center justify-center'
+                  )}
+                >
+                  {section.buttons.map((button, idx) => (
+                    <Button
+                      asChild
+                      size={button.size || 'default'}
+                      variant={button.variant || 'default'}
+                      className={cn(
+                        'rounded-full px-5 text-sm md:h-12 md:px-7 md:text-base',
+                        hasMediaBackground &&
+                          (button.variant === 'outline'
+                            ? 'border-white/15 bg-white/8 text-white shadow-lg shadow-black/15 backdrop-blur-md hover:bg-white/14 hover:text-white dark:bg-white/8'
+                            : 'bg-white text-slate-950 shadow-2xl shadow-black/30 hover:bg-white/90')
+                      )}
+                      key={idx}
+                    >
+                      <Link
+                        href={button.url ?? ''}
+                        target={button.target ?? '_self'}
+                        onClick={() =>
+                          trackGtmCtaClick({
+                            location: section.id || 'hero',
+                            label: button.title
+                              ? String(button.title)
+                              : undefined,
+                            destination: button.url,
+                          })
+                        }
+                      >
+                        {button.icon && (
+                          <SmartIcon name={button.icon as string} />
+                        )}
+                        <span>{button.title}</span>
+                      </Link>
+                    </Button>
+                  ))}
+                </motion.div>
+              )}
+
+              {section.tip && (
+                <motion.p
+                  {...createFadeInVariant(0.6)}
+                  className={cn(tipClasses, hasGallery && 'mx-auto lg:mx-0')}
+                  dangerouslySetInnerHTML={{ __html: section.tip ?? '' }}
+                />
+              )}
+
+              {section.show_avatars && (
+                <motion.div
+                  {...createFadeInVariant(0.75)}
+                  className={cn(
+                    hasGallery ? 'flex justify-center lg:justify-start' : ''
+                  )}
+                >
+                  <SocialAvatars tip={section.avatars_tip || ''} />
+                </motion.div>
+              )}
+            </div>
+
+            {hasGallery && (
+              <motion.div
+                {...createFadeInVariant(0.45)}
+                className="relative mx-auto w-full max-w-[540px]"
+              >
+                <div className="absolute inset-x-10 top-6 h-32 rounded-full bg-orange-100/70 blur-3xl" />
+                <div className="grid grid-cols-2 gap-4 sm:gap-5">
+                  {galleryImages.map((image, index) => (
+                    <div
+                      key={`${image.src}-${index}`}
+                      className={cn(
+                        'group relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-white p-2 shadow-[0_18px_50px_rgba(15,23,42,0.10)]',
+                        index % 3 === 0 && 'translate-y-4',
+                        index % 3 === 1 && '-translate-y-3',
+                        index % 3 === 2 && 'translate-y-1'
+                      )}
+                    >
+                      <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] bg-slate-100">
+                        <Image
+                          src={image.src || ''}
+                          alt={image.alt || `Hero gallery image ${index + 1}`}
+                          fill
+                          sizes="(min-width: 1024px) 260px, 45vw"
+                          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
         </div>
       </section>
-      {section.image && (
+      {section.image && !hasGallery && (
         <motion.section
           className="border-foreground/10 relative mt-8 border-y sm:mt-16"
           initial={{ opacity: 0, y: 20, scale: 0.98 }}
