@@ -1,1 +1,1 @@
-ALTER TABLE "session" ADD COLUMN "login_method" text DEFAULT '' NOT NULL;
+ALTER TABLE "session" ADD COLUMN IF NOT EXISTS "login_method" text DEFAULT '' NOT NULL;
