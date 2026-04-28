@@ -1480,7 +1480,7 @@ export function ImageGenerator({
 
   const content = (
     <div className={cn(!embedded && 'container')}>
-      <div className="mx-auto max-w-6xl">
+      <div className={cn('mx-auto', embedded ? 'max-w-7xl' : 'max-w-6xl')}>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <Card>
             <CardHeader>
