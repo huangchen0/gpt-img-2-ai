@@ -1,6 +1,6 @@
 import { APIError } from 'better-auth';
-import { createAuthMiddleware, getSessionFromCtx } from 'better-auth/api';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { createAuthMiddleware, getSessionFromCtx } from 'better-auth/api';
 import { oneTap } from 'better-auth/plugins';
 import { and, eq, gt, inArray, lte, not } from 'drizzle-orm';
 import { getLocale } from 'next-intl/server';
@@ -23,7 +23,7 @@ import { getCurrentSiteCode } from '@/shared/lib/site';
 // and to add a server-side throttle beyond any client-side cooldown.
 const recentVerificationEmailSentAt = new Map<string, number>();
 const VERIFICATION_EMAIL_MIN_INTERVAL_MS = 60_000;
-const DEFAULT_MAX_ACCOUNTS_PER_IP = 5;
+const DEFAULT_MAX_ACCOUNTS_PER_IP = 3;
 const EMAIL_PASSWORD_SIGN_IN_PATH = '/sign-in/email';
 const EMAIL_LOGIN_METHOD = 'email';
 const SIGN_OUT_PATH = '/sign-out';
@@ -399,8 +399,7 @@ async function collectIpLoginCleanupTargets(ctx: any) {
         (ctx.path === CHANGE_PASSWORD_PATH &&
           ctx?.body?.revokeOtherSessions === true)
           ? activeSessions.filter(
-              (session: any) =>
-                session.token !== currentSession?.session?.token
+              (session: any) => session.token !== currentSession?.session?.token
             )
           : activeSessions;
 

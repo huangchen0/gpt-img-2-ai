@@ -51,6 +51,7 @@ export const user = table(
     index('idx_user_name').on(table.name),
     // Order users by registration time for latest users list
     index('idx_user_created_at').on(table.createdAt),
+    index('idx_user_ip_created_at').on(table.ip, table.createdAt),
     index('idx_user_signup_site').on(table.signupSite),
     index('idx_user_last_seen_site').on(table.lastSeenSite),
     index('idx_user_last_active_at').on(table.lastActiveAt),
