@@ -1,9 +1,6 @@
 'use client';
 
-import { Leaf } from 'lucide-react';
-
-import { Link, usePathname } from '@/core/i18n/navigation';
-import { partnerListings } from '@/config/partners';
+import { Link } from '@/core/i18n/navigation';
 import {
   BrandLogo,
   Copyright,
@@ -14,54 +11,7 @@ import { SmartIcon } from '@/shared/blocks/common/smart-icon';
 import { NavItem } from '@/shared/types/blocks/common';
 import { Footer as FooterType } from '@/shared/types/blocks/landing';
 
-const HOMEPAGE_BADGE_SCALE = 0.45;
-
-type BadgeStyle = {
-  border?: string;
-  borderRadius?: string;
-  height?: string;
-  width?: string;
-};
-
-function scaleBadgeDimension(value?: number) {
-  return typeof value === 'number'
-    ? Math.max(1, Math.round(value * HOMEPAGE_BADGE_SCALE))
-    : undefined;
-}
-
-function scaleBadgeCssDimension(value?: string) {
-  if (!value || value === 'auto') {
-    return value;
-  }
-
-  const match = /^(\d+(?:\.\d+)?)px$/.exec(value.trim());
-
-  if (!match) {
-    return value;
-  }
-
-  return `${Math.max(1, Math.round(Number(match[1]) * HOMEPAGE_BADGE_SCALE))}px`;
-}
-
-function getScaledBadgeStyle(badgeStyle?: BadgeStyle) {
-  if (!badgeStyle) {
-    return undefined;
-  }
-
-  return {
-    ...badgeStyle,
-    height: scaleBadgeCssDimension(badgeStyle.height),
-    width: scaleBadgeCssDimension(badgeStyle.width),
-  };
-}
-
 export function Footer({ footer }: { footer: FooterType }) {
-  const pathname = usePathname();
-  const footerBadges = partnerListings.filter(
-    (listing) => listing.showInFooter && listing.badgeImageUrl
-  );
-  const showHomepageBadges = pathname === '/';
-
   return (
     <footer
       id={footer.id}
@@ -105,80 +55,6 @@ export function Footer({ footer }: { footer: FooterType }) {
           </div>
         </div>
 
-        {showHomepageBadges && footerBadges.length > 0 ? (
-          <div className="flex min-w-0 flex-nowrap items-center justify-center gap-2 overflow-x-auto sm:gap-3">
-            {footerBadges.map((listing) => {
-              const relValue =
-                listing.linkRel !== undefined
-                  ? listing.linkRel
-                  : [
-                      listing.relationship === 'sponsored'
-                        ? 'sponsored'
-                        : null,
-                      'nofollow',
-                      'noopener',
-                      'noreferrer',
-                    ]
-                      .filter(Boolean)
-                      .join(' ');
-              const anchorTarget =
-                listing.openInNewTab === false ? undefined : '_blank';
-              const anchorRel = relValue || undefined;
-              const badgeWidth = listing.disableFooterBadgeScaling
-                ? listing.badgeWidth
-                : scaleBadgeDimension(listing.badgeWidth);
-              const badgeHeight = listing.disableFooterBadgeScaling
-                ? listing.badgeHeight
-                : scaleBadgeDimension(listing.badgeHeight);
-              const badgeStyle = listing.disableFooterBadgeScaling
-                ? listing.badgeStyle
-                : getScaledBadgeStyle(listing.badgeStyle);
-
-              if (listing.rawBadgeEmbed) {
-                return (
-                  <a
-                    key={listing.url}
-                    href={listing.url}
-                    target={anchorTarget}
-                    rel={anchorRel}
-                  >
-                    <img
-                      src={listing.badgeImageUrl}
-                      alt={listing.badgeAlt || `${listing.name} Badge`}
-                      width={badgeWidth}
-                      height={badgeHeight}
-                      style={badgeStyle}
-                    />
-                  </a>
-                );
-              }
-
-              return (
-                <a
-                  key={listing.url}
-                  href={listing.url}
-                  target={anchorTarget}
-                  rel={anchorRel}
-                  title={listing.description}
-                  aria-label={`${listing.name}: ${listing.description}`}
-                  className="shrink-0"
-                >
-                  <img
-                    src={listing.badgeImageUrl}
-                    width={badgeWidth || scaleBadgeDimension(160)}
-                    height={badgeHeight}
-                    alt={listing.badgeAlt || `${listing.name} Badge`}
-                    loading="lazy"
-                    decoding="async"
-                    className="block h-auto w-auto shrink-0"
-                    style={badgeStyle}
-                  />
-                </a>
-              );
-            })}
-          </div>
-        ) : null}
-
         {/* Settings */}
         <div className="flex min-w-0 flex-wrap items-center justify-end gap-4">
           {footer.show_theme !== false ? <ThemeToggler type="toggle" /> : null}
@@ -201,17 +77,6 @@ export function Footer({ footer }: { footer: FooterType }) {
             ) : footer.brand ? (
               <Copyright brand={footer.brand} />
             ) : null}
-
-            <a
-              href="https://climate.stripe.com/fIF3Dw"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-[11px] transition-colors"
-              aria-label="Visit GPT Image 2 climate contributor page on Stripe Climate"
-            >
-              <Leaf className="h-3 w-3 text-emerald-500" strokeWidth={2} />
-              <span>Climate contributor</span>
-            </a>
           </div>
 
           <div className="min-w-0 flex-1"></div>

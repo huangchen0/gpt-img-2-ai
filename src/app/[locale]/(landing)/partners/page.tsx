@@ -9,7 +9,7 @@ import { Post as PostType } from '@/shared/types/blocks/blog';
 
 const PARTNERS_SLUG = 'partners';
 const FALLBACK_PARTNERS_DESCRIPTION =
-  'A manually reviewed partner and resource page for AI video creators.';
+  'A manually reviewed resource page for AI video creators.';
 const FALLBACK_PARTNERS_CONTENT = `
 ## About This Page
 
@@ -40,12 +40,11 @@ We don't run an open directory. Listings are selective, editorially reviewed, an
 ## Important Notes
 
 - Placement on this page is not guaranteed.
-- External links from this page may use \`rel="nofollow"\` or \`rel="sponsored"\` when appropriate.
 - We may decline or remove a listing if the site's quality, ownership, or topical relevance changes.
 
 ## Publication Policy
 
-Approved outbound partner links are published in the dedicated list at the bottom of this page. We keep all exchanged links in one place rather than spreading them across blog posts or core landing pages.
+Partner resources are not published as outbound links on this page. We keep them off blog posts, core landing pages, and the project footer.
 
 ## Contact
 
@@ -108,7 +107,7 @@ export async function generateMetadata({
     title: page?.title || 'Partners',
     description:
       page?.description ||
-      'Editorially reviewed partner and resource page for AI video creators.',
+      'Editorially reviewed resource page for AI video creators.',
     alternates: {
       canonical: canonicalUrl,
     },
@@ -144,24 +143,20 @@ function PartnerListingsSection({ listings }: { listings: PartnerListing[] }) {
   );
 
   return (
-    <section
-      aria-labelledby="approved-partner-links"
-      className="pb-24 md:pb-32"
-    >
+    <section aria-labelledby="partner-resources" className="pb-24 md:pb-32">
       <div className="mx-auto w-full max-w-6xl px-6 md:px-8">
         <div className="ring-foreground/5 rounded-3xl border border-transparent px-4 shadow ring-1 md:px-8">
           <div className="my-8 space-y-6">
             <div className="space-y-2">
               <h2
-                id="approved-partner-links"
+                id="partner-resources"
                 className="text-foreground text-2xl font-semibold md:text-3xl"
               >
-                Approved Partner Links
+                Partner Resources
               </h2>
               <p className="text-muted-foreground text-sm leading-7 md:text-base">
-                All approved outbound partner links for this project are
-                published here. We keep them off blog posts and core landing
-                pages.
+                Partner resources are not linked out from this project. We keep
+                them off blog posts, core landing pages, and the footer.
               </p>
             </div>
 
@@ -219,18 +214,18 @@ function PartnerListingsSection({ listings }: { listings: PartnerListing[] }) {
                 </div>
 
                 <p className="text-muted-foreground text-xs leading-6">
-                  These approved partners are shown here as a reference list and
-                  are not currently linked out from this page.
+                  These resources are shown here as a reference list and are not
+                  linked out from this page.
                 </p>
               </div>
             ) : (
               <div className="bg-muted/40 rounded-2xl border px-5 py-5">
                 <p className="text-foreground text-sm font-medium md:text-base">
-                  No approved partner links have been published yet.
+                  No partner resources have been published yet.
                 </p>
                 <p className="text-muted-foreground mt-2 text-sm leading-7">
-                  Once a site passes manual review, its outbound link will be
-                  added here.
+                  Once a site passes manual review, it may be added here without
+                  an outbound link.
                 </p>
               </div>
             )}
