@@ -277,7 +277,6 @@ export function buildPromptDetailJsonLd({
       ? {
           '@type': 'Person',
           name: item.authorName,
-          url: item.authorUrl || item.sourceUrl || undefined,
         }
       : undefined,
     keywords: getPromptKeywords(item, locale).join(', '),

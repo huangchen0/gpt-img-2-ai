@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Script from 'next/script';
-import { ArrowLeft, ExternalLink, ImageIcon } from 'lucide-react';
+import { ArrowLeft, ImageIcon } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 
 import { Link } from '@/core/i18n/navigation';
@@ -24,6 +24,10 @@ import {
   promptLibraryLocales,
 } from '@/shared/prompt-library/localization';
 import {
+  getPreferredPrompt,
+  getPromptVariants,
+} from '@/shared/prompt-library/prompts';
+import {
   buildPromptDetailJsonLd,
   getCanonicalUrl,
   getPromptDetailDescription,
@@ -32,10 +36,6 @@ import {
   getPromptMediaImage,
   getPromptVisualAltText,
 } from '@/shared/prompt-library/seo';
-import {
-  getPreferredPrompt,
-  getPromptVariants,
-} from '@/shared/prompt-library/prompts';
 
 import { CopyPromptButton } from '../copy-prompt-button';
 import { SharePromptButton } from '../share-prompt-button';
@@ -75,6 +75,12 @@ export async function generateMetadata({
   if (!item) return {};
 
   const promptLocale = getPromptLibraryLocale(locale);
+  if (item.slug !== slug) {
+    const redirectPath = `/prompts/gpt-image-2/${item.slug}`;
+    redirect(
+      promptLocale === 'en' ? redirectPath : `/${promptLocale}${redirectPath}`
+    );
+  }
   const path = `/prompts/gpt-image-2/${item.slug}`;
   const canonicalUrl = getCanonicalUrl(path, promptLocale);
   const image = getPromptMediaImage(item.media[0]);
@@ -220,14 +226,9 @@ export default async function GptImage2PromptDetailPage({
               {item.authorName && (
                 <p className="text-muted-foreground mt-5 text-sm">
                   {messages.detail.sourceCreator}{' '}
-                  <a
-                    className="font-medium underline underline-offset-4"
-                    href={item.authorUrl || item.sourceUrl || '#'}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <span className="font-medium">
                     @{item.authorName.replace(/^@/, '')}
-                  </a>
+                  </span>
                 </p>
               )}
             </div>
@@ -313,15 +314,6 @@ export default async function GptImage2PromptDetailPage({
                 ))}
               </ul>
             </div>
-
-            {item.sourceUrl && (
-              <Button asChild variant="outline" className="w-full">
-                <a href={item.sourceUrl} target="_blank" rel="noreferrer">
-                  {messages.buttons.originalSource}
-                  <ExternalLink className="size-4" />
-                </a>
-              </Button>
-            )}
           </aside>
         </section>
 

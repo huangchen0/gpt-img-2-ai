@@ -1,5 +1,3 @@
-import 'server-only';
-
 import fs from 'fs';
 import path from 'path';
 
@@ -12,6 +10,11 @@ import {
   getPromptLibraryImportItem,
   mergePromptLibraryIndexItems,
 } from './imports';
+import {
+  getPublicPromptSlug,
+  sanitizePromptLibraryDataset,
+  sanitizePromptLibraryItem,
+} from './sanitize';
 import type {
   PromptLibraryIndexDataset,
   PromptLibraryIndexItem,
@@ -43,7 +46,8 @@ type CacheEntry<T> = {
 };
 
 const indexCache = new Map<string, CacheEntry<PromptLibraryIndexDataset>>();
-const itemCache = new Map<string, CacheEntry<PromptLibraryItem>>();
+const rawIndexCache = new Map<string, CacheEntry<PromptLibraryIndexDataset>>();
+const rawItemCache = new Map<string, CacheEntry<PromptLibraryItem>>();
 const indexRequests = new Map<string, Promise<PromptLibraryIndexDataset>>();
 const itemRequests = new Map<string, Promise<PromptLibraryItem | undefined>>();
 
@@ -165,6 +169,16 @@ function mergeImportedDatasetItems(
   });
 }
 
+function sanitizeDatasetForFrontend(
+  model: PromptLibraryModel,
+  dataset: PromptLibraryIndexDataset
+) {
+  return sanitizePromptLibraryDataset(dataset, {
+    model,
+    assetBaseUrl: '/api/prompt-library',
+  });
+}
+
 function readLocalPromptLibraryDataset(model: PromptLibraryModel) {
   const filePath = path.join(getPromptLibraryDir(model), 'index.json');
   return JSON.parse(
@@ -181,6 +195,86 @@ function readLocalPromptLibraryItem(model: PromptLibraryModel, slug: string) {
   if (!fs.existsSync(filePath)) return undefined;
 
   return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromptLibraryItem;
+}
+
+async function getLocalOrPublicPromptLibraryDataset(model: PromptLibraryModel) {
+  let dataset: PromptLibraryIndexDataset;
+
+  try {
+    dataset = readLocalPromptLibraryDataset(model);
+  } catch (error) {
+    const publicUrl = getPublicAssetUrl(model, 'index.json');
+    if (!publicUrl) throw error;
+
+    dataset =
+      await fetchPromptLibraryJson<PromptLibraryIndexDataset>(publicUrl);
+  }
+
+  return mergeImportedDatasetItems(model, normalizeIndexDataset(dataset));
+}
+
+async function getLocalOrPublicPromptLibraryItem(
+  model: PromptLibraryModel,
+  slug: string
+) {
+  const item = readLocalPromptLibraryItem(model, slug);
+  if (item) return item;
+
+  const publicUrl = getPublicAssetUrl(model, `items/${slug}.json`);
+  if (!publicUrl) return undefined;
+
+  try {
+    return await fetchPromptLibraryJson<PromptLibraryItem>(publicUrl);
+  } catch {
+    return undefined;
+  }
+}
+
+async function getFallbackPromptLibraryDataset(model: PromptLibraryModel) {
+  const dataset = await getLocalOrPublicPromptLibraryDataset(model);
+  dataset.assetBaseUrl = getRemoteBaseUrl();
+  return dataset;
+}
+
+async function getRawRemotePromptLibraryDataset(model: PromptLibraryModel) {
+  const remoteUrl = getRemoteAssetUrl(model, 'index.json');
+  if (!remoteUrl) return undefined;
+
+  const cacheKey = `${model}:raw:${remoteUrl}`;
+  const cached = getCachedValue(rawIndexCache, cacheKey);
+  if (cached) return cached;
+
+  const dataset =
+    await fetchPromptLibraryJson<PromptLibraryIndexDataset>(remoteUrl);
+
+  return setCachedValue(rawIndexCache, cacheKey, dataset);
+}
+
+async function resolveRawRemotePromptSlug(
+  model: PromptLibraryModel,
+  slug: string
+) {
+  try {
+    const dataset = await getRawRemotePromptLibraryDataset(model);
+    const item = dataset?.items.find(
+      (candidate) =>
+        candidate.slug === slug || getPublicPromptSlug(candidate.slug) === slug
+    );
+
+    return item?.slug || slug;
+  } catch {
+    return slug;
+  }
+}
+
+async function getFallbackPromptLibraryItem(
+  model: PromptLibraryModel,
+  slug: string
+) {
+  const importedItem = getPromptLibraryImportItem(model, slug);
+  if (importedItem) return importedItem;
+
+  return getLocalOrPublicPromptLibraryItem(model, slug);
 }
 
 export async function getPromptLibraryDataset(model: PromptLibraryModel) {
@@ -202,14 +296,27 @@ export async function getPromptLibraryDataset(model: PromptLibraryModel) {
           )
         );
         dataset.assetBaseUrl = getRemoteBaseUrl();
-        return setCachedValue(indexCache, cacheKey, dataset);
+        return setCachedValue(
+          indexCache,
+          cacheKey,
+          sanitizeDatasetForFrontend(model, dataset)
+        );
       } catch (error) {
         const staleDataset = getCachedValue(indexCache, cacheKey, {
           allowStale: true,
         });
         if (staleDataset) return staleDataset;
 
-        throw error;
+        try {
+          const fallbackDataset = await getFallbackPromptLibraryDataset(model);
+          return setCachedValue(
+            indexCache,
+            cacheKey,
+            sanitizeDatasetForFrontend(model, fallbackDataset)
+          );
+        } catch {
+          throw error;
+        }
       } finally {
         indexRequests.delete(cacheKey);
       }
@@ -223,26 +330,12 @@ export async function getPromptLibraryDataset(model: PromptLibraryModel) {
   const cached = getCachedValue(indexCache, cacheKey);
   if (cached) return cached;
 
-  let dataset: PromptLibraryIndexDataset;
-
-  try {
-    dataset = mergeImportedDatasetItems(
-      model,
-      normalizeIndexDataset(readLocalPromptLibraryDataset(model))
-    );
-  } catch {
-    dataset = mergeImportedDatasetItems(
-      model,
-      normalizeIndexDataset(
-        await fetchPromptLibraryJson<PromptLibraryIndexDataset>(
-          getPublicAssetUrl(model, 'index.json')
-        )
-      )
-    );
-  }
-
-  dataset.assetBaseUrl = getRemoteBaseUrl();
-  return setCachedValue(indexCache, cacheKey, dataset);
+  const dataset = await getFallbackPromptLibraryDataset(model);
+  return setCachedValue(
+    indexCache,
+    cacheKey,
+    sanitizeDatasetForFrontend(model, dataset)
+  );
 }
 
 export async function getPromptLibraryItems(model: PromptLibraryModel) {
@@ -270,20 +363,23 @@ export async function getRelatedPromptLibraryItems(
     .slice(0, limit);
 }
 
-export async function getPromptLibraryItem(
+export async function getRawPromptLibraryItem(
   model: PromptLibraryModel,
   slug: string
 ) {
-  const remoteUrl = getRemoteAssetUrl(model, `items/${slug}.json`);
-  const cacheKey = `${model}:${slug}:${remoteUrl || 'local'}`;
   const importedItem = getPromptLibraryImportItem(model, slug);
 
   if (importedItem) {
-    return setCachedValue(itemCache, cacheKey, importedItem);
+    const cacheKey = `${model}:${slug}:imported`;
+    return setCachedValue(rawItemCache, cacheKey, importedItem);
   }
 
+  const rawSlug = await resolveRawRemotePromptSlug(model, slug);
+  const remoteUrl = getRemoteAssetUrl(model, `items/${rawSlug}.json`);
+  const cacheKey = `${model}:${slug}:${rawSlug}:${remoteUrl || 'local'}`;
+
   if (remoteUrl) {
-    const cached = getCachedValue(itemCache, cacheKey);
+    const cached = getCachedValue(rawItemCache, cacheKey);
     if (cached) return cached;
 
     const pendingRequest = itemRequests.get(cacheKey);
@@ -292,16 +388,28 @@ export async function getPromptLibraryItem(
     const request = (async () => {
       try {
         const item = await fetchPromptLibraryJson<PromptLibraryItem>(remoteUrl);
-        return setCachedValue(itemCache, cacheKey, item);
+        return setCachedValue(rawItemCache, cacheKey, item);
       } catch (error) {
+        const staleItem = getCachedValue(rawItemCache, cacheKey, {
+          allowStale: true,
+        });
+        if (staleItem) return staleItem;
+
         if (error instanceof PromptLibraryAssetError && error.status === 404) {
           return undefined;
         }
 
-        const staleItem = getCachedValue(itemCache, cacheKey, {
-          allowStale: true,
-        });
-        if (staleItem) return staleItem;
+        try {
+          const fallbackItem = await getFallbackPromptLibraryItem(
+            model,
+            rawSlug
+          );
+          if (fallbackItem) {
+            return setCachedValue(rawItemCache, cacheKey, fallbackItem);
+          }
+        } catch {
+          // Preserve the original remote error if every fallback source fails.
+        }
 
         throw error;
       } finally {
@@ -313,22 +421,27 @@ export async function getPromptLibraryItem(
     return request;
   }
 
-  const cached = getCachedValue(itemCache, cacheKey);
+  const cached = getCachedValue(rawItemCache, cacheKey);
   if (cached) return cached;
 
-  let item = readLocalPromptLibraryItem(model, slug);
+  const importedItemForRawSlug = getPromptLibraryImportItem(model, rawSlug);
 
-  if (!item) {
-    try {
-      item = await fetchPromptLibraryJson<PromptLibraryItem>(
-        getPublicAssetUrl(model, `items/${slug}.json`)
-      );
-    } catch {
-      item = undefined;
-    }
+  if (importedItemForRawSlug) {
+    return setCachedValue(rawItemCache, cacheKey, importedItemForRawSlug);
   }
 
-  if (item) setCachedValue(itemCache, cacheKey, item);
+  const item = await getLocalOrPublicPromptLibraryItem(model, rawSlug);
+
+  if (item) setCachedValue(rawItemCache, cacheKey, item);
 
   return item;
+}
+
+export async function getPromptLibraryItem(
+  model: PromptLibraryModel,
+  slug: string
+) {
+  const item = await getRawPromptLibraryItem(model, slug);
+
+  return item ? sanitizePromptLibraryItem(item, { model }) : item;
 }

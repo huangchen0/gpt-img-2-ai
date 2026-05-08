@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { getPromptCategories } from './insights';
+import { getPublicPromptSlug } from './sanitize';
 import type {
   PromptLibraryIndexItem,
   PromptLibraryItem,
@@ -128,7 +129,10 @@ export function getPromptLibraryImportItem(
   const datasets = getPromptLibraryImportDatasets(model);
 
   for (const dataset of datasets) {
-    const item = dataset.items.find((candidate) => candidate.slug === slug);
+    const item = dataset.items.find(
+      (candidate) =>
+        candidate.slug === slug || getPublicPromptSlug(candidate.slug) === slug
+    );
     if (item) {
       return stripImportOnlyFields(item);
     }

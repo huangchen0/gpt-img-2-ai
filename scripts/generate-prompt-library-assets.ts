@@ -169,10 +169,14 @@ async function main() {
     items: mergedIndexItems,
     assetBaseUrl: promptLibraryAssetBaseUrl,
   };
+  const publicIndexDataset = sanitizePromptLibraryDataset(indexDataset, {
+    model: indexDataset.model,
+    assetBaseUrl: promptLibraryAssetBaseUrl,
+  });
 
   fs.rmSync(outputDir, { recursive: true, force: true });
   fs.mkdirSync(outputDir, { recursive: true });
-  writeJsonFile(path.join(outputDir, 'index.json'), indexDataset);
+  writeJsonFile(path.join(outputDir, 'index.json'), publicIndexDataset);
 
   if (generateLocalAssets) {
     fs.mkdirSync(itemsDir, { recursive: true });
@@ -181,11 +185,23 @@ async function main() {
       const fullItem = await fetchJson<PromptLibraryDataset['items'][number]>(
         `${promptLibraryBaseUrl}/gpt-image-2/items/${item.slug}.json`
       );
-      writeJsonFile(path.join(itemsDir, `${item.slug}.json`), fullItem);
+      writeJsonFile(
+        path.join(
+          itemsDir,
+          `${sanitizePromptLibraryItem(fullItem, { model: fullItem.model }).slug}.json`
+        ),
+        sanitizePromptLibraryItem(fullItem, { model: fullItem.model })
+      );
     }
 
     for (const item of importedItems) {
-      writeJsonFile(path.join(itemsDir, `${item.slug}.json`), item);
+      writeJsonFile(
+        path.join(
+          itemsDir,
+          `${sanitizePromptLibraryItem(item, { model: item.model }).slug}.json`
+        ),
+        sanitizePromptLibraryItem(item, { model: item.model })
+      );
     }
   } else {
     fs.rmSync(itemsDir, { recursive: true, force: true });

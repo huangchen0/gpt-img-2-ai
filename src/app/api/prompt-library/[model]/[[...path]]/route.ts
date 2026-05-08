@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import {
   getPromptLibraryDataset,
   getPromptLibraryItem,
+  getRawPromptLibraryItem,
 } from '@/shared/prompt-library/data';
 import type { PromptLibraryModel } from '@/shared/prompt-library/types';
 
@@ -30,8 +31,23 @@ function getNoStoreHeaders() {
   };
 }
 
+function getMediaUrl(
+  item: NonNullable<Awaited<ReturnType<typeof getRawPromptLibraryItem>>>,
+  index: number,
+  variant?: string | null
+) {
+  const media = item.media[index];
+  if (!media) return '';
+
+  if (variant === 'thumbnail') {
+    return media.r2Thumbnail || media.thumbnail || media.r2Url || media.url;
+  }
+
+  return media.r2Url || media.url || media.r2Thumbnail || media.thumbnail || '';
+}
+
 export async function GET(
-  _request: Request,
+  request: Request,
   {
     params,
   }: {
@@ -66,8 +82,60 @@ export async function GET(
     }
   }
 
+  if (path.length === 3 && path[0] === 'media') {
+    const slug = path[1];
+    const indexValue = path[2];
+    const index = Number.parseInt(indexValue, 10);
+    const variant = new URL(request.url).searchParams.get('variant');
+
+    if (!Number.isInteger(index) || index < 0) {
+      return NextResponse.json({ error: 'Media not found' }, { status: 404 });
+    }
+
+    let item: Awaited<ReturnType<typeof getRawPromptLibraryItem>>;
+
+    try {
+      item = await getRawPromptLibraryItem(model, slug);
+    } catch {
+      return NextResponse.json(
+        { error: 'Media is temporarily unavailable' },
+        { status: 503, headers: getNoStoreHeaders() }
+      );
+    }
+
+    const mediaUrl = item ? getMediaUrl(item, index, variant) : '';
+    if (!mediaUrl) {
+      return NextResponse.json({ error: 'Media not found' }, { status: 404 });
+    }
+
+    try {
+      const upstreamUrl = new URL(mediaUrl, request.url);
+      const response = await fetch(upstreamUrl, {
+        headers: { accept: 'image/*,*/*' },
+        signal: AbortSignal.timeout(20000),
+      });
+
+      if (!response.ok || !response.body) {
+        return NextResponse.json({ error: 'Media not found' }, { status: 404 });
+      }
+
+      return new NextResponse(response.body, {
+        headers: {
+          ...getPromptLibraryCacheHeaders(),
+          'Content-Type':
+            response.headers.get('content-type') || 'application/octet-stream',
+        },
+      });
+    } catch {
+      return NextResponse.json(
+        { error: 'Media is temporarily unavailable' },
+        { status: 503, headers: getNoStoreHeaders() }
+      );
+    }
+  }
+
   if (path.length === 2 && path[0] === 'items' && path[1].endsWith('.json')) {
-    const slug = path[1].replace(/\.json$/, '');
+    const slug = path[1].replace(/.json$/, '');
     let item: Awaited<ReturnType<typeof getPromptLibraryItem>>;
 
     try {
