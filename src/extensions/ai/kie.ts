@@ -73,6 +73,24 @@ function unwrapKiePayloadOrThrow(payload: any, fallbackMessage: string) {
   return payload?.data ?? payload;
 }
 
+function isKieMarketQuerySuccess(payload: {
+  code?: unknown;
+  msg?: unknown;
+  data?: unknown;
+}) {
+  if (payload.code === 200) {
+    return true;
+  }
+
+  const data = getRecord(payload.data);
+  return (
+    typeof payload.msg === 'string' &&
+    payload.msg.trim().toLowerCase() === 'success' &&
+    typeof data?.state === 'string' &&
+    data.state.trim().length > 0
+  );
+}
+
 function collectNestedResponseRecords(source: unknown) {
   const records: Record<string, unknown>[] = [];
   const visited = new WeakSet<object>();
@@ -1122,7 +1140,7 @@ export class KieProvider implements AIProvider {
 
     const { code, msg, data } = await resp.json();
 
-    if (code !== 200) {
+    if (!isKieMarketQuerySuccess({ code, msg, data })) {
       throw new Error(msg);
     }
 
@@ -1214,7 +1232,7 @@ export class KieProvider implements AIProvider {
 
     const { code, msg, data } = await resp.json();
 
-    if (code !== 200) {
+    if (!isKieMarketQuerySuccess({ code, msg, data })) {
       throw new Error(msg);
     }
 

@@ -72,6 +72,7 @@ import {
 import { md5 } from '@/shared/lib/hash';
 import { resolvePriorityQueueWaitRangeMs } from '@/shared/lib/membership-priority-queue-config';
 import { calculateSeedanceCredits } from '@/shared/lib/seedance-pricing';
+import { shouldUseApimartForSeedance2 } from '@/shared/lib/seedance-provider';
 import {
   createSeedancePromptReferenceToken,
   extractSeedancePromptReferenceTokens,
@@ -1251,10 +1252,10 @@ export function VideoGenerator({
 
     return toSeedance2FaceModel(model) ?? model;
   }, [canUseRealPersonMode, model, realPersonMode]);
-  const usesApimartSeedanceRuntime =
-    isSeedance2xModel &&
-    (configs.seedance_provider === 'apimart' ||
-      isSeedance2FaceModel(effectiveModel));
+  const usesApimartSeedanceRuntime = shouldUseApimartForSeedance2({
+    model: effectiveModel,
+    configs,
+  });
   const shouldUseAssetReferences =
     isSeedance2xModel &&
     currentCreatorMode === 'advanced-reference' &&

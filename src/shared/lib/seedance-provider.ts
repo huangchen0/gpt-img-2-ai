@@ -6,10 +6,16 @@ import {
 
 export const SEEDANCE_PROVIDER_KIE = 'kie' as const;
 export const SEEDANCE_PROVIDER_APIMART = 'apimart' as const;
+export const SEEDANCE_2_PROVIDER_STRATEGY_KIE_WITH_APIMART_FACE =
+  'kie_with_apimart_face' as const;
+export const SEEDANCE_2_PROVIDER_STRATEGY_APIMART_ALL = 'apimart_all' as const;
 
 export type SeedanceRuntimeProvider =
   | typeof SEEDANCE_PROVIDER_KIE
   | typeof SEEDANCE_PROVIDER_APIMART;
+export type Seedance2ProviderStrategy =
+  | typeof SEEDANCE_2_PROVIDER_STRATEGY_KIE_WITH_APIMART_FACE
+  | typeof SEEDANCE_2_PROVIDER_STRATEGY_APIMART_ALL;
 
 export function normalizeSeedanceProvider(
   value?: string | null
@@ -17,6 +23,37 @@ export function normalizeSeedanceProvider(
   return value === SEEDANCE_PROVIDER_APIMART
     ? SEEDANCE_PROVIDER_APIMART
     : SEEDANCE_PROVIDER_KIE;
+}
+
+export function normalizeSeedance2ProviderStrategy(
+  value?: string | null
+): Seedance2ProviderStrategy {
+  return value === SEEDANCE_2_PROVIDER_STRATEGY_APIMART_ALL ||
+    value === SEEDANCE_PROVIDER_APIMART
+    ? SEEDANCE_2_PROVIDER_STRATEGY_APIMART_ALL
+    : SEEDANCE_2_PROVIDER_STRATEGY_KIE_WITH_APIMART_FACE;
+}
+
+export function shouldUseApimartForSeedance2({
+  model,
+  configs,
+}: {
+  model?: string | null;
+  configs?: Record<string, string | undefined> | null;
+}) {
+  if (isSeedance2FaceModel(model)) {
+    return true;
+  }
+
+  if (!isSeedance2GenerationModel(model)) {
+    return false;
+  }
+
+  return (
+    normalizeSeedance2ProviderStrategy(
+      configs?.seedance_2_provider_strategy
+    ) === SEEDANCE_2_PROVIDER_STRATEGY_APIMART_ALL
+  );
 }
 
 export function resolveVideoGenerationProvider({
@@ -28,12 +65,12 @@ export function resolveVideoGenerationProvider({
   model?: string | null;
   configs?: Record<string, string | undefined> | null;
 }) {
-  if (isSeedance2FaceModel(model)) {
+  if (shouldUseApimartForSeedance2({ model, configs })) {
     return SEEDANCE_PROVIDER_APIMART;
   }
 
   if (isSeedance2GenerationModel(model)) {
-    return normalizeSeedanceProvider(configs?.seedance_provider);
+    return SEEDANCE_PROVIDER_KIE;
   }
 
   return requestedProvider;
